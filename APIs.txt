@@ -1,0 +1,9 @@
+Links to how to use different APIs for different websites:
+
+ShapeShift:
+https://info.shapeshift.io/api
+
+Coinbase:
+https://developers.coinbase.com/
+
+
