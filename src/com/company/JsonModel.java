@@ -1,4 +1,19 @@
 package com.company;
 
-public class JsonModel {
+public class JsonModel extends AbstractModel {
+
+    /****************/
+    /*    Fields    */
+    /****************/
+
+    private String url;
+
+    /****************/
+    /* Constructors */
+    /****************/
+
+    /****************/
+    /*   Methods    */
+    /****************/
+
 }
