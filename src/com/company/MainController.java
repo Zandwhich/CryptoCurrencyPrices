@@ -26,6 +26,8 @@ public class MainController {
 
     public void run() {
 
+        //TODO: Add in a while(true) loop to run the program forever
+
     }//end run()
 
     public void updatePrices() {
