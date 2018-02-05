@@ -6,5 +6,6 @@ public interface APICallerInterface {
     public abstract String getCurrency();
     public abstract boolean getHasPrice();
     public abstract void updatePrice();
+    public abstract String getName();
 
 }//end AbstractAPICaller

@@ -9,16 +9,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private double price;
     private String currency;
     private boolean hasPrice;
+    private String name;
 
 
     /****************/
     /* Constructors */
     /****************/
 
-    public AbstractAPICaller(final String currency) {
+    public AbstractAPICaller(final String currency, final String name) {
         this.currency = currency;
         this.hasPrice = false;
         this.price = 0.0;
+        this.name = name;
     }//end AbstractAPICaller()
 
     /****************/
@@ -34,10 +36,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public String getCurrency() { return currency; }//end getCurrency()
     @Override
     public boolean getHasPrice() { return hasPrice; }//end getHasPrice()
+    @Override
+    public String getName() { return name; }//end getName()
 
     // Other
     @Override
-    public void updatePrice() { price = getNewPrice(); }//end updatePrice()
+    public void updatePrice() { this.price = getNewPrice(); }//end updatePrice()
 
     // Setters
     protected void setPrice(final double price) { this.price = price; }//end setPrice()
