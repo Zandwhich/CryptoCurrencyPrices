@@ -15,6 +15,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      ****************/
 
     /**
+     * TODO: Figure out a better way to describe this
      * The url to hit
      */
     private URL url;
