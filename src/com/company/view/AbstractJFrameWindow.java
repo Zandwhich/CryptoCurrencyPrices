@@ -2,7 +2,7 @@ package com.company.view;
 
 import javax.swing.*;
 
-public class AbstractJFrameWindow extends JFrame implements WindowInterface {
+public abstract class AbstractJFrameWindow extends JFrame implements WindowInterface {
 
     /****************
      *    Fields    *
@@ -125,18 +125,21 @@ public class AbstractJFrameWindow extends JFrame implements WindowInterface {
      * Gets the title of the window
      * @return The title of the window
      */
+    @Override
     public String getTitle() { return this.title; }//end getTitle()
 
     /**
      * Gets the width (in pixels) of the window
      * @return The width (in pixels) of the window
      */
+    @Override
     public int getWidth() { return this.width; }//end getWidth()
 
     /**
      * Gets the height (in pixels) of the window
      * @return The height (in pixels) of the window
      */
+    @Override
     public int getHeight() { return this.height; }//end getHeight()
 
     /**

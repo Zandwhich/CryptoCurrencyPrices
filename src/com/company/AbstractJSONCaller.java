@@ -7,27 +7,32 @@ import java.net.URL;
 
 public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
-    /****************/
-    /*    Fields    */
-    /****************/
+    /****************
+     *    Fields    *
+     ****************/
 
+    /**
+     * The url to hit
+     */
     private URL url;
 
 
-    /****************/
-    /* Constructors */
-    /****************/
+    /****************
+     * Constructors *
+     ****************/
 
     public AbstractJSONCaller(String currency) {
+        // TODO: Figure out what I'm doing here (specifically with the names I think)
         super(currency);
     }//end AbstractJSONCaller()
 
-    /****************/
-    /*   Methods    */
-    /****************/
+    /****************
+     *   Methods    *
+     ****************/
 
     @Override
     protected double getNewPrice() {
+        // TODO: Figure out how to do the JSON
         try {
             InputStream is = url.openStream();
             JSONReader reader = ;
