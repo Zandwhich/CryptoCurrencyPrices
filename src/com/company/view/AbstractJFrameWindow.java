@@ -2,6 +2,9 @@ package com.company.view;
 
 import javax.swing.*;
 
+/**
+ * The abstract window class which uses Java's JFrame
+ */
 public abstract class AbstractJFrameWindow extends JFrame implements WindowInterface {
 
     /****************
