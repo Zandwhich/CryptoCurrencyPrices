@@ -44,7 +44,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      */
     @Override
     protected double getNewPrice() {
-        // TODO: Figure out how to do the JSON
+        // TODO: Figure out how to do the JSON (JSON.SIMPLE or whatever it's called)
         try {
             InputStream is = url.openStream();
             JSONReader reader = ;
