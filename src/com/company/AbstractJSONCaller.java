@@ -5,6 +5,9 @@ import com.oracle.javafx.jmx.json.JSONReader;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * TODO: Fill this out
+ */
 public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
     /****************
@@ -21,6 +24,10 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * Constructors *
      ****************/
 
+    /**
+     * TODO: Fill this out
+     * @param currency
+     */
     public AbstractJSONCaller(String currency) {
         // TODO: Figure out what I'm doing here (specifically with the names I think)
         super(currency);
@@ -30,6 +37,10 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      *   Methods    *
      ****************/
 
+    /**
+     * TODO: Fill this out
+     * @return
+     */
     @Override
     protected double getNewPrice() {
         // TODO: Figure out how to do the JSON

@@ -2,32 +2,49 @@ package com.company;
 
 import java.util.ArrayList;
 
+/**
+ * TODO: Fill this out
+ */
 public class MainController {
 
-    /****************/
-    /*    Fields    */
-    /****************/
+    /****************
+     *    Fields    *
+     ****************/
 
+    /**
+     * The list of all of the API endpoints
+     */
     private ArrayList<APICallerInterface> websiteList;
 
-    /****************/
-    /* Constructors */
-    /****************/
+    /****************
+     * Constructors *
+     ****************/
 
+    /**
+     * The constructor for the MainController
+     */
     public MainController() {
 
         websiteList = new ArrayList<APICallerInterface>();
 
+        // TODO: Create the main window
+
     }//end MainController()
 
-    /****************/
-    /*    Methods   */
-    /****************/
+    /****************
+     *    Methods   *
+     ****************/
 
+    /**
+     * TODO: Fill this out
+     */
     public void run() {
 
     }//end run()
 
+    /**
+     * TODO: Fill this out
+     */
     public void updatePrices() {
 
         for (APICallerInterface website :
