@@ -10,7 +10,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Window window = new Window();
-	// write your code here
-    }
-}
+        MainController controller = new MainController();
+        controller.run();
+    }//end main()
+}//end Main

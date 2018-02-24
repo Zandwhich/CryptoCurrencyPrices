@@ -14,24 +14,17 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      *    Fields    *
      ****************/
 
-    /**
-     * TODO: Figure out a better way to describe this
-     * The url to hit
-     */
-    private URL url;
-
 
     /****************
      * Constructors *
      ****************/
 
     /**
-     * TODO: Fill this out
+     * A constructor for the Abstract JSON caller
      * @param currency
      */
-    public AbstractJSONCaller(String currency) {
-        // TODO: Figure out what I'm doing here (specifically with the names I think)
-        super(currency);
+    public AbstractJSONCaller(String currency, String name) {
+        super(currency, name);
     }//end AbstractJSONCaller()
 
     /****************
@@ -46,9 +39,9 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     protected double getNewPrice() {
         // TODO: Figure out how to do the JSON (JSON.SIMPLE or whatever it's called)
         try {
-            InputStream is = url.openStream();
+            /*InputStream is = url.openStream();
             JSONReader reader = ;
-            JSON
+            JSON*/
 
         }
         catch (Exception e) {
@@ -56,5 +49,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
             // TODO: Do something in the future to notify there was a failure in getting the updated price
             return this.getPrice();
         }
+        // TODO: Change the return statement once everything is figured out
+        return 0;
     }//end getNewPrice()
 }//end AbstractJSONCaller

@@ -1,5 +1,7 @@
 package com.company;
 
+import java.net.URL;
+
 /**
  * TODO: Fill this out
  */
@@ -28,6 +30,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * The name of the API endpoint
      */
     private String name;
+
+    /**
+     * TODO: Figure out a better way to phrase this
+     * The url to hit
+     */
+    private URL url;
 
 
     /****************
