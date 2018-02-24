@@ -14,7 +14,6 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      *    Fields    *
      ****************/
 
-
     /****************
      * Constructors *
      ****************/
@@ -32,8 +31,8 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      ****************/
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Gets the new price of the currency
+     * @return The new price of the currency
      */
     @Override
     protected double getNewPrice() {
