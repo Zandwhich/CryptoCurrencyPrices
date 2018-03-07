@@ -1,4 +1,6 @@
-package com.company;
+package com.company.api_calls;
+
+import com.company.api_calls.APICallerInterface;
 
 import java.net.URL;
 

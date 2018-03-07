@@ -1,4 +1,4 @@
-package com.company;
+package com.company.api_calls;
 
 /**
  * TODO: Fill this out

@@ -1,9 +1,4 @@
-package com.company;
-
-import com.oracle.javafx.jmx.json.JSONReader;
-
-import java.io.InputStream;
-import java.net.URL;
+package com.company.api_calls;
 
 /**
  * TODO: Fill this out
