@@ -1,35 +1,61 @@
 package com.company;
 
+import com.company.view.MainWindow;
+import com.company.view.WindowInterface;
+
 import java.util.ArrayList;
 
+/**
+ * TODO: Fill this out
+ */
 public class MainController {
 
-    /****************/
-    /*    Fields    */
-    /****************/
+    /****************
+     *    Fields    *
+     ****************/
 
+    /**
+     * The list of all of the API endpoints
+     */
     private ArrayList<APICallerInterface> websiteList;
 
-    /****************/
-    /* Constructors */
-    /****************/
+    /**
+     * The main window of the application
+     */
+    private WindowInterface mainWindow;
 
+    /****************
+     * Constructors *
+     ****************/
+
+    /**
+     * The constructor for the MainController
+     */
     public MainController() {
 
-        websiteList = new ArrayList<APICallerInterface>();
+        this.websiteList = new ArrayList<APICallerInterface>();
+        this.mainWindow = new MainWindow();
+
+        // TODO: Create the main window
 
     }//end MainController()
 
-    /****************/
-    /*    Methods   */
-    /****************/
+    /****************
+     *    Methods   *
+     ****************/
 
+    /**
+     * The method to be run on a near-infinite loop to run the program
+     */
     public void run() {
-
-        //TODO: Add in a while(true) loop to run the program forever
+      
+        while(true) {}//end while
 
     }//end run()
 
+    /**
+     * TODO: Fill this out
+     */
     public void updatePrices() {
 
         for (APICallerInterface website :
