@@ -1,4 +1,6 @@
-package com.company.view;
+package com.company.view.window;
+
+import com.company.view.window.WindowInterface;
 
 import javax.swing.*;
 

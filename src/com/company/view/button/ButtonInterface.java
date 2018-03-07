@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.button;
 
 /**
  * TODO: Fill this out

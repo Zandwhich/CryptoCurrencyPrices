@@ -1,19 +1,19 @@
-package com.company.view;
+package com.company.view.window;
 
 /**
- * TODO: Fill this out
+ * The main window to display for the application
  */
 public class MainWindow extends AbstractJFrameWindow {
 
     /**
-     * TODO: Fill this out
+     * A constructor for the main window
      */
     public MainWindow() {
         super("CryptoCurrency Prices", 1000, 700);
     }//end MainWindow()
 
     /**
-     * TODO: Fill this out
+     * A constructor for the main window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -23,7 +23,7 @@ public class MainWindow extends AbstractJFrameWindow {
     }//end MainWindow()
 
     /**
-     * TODO: Fill this out
+     * A constrcutor for the main window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -34,7 +34,7 @@ public class MainWindow extends AbstractJFrameWindow {
     }//end MainWindow()
 
     /**
-     * TODO: Fill this out
+     * A constructor for the main window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -45,7 +45,7 @@ public class MainWindow extends AbstractJFrameWindow {
     }//end MainWindow()
 
     /**
-     * TODO: Fill this out
+     * A constructor for the main window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window

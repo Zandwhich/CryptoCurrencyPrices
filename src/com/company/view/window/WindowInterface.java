@@ -1,4 +1,4 @@
-package com.company.view;
+package com.company.view.window;
 
 /**
  * The basic interface for all windows within the program

@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.view.MainWindow;
-import com.company.view.WindowInterface;
+import com.company.view.window.MainWindow;
+import com.company.view.window.WindowInterface;
 
 import java.util.ArrayList;
 
