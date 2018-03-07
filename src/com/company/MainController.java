@@ -48,7 +48,7 @@ public class MainController {
      * The method to be run on a near-infinite loop to run the program
      */
     public void run() {
-
+      
         while(true) {}//end while
 
     }//end run()
