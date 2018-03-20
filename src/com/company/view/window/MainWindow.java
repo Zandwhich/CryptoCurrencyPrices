@@ -3,7 +3,15 @@ package com.company.view.window;
 /**
  * The main window to display for the application
  */
-public class MainWindow extends AbstractJFrameWindow {
+public class MainWindow extends AbstractJFrameWindow implements WindowListenerInterface {
+
+    /****************
+     *    Fields    *
+     ****************/
+
+    /****************
+     * Constructors *
+     ****************/
 
     /**
      * A constructor for the main window
@@ -55,6 +63,18 @@ public class MainWindow extends AbstractJFrameWindow {
     public MainWindow(String title, int width, int height, int closeOperation, boolean isVisible) {
         super(title, width, height, closeOperation, isVisible);
     }//end MainWindow()
+
+    /****************
+     *    Methods   *
+     ****************/
+
+    /**
+     * TODO: Fill this out
+     */
+    @Override
+    public void doSomething() {
+
+    }//end doSomething
 
     // TODO: Add a bunch of different MainWindow constructors using different params
     // TODO: Add a default MainWindow constructor
