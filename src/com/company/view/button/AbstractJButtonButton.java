@@ -2,6 +2,7 @@ package com.company.view.button;
 
 import com.company.view.window.WindowListenerInterface;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -21,7 +22,21 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * TODO: Fill this out
      */
-    abstract private class ClickListener implements ActionListener {}
+    private class ClickListener implements ActionListener {
+
+        /**
+         * TODO: Fill this in
+         * @param e TODO: Fill this in
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            /* TODO: Figure out if overriding onClick actually works as expected in this case (also if I can construct
+             * it at the super-class level or if it needs to be done at the sub-class level)
+             */
+
+            onClick(e);
+        }//end actionPerformed()
+    }//end ClickListener
 
     /****************
      * Constructors *
@@ -30,11 +45,23 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * TODO: Fill this out
      * @param window The window that holds and subscribes to the button
+     * @param width The width (in pixels) of the button
+     * @param height The height (in pixels) of the button
+     */
+    public AbstractJButtonButton(WindowListenerInterface window, int width, int height) {
+        this.window = window;
+        ActionListener listener = new ClickListener();
+        this.addActionListener(listener);
+    }//end AbstractJButtonButton()
+
+    /**
+     * TODO: Fill this out
+     * @param window The window that holds and subscribes to the button
      */
     public AbstractJButtonButton(WindowListenerInterface window) {
         this.window = window;
-        // TODO: Figure out how to make the ClickListener and whatnot
-        //this.addActionListener(listener);
+        ActionListener listener = new ClickListener();
+        this.addActionListener(listener);
     }//end AbstractJButtonButton()
 
     /****************
@@ -42,6 +69,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      ****************/
 
     /* Private */
+
+    /**
+     * TODO: Fill this in
+     * @param event TODO: Fill this in
+     */
+    protected abstract void onClick(ActionEvent event);
 
     /* Public */
 

@@ -17,9 +17,4 @@ public interface ButtonInterface {
      */
     public abstract int getHeight();
 
-    /**
-     * Action that happens when the button is pressed
-     */
-    public abstract void press();
-
 }//end ButtonInterface
