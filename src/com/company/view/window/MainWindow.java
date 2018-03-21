@@ -1,13 +1,20 @@
 package com.company.view.window;
 
+import com.company.view.button.ButtonInterface;
+import com.company.view.button.RefreshButton;
+
+import javax.swing.*;
+
 /**
  * The main window to display for the application
  */
-public class MainWindow extends AbstractJFrameWindow implements WindowListenerInterface {
+public class MainWindow extends AbstractJFrameWindow implements MainWindowListenerInterface {
 
     /****************
      *    Fields    *
      ****************/
+
+    private ButtonInterface refreshButton = new RefreshButton(this);
 
     /****************
      * Constructors *
@@ -17,7 +24,9 @@ public class MainWindow extends AbstractJFrameWindow implements WindowListenerIn
      * A constructor for the main window
      */
     public MainWindow() {
+
         super("CryptoCurrency Prices", 1000, 700);
+        this.setup();
     }//end MainWindow()
 
     /**
@@ -68,12 +77,25 @@ public class MainWindow extends AbstractJFrameWindow implements WindowListenerIn
      *    Methods   *
      ****************/
 
+    /* Private */
+
+    /**
+     * The general setup method that is used in for the most abstraction
+     */
+    private void setup() {
+        this.add((JButton) refreshButton);
+    }//end setup()
+
+    /* Protected */
+
+    /* Public */
+
     /**
      * TODO: Fill this out
      */
     @Override
-    public void doSomething() {
-
+    public void refresh() {
+        super.setTitle("Refreshed");
     }//end doSomething
 
     // TODO: Add a bunch of different MainWindow constructors using different params

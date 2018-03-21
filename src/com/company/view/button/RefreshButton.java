@@ -1,9 +1,8 @@
 package com.company.view.button;
 
-import com.company.view.window.WindowListenerInterface;
+import com.company.view.window.MainWindowListenerInterface;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * TODO: Fill this out
@@ -20,9 +19,15 @@ public class RefreshButton extends AbstractJButtonButton{
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
      */
-    public RefreshButton(WindowListenerInterface window, int width, int height) {
-        super(window, width, height);
+    public RefreshButton(MainWindowListenerInterface window, int width, int height) {
+        super(width, height, window);
     }//end RefreshButton()
+
+    /**
+     * TODO: Fill this out
+     * @param window The window that holds and subscribes to the button
+     */
+    public RefreshButton(MainWindowListenerInterface window) { super(window); }//end RefreshButton()
 
     /****************
      *   Methods    *
@@ -38,7 +43,7 @@ public class RefreshButton extends AbstractJButtonButton{
      */
     @Override
     protected void onClick(ActionEvent event) {
-
+        window.refresh();
     }//end onClick()
 
     /* Public */

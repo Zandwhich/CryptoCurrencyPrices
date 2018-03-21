@@ -88,7 +88,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
         super.setSize(width, height);
         super.setDefaultCloseOperation(closeOperation);
         super.setVisible(isVisible);
-    }
+    }//end setup()
 
     /* Public */
 
