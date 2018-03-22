@@ -89,6 +89,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
         // TODO: Figure out why the button resizes upon moving the screen
         // TODO: Add text/labels to the window
         // TODO: Add table functionality to the window
+        // TODO: Add it so that the window calls controller's methods after button presses
     }//end setup()
 
     /* Protected */
