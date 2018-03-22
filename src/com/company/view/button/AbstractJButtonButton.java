@@ -20,12 +20,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * The default width of a button
      */
-    public final int DEFAULT_WIDTH = 10;
+    public final int DEFAULT_WIDTH = 100;
 
     /**
      * The default height of a button
      */
-    public final int DEFAULT_HEIGHT = 10;
+    public final int DEFAULT_HEIGHT = 100;
 
     /* Variables */
 
@@ -91,6 +91,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
         // Setting up the window
         //if (!name.equals("")) super.setName(name);
+        System.out.println("Width: " + width + ", Height: " + height);
         super.setSize(width, height);
         super.setVisible(true);
         this.window = window;

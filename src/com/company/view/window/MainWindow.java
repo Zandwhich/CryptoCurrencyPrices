@@ -4,6 +4,7 @@ import com.company.view.button.ButtonInterface;
 import com.company.view.button.RefreshButton;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * The main window to display for the application
@@ -24,7 +25,6 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
      * A constructor for the main window
      */
     public MainWindow() {
-
         super("CryptoCurrency Prices", 1000, 700);
         this.setup();
     }//end MainWindow()
@@ -84,6 +84,11 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
      */
     private void setup() {
         this.add((JButton) refreshButton);
+        //this.setVisible(true);
+
+        // TODO: Figure out why the button resizes upon moving the screen
+        // TODO: Add text/labels to the window
+        // TODO: Add table functionality to the window
     }//end setup()
 
     /* Protected */
