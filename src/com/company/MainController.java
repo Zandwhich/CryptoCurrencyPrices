@@ -23,7 +23,7 @@ public class MainController {
     /**
      * The main window of the application
      */
-    private WindowInterface mainWindow;
+    private WindowInterface mainWindow = new MainWindow();
 
     /****************
      * Constructors *
@@ -35,7 +35,6 @@ public class MainController {
     public MainController() {
 
         this.websiteList = new ArrayList<APICallerInterface>();
-        this.mainWindow = new MainWindow();
 
         // TODO: Create the main window
 

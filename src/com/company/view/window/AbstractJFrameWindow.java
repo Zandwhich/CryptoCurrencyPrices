@@ -164,4 +164,11 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public void setIsVisible(boolean isVisible) { super.setVisible(isVisible); }//end setIsVisible()
 
+    // Other
+
+    public void refreshWindow() {
+        this.setIsVisible(false);
+        this.setIsVisible(true);
+    }//end refreshWindow()
+
 }//end AbstractWindow

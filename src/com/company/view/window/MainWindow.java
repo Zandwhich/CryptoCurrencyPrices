@@ -16,6 +16,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
      ****************/
 
     private ButtonInterface refreshButton = new RefreshButton(this);
+    private JPanel panel = new JPanel();
 
     /****************
      * Constructors *
@@ -25,7 +26,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
      * A constructor for the main window
      */
     public MainWindow() {
-        super("CryptoCurrency Prices", 1000, 700);
+        super("CryptoCurrency Prices", 1000, 700, false);
         this.setup();
     }//end MainWindow()
 
@@ -80,14 +81,18 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowListen
     /* Private */
 
     /**
-     * The general setup method that is used in for the most abstraction
+     * The general setup method that is used in for maximum abstraction
      */
     private void setup() {
-        this.add((JButton) refreshButton);
+        this.panel.add((JButton) refreshButton);
+        this.add(panel);
+        super.refreshWindow();
+
         //this.setVisible(true);
 
         // TODO: Figure out why the button resizes upon moving the screen
         // TODO: Add text/labels to the window
+        // TODO: Add a panel to the window
         // TODO: Add table functionality to the window
         // TODO: Add it so that the window calls controller's methods after button presses
     }//end setup()

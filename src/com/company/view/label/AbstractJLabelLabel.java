@@ -15,6 +15,12 @@ public class AbstractJLabelLabel extends JLabel implements LabelInterface {
      * Constructors *
      ****************/
 
+    /**
+     * TODO: Fill this in
+     * @param text
+     */
+    public AbstractJLabelLabel(String text) { super(text); }//end AbstractJLabelLabel()
+
     /****************
      *    Methods   *
      ****************/
