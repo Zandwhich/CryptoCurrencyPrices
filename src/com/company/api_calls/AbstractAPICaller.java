@@ -122,4 +122,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected abstract double getNewPrice();
 
+    protected abstract void /* TODO: Figure out the correct return type (String? HTML-Specific Object?) */ getRequestCall();
+
 }//end AbstractModel
