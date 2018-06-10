@@ -1,15 +1,16 @@
 package com.company;
 
 import com.company.api_calls.APICallerInterface;
+import com.company.api_calls.individual.CoinBase;
 import com.company.view.window.MainWindow;
-import com.company.view.window.WindowInterface;
+import com.company.view.window.MainWindowInterface;
 
 import java.util.ArrayList;
 
 /**
  * TODO: Fill this out
  */
-public class MainController {
+public class MainController implements MainControllerInterface{
 
     /****************
      *    Fields    *
@@ -23,7 +24,7 @@ public class MainController {
     /**
      * The main window of the application
      */
-    private WindowInterface mainWindow = new MainWindow();
+    private MainWindowInterface mainWindow = new MainWindow(this);
 
     /****************
      * Constructors *
@@ -34,7 +35,8 @@ public class MainController {
      */
     public MainController() {
 
-        this.websiteList = new ArrayList<APICallerInterface>();
+        this.websiteList = new ArrayList<>();
+        websiteList.add(new CoinBase());
 
         // TODO: Create the main window
 
@@ -43,6 +45,17 @@ public class MainController {
     /****************
      *    Methods   *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * Gets the list of websites of URLs to hit
+     * @return The list of websites of URLs to hit
+     */
+    @Override
+    public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
 
     /**
      * The method to be run on a near-infinite loop to run the program
@@ -56,14 +69,26 @@ public class MainController {
     /**
      * TODO: Fill this out
      */
-    public void updatePrices() {
+    @Override
+    public void refresh() {
+        this.updatePrices();
+    }//end refresh()
 
-        for (APICallerInterface website :
-                this.websiteList) {
+    /**
+     * TODO: Fill this out
+     */
+    public void updatePrices() {
+        for (APICallerInterface website : this.websiteList) {
             website.updatePrice();
         }//end for websites
-
     }//end updatePrices()
+
+    /**
+     * TODO: Fill this out
+     */
+    public void updateViewPrices() {
+        this.mainWindow.updatePrices();
+    }//end updateViewPrices()
 
     //TODO: Add in a method that updates the View somehow
 

@@ -1,6 +1,6 @@
 package com.company.view.button;
 
-import com.company.view.window.MainWindowListenerInterface;
+import com.company.view.window.MainWindowInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +32,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * The window that holds and subscribes to the button
      */
-    protected MainWindowListenerInterface window;
+    protected MainWindowInterface window;
 
     /**
      * TODO: Fill this out
@@ -63,7 +63,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
      */
-    public AbstractJButtonButton(int width, int height, MainWindowListenerInterface window) {
+    public AbstractJButtonButton(int width, int height, MainWindowInterface window) {
         this.setup(width, height, window);
     }//end AbstractJButtonButton()
 
@@ -71,7 +71,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * TODO: Fill this out
      * @param window The window that holds and subscribes to the button
      */
-    public AbstractJButtonButton(MainWindowListenerInterface window) {
+    public AbstractJButtonButton(MainWindowInterface window) {
         this.setup(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT, window);
     }//end AbstractJButtonButton()
 
@@ -87,7 +87,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * @param height The height (in pixels) of the button
      * @param window The window that holds and subscribes to the button
      */
-    private void setup(int width, int height, MainWindowListenerInterface window) {
+    private void setup(int width, int height, MainWindowInterface window) {
 
         // Setting up the window
         //if (!name.equals("")) super.setName(name);
@@ -114,7 +114,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * Gets the window that the button is posting to
      * @return The window that the button is posting to
      */
-    public MainWindowListenerInterface getWindow() { return window; }//end getWindow()
+    public MainWindowInterface getWindow() { return window; }//end getWindow()
 
     // Setters
 

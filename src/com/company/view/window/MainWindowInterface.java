@@ -3,11 +3,16 @@ package com.company.view.window;
 /**
  * TODO: Fill this out
  */
-public interface MainWindowListenerInterface {
+public interface MainWindowInterface extends WindowInterface{
 
     /**
      * Refreshes the page with the newest cryptocurrency rates
      */
     abstract public void refresh();
 
-}//end MainWindowListenerInterface
+    /**
+     * TODO: Fill in
+     */
+    abstract public void updatePrices();
+
+}//end MainWindowInterface

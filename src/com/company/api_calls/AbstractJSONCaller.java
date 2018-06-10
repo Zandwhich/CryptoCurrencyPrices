@@ -2,6 +2,8 @@ package com.company.api_calls;
 
 import json_simple.JSONObject;
 import json_simple.JSONValue;
+import json_simple.parser.JSONParser;
+import json_simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,10 +57,17 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
             URLConnection connection = this.getUrl().openConnection();
             connection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            JSONParser parser = new JSONParser();
 
             // Parse the input stream into a JSONObject
             // TODO: Eventually get rid of this simple casting. It could prove problematic in the future
-            jsonObject = (JSONObject) JSONValue.parseWithException(in);
+            try {
+                jsonObject = (JSONObject) parser.parse(in);
+            }//end try
+            catch (ParseException e) {
+                // TODO: Figure out what to do with a ParseException
+                jsonObject = null;
+            }//end catch (ParseException)
         }//end try
         catch (IOException e) {
             // openConnection() failed

@@ -7,3 +7,12 @@ Coinbase:
 https://developers.coinbase.com/
 
 
+Links to the actual APIs themselves:
+
+CoinBase:
+https://api.coinbase.com/v2/prices/spot?currency=USD
+
+
+
+
+
