@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.individual.CoinBase;
+import com.company.api_calls.individual.CoinBaseBTC;
+import com.company.api_calls.individual.CoinBaseETH;
+import com.company.api_calls.individual.CoinBaseLTC;
 import com.company.view.window.MainWindow;
 import com.company.view.window.MainWindowInterface;
 
@@ -19,7 +21,7 @@ public class MainController implements MainControllerInterface{
     /**
      * The list of all of the API endpoints
      */
-    private ArrayList<APICallerInterface> websiteList;
+    private ArrayList<APICallerInterface> websiteList = new ArrayList<>();
 
     /**
      * The main window of the application
@@ -35,10 +37,9 @@ public class MainController implements MainControllerInterface{
      */
     public MainController() {
 
-        this.websiteList = new ArrayList<>();
-        websiteList.add(new CoinBase());
-
-        // TODO: Create the main window
+        websiteList.add(new CoinBaseBTC());
+        websiteList.add(new CoinBaseETH());
+        websiteList.add(new CoinBaseLTC());
 
     }//end MainController()
 

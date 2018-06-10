@@ -2,8 +2,7 @@ package com.company.view.window;
 
 import com.company.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.AbstractAPICaller;
-import com.company.api_calls.individual.CoinBase;
+import com.company.api_calls.individual.CoinBaseBTC;
 import com.company.view.button.ButtonInterface;
 import com.company.view.button.RefreshButton;
 
@@ -119,12 +118,10 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
         this.mainController = mainController;
 
-        this.coinBaseBTC = new CoinBase();
+        this.coinBaseBTC = new CoinBaseBTC();
 
         // TODO: Add text/labels to the window
-        // TODO: Add a panel to the window
         // TODO: Add table functionality to the window
-        // TODO: Add it so that the window calls controller's methods after button presses
     }//end setup()
 
     /* Protected */

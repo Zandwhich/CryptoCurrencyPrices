@@ -7,7 +7,7 @@ import json_simple.parser.JSONParser;
 /**
  * TODO: Fill in
  */
-public class CoinBase extends AbstractJSONCaller {
+public class CoinBaseBTC extends AbstractJSONCaller {
 
     /****************
      *    Fields    *
@@ -16,7 +16,7 @@ public class CoinBase extends AbstractJSONCaller {
     /**
      * TODO: Fill in
      */
-    public final String BASE_URL_STRING = "https://api.coinbase.com/v2/prices/spot?currency=";
+    public final String BASE_URL_STRING = "https://api.coinbase.com/v2/prices/BTC-USD/buy";
 
     /****************
      * Constructors *
@@ -25,9 +25,9 @@ public class CoinBase extends AbstractJSONCaller {
     /**
      * The default constructor that will use USD as the fiat currency
      */
-    public CoinBase() {
-        super("BTC", "CoinBase Bitcoin", "https://api.coinbase.com/v2/prices/spot?currency=USD");
-    }//end CoinBase()
+    public CoinBaseBTC() {
+        super("BTC", "CoinBaseBTC Bitcoin", "https://api.coinbase.com/v2/prices/BTC-USD/buy");
+    }//end CoinBaseBTC()
 
     /****************
      *   Methods    *
@@ -48,4 +48,4 @@ public class CoinBase extends AbstractJSONCaller {
 
         return Double.parseDouble((String) data.get("amount"));
     }//end extractPrice()
-}//end CoinBase
+}//end CoinBaseBTC
