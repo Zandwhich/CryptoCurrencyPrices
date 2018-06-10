@@ -1,9 +1,13 @@
 package com.company.api_calls;
 
+import java.net.URL;
+
 /**
  * TODO: Fill this out
  */
 public interface APICallerInterface {
+
+    // Getters
 
     /**
      * TODO: Fill this out
@@ -29,9 +33,21 @@ public interface APICallerInterface {
     public abstract void updatePrice();
 
     /**
-     * TODO: FIll this out
+     * TODO: Fill this out
      * @return
      */
     public abstract String getName();
+
+    /**
+     * TODO: Fill this out
+     * @return
+     */
+    public abstract URL getUrl();
+
+    /**
+     * TODO: Fill this out
+     * @return
+     */
+    public abstract String getUrlString();
 
 }//end AbstractAPICaller

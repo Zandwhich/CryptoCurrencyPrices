@@ -1,8 +1,15 @@
 package com.company.api_calls;
 
 import com.company.api_calls.APICallerInterface;
+import json_simple.JSONObject;
+import json_simple.JSONValue;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * TODO: Fill this out
@@ -49,11 +56,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param currency The currency (i.e. BTC, ETH, LTC, etc.)
      * @param name The name of the API endpoint
      */
-    public AbstractAPICaller(final String currency, final String name) {
+    public AbstractAPICaller(final String currency, final String name, final String url) {
         this.currency = currency;
         this.hasPrice = false;
         this.price = 0.0;
         this.name = name;
+        try {
+            this.url = new URL(url);
+        }//end try
+        catch (MalformedURLException e) {
+            // Bad URL inputted
+            // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+        }//end catch(MalformedURLException)
     }//end AbstractAPICaller()
 
     /****************
@@ -92,13 +106,27 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     @Override
     public String getName() { return name; }//end getName()
 
+    /**
+     * Gets the URL to update the prices
+     * @return The URL to update the prices
+     */
+    public URL getUrl() { return url; }//end getUrl()
+
+    /**
+     * Gets the URL in a string format
+     * @return The URL in a string format
+     */
+    public String getUrlString() { return url.toString(); }//end getUrlString()
+
     // Other
 
     /**
      * Updates the price
      */
     @Override
-    public void updatePrice() { this.price = getNewPrice(); }//end updatePrice()
+    public void updatePrice() { this.price = this.getNewPrice(); }//end updatePrice()
+
+    /* Protected */
 
     // Setters
 
@@ -114,14 +142,11 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected void setHasPrice(final boolean hasPrice) { this.hasPrice = hasPrice; }//end setHasPrice();
 
-    /* Protected */
+    // Other
 
     /**
      * Gets the new updated price from the API endpoint
      * @return The new updated price from the API endpoint
      */
     protected abstract double getNewPrice();
-
-    protected abstract void /* TODO: Figure out the correct return type (String? HTML-Specific Object?) */ getRequestCall();
-
 }//end AbstractModel
