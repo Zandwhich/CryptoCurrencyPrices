@@ -1,9 +1,10 @@
-package com.company.api_calls.CoinBase;
+package com.company.api_calls.individual.CoinBase;
 
 /**
  * TODO: Fill in
  */
-public class CoinBaseSellETH_USD extends AbstractCoinBase {
+public class CoinBaseSellLTC_USD extends AbstractCoinBase {
+
     /****************
      *    Fields    *
      ****************/
@@ -15,11 +16,11 @@ public class CoinBaseSellETH_USD extends AbstractCoinBase {
     /**
      * The default constructor that will use USD as the fiat currency
      */
-    public CoinBaseSellETH_USD() {
-        super("ETH", "CoinBase Sell Ethereum", "https://api.coinbase.com/v2/prices/ETH-USD/sell");
+    public CoinBaseSellLTC_USD() {
+        super("LTC", "CoinBase Sell Litecoin", "https://api.coinbase.com/v2/prices/LTC-USD/sell");
     }//end CoinBaseBuyBTC_USD()
 
     /****************
      *   Methods    *
      ****************/
-}//end CoinBaseSellETH_USD
+}//end CoinBaseSellLTC_USD

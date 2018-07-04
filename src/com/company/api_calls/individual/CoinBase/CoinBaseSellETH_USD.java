@@ -1,10 +1,9 @@
-package com.company.api_calls.CoinBase;
+package com.company.api_calls.individual.CoinBase;
 
 /**
  * TODO: Fill in
  */
-public class CoinBaseBuyBTC_USD extends AbstractCoinBase {
-
+public class CoinBaseSellETH_USD extends AbstractCoinBase {
     /****************
      *    Fields    *
      ****************/
@@ -16,11 +15,11 @@ public class CoinBaseBuyBTC_USD extends AbstractCoinBase {
     /**
      * The default constructor that will use USD as the fiat currency
      */
-    public CoinBaseBuyBTC_USD() {
-        super("BTC", "CoinBase Buy Bitcoin", "https://api.coinbase.com/v2/prices/BTC-USD/buy");
+    public CoinBaseSellETH_USD() {
+        super("ETH", "CoinBase Sell Ethereum", "https://api.coinbase.com/v2/prices/ETH-USD/sell");
     }//end CoinBaseBuyBTC_USD()
 
     /****************
      *   Methods    *
      ****************/
-}//end CoinBaseBuyBTC_USD
+}//end CoinBaseSellETH_USD

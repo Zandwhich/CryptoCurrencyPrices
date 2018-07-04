@@ -1,9 +1,9 @@
 package com.company;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.CoinBase.CoinBaseBuyBTC_USD;
-import com.company.api_calls.CoinBase.CoinBaseBuyETH_USD;
-import com.company.api_calls.CoinBase.CoinBaseBuyLTC_USD;
+import com.company.api_calls.individual.CoinBase.CoinBaseBuyBTC_USD;
+import com.company.api_calls.individual.CoinBase.CoinBaseBuyETH_USD;
+import com.company.api_calls.individual.CoinBase.CoinBaseBuyLTC_USD;
 import com.company.view.window.MainWindow;
 import com.company.view.window.MainWindowInterface;
 

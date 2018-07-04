@@ -2,7 +2,7 @@ package com.company.view.window;
 
 import com.company.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.CoinBase.CoinBaseBuyBTC_USD;
+import com.company.api_calls.individual.CoinBase.CoinBaseBuyBTC_USD;
 import com.company.view.button.ButtonInterface;
 import com.company.view.button.RefreshButton;
 
