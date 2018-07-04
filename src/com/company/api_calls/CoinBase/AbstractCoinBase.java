@@ -1,33 +1,30 @@
-package com.company.api_calls.individual;
+package com.company.api_calls.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
 import json_simple.JSONObject;
-import json_simple.parser.JSONParser;
 
 /**
  * TODO: Fill in
  */
-public class CoinBaseBTC extends AbstractJSONCaller {
+public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
     /****************
      *    Fields    *
      ****************/
-
-    /**
-     * TODO: Fill in
-     */
-    public final String BASE_URL_STRING = "https://api.coinbase.com/v2/prices/BTC-USD/buy";
 
     /****************
      * Constructors *
      ****************/
 
     /**
-     * The default constructor that will use USD as the fiat currency
+     * TODO: Fill in
+     * @param currency
+     * @param name
+     * @param url
      */
-    public CoinBaseBTC() {
-        super("BTC", "CoinBaseBTC Bitcoin", "https://api.coinbase.com/v2/prices/BTC-USD/buy");
-    }//end CoinBaseBTC()
+    public AbstractCoinBase(String currency, String name, String url) {
+        super(currency, name, url);
+    }//end AbstractCoinBase()
 
     /****************
      *   Methods    *
@@ -48,4 +45,4 @@ public class CoinBaseBTC extends AbstractJSONCaller {
 
         return Double.parseDouble((String) data.get("amount"));
     }//end extractPrice()
-}//end CoinBaseBTC
+}//end AbstractCoinBase
