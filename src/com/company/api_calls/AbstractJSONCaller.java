@@ -24,11 +24,15 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      ****************/
 
     /**
-     * A constructor for the Abstract JSON caller
-     * @param currency
+     * TODO: Fill in
+     * @param cryptoCurrency
+     * @param fiatCurrency
+     * @param name
+     * @param url
      */
-    public AbstractJSONCaller(final String currency, final String name, final String url) {
-        super(currency, name, url);
+    public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
+                              final String url) {
+        super(cryptoCurrency, fiatCurrency, name, url);
     }//end AbstractJSONCaller()
 
     /****************

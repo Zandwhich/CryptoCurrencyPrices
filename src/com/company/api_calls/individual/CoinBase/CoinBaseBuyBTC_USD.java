@@ -9,18 +9,51 @@ public class CoinBaseBuyBTC_USD extends AbstractCoinBase {
      *    Fields    *
      ****************/
 
+    /**
+     * TODO: Fill in
+     */
+    public final static String URL_EXT = "BTC-USD/buy";
+
+    /**
+     * TODO: Fill in
+     */
+    public final static String CRYPTO_CURRENCY = "BTC";
+
+    /**
+     * TODO: Fill in
+     */
+    public final static String FIAT_CURRENCY = "USD";
+
+    /**
+     * TODO: Fill in
+     */
+    public final static String NAME = "CoinBase-Buy Bitcoin/USD";
+
     /****************
      * Constructors *
      ****************/
 
     /**
-     * The default constructor that will use USD as the fiat currency
+     * The default constructor for CoinBase Buy BTC/USD
      */
     public CoinBaseBuyBTC_USD() {
-        super("BTC", "CoinBase Buy Bitcoin", "https://api.coinbase.com/v2/prices/BTC-USD/buy");
+        super(CoinBaseBuyBTC_USD.CRYPTO_CURRENCY, CoinBaseBuyBTC_USD.FIAT_CURRENCY, CoinBaseBuyBTC_USD.NAME,
+                CoinBaseBuyBTC_USD.URL_EXT);
     }//end CoinBaseBuyBTC_USD()
 
     /****************
      *   Methods    *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * TODO: Fill in
+     * @return
+     */
+    @Override
+    public String getUrlExt() { return CoinBaseBuyBTC_USD.URL_EXT; }//end getUrlExt()
+
 }//end CoinBaseBuyBTC_USD

@@ -6,11 +6,16 @@ import com.company.api_calls.AbstractJSONCaller;
  * TODO: Fill in
  */
 public abstract class AbstractQuadrigacx extends AbstractJSONCaller {
+
     /****************
      *    Fields    *
      ****************/
 
-    // TODO: Have a final static base url string
+    /**
+     * The base URL for Quadrigacx requests
+     * TODO: Put in actual base URL
+     */
+    public final static String BASE_URL = "";
 
     /****************
      * Constructors *
@@ -18,18 +23,32 @@ public abstract class AbstractQuadrigacx extends AbstractJSONCaller {
 
     /**
      * TODO: Fill in
-     * @param currency
+     * @param cryptoCurrency
+     * @param fiatCurrency
      * @param name
-     * @param url
+     * @param urlExt
      */
-    public AbstractQuadrigacx(final String currency, final String name, final String url) {
-        // TODO: Concatenate the ending of the url with the base string
-        super(currency, name, url);
+    public AbstractQuadrigacx(final String cryptoCurrency, final String fiatCurrency, final String name,
+                              final String urlExt) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractQuadrigacx.BASE_URL + urlExt);
     }//end AbstractQuadrigacx()
 
     /****************
      *   Methods    *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * TODO: Fill in
+     * @return
+     */
+    @Override
+    public String getBaseUrl() { return AbstractQuadrigacx.BASE_URL; }//end getBaseUrl()
+
+    /* Protected */
 
     // TODO: Override the extract price method
 }//end AbstractQuadrigacx

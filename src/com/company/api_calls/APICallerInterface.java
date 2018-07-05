@@ -19,7 +19,13 @@ public interface APICallerInterface {
      * TODO: Fill this out
      * @return
      */
-    public abstract String getCurrency();
+    public abstract String getCryptoCurrency();
+
+    /**
+     * TODO: Fill this out
+     * @return
+     */
+    public abstract String getFiatCurrency();
 
     /**
      * TODO: Fill this out

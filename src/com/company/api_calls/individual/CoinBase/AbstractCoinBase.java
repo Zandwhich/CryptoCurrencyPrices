@@ -12,7 +12,10 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      *    Fields    *
      ****************/
 
-    // TODO: Have a final static base url string
+    /**
+     * The base URL for CoinBase requests
+     */
+    final static String BASE_URL = "https://api.coinbase.com/v2/prices/";
 
     /****************
      * Constructors *
@@ -20,18 +23,32 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
     /**
      * TODO: Fill in
-     * @param currency
+     * @param cryptoCurrency
+     * @param fiatCurrency
      * @param name
-     * @param url
+     * @param urlExt
      */
-    public AbstractCoinBase(final String currency, final String name, final String url) {
-        // TODO: Concatenate the base url with the ending passed in
-        super(currency, name, url);
+    public AbstractCoinBase(final String cryptoCurrency, final String fiatCurrency, final String name,
+                            final String urlExt) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractCoinBase.BASE_URL + urlExt);
     }//end AbstractCoinBase()
 
     /****************
      *   Methods    *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * TODO: Fill in
+     * @return
+     */
+    @Override
+    public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }//end getBaseUrl()
+
+    /* Protected */
 
     /**
      * TODO: Fill in
@@ -48,4 +65,5 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
         return Double.parseDouble((String) data.get("amount"));
     }//end extractPrice()
+
 }//end AbstractCoinBase

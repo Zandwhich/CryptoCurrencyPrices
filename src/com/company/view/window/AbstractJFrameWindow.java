@@ -18,17 +18,17 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      ****************/
 
     /**
-     * Constructor for an Abstract Window
+     * Constructor for an AbstractJFrameWindow
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
      */
     public AbstractJFrameWindow(String title, int width, int height) {
         this.setup(title, width, height, JFrame.EXIT_ON_CLOSE, true);
-    }//end AbstractWindow()
+    }//end AbstractJFrameWindow()
 
     /**
-     * Constructor for an Abstract Window
+     * Constructor for an AbstractJFrameWindow
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -38,10 +38,10 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public AbstractJFrameWindow(String title, int width, int height, int closeOperation) {
         this.setup(title, width, height, closeOperation, true);
-    }//end AbstractWindow()
+    }//end AbstractJFrameWindow()
 
     /**
-     * Constructor for an Abstract Window
+     * Constructor for an AbstractJFrameWindow
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -49,10 +49,10 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public AbstractJFrameWindow(String title, int width, int height, boolean isVisible) {
         this.setup(title, width, height, JFrame.EXIT_ON_CLOSE, isVisible);
-    }//end AbstractWindow()
+    }//end AbstractJFrameWindow()
 
     /**
-     * Constructor for an Abstract Window
+     * Constructor for an AbstractJFrameWindow
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -166,6 +166,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     // Other
 
+    /**
+     * TODO: Fill in
+     */
     public void refreshWindow() {
         this.setIsVisible(false);
         this.setIsVisible(true);

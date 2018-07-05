@@ -135,7 +135,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         this.text.setText("");
         ArrayList<APICallerInterface> websiteList= this.mainController.getWebsiteList();
         for (APICallerInterface website : websiteList) {
-            this.text.setText(this.text.getText() + "\n" + website.getName() + ": " + website.getCurrency() + ": " + website.getPrice());
+            this.text.setText(this.text.getText() + "\n" + website.getName() + ": " + website.getCryptoCurrency() + ": " + website.getPrice());
         }//end for each website
     }//end updatePrices()
 

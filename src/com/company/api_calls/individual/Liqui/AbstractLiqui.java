@@ -6,30 +6,42 @@ import com.company.api_calls.AbstractJSONCaller;
  * TODO: Fill in
  */
 public abstract class AbstractLiqui extends AbstractJSONCaller {
+
     /****************
      *    Fields    *
      ****************/
 
-    // TODO: Have a final static base url string
+    /**
+     * The base URL for Liqui requests
+     * TODO: Put in actual base URL
+     */
+    public final static String BASE_URL = "";
 
     /****************
      * Constructors *
      ****************/
 
-    /**
-     * TODO: Fill in
-     * @param currency
-     * @param name
-     * @param url
-     */
-    public AbstractLiqui(final String currency, final String name, final String url) {
-        // TODO: Concatenate the ending of the url with the base string
-        super(currency, name, url);
+    public AbstractLiqui(final String cryptoCurrency, final String fiatCurrency, final String name,
+                         final String urlExt) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractLiqui.BASE_URL + urlExt);
     }//end AbstractLiqui()
 
     /****************
      *   Methods    *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * TODO: Fill in
+     * @return
+     */
+    @Override
+    public String getBaseUrl() { return AbstractLiqui.BASE_URL; }//end getBaseUrl()
+
+    /* Protected */
 
     // TODO: Override the extract price method
 }//end AbstractLiqui

@@ -11,7 +11,11 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
      *    Fields    *
      ****************/
 
-    // TODO: Have a final static base url string
+    /**
+     * The base URL for CoinCap requests
+     * TODO: Put in correct base URL
+     */
+    public final static String BASE_URL = "";
 
     /****************
      * Constructors *
@@ -19,18 +23,32 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
 
     /**
      * TODO: Fill in
-     * @param currency
+     * @param cryptoCurrency
+     * @param fiatCurrency
      * @param name
-     * @param url
+     * @param urlExt
      */
-    public AbstractCoinCap(final String currency, final String name, final String url) {
-        // TODO: Concatenate the ending of the url with the base string
-        super(currency, name, url);
+    public AbstractCoinCap(final String cryptoCurrency, final String fiatCurrency, final String name,
+                           final String urlExt) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractCoinCap.BASE_URL + urlExt);
     }//end AbstractCoinCap()
 
     /****************
      *   Methods    *
      ****************/
+
+    /* Public */
+
+    // Getters
+
+    /**
+     * TODO: Fill in
+     * @return
+     */
+    @Override
+    public String getBaseUrl() { return AbstractCoinCap.BASE_URL; }//end getBaseUrl()
+
+    /* Protected */
 
     // TODO: Override the extract price method
 }//end AbstractCoinCap

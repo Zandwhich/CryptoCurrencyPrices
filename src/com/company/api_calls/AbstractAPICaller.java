@@ -1,15 +1,7 @@
 package com.company.api_calls;
 
-import com.company.api_calls.APICallerInterface;
-import json_simple.JSONObject;
-import json_simple.JSONValue;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * TODO: Fill this out
@@ -26,9 +18,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private double price;
 
     /**
-     * The currency (i.e. BTC, ETH, LTC, etc.)
+     * The crypto currency (i.e. BTC, ETH, LTC, etc.)
      */
-    private String currency;
+    private String cryptoCurrency;
+
+    /**
+     * The fiat currency (i.e. USD, CAD, PLN, etc.)
+     */
+    private String fiatCurrency;
 
     /**
      * If the API has a price to display
@@ -53,11 +50,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     /**
      * The constructor for AbstractAPICaller
-     * @param currency The currency (i.e. BTC, ETH, LTC, etc.)
+     * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
      * @param name The name of the API endpoint
      */
-    public AbstractAPICaller(final String currency, final String name, final String url) {
-        this.currency = currency;
+    public AbstractAPICaller(final String cryptoCurrency, final String fiatCurrency, final String name,
+                             final String url) {
+        this.cryptoCurrency = cryptoCurrency;
+        this.fiatCurrency = fiatCurrency;
         this.hasPrice = false;
         this.price = 0.0;
         this.name = name;
@@ -83,40 +82,58 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The last received price
      */
     @Override
-    public double getPrice() { return price; }//end getPrice()
+    public double getPrice() { return this.price; }//end getPrice()
 
     /**
-     * Gets the currency (i.e. BTC, ETH, LTC, etc.)
-     * @return The currency (i.e. BTC, ETH, LTC, etc.)
+     * Gets the crypto currency (i.e. BTC, ETH, LTC, etc.)
+     * @return The crypto currency (i.e. BTC, ETH, LTC, etc.)
      */
     @Override
-    public String getCurrency() { return currency; }//end getCurrency()
+    public String getCryptoCurrency() { return this.cryptoCurrency; }//end getCryptoCurrency()
+
+    /**
+     * Gets the fiat currency (i.e. USD, CAD, PLN, etc.)
+     * @return The fiat currency (i.e. USD, CAD, PLN, etc.)
+     */
+    public String getFiatCurrency() { return this.fiatCurrency; }//end getFiatCurrency()
 
     /**
      * Gets if the API has received a price
      * @return If the API ahs received a price
      */
     @Override
-    public boolean getHasPrice() { return hasPrice; }//end getHasPrice()
+    public boolean getHasPrice() { return this.hasPrice; }//end getHasPrice()
 
     /**
      * Gets the name of the API endpoint
      * @return The name of the API endpoint
      */
     @Override
-    public String getName() { return name; }//end getName()
+    public String getName() { return this.name; }//end getName()
 
     /**
      * Gets the URL to update the prices
      * @return The URL to update the prices
      */
-    public URL getUrl() { return url; }//end getUrl()
+    public URL getUrl() { return this.url; }//end getUrl()
 
     /**
      * Gets the URL in a string format
      * @return The URL in a string format
      */
-    public String getUrlString() { return url.toString(); }//end getUrlString()
+    public String getUrlString() { return this.url.toString(); }//end getUrlString()
+
+    /**
+     * Gets the Base URL of the API call
+     * @return The Base URL of the API call
+     */
+    public abstract String getBaseUrl();
+
+    /**
+     * Gets the URL extension of the API call
+     * @return The URL extension of the API call
+     */
+    public abstract String getUrlExt();
 
     // Other
 
