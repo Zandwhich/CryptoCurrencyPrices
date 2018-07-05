@@ -1,9 +1,7 @@
 package com.company;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.individual.CoinBase.CoinBaseBuyBTC_USD;
-import com.company.api_calls.individual.CoinBase.CoinBaseBuyETH_USD;
-import com.company.api_calls.individual.CoinBase.CoinBaseBuyLTC_USD;
+import com.company.api_calls.individual.CoinBase.*;
 import com.company.view.window.MainWindow;
 import com.company.view.window.MainWindowInterface;
 
@@ -40,6 +38,9 @@ public class MainController implements MainControllerInterface{
         websiteList.add(new CoinBaseBuyBTC_USD());
         websiteList.add(new CoinBaseBuyETH_USD());
         websiteList.add(new CoinBaseBuyLTC_USD());
+        websiteList.add(new CoinBaseSellBTC_USD());
+        websiteList.add(new CoinBaseSellETH_USD());
+        websiteList.add(new CoinBaseSellLTC_USD());
 
     }//end MainController()
 

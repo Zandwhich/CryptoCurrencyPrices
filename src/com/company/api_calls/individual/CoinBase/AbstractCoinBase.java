@@ -12,6 +12,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      *    Fields    *
      ****************/
 
+    // TODO: Have a final static base url string
+
     /****************
      * Constructors *
      ****************/
@@ -22,7 +24,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param name
      * @param url
      */
-    public AbstractCoinBase(String currency, String name, String url) {
+    public AbstractCoinBase(final String currency, final String name, final String url) {
+        // TODO: Concatenate the base url with the ending passed in
         super(currency, name, url);
     }//end AbstractCoinBase()
 
