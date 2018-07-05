@@ -1,18 +1,15 @@
 Links to how to use different APIs for different websites:
 
-ShapeShift:
-https://info.shapeshift.io/api
+    ShapeShift:
+    https://info.shapeshift.io/api
 
-Coinbase:
-https://developers.coinbase.com/
-
-
-Links to the actual APIs themselves:
-
-CoinBase:
-https://api.coinbase.com/v2/prices/spot?currency=USD
+    CoinBase:
+    https://developers.coinbase.com/
 
 
+The actual APIs themselves:
 
-
-
+    CoinBase:
+        Base URL:       https://api.coinbase.com/v2/prices/
+        Example Buy:    https://api.coinbase.com/v2/prices/BTC-USD/buy
+        Example Sell:   https://api.coinbase.com/v2/prices/BTC-USD/sell
