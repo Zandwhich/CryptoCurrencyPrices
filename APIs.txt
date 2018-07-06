@@ -33,3 +33,4 @@ The actual APIs themselves:
             Base URL:           https://api.coinmarketcap.com/v2/ticker/
             Example BTC/USD:    https://api.coinmarketcap.com/v2/ticker/1/?convert=USD
             Example ETH/EUR:    https://api.coinmarketcap.com/v2/ticker/1027/?convert=EUR
+
