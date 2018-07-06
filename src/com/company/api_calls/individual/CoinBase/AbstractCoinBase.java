@@ -63,6 +63,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
         if (data == null) return -1;
 
+        // TODO: Figure out error-checking in the case that "amount" doesn't exist
         return Double.parseDouble((String) data.get("amount"));
     }//end extractPrice()
 

@@ -1,7 +1,6 @@
 package com.company.api_calls;
 
 import json_simple.JSONObject;
-import json_simple.JSONValue;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
 
@@ -69,12 +68,15 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
                 jsonObject = (JSONObject) parser.parse(in);
             }//end try
             catch (ParseException e) {
+                System.out.println("In ParseException");
                 // TODO: Figure out what to do with a ParseException
                 jsonObject = null;
             }//end catch (ParseException)
         }//end try
         catch (IOException e) {
             // openConnection() failed
+
+            System.out.println("In IOException");
 
             jsonObject = null;
             // TODO: Figure out exactly what to do when the connection fails

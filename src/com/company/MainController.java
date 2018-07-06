@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
+import com.company.api_calls.individual.CoinCap.CoinCapBTC_USD;
+import com.company.api_calls.individual.CoinMarketCap.*;
 import com.company.view.window.MainWindow;
 import com.company.view.window.MainWindowInterface;
 
@@ -35,12 +37,20 @@ public class MainController implements MainControllerInterface{
      */
     public MainController() {
 
-        websiteList.add(new CoinBaseBuyBTC_USD());
-        websiteList.add(new CoinBaseBuyETH_USD());
-        websiteList.add(new CoinBaseBuyLTC_USD());
-        websiteList.add(new CoinBaseSellBTC_USD());
-        websiteList.add(new CoinBaseSellETH_USD());
-        websiteList.add(new CoinBaseSellLTC_USD());
+//        websiteList.add(new CoinBaseBuyBTC_USD());
+//        websiteList.add(new CoinBaseBuyETH_USD());
+//        websiteList.add(new CoinBaseBuyLTC_USD());
+//        websiteList.add(new CoinBaseSellBTC_USD());
+//        websiteList.add(new CoinBaseSellETH_USD());
+//        websiteList.add(new CoinBaseSellLTC_USD());
+//        websiteList.add(new CoinMarketCapBTC_USD());
+//        websiteList.add(new CoinMarketCapETH_USD());
+//        websiteList.add(new CoinMarketCapLTC_USD());
+//        websiteList.add(new CoinMarketCapXRP_USD());
+//        websiteList.add(new CoinMarketCapBTC_EUR());
+//        websiteList.add(new CoinMarketCapETH_EUR());
+//        websiteList.add(new CoinMarketCapLTC_EUR());
+        websiteList.add(new CoinMarketCapXRP_EUR());
 
     }//end MainController()
 

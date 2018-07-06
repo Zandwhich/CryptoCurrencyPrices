@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
 import com.company.api_calls.AbstractJSONCaller;
+import json_simple.JSONObject;
 
 /**
  * TODO: Fill in
@@ -13,9 +14,8 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
 
     /**
      * The base URL for CoinMarketCap requests
-     * TODO: Put in actual base URL
      */
-    public final static String BASE_URL = "";
+    public final static String BASE_URL = "https://api.coinmarketcap.com/v2/ticker/";
 
     /****************
      * Constructors *
@@ -30,7 +30,6 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
      */
     public AbstractCoinMarketCap(final String cryptoCurrency, final String fiatCurrency, final String name,
                                  final String urlExt) {
-        // TODO: Concatenate the ending of the url with the base string
         super(cryptoCurrency, fiatCurrency, name, AbstractCoinMarketCap.BASE_URL + urlExt);
     }//end AbstractCoinMarketCap()
 
@@ -51,5 +50,30 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
 
     /* Protected */
 
-    // TODO: Override the extract price method
+    /**
+     * TODO: Fill in
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    protected double extractPrice(JSONObject jsonObject) {
+        if (jsonObject == null) return -1;
+
+        JSONObject data = (JSONObject) jsonObject.get("data");
+
+        if (data == null) return -1;
+
+        JSONObject quotes = (JSONObject) data.get("quotes");
+
+        if (quotes == null) return -1;
+
+        return this.extractFiat(quotes);
+    }//end extractPrice()
+
+    /**
+     * TODO: Fill in
+     * @param quotes
+     * @return
+     */
+    protected abstract double extractFiat(JSONObject quotes);
 }//end AbstractCoinMarketCap

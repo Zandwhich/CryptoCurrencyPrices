@@ -6,10 +6,30 @@ Links to how to use different APIs for different websites:
     CoinBase:
     https://developers.coinbase.com/
 
+    CoinMarketCap:
+    https://coinmarketcap.com/api/
+
 
 The actual APIs themselves:
 
     CoinBase:
-        Base URL:       https://api.coinbase.com/v2/prices/
-        Example Buy:    https://api.coinbase.com/v2/prices/BTC-USD/buy
-        Example Sell:   https://api.coinbase.com/v2/prices/BTC-USD/sell
+        Examples:
+            Base URL:       https://api.coinbase.com/v2/prices/
+            Example Buy:    https://api.coinbase.com/v2/prices/BTC-USD/buy
+            Example Sell:   https://api.coinbase.com/v2/prices/BTC-USD/sell
+
+    CoinMarketCap:
+        Accepted cryptocurrencies (to convert TO):
+            BTC, ETH, XRP, LTC, BCH
+        Accepted fiat currencies (to convert TO):
+            AUD, BRL, CAD, CHF, CLP, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD,
+            PHP, PKR, PLN, RUB, SEK, SGD, THB, TRY, TWD, ZAR
+        Cryptocurrencies and their respective ids:
+            BTC:    1
+            ETH:    1027
+            LTC:    2
+            XRP:    57
+        Examples:
+            Base URL:           https://api.coinmarketcap.com/v2/ticker/
+            Example BTC/USD:    https://api.coinmarketcap.com/v2/ticker/1/?convert=USD
+            Example ETH/EUR:    https://api.coinmarketcap.com/v2/ticker/1027/?convert=EUR

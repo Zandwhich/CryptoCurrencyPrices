@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinCap;
 
 import com.company.api_calls.AbstractJSONCaller;
+import json_simple.JSONObject;
 
 /**
  * TODO: Fill in
@@ -13,9 +14,8 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
 
     /**
      * The base URL for CoinCap requests
-     * TODO: Put in correct base URL
      */
-    public final static String BASE_URL = "";
+    public final static String BASE_URL = "http://coincap.io/page/";
 
     /****************
      * Constructors *
@@ -50,5 +50,25 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
 
     /* Protected */
 
-    // TODO: Override the extract price method
+    /**
+     * TODO: Fill in
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    protected double extractPrice(JSONObject jsonObject) {
+        if (jsonObject == null) return -1;
+
+        // TODO: Figure out how to stop getting denied
+
+        return this.extractFiat(jsonObject);
+    }//end extractPrice()
+
+    /**
+     * TODO: Fill in
+     * @param jsonObject
+     * @return
+     */
+    protected abstract double extractFiat(JSONObject jsonObject);
+
 }//end AbstractCoinCap
