@@ -73,6 +73,8 @@ public class MainController implements MainControllerInterface{
     @Override
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
 
+    // Other
+
     /**
      * The method to be run on a near-infinite loop to run the program
      */
