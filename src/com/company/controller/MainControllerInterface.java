@@ -1,4 +1,4 @@
-package com.company;
+package com.company.controller;
 
 import com.company.api_calls.APICallerInterface;
 
