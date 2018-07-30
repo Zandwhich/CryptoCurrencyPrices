@@ -53,8 +53,11 @@ public class MainController implements MainControllerInterface{
 //        websiteList.add(new CoinBaseSpotBTC_USD());
 //        websiteList.add(new CoinBaseSpotETH_USD());
 //        websiteList.add(new CoinBaseSpotLTC_USD());
-        websiteList.add(new CoinMarketCapXRP_EUR());
-        websiteList.add(new CoinMarketCapXRP_USD());
+        websiteList.add(new CoinBaseBuyBCH_USD());
+        websiteList.add(new CoinBaseSellBCH_USD());
+        websiteList.add(new CoinBaseSpotBCH_USD());
+//        websiteList.add(new CoinMarketCapXRP_EUR());
+//        websiteList.add(new CoinMarketCapXRP_USD());
 
     }//end MainController()
 

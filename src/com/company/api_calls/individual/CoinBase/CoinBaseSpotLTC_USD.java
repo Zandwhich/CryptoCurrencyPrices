@@ -1,5 +1,8 @@
 package com.company.api_calls.individual.CoinBase;
 
+/**
+ * TODO: Fill in
+ */
 public class CoinBaseSpotLTC_USD extends AbstractCoinBase {
 
     /****************
