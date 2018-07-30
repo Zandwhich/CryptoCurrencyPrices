@@ -27,7 +27,7 @@ public class CoinBaseBuyLTC_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String NAME = "CoinBase Buy Litecoin/USD";
+    public final static String NAME = "CoinBase-Buy Litecoin/USD";
 
     /****************
      * Constructors *

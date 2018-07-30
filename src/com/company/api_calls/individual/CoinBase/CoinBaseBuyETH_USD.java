@@ -27,7 +27,7 @@ public class CoinBaseBuyETH_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String NAME = "CoinBase Buy Ethereum/USD";
+    public final static String NAME = "CoinBase-Buy Ethereum/USD";
 
     /****************
      * Constructors *

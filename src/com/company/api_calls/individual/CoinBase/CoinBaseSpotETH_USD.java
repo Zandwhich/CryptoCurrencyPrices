@@ -3,7 +3,8 @@ package com.company.api_calls.individual.CoinBase;
 /**
  * TODO: Fill in
  */
-public class CoinBaseSellETH_USD extends AbstractCoinBase {
+public class CoinBaseSpotETH_USD extends AbstractCoinBase{
+
     /****************
      *    Fields    *
      ****************/
@@ -11,7 +12,7 @@ public class CoinBaseSellETH_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String URL_EXT = "ETH-USD/sell";
+    public final static String URL_EXT = "ETH-USD/spot";
 
     /**
      * TODO: Fill in
@@ -26,19 +27,19 @@ public class CoinBaseSellETH_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String NAME = "CoinBase-Sell Ethereum/USD";
+    public final static String NAME = "CoinBase-Spot Ethereum/USD";
 
     /****************
      * Constructors *
      ****************/
 
     /**
-     * The default constructor for CoinBase Sell ETH/USD
+     * The default constructor for CoinBase Spot ETH/USD
      */
-    public CoinBaseSellETH_USD() {
-        super(CoinBaseSellETH_USD.CRYPTO_CURRENCY, CoinBaseSellETH_USD.FIAT_CURRENCY, CoinBaseSellETH_USD.NAME,
-                CoinBaseSellETH_USD.URL_EXT);
-    }//end CoinBaseSellETH_USD()
+    public CoinBaseSpotETH_USD() {
+        super(CoinBaseSpotETH_USD.CRYPTO_CURRENCY, CoinBaseSpotETH_USD.FIAT_CURRENCY, CoinBaseSpotETH_USD.NAME,
+                CoinBaseSpotETH_USD.URL_EXT);
+    }//end CoinBaseSpotETH_USD()
 
     /****************
      *   Methods    *
@@ -53,6 +54,6 @@ public class CoinBaseSellETH_USD extends AbstractCoinBase {
      * @return
      */
     @Override
-    public String getUrlExt() { return CoinBaseSellETH_USD.URL_EXT; }//end getUrlExt()
+    public String getUrlExt() { return CoinBaseSpotETH_USD.URL_EXT; }//end getUrlExt()
 
-}//end CoinBaseSellETH_USD
+}//end CoinBaseSpotETH_USd

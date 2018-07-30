@@ -3,7 +3,8 @@ package com.company.api_calls.individual.CoinBase;
 /**
  * TODO: Fill in
  */
-public class CoinBaseSellBTC_USD extends AbstractCoinBase {
+public class CoinBaseSpotBTC_USD extends AbstractCoinBase {
+
     /****************
      *    Fields    *
      ****************/
@@ -11,7 +12,7 @@ public class CoinBaseSellBTC_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String URL_EXT = "BTC-USD/sell";
+    public final static String URL_EXT = "BTC-USD/spot";
 
     /**
      * TODO: Fill in
@@ -26,19 +27,19 @@ public class CoinBaseSellBTC_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String NAME = "CoinBase-Sell Bitcoin/USD";
+    public final static String NAME = "CoinBase-Spot Bitcoin/USD";
 
     /****************
      * Constructors *
      ****************/
 
     /**
-     * The default constructor for CoinBase Sell BTC/USD
+     * The default constructor for CoinBase Spot BTC/USD
      */
-    public CoinBaseSellBTC_USD() {
-        super(CoinBaseSellBTC_USD.CRYPTO_CURRENCY, CoinBaseSellBTC_USD.FIAT_CURRENCY, CoinBaseSellBTC_USD.NAME,
-                CoinBaseSellBTC_USD.URL_EXT);
-    }//end CoinBaseSellBTC_USD()
+    public CoinBaseSpotBTC_USD() {
+        super(CoinBaseSpotBTC_USD.CRYPTO_CURRENCY, CoinBaseSpotBTC_USD.FIAT_CURRENCY, CoinBaseSpotBTC_USD.NAME,
+                CoinBaseSpotBTC_USD.URL_EXT);
+    }//end CoinBaseSpotBTC_USD()
 
     /****************
      *   Methods    *
@@ -53,6 +54,6 @@ public class CoinBaseSellBTC_USD extends AbstractCoinBase {
      * @return
      */
     @Override
-    public String getUrlExt() { return CoinBaseSellBTC_USD.URL_EXT; }//end getUrlExt()
+    public String getUrlExt() { return CoinBaseSpotBTC_USD.URL_EXT; }//end getUrlExt()
 
-}//end CoinBaseSellBTC_USD
+}//end CoinBaseSpotBTC_USD

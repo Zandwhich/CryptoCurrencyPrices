@@ -1,9 +1,6 @@
 package com.company.api_calls.individual.CoinBase;
 
-/**
- * TODO: Fill in
- */
-public class CoinBaseSellLTC_USD extends AbstractCoinBase {
+public class CoinBaseSpotLTC_USD extends AbstractCoinBase {
 
     /****************
      *    Fields    *
@@ -12,7 +9,7 @@ public class CoinBaseSellLTC_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String URL_EXT = "LTC-USD/sell";
+    public final static String URL_EXT = "LTC-USD/spot";
 
     /**
      * TODO: Fill in
@@ -27,19 +24,19 @@ public class CoinBaseSellLTC_USD extends AbstractCoinBase {
     /**
      * TODO: Fill in
      */
-    public final static String NAME = "CoinBase-Sell Litecoin/USD";
+    public final static String NAME = "CoinBase-Spot Litecoin/USD";
 
     /****************
      * Constructors *
      ****************/
 
     /**
-     * The default constructor for CoinBase Sell LTC/USD
+     * The default constructor for CoinBase Spot LTC/USD
      */
-    public CoinBaseSellLTC_USD() {
-        super(CoinBaseSellLTC_USD.CRYPTO_CURRENCY, CoinBaseSellLTC_USD.FIAT_CURRENCY, CoinBaseSellLTC_USD.NAME,
-                CoinBaseSellLTC_USD.URL_EXT);
-    }//end CoinBaseSellLTC_USD()
+    public CoinBaseSpotLTC_USD() {
+        super(CoinBaseSpotLTC_USD.CRYPTO_CURRENCY, CoinBaseSpotLTC_USD.FIAT_CURRENCY, CoinBaseSpotLTC_USD.NAME,
+                CoinBaseSpotLTC_USD.URL_EXT);
+    }//end CoinBaseSpotLTC_USD()
 
     /****************
      *   Methods    *
@@ -54,6 +51,6 @@ public class CoinBaseSellLTC_USD extends AbstractCoinBase {
      * @return
      */
     @Override
-    public String getUrlExt() { return CoinBaseSellLTC_USD.URL_EXT; }//end getUrlExt()
+    public String getUrlExt() { return CoinBaseSpotLTC_USD.URL_EXT; }//end getUrlExt()
 
-}//end CoinBaseSellLTC_USD
+}//end CoinBaseSpotLTC_USD
