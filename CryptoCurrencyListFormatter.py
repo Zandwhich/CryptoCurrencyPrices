@@ -8,17 +8,17 @@ data = json.load(f)
 
 data = data["data"]
 
-list = []
+currencyList = []
 
 for coin in data:
     if coin.has_key("name"):
-        list.append(coin["symbol"] + ",\t// " + coin["name"])
-        #print(coin["symbol"] + ",\t// " + coin["name"])
+        currencyList.append(coin["symbol"] + ",\t// " + coin["name"])
+        # print(coin["symbol"] + ",\t// " + coin["name"])
     else:
-        list.append(coin["symbol"] + ",")
-        #print(coin["symbol"] + ",")
+        currencyList.append(coin["symbol"] + ",")
+        # print(coin["symbol"] + ",")
 
-list.sort()
+currencyList.sort()
 
-for coin in list:
+for coin in currencyList:
     print(coin)
