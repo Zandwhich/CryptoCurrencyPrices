@@ -3,7 +3,7 @@ package com.company.view.window;
 import com.company.controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
 import com.company.view.button.ButtonInterface;
-import com.company.view.button.RefreshButton;
+import com.company.view.button.buttons.RefreshButton;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
 
-    /****************
+    /****************®
      *    Fields    *
      ****************/
 
@@ -81,6 +81,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
     /**
      * The general setup method that is used for maximum abstraction
+     * @param mainController TODO: Fill in
      */
     private void setup(MainControllerInterface mainController) {
         this.panel.add((JButton) refreshButton);

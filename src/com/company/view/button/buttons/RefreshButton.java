@@ -1,5 +1,6 @@
-package com.company.view.button;
+package com.company.view.button.buttons;
 
+import com.company.view.button.AbstractJButtonButton;
 import com.company.view.window.MainWindowInterface;
 
 import java.awt.event.ActionEvent;
@@ -7,11 +8,16 @@ import java.awt.event.ActionEvent;
 /**
  * TODO: Fill this out
  */
-public class RefreshButton extends AbstractJButtonButton{
+public class RefreshButton extends AbstractJButtonButton {
 
     /****************
      * Constructors *
      ****************/
+
+    /*
+     * TODO: Realized that the MainWindowInterface shouldn't be passed in, but rather the controller interface,
+     *       and that the controller should be doing the 'refresh' functionality instead of the window
+     */
 
     /**
      * TODO: Fill this out
@@ -27,7 +33,10 @@ public class RefreshButton extends AbstractJButtonButton{
      * TODO: Fill this out
      * @param window The window that holds and subscribes to the button
      */
-    public RefreshButton(MainWindowInterface window) { super(window); }//end RefreshButton()
+    public RefreshButton(MainWindowInterface window) {
+        super(window);
+        this.setText("Refresh");
+    }//end RefreshButton()
 
     /****************
      *   Methods    *
@@ -43,7 +52,7 @@ public class RefreshButton extends AbstractJButtonButton{
      */
     @Override
     protected void onClick(ActionEvent event) {
-        window.refresh();
+        ((MainWindowInterface) window).refresh();
     }//end onClick()
 
     /* Public */
