@@ -115,9 +115,13 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     protected void setImage(String imagePath) {
         this.imagePath = imagePath;
+
+        // These lines are just used for testing
         File imageCheck = new File(this.imagePath);
         if (imageCheck.exists()) { System.out.println("Exists"); }
         else { System.out.println("Doesn't exist"); }
+        // End testing
+
         ImageIcon icon = new ImageIcon(this.imagePath);
         this.setIcon(icon);
     }//end setImage()
