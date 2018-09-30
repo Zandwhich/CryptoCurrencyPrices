@@ -35,7 +35,7 @@ public class RefreshButton extends AbstractJButtonButton {
      */
     public RefreshButton(MainWindowInterface window) {
         super(window);
-        this.setText("Refresh");
+        super.setImage("imgs/refresh_button_image.PNG");
     }//end RefreshButton()
 
     /****************

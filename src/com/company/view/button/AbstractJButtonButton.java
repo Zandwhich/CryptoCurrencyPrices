@@ -5,6 +5,7 @@ import com.company.view.window.WindowInterface;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * TODO: Fill this out
@@ -33,6 +34,8 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * The window that holds and subscribes to the button
      */
     protected WindowInterface window;
+
+    protected String imagePath;
 
     /**
      * TODO: Fill this out
@@ -105,6 +108,19 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * @param event TODO: Fill this in
      */
     protected abstract void onClick(ActionEvent event);
+
+    /**
+     * TODO: Fill in
+     * @param imagePath
+     */
+    protected void setImage(String imagePath) {
+        this.imagePath = imagePath;
+        File imageCheck = new File(this.imagePath);
+        if (imageCheck.exists()) { System.out.println("Exists"); }
+        else { System.out.println("Doesn't exist"); }
+        ImageIcon icon = new ImageIcon(this.imagePath);
+        this.setIcon(icon);
+    }//end setImage()
 
     /* Public */
 
