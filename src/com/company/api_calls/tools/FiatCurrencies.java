@@ -1,7 +1,7 @@
 package com.company.api_calls.tools;
 
 /**
- * An enum that shows all possible fiat currencies
+ * An enum that holds all possible fiat currencies
  */
 public enum FiatCurrencies {
 

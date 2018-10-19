@@ -1,7 +1,7 @@
 package com.company.api_calls.tools;
 
 /**
- * An enum that shows all possible cryptocurrencies (received from http://coincap.io/map)
+ * An enum that holds all possible cryptocurrencies (received from http://coincap.io/map)
  */
 public enum CryptoCurrencies {
     A0XBTC,	// 0xBitcoin    (Actually '0XBTC')
