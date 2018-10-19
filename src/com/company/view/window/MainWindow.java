@@ -44,7 +44,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * TODO: Fill in
      */
-    private ButtonInterface refreshButton = new RefreshButton(this);
+    private ButtonInterface refreshButton;
 
     /**
      * TODO: Fill in
@@ -84,14 +84,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * @param mainController TODO: Fill in
      */
     private void setup(MainControllerInterface mainController) {
+        this.mainController = mainController;
+        this.refreshButton = new RefreshButton(this.mainController);
         this.panel.add((JButton) refreshButton);
         this.panel.add(text);
         this.add(panel);
         super.refreshWindow();
 
         //this.setVisible(true);
-
-        this.mainController = mainController;
 
         //this.coinBaseBTC = new CoinBaseBuyBTC_USD();
 
@@ -119,7 +119,8 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     @Override
     public void refresh() {
-        this.mainController.updatePrices();
+        // TODO: Include an actual message that says that the information was updated in the MainController,
+        //       and this is simply updating the view
         this.updatePrices();
 
         //this.coinBaseBTC.updatePrice();

@@ -7,12 +7,7 @@ import java.util.ArrayList;
 /**
  * TODO: Fill in
  */
-public interface MainControllerInterface {
-
-    /**
-     * TODO: Fill in
-     */
-    public abstract void refresh();
+public interface MainControllerInterface extends ControllerInterface{
 
     /**
      * TODO: Fill in

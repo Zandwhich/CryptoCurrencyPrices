@@ -1,6 +1,6 @@
 package com.company.view.button;
 
-import com.company.view.window.WindowInterface;
+import com.company.controller.ControllerInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,24 +21,28 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * The default width of a button
      */
-    public final int DEFAULT_WIDTH = 100;
+    public static final int DEFAULT_WIDTH = 100;
 
     /**
      * The default height of a button
      */
-    public final int DEFAULT_HEIGHT = 100;
+    public static final int DEFAULT_HEIGHT = 100;
 
     /* Variables */
 
     /**
-     * The window that holds and subscribes to the button
+     * The controller that holds and subscribes to the button
      */
-    protected WindowInterface window;
+    protected ControllerInterface controller;
 
-    protected String imagePath;
+    /**
+     * The path to the image file
+     */
+    private String imagePath;
 
     /**
      * TODO: Fill this out
+     * Not too sure exactly how this works. Need to research this further. All I know is that it works.
      */
     private class ClickListener implements ActionListener {
 
@@ -62,20 +66,29 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
     /**
      * TODO: Fill this out
-     * @param window The window that holds and subscribes to the button
+     * @param controller The window that holds and subscribes to the button
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
      */
-    public AbstractJButtonButton(int width, int height, WindowInterface window) {
-        this.setup(width, height, window);
+    public AbstractJButtonButton(int width, int height, ControllerInterface controller) {
+        this.setup(width, height, controller);
     }//end AbstractJButtonButton()
 
     /**
      * TODO: Fill this out
-     * @param window The window that holds and subscribes to the button
+     * @param controller The controller that holds and subscribes to the button
      */
-    public AbstractJButtonButton(WindowInterface window) {
-        this.setup(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT, window);
+    public AbstractJButtonButton(ControllerInterface controller) {
+        this.setup(AbstractJButtonButton.DEFAULT_WIDTH, AbstractJButtonButton.DEFAULT_HEIGHT, controller);
+    }//end AbstractJButtonButton()
+
+    /**
+     * TODO: Fill in
+     * @param imagePath The path for the image of the button
+     * @param controller The controller that holds and subscribes to the button
+     */
+    public AbstractJButtonButton(String imagePath, ControllerInterface controller) {
+        this.setup(imagePath, controller);
     }//end AbstractJButtonButton()
 
     /****************
@@ -88,18 +101,38 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * The method that is run during the constructor in order to abstract the process as much as possible
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
-     * @param window The window that holds and subscribes to the button
+     * @param controller The controller that holds and subscribes to the button
      */
-    private void setup(int width, int height, WindowInterface window) {
+    private void setup(int width, int height, ControllerInterface controller) {
+        this.generalSetup(controller);
 
         // Setting up the window
         //if (!name.equals("")) super.setName(name);
         //System.out.println("Width: " + width + ", Height: " + height);
         super.setSize(width, height);
-        super.setVisible(true);
-        this.window = window;
-        this.addActionListener(new ClickListener());
     }//end setup()
+
+    /**
+     * The setup method that is run by the constructor who gets passed in an imagePath and a controller
+     * @param imagePath The path for the image of the button
+     * @param controller The controller that holds and subscribes to the button
+     */
+    private void setup(String imagePath, ControllerInterface controller) {
+        this.generalSetup(controller);
+
+        this.imagePath = imagePath;
+        this.setImage(this.imagePath);
+    }//end setup()
+
+    /**
+     * The method that is run by any of the setup methods
+     * @param controller The controller that holds and subscribes to the button
+     */
+    private void generalSetup(ControllerInterface controller) {
+        this.controller = controller;
+        this.addActionListener(new ClickListener());
+        super.setVisible(true);
+    }//end generalSetup()
 
     /* Protected */
 
@@ -111,19 +144,11 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
     /**
      * TODO: Fill in
-     * @param imagePath
+     * @param imagePath TODO: Fill in
      */
-    protected void setImage(String imagePath) {
+    public void setImage(String imagePath) {
         this.imagePath = imagePath;
-
-        // These lines are just used for testing
-        File imageCheck = new File(this.imagePath);
-        if (imageCheck.exists()) { System.out.println("Exists"); }
-        else { System.out.println("Doesn't exist"); }
-        // End testing
-
-        ImageIcon icon = new ImageIcon(this.imagePath);
-        this.setIcon(icon);
+        super.setIcon(new ImageIcon(this.imagePath));
     }//end setImage()
 
     /* Public */
@@ -131,10 +156,16 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     // Getters
 
     /**
-     * Gets the window that the button is posting to
-     * @return The window that the button is posting to
+     * Gets the controller that the button is posting to
+     * @return The controller that the button is posting to
      */
-    public WindowInterface getWindow() { return window; }//end getWindow()
+    public ControllerInterface getController() { return this.controller; }//end getWindow()
+
+    /**
+     * Gets the path of the image of the button. If no image is used, returns 'null'
+     * @return The path of the image of the button. If no image is used, returns 'null'
+     */
+    public String getImagePath() { return this.imagePath; }//end getImagePath()
 
     // Setters
 
