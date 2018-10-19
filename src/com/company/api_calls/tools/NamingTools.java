@@ -9,6 +9,12 @@ import static com.company.api_calls.tools.CryptoCurrencies.*;
  */
 public class NamingTools {
 
+    /*
+     * REMINDER:
+     * This file's primary focus is names, but on top of the that it is used to tell which of the currencies are
+     * supported by which of the providers.
+     */
+
     /****************
      *    Fields    *
      ****************/
@@ -18,7 +24,7 @@ public class NamingTools {
     /**
      * All of the fiat currencies that CoinBase supports (https://api.coinbase.com/v2/currencies)
      */
-    public static final FiatCurrencies[] COINBASE_FIAT_CURRENCIES = {AED, AFN, FiatCurrencies.ALL, AMD, ANG, AOA, ARS,
+    public static final FiatCurrencies[] COINBASE_FIAT_CURRENCIES = { AED, AFN, FiatCurrencies.ALL, AMD, ANG, AOA, ARS,
             AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, FiatCurrencies.BOB, BRL, FiatCurrencies.BSD, BTN,
             BWP, BYN, BYR, BZD, FiatCurrencies.CAD, CDF, CHF, CLF, CLP, CNH, CNY, COP, FiatCurrencies.CRC, CUC, CVE,
             CZK, DJF, DKK, DOP, DZD, EEK, EGP, ERN, ETB, FiatCurrencies.EUR, FJD, JEP, JMD, JOD, FiatCurrencies.JPY,
@@ -27,13 +33,13 @@ public class NamingTools {
             FiatCurrencies.NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR,
             FiatCurrencies.SBD, SCR, SEK, SGD, FiatCurrencies.SHP, SLL, SOS, SRD, FiatCurrencies.SSP, STD, SVC, SZL,
             THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, FiatCurrencies.USD, UYU, UZS, VEF, VND, VUV, WST,
-            XAF, XAG, XAU, XCD, XDR, XOF, FiatCurrencies.XPD, XPF, XPT, YER, ZAR, ZMK, ZMW, ZWL};
+            XAF, XAG, XAU, XCD, XDR, XOF, FiatCurrencies.XPD, XPF, XPT, YER, ZAR, ZMK, ZMW, ZWL };
 
     /**
      * All of the fiat currencies that CoinCap supports (http://coincap.io/page/ETC)
      */
-    public static final FiatCurrencies[] COINCAP_FIAT_CURRENCIES = {FiatCurrencies.BTC, FiatCurrencies.ETH, FiatCurrencies.EUR,
-            FiatCurrencies.LTC, FiatCurrencies.USD, FiatCurrencies.ZEC};
+    public static final FiatCurrencies[] COINCAP_FIAT_CURRENCIES = { FiatCurrencies.BTC, FiatCurrencies.ETH,
+            FiatCurrencies.EUR, FiatCurrencies.LTC, FiatCurrencies.USD, FiatCurrencies.ZEC };
 
     /**
      * All of the fiat currencies that CoinMarketCap supports (TODO: Put useful URL here)
@@ -191,6 +197,7 @@ public class NamingTools {
     // TODO: Actually fill in
     public static final CryptoCurrencies[] SHAPESHIFT_CRYPTO_CURRENCIES = {};
 
+
     /****************
      *   Methods    *
      ****************/
@@ -199,8 +206,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String fullName(@NotNull FiatCurrencies fiatCurrency) {
         switch (fiatCurrency) {
@@ -549,8 +556,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String fullName(@NotNull CryptoCurrencies cryptoCurrency) {
         switch(cryptoCurrency) {
@@ -3631,9 +3638,9 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param website
-     * @param fiatCurrency
-     * @return
+     * @param website TODO: Fill in
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInGivenFiat(FiatCurrencies[] website, @NotNull FiatCurrencies fiatCurrency) {
         for (FiatCurrencies currency : website) {
@@ -3644,9 +3651,9 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param website
-     * @param cryptoCurrency
-     * @return
+     * @param website TODO: Fill in
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInGivenCrypto(CryptoCurrencies[] website, @NotNull CryptoCurrencies cryptoCurrency) {
         for (CryptoCurrencies currency : website) {
@@ -3659,8 +3666,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinBase(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.COINBASE_FIAT_CURRENCIES, fiatCurrency);
@@ -3668,8 +3675,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinCap(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.COINCAP_FIAT_CURRENCIES, fiatCurrency);
@@ -3677,8 +3684,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinMarketCap(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.COINMARKETCAP_FIAT_CURRENCIES, fiatCurrency);
@@ -3686,8 +3693,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCryptoCompare(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.CRYPTOCOMPARE_FIAT_CURRENCIES, fiatCurrency);
@@ -3695,8 +3702,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInLiqui(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.LIQUI_FIAT_CURRENCIES, fiatCurrency);
@@ -3704,8 +3711,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInQuadrigacx(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.QUADRIGACX_FIAT_CURRENCIES, fiatCurrency);
@@ -3713,8 +3720,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param fiatCurrency
-     * @return
+     * @param fiatCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInShapeShift(@NotNull FiatCurrencies fiatCurrency) {
         return isInGivenFiat(NamingTools.SHAPESHIFT_FIAT_CURRENCIES, fiatCurrency);
@@ -3724,8 +3731,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinBase(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.COINBASE_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3733,8 +3740,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinCap(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.COINCAP_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3742,8 +3749,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCoinMarketCap(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.COINMARKETCAP_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3751,8 +3758,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInCryptoCompare(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.CRYPTOCOMPARE_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3760,8 +3767,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInLiqui(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.LIQUI_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3769,8 +3776,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInQuadrigacx(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.QUADRIGACX_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3778,8 +3785,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param cryptoCurrency
-     * @return
+     * @param cryptoCurrency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static boolean isInShapeShift(@NotNull CryptoCurrencies cryptoCurrency) {
         return isInGivenCrypto(NamingTools.SHAPESHIFT_CRYPTO_CURRENCIES, cryptoCurrency);
@@ -3791,8 +3798,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinBaseCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInCoinBase(currency)) {
@@ -3804,8 +3811,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinCapCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInCoinCap(currency)) {
@@ -3818,8 +3825,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinMarketCapCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInCoinMarketCap(currency)) {
@@ -3832,8 +3839,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCryptoCompareCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInCryptoCompare(currency)) {
@@ -3846,8 +3853,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getLiquiCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInLiqui(currency)) {
@@ -3860,8 +3867,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getQuadrigacxCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInQuadrigacx(currency)) {
@@ -3874,8 +3881,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getShapeShiftCurrencySymbol(@NotNull FiatCurrencies currency) {
         if (!NamingTools.isInShapeShift(currency)) {
@@ -3890,8 +3897,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinBaseCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInCoinBase(currency)) {
@@ -3903,8 +3910,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinCapCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInCoinCap(currency)) {
@@ -3938,8 +3945,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCoinMarketCapCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInCoinMarketCap(currency)) {
@@ -3952,8 +3959,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getCryptoCompareCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInCryptoCompare(currency)) {
@@ -3966,8 +3973,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getLiquiCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInLiqui(currency)) {
@@ -3980,8 +3987,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getQuadrigacxCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInQuadrigacx(currency)) {
@@ -3994,8 +4001,8 @@ public class NamingTools {
 
     /**
      * TODO: Fill in
-     * @param currency
-     * @return
+     * @param currency TODO: Fill in
+     * @return TODO: Fill in
      */
     public static String getShapeShiftCurrencySymbol(@NotNull CryptoCurrencies currency) {
         if (!NamingTools.isInShapeShift(currency)) {
