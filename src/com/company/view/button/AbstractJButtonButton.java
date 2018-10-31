@@ -35,6 +35,9 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     protected WindowInterface window;
 
+    /**
+     * The path of the image displayed on the button
+     */
     protected String imagePath;
 
     /**
@@ -61,7 +64,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      ****************/
 
     /**
-     * TODO: Fill this out
+     * A constructor for AbstractJButtonButton
      * @param window The window that holds and subscribes to the button
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
@@ -71,7 +74,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     }//end AbstractJButtonButton()
 
     /**
-     * TODO: Fill this out
+     * A constructor for Abstract JButtonButton
      * @param window The window that holds and subscribes to the button
      */
     public AbstractJButtonButton(WindowInterface window) {
@@ -111,7 +114,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
     /**
      * TODO: Fill in
-     * @param imagePath
+     * @param imagePath The path of the image displayed by the button
      */
     protected void setImage(String imagePath) {
         this.imagePath = imagePath;

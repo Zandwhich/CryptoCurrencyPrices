@@ -3,13 +3,13 @@ package com.company;
 import com.company.controller.MainController;
 
 /**
- * TODO: Fill this out
+ * The main class which launches the application
  */
 public class Main {
 
     /**
-     * TODO: Fill this out
-     * @param args
+     * The main method which launches the application
+     * @param args Standard main method args
      */
     public static void main(String[] args) {
         MainController controller = new MainController();
