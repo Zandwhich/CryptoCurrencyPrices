@@ -1,0 +1,21 @@
+# Ignore everything…
+*
+
+# ...execpt these exensions: ...
+!*.java
+!*.txt
+!*.md
+!*.json
+!*.py
+!*.gliffy
+!*.PNG
+!*.gitignore
+
+# ...and this file: ...
+!LICENCSE
+
+# ...and folders: ...
+!*/
+
+# ...but ignore this folder:
+out/
