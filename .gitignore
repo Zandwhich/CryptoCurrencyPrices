@@ -17,5 +17,6 @@
 # ...and folders: ...
 !*/
 
-# ...but ignore this folder:
+# ...but ignore these folders:
 out/
+venv/
