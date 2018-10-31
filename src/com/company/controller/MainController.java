@@ -100,6 +100,7 @@ public class MainController implements MainControllerInterface{
         for (APICallerInterface website : this.websiteList) {
             website.updatePrice();
         }//end for websites
+        this.updateViewPrices();
     }//end updatePrices()
 
     /**
