@@ -57,7 +57,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @return
      */
     @Override
-    protected double extractPrice(@NotNull JSONObject jsonObject) {
+    protected double extractPrice(@NotNull final JSONObject jsonObject) {
         JSONObject data = (JSONObject) jsonObject.get("data");
 
         if (data == null || !data.containsKey("amount")) return -1;
