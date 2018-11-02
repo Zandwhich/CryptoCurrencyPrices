@@ -5,7 +5,7 @@ import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
- * TODO: Fill in
+ * The basic class for all CoinBase requests
  */
 public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
@@ -23,11 +23,11 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      ****************/
 
     /**
-     * TODO: Fill in
-     * @param cryptoCurrency
-     * @param fiatCurrency
-     * @param name
-     * @param urlExt
+     * A constructor for the AbstractCoinBase class
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @param name The name of the specific request
+     * @param urlExt The extension to the base url
      */
     public AbstractCoinBase(final String cryptoCurrency, final String fiatCurrency, final String name,
                             final String urlExt) {
@@ -52,9 +52,9 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
     /* Protected */
 
     /**
-     * TODO: Fill in
-     * @param jsonObject
-     * @return
+     * Gets the price from the JSON Object
+     * @param jsonObject The JSON object received from a request
+     * @return The price from the JSON object
      */
     @Override
     protected double extractPrice(@NotNull final JSONObject jsonObject) {
