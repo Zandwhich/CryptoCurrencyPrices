@@ -6,7 +6,7 @@ import com.company.view.button.AbstractJButtonButton;
 import java.awt.event.ActionEvent;
 
 /**
- * TODO: Fill this out
+ * The refresh button that is displayed on the main page
  */
 public class RefreshButton extends AbstractJButtonButton {
 
@@ -23,7 +23,7 @@ public class RefreshButton extends AbstractJButtonButton {
      ****************/
 
     /**
-     * TODO: Fill this out
+     * A constructor for the RefreshButton
      * @param controller The controller that holds and subscribes to the button
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
@@ -33,7 +33,7 @@ public class RefreshButton extends AbstractJButtonButton {
     }//end RefreshButton()
 
     /**
-     * TODO: Fill this out
+     * A constructor for the refresh button
      * @param controller The controller that holds and subscribes to the button that will be refreshed
      */
     public RefreshButton(MainControllerInterface controller) {
@@ -49,8 +49,8 @@ public class RefreshButton extends AbstractJButtonButton {
     /* Protected */
 
     /**
-     * TODO: Fill this in
-     * @param event TODO: Fill this in
+     * The action to do on pressing. It will tell the controller to refresh
+     * @param event Because of the nature of the method, an ActionEvent is required
      */
     @Override
     protected void onClick(ActionEvent event) {

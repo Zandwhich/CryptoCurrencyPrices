@@ -1,7 +1,7 @@
 package com.company.controller;
 
 /**
- * TODO: Fill in
+ * The general interface for all controllers
  */
 public interface ControllerInterface {
 

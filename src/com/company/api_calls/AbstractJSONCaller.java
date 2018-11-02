@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.URLConnection;
 
 /**
- * TODO: Fill this out
+ * The abstract class of all 'callers' which use JSON
  */
 public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
@@ -23,11 +23,11 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      ****************/
 
     /**
-     * TODO: Fill in
-     * @param cryptoCurrency
-     * @param fiatCurrency
-     * @param name
-     * @param url
+     * The constructor for AbstractJSONCaller
+     * @param cryptoCurrency The cryptocurrency in question
+     * @param fiatCurrency The fiat currency in question
+     * @param name The
+     * @param url The url to hit
      */
     public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
                               final String url) {
@@ -41,8 +41,8 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     /* Private */
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Hits the url and retrieves the JSON
+     * @return The parsed JSON object returned as a result of the call
      */
     private JSONObject getRequestCall() {
 
@@ -88,15 +88,15 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     /* Protected */
 
     /**
-     * TODO: Fill in
-     * @param jsonObject
-     * @return
+     * Gets the price from the JSON object which was returned from a call
+     * @param jsonObject The returned, parsed JSON object from the call
+     * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
      */
     protected abstract double extractPrice(JSONObject jsonObject);
 
     /**
-     * TODO: Fill in
-     * @return
+     * Gets an updated price by calling the API
+     * @return The update price received from calling the API. If it is -1, there was a failure in retrieving the price
      */
     @Override
     protected double getNewPrice() { return extractPrice(getRequestCall()); }//end getNewPrice()

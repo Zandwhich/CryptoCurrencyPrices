@@ -8,7 +8,7 @@ import com.company.view.window.MainWindowInterface;
 import java.util.ArrayList;
 
 /**
- * TODO: Fill this out
+ * The main controller of the application which controls the main page
  */
 public class MainController implements MainControllerInterface{
 
@@ -86,7 +86,7 @@ public class MainController implements MainControllerInterface{
     }//end run()
 
     /**
-     * TODO: Fill this out
+     * Refreshes the controller
      */
     @Override
     public void refresh() {
@@ -94,7 +94,8 @@ public class MainController implements MainControllerInterface{
     }//end refresh()
 
     /**
-     * TODO: Fill this out
+     * Updates the prices displayed on the controller.
+     * Calls on each of the websites to update their individual prices.
      */
     public void updatePrices() {
         for (APICallerInterface website : this.websiteList) {
@@ -104,12 +105,12 @@ public class MainController implements MainControllerInterface{
     }//end updatePrices()
 
     /**
-     * TODO: Fill this out
+     * Updates the prices in the view
      */
     public void updateViewPrices() {
         this.mainWindow.updatePrices();
     }//end updateViewPrices()
 
-    //TODO: Add in a method that updates the View somehow
+    //TODO: Add in a method that updates the View somehow (Do I still need this?)
 
 }//end MainController

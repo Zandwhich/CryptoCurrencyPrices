@@ -5,12 +5,12 @@ import com.company.api_calls.APICallerInterface;
 import java.util.ArrayList;
 
 /**
- * TODO: Fill in
+ * The interface for specifically the main controller
  */
 public interface MainControllerInterface extends ControllerInterface{
 
     /**
-     * TODO: Fill in
+     * Update the prices that are listed on the main screen
      */
     public abstract void updatePrices();
 

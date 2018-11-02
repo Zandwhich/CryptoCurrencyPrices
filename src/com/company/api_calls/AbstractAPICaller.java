@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * TODO: Fill this out
+ * The abstract class for API calls, which all API calls are based off of
  */
 public abstract class AbstractAPICaller implements APICallerInterface {
 
@@ -43,6 +43,11 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private URL url;
 
+    /**
+     * If the last attempt to update the prices ended in failure
+     */
+    private boolean hasFailedLastUpdate;
+
 
     /****************
      * Constructors *
@@ -58,6 +63,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
         this.hasPrice = false;
+        // There has not been a failure to update, as there hasn't been a request made yet
+        this.hasFailedLastUpdate = false;
         this.price = 0.0;
         this.name = name;
         try {
@@ -135,13 +142,29 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     public abstract String getUrlExt();
 
+    /**
+     * Gets if the last attempt at updating the price ended in failure
+     * @return If the last attempt at updating the price ended in failure
+     */
+    public boolean getHasFailedLastUpdate() { return this.hasFailedLastUpdate; }
+
     // Other
 
     /**
      * Updates the price
      */
     @Override
-    public void updatePrice() { this.price = this.getNewPrice(); }//end updatePrice()
+    public void updatePrice() {
+        double newPrice = this.getNewPrice();
+        if (newPrice != -1) {
+            this.price = newPrice;
+            this.hasFailedLastUpdate = false;
+            this.hasPrice = true;
+        }//end if has received a new price successfully
+        else {
+            this.hasFailedLastUpdate = true;
+        }//end else there has not been a new price received successfully
+    }//end updatePrice()
 
     /* Protected */
 
@@ -152,6 +175,36 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param price The new price
      */
     protected void setPrice(final double price) { this.price = price; }//end setPrice()
+
+    /**
+     * Sets the cryptocurrency
+     * @param cryptoCurrency The cryptocurrency
+     */
+    protected void setCryptoCurrency(final String cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }//end setCryptoCurrency()
+
+    /**
+     * Sets the fiat currency
+     * @param fiatCurrency The fiat currency
+     */
+    protected void setFiatCurrency(final String fiatCurrency) { this.fiatCurrency = fiatCurrency; }//end fiatCurrency()
+
+    /**
+     * Sets the name of the API endpoint
+     * @param name The name of the API endpoint
+     */
+    public void setName(String name) { this.name = name; }//end setName()
+
+    /**
+     * Sets the URL to hit
+     * @param url The url to hit
+     */
+    public void setUrl(URL url) { this.url = url; }//end setUrl()
+
+    /**
+     * Sets if the last update failed
+     * @param hasFailedLastUpdate If the last update failed
+     */
+    public void setHasFailedLastUpdate(boolean hasFailedLastUpdate) { this.hasFailedLastUpdate = hasFailedLastUpdate; }//end setHasFailedLastUpdate()
 
     /**
      * Sets if there is a price to display
@@ -166,4 +219,5 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The new updated price from the API endpoint
      */
     protected abstract double getNewPrice();
+
 }//end AbstractModel

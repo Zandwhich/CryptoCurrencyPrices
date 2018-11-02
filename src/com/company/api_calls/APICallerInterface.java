@@ -3,21 +3,21 @@ package com.company.api_calls;
 import java.net.URL;
 
 /**
- * TODO: Fill this out
+ * The abstract API caller interface for all classes which will call APIs
  */
 public interface APICallerInterface {
 
     // Getters
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the current price
+     * @return The current price
      */
     public abstract double getPrice();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the cryptocurrency
+     * @return The cryptocurrency
      */
     public abstract String getCryptoCurrency();
 
