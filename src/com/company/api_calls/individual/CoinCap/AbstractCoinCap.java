@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinCap;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -57,9 +58,8 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
      */
     @Override
     protected double extractPrice(JSONObject jsonObject) {
-        if (jsonObject == null) return -1;
 
-        // TODO: Figure out how to stop getting denied
+        // TODO: Figure out how to stop getting denied :(
 
         return this.extractFiat(jsonObject);
     }//end extractPrice()
@@ -69,6 +69,6 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
      * @param jsonObject
      * @return
      */
-    protected abstract double extractFiat(JSONObject jsonObject);
+    protected abstract double extractFiat(@NotNull final JSONObject jsonObject);
 
 }//end AbstractCoinCap
