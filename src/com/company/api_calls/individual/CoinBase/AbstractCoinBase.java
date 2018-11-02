@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -42,8 +43,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the base url
+     * @return The base url
      */
     @Override
     public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }//end getBaseUrl()
@@ -56,9 +57,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @return
      */
     @Override
-    protected double extractPrice(JSONObject jsonObject) {
-        if (jsonObject == null) return -1;
-
+    protected double extractPrice(@NotNull JSONObject jsonObject) {
         JSONObject data = (JSONObject) jsonObject.get("data");
 
         if (data == null || !data.containsKey("amount")) return -1;
