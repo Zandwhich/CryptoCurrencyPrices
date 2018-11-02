@@ -61,9 +61,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
         JSONObject data = (JSONObject) jsonObject.get("data");
 
-        if (data == null) return -1;
+        if (data == null || !data.containsKey("amount")) return -1;
 
-        // TODO: Figure out error-checking in the case that "amount" doesn't exist
         return Double.parseDouble((String) data.get("amount"));
     }//end extractPrice()
 

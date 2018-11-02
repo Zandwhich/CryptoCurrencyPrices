@@ -41,8 +41,8 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     /* Private */
 
     /**
-     * Hits the url and retrieves the JSON
-     * @return The parsed JSON object returned as a result of the call
+     * Hits the url and retrieves the JSON. If there is an error, it returns null
+     * @return The parsed JSON object returned as a result of the call. If there is an error, then it returns null
      */
     private JSONObject getRequestCall() {
 
@@ -99,5 +99,9 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @return The update price received from calling the API. If it is -1, there was a failure in retrieving the price
      */
     @Override
-    protected double getNewPrice() { return extractPrice(getRequestCall()); }//end getNewPrice()
+    protected double getNewPrice() {
+        JSONObject response = getRequestCall();
+        if (response == null) return -1;
+        return extractPrice(response);
+    }//end getNewPrice()
 }//end AbstractJSONCaller
