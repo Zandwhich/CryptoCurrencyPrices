@@ -52,8 +52,8 @@ public class CoinMarketCapXRP_EUR extends AbstractCoinMarketCap {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinMarketCapXRP_EUR.URL_EXT; }//end getUrlExt()

@@ -50,8 +50,8 @@ public class CoinBaseSpotBTC_USD extends AbstractCoinBase {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinBaseSpotBTC_USD.URL_EXT; }//end getUrlExt()

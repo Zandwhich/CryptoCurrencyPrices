@@ -52,8 +52,8 @@ public class CoinCapETH_USD extends AbstractCoinCap {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinCapETH_USD.URL_EXT; }//end getUrlExt()

@@ -52,8 +52,8 @@ public class CoinMarketCapLTC_USD extends AbstractCoinMarketCap {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinMarketCapLTC_USD.URL_EXT; }//end getUrlExt()

@@ -49,8 +49,8 @@ public class CoinCapBTC_USD extends AbstractCoinCap {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinCapBTC_USD.URL_EXT; }//end getUrlExt()

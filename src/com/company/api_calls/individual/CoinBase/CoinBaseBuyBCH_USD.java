@@ -50,8 +50,8 @@ public class CoinBaseBuyBCH_USD extends  AbstractCoinBase{
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the url extension
+     * @return The url extension
      */
     @Override
     public String getUrlExt() { return CoinBaseBuyBCH_USD.URL_EXT; }//end getUrlExt()
