@@ -35,8 +35,8 @@ public abstract class AbstractLiqui extends AbstractJSONCaller {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the base URL
+     * @return The base URL
      */
     @Override
     public String getBaseUrl() { return AbstractLiqui.BASE_URL; }//end getBaseUrl()

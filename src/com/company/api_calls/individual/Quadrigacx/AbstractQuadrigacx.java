@@ -42,8 +42,8 @@ public abstract class AbstractQuadrigacx extends AbstractJSONCaller {
     // Getters
 
     /**
-     * TODO: Fill in
-     * @return
+     * Returns the base URL
+     * @return The base URL
      */
     @Override
     public String getBaseUrl() { return AbstractQuadrigacx.BASE_URL; }//end getBaseUrl()
