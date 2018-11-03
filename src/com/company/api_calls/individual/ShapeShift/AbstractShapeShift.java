@@ -22,11 +22,11 @@ public abstract class AbstractShapeShift extends AbstractJSONCaller {
      ****************/
 
     /**
-     * TODO: Fill in
-     * @param cryptoCurrency
-     * @param fiatCurrency
-     * @param name
-     * @param urlExt
+     * A constructor for the AbstractShapeShift class
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @param name The name of class
+     * @param urlExt The specific extension of the url
      */
     public AbstractShapeShift(final String cryptoCurrency, final String fiatCurrency, final String name,
                               final String urlExt) {
