@@ -1,7 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 /**
- * TODO: Fill in
+ * The class used for CoinBase Sell ETH to USD
  */
 public class CoinBaseSellETH_USD extends AbstractCoinBase {
     /****************

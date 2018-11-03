@@ -1,7 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 /**
- * TODO: Fill in
+ * TThe class used for CoinBase Spot LTC to USD
  */
 public class CoinBaseSpotLTC_USD extends AbstractCoinBase {
 

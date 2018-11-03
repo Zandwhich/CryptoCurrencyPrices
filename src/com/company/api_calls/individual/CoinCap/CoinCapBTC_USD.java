@@ -2,6 +2,9 @@ package com.company.api_calls.individual.CoinCap;
 
 import json_simple.JSONObject;
 
+/**
+ * The class used for CoinCap BTC to USD
+ */
 public class CoinCapBTC_USD extends AbstractCoinCap {
 
     /****************

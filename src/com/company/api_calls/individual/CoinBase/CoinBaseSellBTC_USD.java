@@ -19,7 +19,7 @@ public class CoinBaseSellBTC_USD extends AbstractCoinBase {
     public final static String CRYPTO_CURRENCY = "BTC";
 
     /**
-     * TODO: Fill in
+     * The class sued for CoinBase Sell BTC to USD
      */
     public final static String FIAT_CURRENCY = "USD";
 

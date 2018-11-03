@@ -1,7 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 /**
- * TODO: Fill in
+ * The class used for CoinBase Spot BTC to USD
  */
 public class CoinBaseSpotBTC_USD extends AbstractCoinBase {
 

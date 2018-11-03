@@ -1,7 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 /**
- * TODO: Fill in
+ * The class used for calling CoinBase Buy BTC to USD
  */
 public class CoinBaseBuyBTC_USD extends AbstractCoinBase {
 

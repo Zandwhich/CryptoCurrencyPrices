@@ -3,7 +3,7 @@ package com.company.api_calls.individual.CoinCap;
 import json_simple.JSONObject;
 
 /**
- * TODO: Fill in
+ * The class used for CoinCap ETh to USD
  */
 public class CoinCapETH_USD extends AbstractCoinCap {
 

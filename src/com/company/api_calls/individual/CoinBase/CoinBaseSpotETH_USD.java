@@ -1,7 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 /**
- * TODO: Fill in
+ * The class used for CoinBase Spot ETH to USD
  */
 public class CoinBaseSpotETH_USD extends AbstractCoinBase{
 

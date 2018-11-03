@@ -3,7 +3,7 @@ package com.company.api_calls.individual.CoinMarketCap;
 import json_simple.JSONObject;
 
 /**
- * TODO: Fill in
+ * The class used for CoinMarketCap BTC to EUR
  */
 public class CoinMarketCapBTC_EUR extends AbstractCoinMarketCap {
 
