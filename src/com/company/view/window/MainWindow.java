@@ -91,6 +91,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     private void setup() {
         this.mainController = (MainControllerInterface) super.getController();
         this.refreshButton = new RefreshButton(this.mainController);
+        // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add(this.websiteNames);
         this.add(this.panel);
