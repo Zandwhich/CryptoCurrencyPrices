@@ -57,9 +57,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     private MainControllerInterface mainController;
 
     /**
-     * Temporary for now
+     * The list of website objects
      */
-    private JLabel text = new JLabel();
+    private ArrayList<APICallerInterface> websites;
+
+    /**
+     * The list of website names that are displayed
+     */
+    private JList<String> websiteNames = new JList<>();
 
     /****************
      * Constructors *
@@ -69,8 +74,9 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The default constructor for the main window
      */
     public MainWindow(MainControllerInterface mainController) {
-        super(MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT, MainWindow.DEFAULT_VISIBILITY);
-        this.setup(mainController);
+        super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
+                MainWindow.DEFAULT_VISIBILITY);
+        this.setup();
     }//end MainWindow()
 
     /****************
@@ -81,15 +87,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
     /**
      * The general setup method that is used for maximum abstraction
-     * @param mainController TODO: Fill in
      */
-    private void setup(MainControllerInterface mainController) {
-        this.mainController = mainController;
+    private void setup() {
+        this.mainController = (MainControllerInterface) super.getController();
         this.refreshButton = new RefreshButton(this.mainController);
-        this.panel.add((JButton) refreshButton);
-        this.panel.add(text);
-        this.add(panel);
-        super.refreshWindow();
+        this.panel.add((JButton) this.refreshButton);
+        this.panel.add(this.websiteNames);
+        this.add(this.panel);
+        this.updatePrices();
 
         //this.setVisible(true);
 
@@ -107,11 +112,12 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * TODO: Fill this in
      */
     public void updatePrices() {
-        this.text.setText("");
-        ArrayList<APICallerInterface> websiteList= this.mainController.getWebsiteList();
-        for (APICallerInterface website : websiteList) {
-            this.text.setText(this.text.getText() + "\n" + website.getName() + ": " + website.getPrice());
+        this.websites = this.mainController.getWebsiteList();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (APICallerInterface website : this.websites) {
+            listModel.addElement(website.getName() +":\t\t" + website.getPrice());
         }//end for each website
+        this.websiteNames.setModel(listModel);
     }//end updatePrices()
 
     /**

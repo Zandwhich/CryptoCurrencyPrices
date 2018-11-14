@@ -5,7 +5,6 @@ import com.company.controller.ControllerInterface;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 /**
  * TODO: Fill this out

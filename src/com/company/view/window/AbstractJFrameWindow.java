@@ -1,6 +1,8 @@
 package com.company.view.window;
 
 
+import com.company.controller.ControllerInterface;
+
 import javax.swing.*;
 
 /**
@@ -12,6 +14,8 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *    Fields    *
      ****************/
 
+    private ControllerInterface controller;
+
     /****************
      * Constructors *
      ****************/
@@ -22,8 +26,8 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
      */
-    public AbstractJFrameWindow(String title, int width, int height) {
-        this.setup(title, width, height, JFrame.EXIT_ON_CLOSE, true);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height) {
+        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, true);
     }//end AbstractJFrameWindow()
 
     /**
@@ -35,8 +39,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE, JFrame.HIDE_ON_CLOSE, or
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      */
-    public AbstractJFrameWindow(String title, int width, int height, int closeOperation) {
-        this.setup(title, width, height, closeOperation, true);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
+                                int closeOperation) {
+        this.setup(controller, title, width, height, closeOperation, true);
     }//end AbstractJFrameWindow()
 
     /**
@@ -46,8 +51,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param height The height (in pixels) of the window
      * @param isVisible If the window is visible or not
      */
-    public AbstractJFrameWindow(String title, int width, int height, boolean isVisible) {
-        this.setup(title, width, height, JFrame.EXIT_ON_CLOSE, isVisible);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
+                                boolean isVisible) {
+        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, isVisible);
     }//end AbstractJFrameWindow()
 
     /**
@@ -60,8 +66,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      * @param isVisible If the window is visible or not
      */
-    public AbstractJFrameWindow(String title, int width, int height, int closeOperation, boolean isVisible) {
-        this.setup(title, width, height, closeOperation, isVisible);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int closeOperation,
+                                boolean isVisible) {
+        this.setup(controller, title, width, height, closeOperation, isVisible);
     }//end AbstractJFrameWindow()
 
     /****************
@@ -80,9 +87,11 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      * @param isVisible If the window is visible or not
      */
-    private void setup(String title, int width, int height, int closeOperation, boolean isVisible) {
+    private void setup(ControllerInterface controller, String title, int width, int height, int closeOperation,
+                       boolean isVisible) {
 
         // Setting up the window
+        this.controller = controller;
         super.setTitle(title);
         super.setSize(width, height);
         super.setDefaultCloseOperation(closeOperation);
@@ -127,6 +136,12 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @return If the window is visible or not
      */
     public boolean getIsVisible() { return super.isVisible(); }//end getIsVisible()
+
+    /**
+     * Gets the controller of the window
+     * @return The controller of the window
+     */
+    public ControllerInterface getController() { return this.controller; }//end getController()
 
     // Setters
 
