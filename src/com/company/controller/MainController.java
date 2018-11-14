@@ -36,25 +36,38 @@ public class MainController implements MainControllerInterface{
      */
     public MainController() {
 
+        // TODO: CoinBase added in a bunch of new cryptocurrencies that need to be added in
+
+        // All of the websites we currently have. In the future, we will only add a select amount at a time
+        // TODO: Do the thing above
+
+        /* CoinBase */
+        // Buy
+        websiteList.add(new CoinBaseBuyBCH_USD());
         websiteList.add(new CoinBaseBuyBTC_USD());
         websiteList.add(new CoinBaseBuyETH_USD());
         websiteList.add(new CoinBaseBuyLTC_USD());
+        websiteList.add(new CoinBaseBuyZRX_USD());
+        // Sell
+        websiteList.add(new CoinBaseSellBCH_USD());
         websiteList.add(new CoinBaseSellBTC_USD());
         websiteList.add(new CoinBaseSellETH_USD());
         websiteList.add(new CoinBaseSellLTC_USD());
+        websiteList.add(new CoinBaseSellZRX_USD());
+        // Spot
+        websiteList.add(new CoinBaseSpotBCH_USD());
+        websiteList.add(new CoinBaseSpotBTC_USD());
+        websiteList.add(new CoinBaseSpotETH_USD());
+        websiteList.add(new CoinBaseSpotLTC_USD());
         websiteList.add(new CoinMarketCapBTC_USD());
+
+        /* CoinMarketCap */
         websiteList.add(new CoinMarketCapETH_USD());
         websiteList.add(new CoinMarketCapLTC_USD());
         websiteList.add(new CoinMarketCapXRP_USD());
         websiteList.add(new CoinMarketCapBTC_EUR());
         websiteList.add(new CoinMarketCapETH_EUR());
         websiteList.add(new CoinMarketCapLTC_EUR());
-        websiteList.add(new CoinBaseSpotBTC_USD());
-        websiteList.add(new CoinBaseSpotETH_USD());
-        websiteList.add(new CoinBaseSpotLTC_USD());
-        websiteList.add(new CoinBaseBuyBCH_USD());
-        websiteList.add(new CoinBaseSellBCH_USD());
-        websiteList.add(new CoinBaseSpotBCH_USD());
         websiteList.add(new CoinMarketCapXRP_EUR());
         websiteList.add(new CoinMarketCapXRP_USD());
 

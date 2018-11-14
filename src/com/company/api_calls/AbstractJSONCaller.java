@@ -102,6 +102,12 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     protected double getNewPrice() {
         JSONObject response = getRequestCall();
         if (response == null) return -1;
-        return extractPrice(response);
+
+        double extractedPrice = extractPrice(response);
+
+        if (extractedPrice == -1) return -1;
+
+        setHasPrice(true);
+        return extractedPrice;
     }//end getNewPrice()
 }//end AbstractJSONCaller
