@@ -89,6 +89,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
+        // TODO: Follow the online steps on how to make a table correctly
         this.mainController = (MainControllerInterface) super.getController();
         this.refreshButton = new RefreshButton(this.mainController);
         // TODO: Figure out how to resize the image
