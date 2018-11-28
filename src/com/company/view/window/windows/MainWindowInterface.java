@@ -1,9 +1,11 @@
-package com.company.view.window;
+package com.company.view.window.windows;
+
+import com.company.view.window.WindowInterface;
 
 /**
  * TODO: Fill this out
  */
-public interface MainWindowInterface extends WindowInterface{
+public interface MainWindowInterface extends WindowInterface {
 
     /**
      * Refreshes the page with the newest cryptocurrency rates

@@ -3,8 +3,8 @@ package com.company.controller;
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
-import com.company.view.window.MainWindow;
-import com.company.view.window.MainWindowInterface;
+import com.company.view.window.windows.MainWindow;
+import com.company.view.window.windows.MainWindowInterface;
 
 import java.util.ArrayList;
 

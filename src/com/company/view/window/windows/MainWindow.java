@@ -1,9 +1,10 @@
-package com.company.view.window;
+package com.company.view.window.windows;
 
 import com.company.controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
 import com.company.view.button.ButtonInterface;
 import com.company.view.button.buttons.RefreshButton;
+import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
 
-    /****************®
+    /****************
      *    Fields    *
      ****************/
 
