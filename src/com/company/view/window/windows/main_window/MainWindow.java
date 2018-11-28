@@ -1,4 +1,4 @@
-package com.company.view.window.windows;
+package com.company.view.window.windows.main_window;
 
 import com.company.controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
@@ -91,6 +91,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     private void setup() {
         // TODO: Follow the online steps on how to make a table correctly
+        super.setLocation(155, 58);
         this.mainController = (MainControllerInterface) super.getController();
         this.refreshButton = new RefreshButton(this.mainController);
         // TODO: Figure out how to resize the image

@@ -1,4 +1,4 @@
-package com.company.view.window.windows;
+package com.company.view.window.windows.main_window;
 
 import com.company.view.window.WindowInterface;
 

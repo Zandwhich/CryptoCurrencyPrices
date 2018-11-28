@@ -1,17 +1,18 @@
-package com.company.controller;
+package com.company.controller.controllers;
 
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
-import com.company.view.window.windows.MainWindow;
-import com.company.view.window.windows.MainWindowInterface;
+import com.company.controller.MainControllerInterface;
+import com.company.view.window.windows.main_window.MainWindow;
+import com.company.view.window.windows.main_window.MainWindowInterface;
 
 import java.util.ArrayList;
 
 /**
  * The main controller of the application which controls the main page
  */
-public class MainController implements MainControllerInterface{
+public class MainController implements MainControllerInterface {
 
     /****************
      *    Fields    *
@@ -59,9 +60,10 @@ public class MainController implements MainControllerInterface{
         websiteList.add(new CoinBaseSpotBTC_USD());
         websiteList.add(new CoinBaseSpotETH_USD());
         websiteList.add(new CoinBaseSpotLTC_USD());
-        websiteList.add(new CoinMarketCapBTC_USD());
+
 
         /* CoinMarketCap */
+        websiteList.add(new CoinMarketCapBTC_USD());
         websiteList.add(new CoinMarketCapETH_USD());
         websiteList.add(new CoinMarketCapLTC_USD());
         websiteList.add(new CoinMarketCapXRP_USD());
@@ -95,7 +97,9 @@ public class MainController implements MainControllerInterface{
      */
     public void run() {
       
-        while(true) {}//end while
+        while(true) {
+            // System.out.println("Current window location: (" + this.mainWindow.getLocationX() + ", " + this.mainWindow.getLocationY() + ")");
+        }//end while
 
     }//end run()
 

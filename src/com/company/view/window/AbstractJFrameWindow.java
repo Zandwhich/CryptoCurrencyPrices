@@ -143,6 +143,24 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public ControllerInterface getController() { return this.controller; }//end getController()
 
+    /**
+     * Gets the window's x coordinate for the top-left corner
+     * @return The top-left corner's x coordinate of the window
+     */
+    @Override
+    public int getLocationX() {
+        return super.getLocation().x;
+    }//end getLocationX
+
+    /**
+     * Gets the window's y coordinate for the top-left corner
+     * @return The top-left corner's y coordinate of the window
+     */
+    @Override
+    public int getLocationY() {
+        return super.getLocation().y;
+    }//end getLocationX
+
     // Setters
 
     /**
@@ -178,6 +196,16 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public void setIsVisible(boolean isVisible) { super.setVisible(isVisible); }//end setIsVisible()
 
+    /**
+     * Sets the window's location on the screen
+     * @param x The x coordinate of the top left of the screen
+     * @param y The y coordinate of the top left of the screen
+     */
+    @Override
+    public void setLocation(int x, int y) {
+        super.setLocation(x, y);
+    }//end location()
+
     // Other
 
     /**
@@ -187,5 +215,4 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
         this.setIsVisible(false);
         this.setIsVisible(true);
     }//end refreshWindow()
-
 }//end AbstractWindow
