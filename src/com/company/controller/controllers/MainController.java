@@ -129,6 +129,6 @@ public class MainController implements MainControllerInterface {
         this.mainWindow.updatePrices();
     }//end updateViewPrices()
 
-    //TODO: Add in a method that updates the View somehow (Do I still need this?)
+    // TODO: Add in a method that updates the View somehow (Do I still need this?)
 
 }//end MainController
