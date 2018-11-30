@@ -117,10 +117,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
         this.setVisible(true);
 
-        //this.coinBaseBTC = new CoinBaseBuyBTC_USD();
-
         // TODO: Add text/labels to the window
-        // TODO: Add table functionality to the window
     }//end setup()
 
     /* Protected */
@@ -149,10 +146,6 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         // TODO: Include an actual message that says that the information was updated in the MainController,
         //       and this is simply updating the view
         this.updatePrices();
-
-        //this.coinBaseBTC.updatePrice();
-        //String something = "" + this.coinBaseBTC.getPrice();
-        //super.setTitle(something);
     }//end doSomething
 
 
