@@ -1,4 +1,4 @@
-package com.company.view.table_pane.table_panes;
+package com.company.view.table_pane.table_panes.MainTablePane;
 
 import com.company.view.table_pane.AbstractTablePane;
 
@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * TODO: Fill in
  */
-public class MainTablePane extends AbstractTablePane {
+public class MainTablePane extends AbstractTablePane implements MainTablePaneInterface {
 
     /****************
      *    Fields    *

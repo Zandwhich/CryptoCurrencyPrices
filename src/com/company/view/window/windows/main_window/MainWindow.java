@@ -4,10 +4,14 @@ import com.company.controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
 import com.company.view.button.ButtonInterface;
 import com.company.view.button.buttons.RefreshButton;
+import com.company.view.button.buttons.RefreshButtonInterface;
+import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
+import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * The main window to display for the application
@@ -45,7 +49,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * TODO: Fill in
      */
-    private ButtonInterface refreshButton;
+    private RefreshButtonInterface refreshButton;
 
     /**
      * TODO: Fill in
@@ -61,6 +65,16 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The list of website objects
      */
     private ArrayList<APICallerInterface> websites;
+
+    /**
+     * The data to be displayed in the main table
+     */
+    private Vector<Vector<String>> data = new Vector<>();
+
+    /**
+     * The main table that displays all of the information
+     */
+    private MainTablePaneInterface table;
 
     /**
      * The list of website names that are displayed
@@ -90,15 +104,17 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        // TODO: Follow the online steps on how to make a table correctly
         super.setLocation(155, 58);
+
         this.mainController = (MainControllerInterface) super.getController();
+        this.updatePrices();
+        System.out.println(this.data);
+        this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
-        this.panel.add(this.websiteNames);
+        //this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
-        this.updatePrices();
 
         //this.setVisible(true);
 
@@ -117,11 +133,13 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     public void updatePrices() {
         this.websites = this.mainController.getWebsiteList();
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+        this.data.clear();
         for (APICallerInterface website : this.websites) {
-            listModel.addElement(website.getName() +":\t\t" + website.getPrice());
+            Vector<String> websiteVec = new Vector<>();
+            websiteVec.add(website.getCryptoCurrency());
+            websiteVec.add("" + website.getPrice());
+            this.data.add(websiteVec);
         }//end for each website
-        this.websiteNames.setModel(listModel);
     }//end updatePrices()
 
     /**
