@@ -1,4 +1,4 @@
-package com.company.view.button.buttons;
+package com.company.view.button.buttons.refresh_button;
 
 import com.company.controller.MainControllerInterface;
 import com.company.view.button.AbstractJButtonButton;
@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 /**
  * The refresh button that is displayed on the main page
  */
-public class RefreshButton extends AbstractJButtonButton {
+public class RefreshButton extends AbstractJButtonButton implements RefreshButtonInterface {
 
     /****************
      *    Fields    *

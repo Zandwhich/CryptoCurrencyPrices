@@ -3,7 +3,8 @@ package com.company.view.window.windows.main_window;
 import com.company.controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
 import com.company.view.button.ButtonInterface;
-import com.company.view.button.buttons.RefreshButton;
+import com.company.view.button.buttons.refresh_button.RefreshButton;
+import com.company.view.button.buttons.refresh_button.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
@@ -45,7 +46,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * TODO: Fill in
      */
-    private ButtonInterface refreshButton;
+    private RefreshButtonInterface refreshButton;
 
     /**
      * TODO: Fill in
