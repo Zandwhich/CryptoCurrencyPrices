@@ -2,6 +2,7 @@ package com.company.view.table_pane.table_panes;
 
 import com.company.view.table_pane.AbstractTablePane;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 /**
@@ -13,6 +14,16 @@ public class MainTablePane extends AbstractTablePane {
      *    Fields    *
      ****************/
 
+    /**
+     * The array that the main table column headers are made from because Vectors are dumb
+     */
+    private static final String[] DEFAULT_COLUMN_HEADERS_ARRAY = {"Website", "Price"};
+
+    /**
+     * The default column headers for the main table
+     */
+    public static final Vector<String> DEFAULT_COLUMN_HEADERS = new Vector<>(Arrays.asList(MainTablePane.DEFAULT_COLUMN_HEADERS_ARRAY));
+
     /****************
      * Constructors *
      ****************/
@@ -22,23 +33,11 @@ public class MainTablePane extends AbstractTablePane {
      * @param data The data of all of the prices of the cryptocurrencies and whatnot
      */
     public MainTablePane(Vector<Vector<String>> data) {
-        super(MainTablePane.createColumns(), data);
+        super(MainTablePane.DEFAULT_COLUMN_HEADERS, data);
     }//end MainTablePane()
 
     /****************
      *    Methods   *
      ****************/
 
-    /* Private */
-
-    /**
-     * Static method to create the columns for the constructor
-     * @return The columns
-     */
-    private static Vector<String> createColumns() {
-        Vector<String> columns = new Vector<>();
-        // TODO: Actually put in the correct headers
-        columns.add("test");
-        return columns;
-    }//end createColumns()
 }//end MainTablePane
