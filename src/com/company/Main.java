@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.controller.controllers.MainController;
+import com.company.controller.controllers.main_controller.MainController;
 
 /**
  * The main class which launches the application

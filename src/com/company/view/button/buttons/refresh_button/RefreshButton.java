@@ -1,6 +1,6 @@
 package com.company.view.button.buttons.refresh_button;
 
-import com.company.controller.MainControllerInterface;
+import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.button.AbstractJButtonButton;
 
 import java.awt.event.ActionEvent;
