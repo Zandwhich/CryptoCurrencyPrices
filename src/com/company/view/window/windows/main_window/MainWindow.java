@@ -108,15 +108,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
         this.mainController = (MainControllerInterface) super.getController();
         this.updatePrices();
-        System.out.println(this.data);
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
-        //this.panel.add((JScrollPane) this.table);
+        this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
-        //this.setVisible(true);
+        this.setVisible(true);
 
         //this.coinBaseBTC = new CoinBaseBuyBTC_USD();
 
