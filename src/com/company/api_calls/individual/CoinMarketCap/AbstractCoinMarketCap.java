@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.controller.ControllerInterface;
 import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
@@ -28,10 +29,11 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
      * @param fiatCurrency
      * @param name
      * @param urlExt
+     * @param controller The controller that calls this endpoint
      */
     public AbstractCoinMarketCap(final String cryptoCurrency, final String fiatCurrency, final String name,
-                                 final String urlExt) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractCoinMarketCap.BASE_URL + urlExt);
+                                 final String urlExt, ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractCoinMarketCap.BASE_URL + urlExt, controller);
     }//end AbstractCoinMarketCap()
 
     /****************

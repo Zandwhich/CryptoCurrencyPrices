@@ -14,6 +14,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *    Fields    *
      ****************/
 
+    /**
+     * TODO: Fill in
+     */
     private ControllerInterface controller;
 
     /****************
@@ -22,6 +25,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -32,6 +36,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -46,6 +51,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -58,6 +64,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -79,6 +86,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * The redundant setup that is run for each constructor
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window

@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.Quadrigacx;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.controller.ControllerInterface;
 
 /**
  * TODO: Fill in
@@ -27,10 +28,11 @@ public abstract class AbstractQuadrigacx extends AbstractJSONCaller {
      * @param fiatCurrency
      * @param name
      * @param urlExt
+     * @param controller The controller that calls this endpoint
      */
     public AbstractQuadrigacx(final String cryptoCurrency, final String fiatCurrency, final String name,
-                              final String urlExt) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractQuadrigacx.BASE_URL + urlExt);
+                              final String urlExt, ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractQuadrigacx.BASE_URL + urlExt, controller);
     }//end AbstractQuadrigacx()
 
     /****************

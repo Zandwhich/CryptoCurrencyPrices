@@ -73,6 +73,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
     /**
      * The default constructor for the main window
+     * @param mainController The MainController of the application
      */
     public MainWindow(MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
@@ -91,6 +92,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     private void setup() {
         // TODO: Follow the online steps on how to make a table correctly
+        // TODO: Make the x and y coordinates constants
         super.setLocation(155, 58);
         this.mainController = (MainControllerInterface) super.getController();
         this.refreshButton = new RefreshButton(this.mainController);

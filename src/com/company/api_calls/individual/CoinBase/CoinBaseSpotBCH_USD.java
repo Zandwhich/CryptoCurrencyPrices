@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Spot BCH to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseSpotBCH_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Spot BCH/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSpotBCH_USD() {
+    public CoinBaseSpotBCH_USD(ControllerInterface controller) {
         super(CoinBaseSpotBCH_USD.CRYPTO_CURRENCY, CoinBaseSpotBCH_USD.FIAT_CURRENCY, CoinBaseSpotBCH_USD.NAME,
-                CoinBaseSpotBCH_USD.URL_EXT);
+                CoinBaseSpotBCH_USD.URL_EXT, controller);
     }//end CoinBaseSpotBCH_USD()
 
     /****************

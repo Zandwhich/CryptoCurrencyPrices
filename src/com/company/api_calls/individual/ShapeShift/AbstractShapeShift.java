@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.ShapeShift;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.controller.ControllerInterface;
 
 /**
  * TODO: Fill in
@@ -27,10 +28,11 @@ public abstract class AbstractShapeShift extends AbstractJSONCaller {
      * @param fiatCurrency The fiat currency
      * @param name The name of class
      * @param urlExt The specific extension of the url
+     * @param controller The controller that calls this endpoint
      */
     public AbstractShapeShift(final String cryptoCurrency, final String fiatCurrency, final String name,
-                              final String urlExt) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractShapeShift.BASE_URL + urlExt);
+                              final String urlExt, ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractShapeShift.BASE_URL + urlExt, controller);
     }//end AbstractShapeShift()
 
     /****************

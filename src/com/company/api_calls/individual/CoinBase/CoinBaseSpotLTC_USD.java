@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * TThe class used for CoinBase Spot LTC to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseSpotLTC_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Spot LTC/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSpotLTC_USD() {
+    public CoinBaseSpotLTC_USD(ControllerInterface controller) {
         super(CoinBaseSpotLTC_USD.CRYPTO_CURRENCY, CoinBaseSpotLTC_USD.FIAT_CURRENCY, CoinBaseSpotLTC_USD.NAME,
-                CoinBaseSpotLTC_USD.URL_EXT);
+                CoinBaseSpotLTC_USD.URL_EXT, controller);
     }//end CoinBaseSpotLTC_USD()
 
     /****************

@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Spot ETH to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseSpotETH_USD extends AbstractCoinBase{
 
     /**
      * The default constructor for CoinBase Spot ETH/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSpotETH_USD() {
+    public CoinBaseSpotETH_USD(ControllerInterface controller) {
         super(CoinBaseSpotETH_USD.CRYPTO_CURRENCY, CoinBaseSpotETH_USD.FIAT_CURRENCY, CoinBaseSpotETH_USD.NAME,
-                CoinBaseSpotETH_USD.URL_EXT);
+                CoinBaseSpotETH_USD.URL_EXT, controller);
     }//end CoinBaseSpotETH_USD()
 
     /****************
