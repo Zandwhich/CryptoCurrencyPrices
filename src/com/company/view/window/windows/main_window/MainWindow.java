@@ -1,12 +1,11 @@
 package com.company.view.window.windows.main_window;
 
-import com.company.controller.MainControllerInterface;
+import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
-import com.company.view.button.ButtonInterface;
-import com.company.view.button.buttons.RefreshButton;
-import com.company.view.button.buttons.RefreshButtonInterface;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
+import com.company.view.button.buttons.refresh_button.RefreshButton;
+import com.company.view.button.buttons.refresh_button.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;

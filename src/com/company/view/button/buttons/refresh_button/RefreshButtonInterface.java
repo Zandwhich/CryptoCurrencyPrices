@@ -1,4 +1,4 @@
-package com.company.view.button.buttons;
+package com.company.view.button.buttons.refresh_button;
 
 import com.company.view.button.ButtonInterface;
 
