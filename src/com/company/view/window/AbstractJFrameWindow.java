@@ -4,6 +4,7 @@ package com.company.view.window;
 import com.company.controller.ControllerInterface;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 /**
  * The abstract window class which uses Java's JFrame
@@ -229,6 +230,6 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     @Override
     public void close() {
-        // TODO: Figure out how to close the window, but only dispose
+        super.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 }//end AbstractWindow
