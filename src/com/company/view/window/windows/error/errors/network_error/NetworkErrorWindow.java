@@ -12,15 +12,32 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
      *    Fields    *
      ****************/
 
+    /* Public */
+
     /**
      * The message of the error's window
      */
-    public static final String MESSAGE = "There appears to be a network connection error. Please check your connection and try again.";
+    public static final String MESSAGE = "There appears to be a network connection error.\nPlease check your connection and try again.";
 
     /**
      * The title of the error's window
      */
     public static final String TITLE = "ERROR: Network Connection";
+
+    /**
+     * The width of the error window
+     */
+    public static final int WIDTH = 600;
+
+    /**
+     * The height of the error window
+     */
+    public static final int HEIGHT = 50;
+
+
+    /* Private */
+
+
 
     /****************
      * Constructors *
@@ -29,11 +46,10 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
     /**
      * TODO: The constructor for the window that displays an error
      * @param controller The controller in charge of the window
-     * @param width The width of the window
-     * @param height The height of the window
      */
-    public NetworkErrorWindow(ControllerInterface controller, int width, int height) {
-        super(controller, NetworkErrorWindow.TITLE, width, height, NetworkErrorWindow.MESSAGE);
+    public NetworkErrorWindow(ControllerInterface controller) {
+        super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
+                NetworkErrorWindow.MESSAGE);
     }//end NetworkErrorWindow
 
     /****************

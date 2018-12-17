@@ -141,7 +141,7 @@ public class MainController implements MainControllerInterface {
 
         switch (error) {
             case NETWORK_CONNECTION:
-                new NetworkErrorWindow(this, 100, 100);
+                new NetworkErrorWindow(this);
                 return;
         }//end switch
     }//end errorDisplay()
