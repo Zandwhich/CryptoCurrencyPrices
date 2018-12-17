@@ -95,7 +95,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         // TODO: Make the x and y coordinates constants
         super.setLocation(155, 58);
         this.mainController = (MainControllerInterface) super.getController();
-        this.refreshButton = new RefreshButton(this.mainController);
+        this.refreshButton = new RefreshButton(this.mainController, this);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add(this.websiteNames);
@@ -139,6 +139,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         //String something = "" + this.coinBaseBTC.getPrice();
         //super.setTitle(something);
     }//end doSomething
+
+    /**
+     * TODO: Fill in
+     */
+    @Override
+    public void close() {
+        // TODO: Figure out how to close the window, but close the whole application as well
+    }//end close()
 
 
 

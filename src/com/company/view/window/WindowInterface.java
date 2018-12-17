@@ -42,5 +42,10 @@ public interface WindowInterface {
      */
     public abstract int getLocationY();
 
+    /**
+     * Closes the window
+     */
+    public abstract void close();
+
 
 }//end WindowInterface

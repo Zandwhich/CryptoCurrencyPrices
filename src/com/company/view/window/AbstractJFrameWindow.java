@@ -223,4 +223,12 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
         this.setIsVisible(false);
         this.setIsVisible(true);
     }//end refreshWindow()
+
+    /**
+     * Closes the window
+     */
+    @Override
+    public void close() {
+        // TODO: Figure out how to close the window, but only dispose
+    }
 }//end AbstractWindow

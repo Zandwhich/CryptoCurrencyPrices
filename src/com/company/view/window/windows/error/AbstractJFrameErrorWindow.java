@@ -1,6 +1,8 @@
 package com.company.view.window.windows.error;
 
 import com.company.controller.ControllerInterface;
+import com.company.view.button.buttons.close_button.CloseButton;
+import com.company.view.button.buttons.close_button.CloseButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
@@ -23,6 +25,16 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      * The label that holds the message
      */
     private JLabel label;
+
+    /**
+     * The panel that holds all of the components of the page together
+     */
+    private JPanel panel = new JPanel();
+
+    /**
+     * The button that can close the screen
+     */
+    private CloseButtonInterface closeButton;
 
     /****************
      * Constructors *
@@ -54,8 +66,11 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      */
     private void setup(String message) {
         this.message = message;
-        this.label = new JLabel(message);
-        this.add(this.label);
+        this.label = new JLabel(this.message);
+        this.closeButton = new CloseButton(super.getController(), this);
+        panel.add(this.label);
+        panel.add((CloseButton) this.closeButton);
+        this.add(panel);
     }//end setup()
 
     /* Protected */

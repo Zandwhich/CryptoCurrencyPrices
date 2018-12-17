@@ -1,7 +1,10 @@
 package com.company.view.window.windows.error.errors.network_error;
 
 import com.company.controller.ControllerInterface;
+import com.company.view.button.buttons.close_button.CloseButtonInterface;
 import com.company.view.window.windows.error.AbstractJFrameErrorWindow;
+
+import javax.swing.*;
 
 /**
  * TODO: Fill in
@@ -12,7 +15,7 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
      *    Fields    *
      ****************/
 
-    /* Public */
+    /* Public Constants */
 
     /**
      * The message of the error's window
@@ -34,11 +37,6 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
      */
     public static final int HEIGHT = 50;
 
-
-    /* Private */
-
-
-
     /****************
      * Constructors *
      ****************/
@@ -50,6 +48,7 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
     public NetworkErrorWindow(ControllerInterface controller) {
         super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
                 NetworkErrorWindow.MESSAGE);
+        this.setup();
     }//end NetworkErrorWindow
 
     /****************
@@ -57,6 +56,10 @@ public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements Net
      ****************/
 
     /* Private */
+
+    private void setup() {
+
+    }
 
     /* Protected */
 
