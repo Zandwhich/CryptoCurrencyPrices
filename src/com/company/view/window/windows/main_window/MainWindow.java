@@ -77,7 +77,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     public MainWindow(MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
-                MainWindow.DEFAULT_VISIBILITY);
+                JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
         this.setup();
     }//end MainWindow()
 

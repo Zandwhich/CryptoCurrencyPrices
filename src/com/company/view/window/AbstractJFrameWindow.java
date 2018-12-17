@@ -31,7 +31,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param height The height (in pixels) of the window
      */
     public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height) {
-        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, true);
+        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, true);
     }//end AbstractJFrameWindow()
 
     /**
@@ -59,7 +59,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
                                 boolean isVisible) {
-        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, isVisible);
+        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, isVisible);
     }//end AbstractJFrameWindow()
 
     /**
