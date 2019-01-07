@@ -109,6 +109,7 @@ public class MainController implements MainControllerInterface {
      */
     @Override
     public void refresh() {
+        // TODO: First check if there is a network connection, then attempt to get the prices
         this.updatePrices();
     }//end refresh()
 
