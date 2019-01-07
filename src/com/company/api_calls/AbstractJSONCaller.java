@@ -26,7 +26,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * The constructor for AbstractJSONCaller
      * @param cryptoCurrency The cryptocurrency in question
      * @param fiatCurrency The fiat currency in question
-     * @param name The
+     * @param name TODO: Fill in
      * @param url The url to hit
      */
     public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
@@ -75,8 +75,6 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         }//end try
         catch (IOException e) {
             // openConnection() failed
-
-            System.out.println("In IOException");
 
             jsonObject = null;
             // TODO: Figure out exactly what to do when the connection fails
