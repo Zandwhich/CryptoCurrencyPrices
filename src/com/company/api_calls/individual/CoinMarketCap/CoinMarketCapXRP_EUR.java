@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
+import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 
 /**
@@ -38,9 +39,9 @@ public class CoinMarketCapXRP_EUR extends AbstractCoinMarketCap {
     /**
      * The default constructor for CoinMarketCap XRP/EUR
      */
-    public CoinMarketCapXRP_EUR() {
+    public CoinMarketCapXRP_EUR(ControllerInterface controller) {
         super(CoinMarketCapXRP_EUR.CRYPTO_CURRENCY, CoinMarketCapXRP_EUR.FIAT_CURRENCY, CoinMarketCapXRP_EUR.NAME,
-                CoinMarketCapXRP_EUR.URL_EXT);
+                CoinMarketCapXRP_EUR.URL_EXT, controller);
     }//end CoinMarketCapXRP_EUR()
 
     /****************

@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinCap;
 
+import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 
 /**
@@ -37,10 +38,11 @@ public class CoinCapBTC_USD extends AbstractCoinCap {
 
     /**
      * The default constructor for CoinCap BTC/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinCapBTC_USD() {
+    public CoinCapBTC_USD(ControllerInterface controller) {
         super(CoinCapBTC_USD.CRYPTO_CURRENCY, CoinCapBTC_USD.FIAT_CURRENCY, CoinCapBTC_USD.NAME,
-                CoinCapBTC_USD.URL_EXT);
+                CoinCapBTC_USD.URL_EXT, controller);
     }//end CoinCapBTC_USD()
 
     /****************

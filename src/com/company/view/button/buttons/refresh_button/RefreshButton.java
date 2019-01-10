@@ -2,6 +2,7 @@ package com.company.view.button.buttons.refresh_button;
 
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.button.AbstractJButtonButton;
+import com.company.view.window.WindowInterface;
 
 import java.awt.event.ActionEvent;
 
@@ -27,17 +28,19 @@ public class RefreshButton extends AbstractJButtonButton implements RefreshButto
      * @param controller The controller that holds and subscribes to the button
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
+     * @param window The window that holds the button
      */
-    public RefreshButton(MainControllerInterface controller, int width, int height) {
-        super(width, height, controller);
+    public RefreshButton(MainControllerInterface controller, WindowInterface window, int width, int height) {
+        super(width, height, controller, window);
     }//end RefreshButton()
 
     /**
      * A constructor for the refresh button
      * @param controller The controller that holds and subscribes to the button that will be refreshed
+     * @param window The window that holds the button
      */
-    public RefreshButton(MainControllerInterface controller) {
-        super(RefreshButton.IMAGE_PATH, controller);
+    public RefreshButton(MainControllerInterface controller, WindowInterface window) {
+        super(RefreshButton.IMAGE_PATH, controller, window);
     }//end RefreshButton()
 
     /****************
@@ -54,7 +57,7 @@ public class RefreshButton extends AbstractJButtonButton implements RefreshButto
      */
     @Override
     protected void onClick(ActionEvent event) {
-        controller.refresh();
+        super.getController().refresh();
     }//end onClick()
 
     /* Public */

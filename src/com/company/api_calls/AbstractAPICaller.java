@@ -1,5 +1,7 @@
 package com.company.api_calls;
 
+import com.company.controller.ControllerInterface;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -48,6 +50,11 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private boolean hasFailedLastUpdate;
 
+    /**
+     * The controller that calls this API caller
+     */
+    private ControllerInterface controller;
+
 
     /****************
      * Constructors *
@@ -56,10 +63,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The constructor for AbstractAPICaller
      * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
+     * @param fiatCurrency The fiat currency to compare against (USD, CAD, PLN, etc.)
      * @param name The name of the API endpoint
+     * @param url The url to hit
+     * @param controller The controller that calls this API caller
      */
     public AbstractAPICaller(final String cryptoCurrency, final String fiatCurrency, final String name,
-                             final String url) {
+                             final String url, final ControllerInterface controller) {
+        this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
         this.hasPrice = false;
@@ -146,7 +157,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Gets if the last attempt at updating the price ended in failure
      * @return If the last attempt at updating the price ended in failure
      */
-    public boolean getHasFailedLastUpdate() { return this.hasFailedLastUpdate; }
+    public boolean getHasFailedLastUpdate() { return this.hasFailedLastUpdate; }//end getHasFailedLastUpdate()
+
+    /**
+     * Gets the controller
+     * @return The controller
+     */
+    public ControllerInterface getController() { return this.controller; }//end getController()
 
     // Other
 

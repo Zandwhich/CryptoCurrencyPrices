@@ -86,10 +86,11 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
     /**
      * The default constructor for the main window
+     * @param mainController The MainController of the application
      */
     public MainWindow(MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
-                MainWindow.DEFAULT_VISIBILITY);
+                JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
         this.setup();
     }//end MainWindow()
 
@@ -103,12 +104,15 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
+        // TODO: Follow the online steps on how to make a table correctly
+        // TODO: Make the x and y coordinates constants
         super.setLocation(155, 58);
 
         this.mainController = (MainControllerInterface) super.getController();
         this.updatePrices();
         this.table = new MainTablePane(this.data);
-        this.refreshButton = new RefreshButton(this.mainController);
+        this.refreshButton = new RefreshButton(this.mainController, this);
+
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add((JScrollPane) this.table);
@@ -146,6 +150,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         //       and this is simply updating the view
         this.updatePrices();
     }//end doSomething
+
+    /**
+     * TODO: Fill in
+     */
+    @Override
+    public void close() {
+        // TODO: Figure out how to close the window, but close the whole application as well
+    }//end close()
 
 
 

@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Buy ETH to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseBuyETH_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Buy ETH/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseBuyETH_USD() {
+    public CoinBaseBuyETH_USD(ControllerInterface controller) {
         super(CoinBaseBuyETH_USD.CRYPTO_CURRENCY, CoinBaseBuyETH_USD.FIAT_CURRENCY, CoinBaseBuyETH_USD.NAME,
-                CoinBaseBuyETH_USD.URL_EXT);
+                CoinBaseBuyETH_USD.URL_EXT, controller);
     }//end CoinBaseBuyETH_USD()
 
     /****************

@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.controller.ControllerInterface;
 import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
@@ -30,8 +31,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param urlExt The extension to the base url
      */
     public AbstractCoinBase(final String cryptoCurrency, final String fiatCurrency, final String name,
-                            final String urlExt) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractCoinBase.BASE_URL + urlExt);
+                            final String urlExt, final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractCoinBase.BASE_URL + urlExt, controller);
     }//end AbstractCoinBase()
 
     /****************

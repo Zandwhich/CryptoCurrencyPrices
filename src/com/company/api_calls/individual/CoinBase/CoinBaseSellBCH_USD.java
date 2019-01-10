@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Sell BH to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseSellBCH_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Sell BCH/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSellBCH_USD() {
+    public CoinBaseSellBCH_USD(ControllerInterface controller) {
         super(CoinBaseSellBCH_USD.CRYPTO_CURRENCY, CoinBaseSellBCH_USD.FIAT_CURRENCY, CoinBaseSellBCH_USD.NAME,
-                CoinBaseSellBCH_USD.URL_EXT);
+                CoinBaseSellBCH_USD.URL_EXT, controller);
     }//end CoinBaseSellBCH_USD()
 
     /****************

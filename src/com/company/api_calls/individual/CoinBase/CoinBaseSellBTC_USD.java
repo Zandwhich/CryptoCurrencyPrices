@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * TODO: Fill in
  */
@@ -35,9 +37,9 @@ public class CoinBaseSellBTC_USD extends AbstractCoinBase {
     /**
      * The default constructor for CoinBase Sell BTC/USD
      */
-    public CoinBaseSellBTC_USD() {
+    public CoinBaseSellBTC_USD(ControllerInterface controller) {
         super(CoinBaseSellBTC_USD.CRYPTO_CURRENCY, CoinBaseSellBTC_USD.FIAT_CURRENCY, CoinBaseSellBTC_USD.NAME,
-                CoinBaseSellBTC_USD.URL_EXT);
+                CoinBaseSellBTC_USD.URL_EXT, controller);
     }//end CoinBaseSellBTC_USD()
 
     /****************

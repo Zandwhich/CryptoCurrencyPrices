@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for calling CoinBase Buy BTC to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseBuyBTC_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Buy BTC/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseBuyBTC_USD() {
+    public CoinBaseBuyBTC_USD(ControllerInterface controller) {
         super(CoinBaseBuyBTC_USD.CRYPTO_CURRENCY, CoinBaseBuyBTC_USD.FIAT_CURRENCY, CoinBaseBuyBTC_USD.NAME,
-                CoinBaseBuyBTC_USD.URL_EXT);
+                CoinBaseBuyBTC_USD.URL_EXT, controller);
     }//end CoinBaseBuyBTC_USD()
 
     /****************
