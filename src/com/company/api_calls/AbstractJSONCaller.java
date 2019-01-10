@@ -49,6 +49,9 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      */
     private JSONObject getRequestCall() {
 
+        // If it's not connected, don't try to get the request
+        if (!super.getController().isConnected()) return null;
+
         /*
         Refer to:
             https://docs.oracle.com/javase/tutorial/networking/urls/connecting.html
@@ -78,7 +81,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         }//end try
         catch (IOException e) {
             // openConnection() failed
-            super.getController().errorDisplay(Errors.NETWORK_CONNECTION);
+            super.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
 
             jsonObject = null;
         }//end catch IOException

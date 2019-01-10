@@ -4,6 +4,7 @@ import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
 import com.company.api_calls.tools.Errors;
+import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 /**
  * The main controller of the application which controls the main page
  */
-public class MainController implements MainControllerInterface {
+public class MainController extends AbstractController implements MainControllerInterface {
 
     /****************
      *    Fields    *
@@ -110,7 +111,9 @@ public class MainController implements MainControllerInterface {
     @Override
     public void refresh() {
         // TODO: First check if there is a network connection, then attempt to get the prices
-        this.updatePrices();
+        super.checkConnection();
+        if (!super.isConnected()) this.errorDisplay(Errors.NETWORK_CONNECTION);
+        else this.updatePrices();
     }//end refresh()
 
     /**
@@ -132,6 +135,21 @@ public class MainController implements MainControllerInterface {
     }//end updateViewPrices()
 
     // TODO: Add in a method that updates the View somehow (Do I still need this?)
+
+    /**
+     * Pops up a window that displays an error message
+     * @param error The type of error
+     * @param name The name of who called this error
+     */
+    @Override
+    public void errorDisplay(Errors error, String name) {
+
+        switch (error) {
+            case NETWORK_CONNECTION:
+                new NetworkErrorWindow(this, name);
+                return;
+        }//end switch
+    }//end errorDisplay()
 
     /**
      * Pops up a window that displays an error message
