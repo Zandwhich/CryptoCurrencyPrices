@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Sell LTC to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseSellLTC_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Sell LTC/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSellLTC_USD() {
+    public CoinBaseSellLTC_USD(ControllerInterface controller) {
         super(CoinBaseSellLTC_USD.CRYPTO_CURRENCY, CoinBaseSellLTC_USD.FIAT_CURRENCY, CoinBaseSellLTC_USD.NAME,
-                CoinBaseSellLTC_USD.URL_EXT);
+                CoinBaseSellLTC_USD.URL_EXT, controller);
     }//end CoinBaseSellLTC_USD()
 
     /****************

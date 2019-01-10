@@ -3,6 +3,9 @@ package com.company.controller.controllers.main_controller;
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
+import com.company.api_calls.tools.Errors;
+import com.company.controller.AbstractController;
+import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
 
@@ -11,7 +14,7 @@ import java.util.ArrayList;
 /**
  * The main controller of the application which controls the main page
  */
-public class MainController implements MainControllerInterface {
+public class MainController extends AbstractController implements MainControllerInterface {
 
     /****************
      *    Fields    *
@@ -43,34 +46,34 @@ public class MainController implements MainControllerInterface {
 
         /* CoinBase */
         // Buy
-        websiteList.add(new CoinBaseBuyBCH_USD());
-        websiteList.add(new CoinBaseBuyBTC_USD());
-        websiteList.add(new CoinBaseBuyETH_USD());
-        websiteList.add(new CoinBaseBuyLTC_USD());
-        websiteList.add(new CoinBaseBuyZRX_USD());
+        websiteList.add(new CoinBaseBuyBCH_USD(this));
+        websiteList.add(new CoinBaseBuyBTC_USD(this));
+        websiteList.add(new CoinBaseBuyETH_USD(this));
+        websiteList.add(new CoinBaseBuyLTC_USD(this));
+        websiteList.add(new CoinBaseBuyZRX_USD(this));
         // Sell
-        websiteList.add(new CoinBaseSellBCH_USD());
-        websiteList.add(new CoinBaseSellBTC_USD());
-        websiteList.add(new CoinBaseSellETH_USD());
-        websiteList.add(new CoinBaseSellLTC_USD());
-        websiteList.add(new CoinBaseSellZRX_USD());
+        websiteList.add(new CoinBaseSellBCH_USD(this));
+        websiteList.add(new CoinBaseSellBTC_USD(this));
+        websiteList.add(new CoinBaseSellETH_USD(this));
+        websiteList.add(new CoinBaseSellLTC_USD(this));
+        websiteList.add(new CoinBaseSellZRX_USD(this));
         // Spot
-        websiteList.add(new CoinBaseSpotBCH_USD());
-        websiteList.add(new CoinBaseSpotBTC_USD());
-        websiteList.add(new CoinBaseSpotETH_USD());
-        websiteList.add(new CoinBaseSpotLTC_USD());
+        websiteList.add(new CoinBaseSpotBCH_USD(this));
+        websiteList.add(new CoinBaseSpotBTC_USD(this));
+        websiteList.add(new CoinBaseSpotETH_USD(this));
+        websiteList.add(new CoinBaseSpotLTC_USD(this));
 
 
         /* CoinMarketCap */
-        websiteList.add(new CoinMarketCapBTC_USD());
-        websiteList.add(new CoinMarketCapETH_USD());
-        websiteList.add(new CoinMarketCapLTC_USD());
-        websiteList.add(new CoinMarketCapXRP_USD());
-        websiteList.add(new CoinMarketCapBTC_EUR());
-        websiteList.add(new CoinMarketCapETH_EUR());
-        websiteList.add(new CoinMarketCapLTC_EUR());
-        websiteList.add(new CoinMarketCapXRP_EUR());
-        websiteList.add(new CoinMarketCapXRP_USD());
+        websiteList.add(new CoinMarketCapBTC_USD(this));
+        websiteList.add(new CoinMarketCapETH_USD(this));
+        websiteList.add(new CoinMarketCapLTC_USD(this));
+        websiteList.add(new CoinMarketCapXRP_USD(this));
+        websiteList.add(new CoinMarketCapBTC_EUR(this));
+        websiteList.add(new CoinMarketCapETH_EUR(this));
+        websiteList.add(new CoinMarketCapLTC_EUR(this));
+        websiteList.add(new CoinMarketCapXRP_EUR(this));
+        websiteList.add(new CoinMarketCapXRP_USD(this));
 
     }//end MainController()
 
@@ -108,7 +111,9 @@ public class MainController implements MainControllerInterface {
     @Override
     public void refresh() {
         // TODO: First check if there is a network connection, then attempt to get the prices
-        this.updatePrices();
+        super.checkConnection();
+        if (!super.isConnected()) this.errorDisplay(Errors.NETWORK_CONNECTION);
+        else this.updatePrices();
     }//end refresh()
 
     /**
@@ -130,5 +135,34 @@ public class MainController implements MainControllerInterface {
     }//end updateViewPrices()
 
     // TODO: Add in a method that updates the View somehow (Do I still need this?)
+
+    /**
+     * Pops up a window that displays an error message
+     * @param error The type of error
+     * @param name The name of who called this error
+     */
+    @Override
+    public void errorDisplay(Errors error, String name) {
+
+        switch (error) {
+            case NETWORK_CONNECTION:
+                new NetworkErrorWindow(this, name);
+                return;
+        }//end switch
+    }//end errorDisplay()
+
+    /**
+     * Pops up a window that displays an error message
+     * @param error The type of error
+     */
+    @Override
+    public void errorDisplay(Errors error) {
+
+        switch (error) {
+            case NETWORK_CONNECTION:
+                new NetworkErrorWindow(this);
+                return;
+        }//end switch
+    }//end errorDisplay()
 
 }//end MainController

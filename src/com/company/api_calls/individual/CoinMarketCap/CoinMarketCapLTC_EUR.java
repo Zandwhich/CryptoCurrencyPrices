@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
+import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 
 /**
@@ -37,10 +38,11 @@ public class CoinMarketCapLTC_EUR extends AbstractCoinMarketCap {
 
     /**
      * The default constructor for CoinMarketCap LTC/EUR
+     * @param controller The controller that calls this endpoint
      */
-    public CoinMarketCapLTC_EUR() {
+    public CoinMarketCapLTC_EUR(ControllerInterface controller) {
         super(CoinMarketCapLTC_EUR.CRYPTO_CURRENCY, CoinMarketCapLTC_EUR.FIAT_CURRENCY, CoinMarketCapLTC_EUR.NAME,
-                CoinMarketCapLTC_EUR.URL_EXT);
+                CoinMarketCapLTC_EUR.URL_EXT, controller);
     }//end CoinMarketCapLTC_USD()
 
     /****************

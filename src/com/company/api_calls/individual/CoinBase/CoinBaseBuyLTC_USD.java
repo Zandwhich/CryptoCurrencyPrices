@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * The class used for CoinBase Buy LTC to USD
  */
@@ -35,10 +37,11 @@ public class CoinBaseBuyLTC_USD extends AbstractCoinBase {
 
     /**
      * The default constructor for CoinBase Buy LTC/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseBuyLTC_USD() {
+    public CoinBaseBuyLTC_USD(ControllerInterface controller) {
         super(CoinBaseBuyLTC_USD.CRYPTO_CURRENCY, CoinBaseBuyLTC_USD.FIAT_CURRENCY, CoinBaseBuyLTC_USD.NAME,
-                CoinBaseBuyLTC_USD.URL_EXT);
+                CoinBaseBuyLTC_USD.URL_EXT, controller);
     }//end CoinBaseBuyLTC_USD()
 
     /****************

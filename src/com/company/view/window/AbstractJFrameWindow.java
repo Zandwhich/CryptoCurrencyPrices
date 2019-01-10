@@ -4,6 +4,7 @@ package com.company.view.window;
 import com.company.controller.ControllerInterface;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 /**
  * The abstract window class which uses Java's JFrame
@@ -14,6 +15,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *    Fields    *
      ****************/
 
+    /**
+     * TODO: Fill in
+     */
     private ControllerInterface controller;
 
     /****************
@@ -22,16 +26,18 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
      */
     public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height) {
-        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, true);
+        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, true);
     }//end AbstractJFrameWindow()
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -46,6 +52,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -53,11 +60,12 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
                                 boolean isVisible) {
-        this.setup(controller, title, width, height, JFrame.EXIT_ON_CLOSE, isVisible);
+        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, isVisible);
     }//end AbstractJFrameWindow()
 
     /**
      * Constructor for an AbstractJFrameWindow
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -79,6 +87,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
 
     /**
      * The redundant setup that is run for each constructor
+     * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
@@ -215,4 +224,12 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
         this.setIsVisible(false);
         this.setIsVisible(true);
     }//end refreshWindow()
+
+    /**
+     * Closes the window
+     */
+    @Override
+    public void close() {
+        super.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
 }//end AbstractWindow

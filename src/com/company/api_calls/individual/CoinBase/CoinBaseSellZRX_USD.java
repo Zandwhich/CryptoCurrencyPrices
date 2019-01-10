@@ -1,5 +1,7 @@
 package com.company.api_calls.individual.CoinBase;
 
+import com.company.controller.ControllerInterface;
+
 /**
  * TODO: Fill in
  */
@@ -35,10 +37,11 @@ public class CoinBaseSellZRX_USD extends AbstractCoinBase{
 
     /**
      * The default constructor for CoinBase Sell ZRX/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinBaseSellZRX_USD() {
+    public CoinBaseSellZRX_USD(ControllerInterface controller) {
         super(CoinBaseSellZRX_USD.CRYPTO_CURRENCY, CoinBaseSellZRX_USD.FIAT_CURRENCY, CoinBaseSellZRX_USD.NAME,
-                CoinBaseSellZRX_USD.URL_EXT);
+                CoinBaseSellZRX_USD.URL_EXT, controller);
     }//end CoinBaseSellLTC_USD()
 
     /****************

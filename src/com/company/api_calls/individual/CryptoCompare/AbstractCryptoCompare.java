@@ -1,6 +1,7 @@
 package com.company.api_calls.individual.CryptoCompare;
 
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.controller.ControllerInterface;
 
 /**
  * TODO: Fill in
@@ -27,10 +28,11 @@ public abstract class AbstractCryptoCompare extends AbstractJSONCaller {
      * @param fiatCurrency
      * @param name
      * @param urlExt
+     * @param controller The controller that calls this endpoint
      */
     public AbstractCryptoCompare(final String cryptoCurrency, final String fiatCurrency, final String name,
-                                 final String urlExt) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractCryptoCompare.BASE_URL + urlExt);
+                                 final String urlExt, ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, AbstractCryptoCompare.BASE_URL + urlExt, controller);
     }//end AbstractCryptoCompare()
 
     /****************

@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
+import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 
 /**
@@ -37,10 +38,11 @@ public class CoinMarketCapETH_USD extends AbstractCoinMarketCap {
 
     /**
      * The default constructor for CoinMarketCap ETH/USD
+     * @param controller The controller that calls this endpoint
      */
-    public CoinMarketCapETH_USD() {
+    public CoinMarketCapETH_USD(ControllerInterface controller) {
         super(CoinMarketCapETH_USD.CRYPTO_CURRENCY, CoinMarketCapETH_USD.FIAT_CURRENCY, CoinMarketCapETH_USD.NAME,
-                CoinMarketCapETH_USD.URL_EXT);
+                CoinMarketCapETH_USD.URL_EXT, controller);
     }//end CoinMarketCapETH_USD()
 
     /****************

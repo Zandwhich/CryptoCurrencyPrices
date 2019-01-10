@@ -1,5 +1,7 @@
 package com.company.api_calls;
 
+import com.company.api_calls.tools.Errors;
+import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -28,10 +30,11 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @param fiatCurrency The fiat currency in question
      * @param name TODO: Fill in
      * @param url The url to hit
+     * @param controller The controller that calls this JSON caller
      */
     public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
-                              final String url) {
-        super(cryptoCurrency, fiatCurrency, name, url);
+                              final String url, final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, url, controller);
     }//end AbstractJSONCaller()
 
     /****************
@@ -45,6 +48,9 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @return The parsed JSON object returned as a result of the call. If there is an error, then it returns null
      */
     private JSONObject getRequestCall() {
+
+        // If it's not connected, don't try to get the request
+        if (!super.getController().isConnected()) return null;
 
         /*
         Refer to:
@@ -75,9 +81,9 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         }//end try
         catch (IOException e) {
             // openConnection() failed
+            super.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
 
             jsonObject = null;
-            // TODO: Figure out exactly what to do when the connection fails
         }//end catch IOException
 
         return jsonObject;
