@@ -96,6 +96,7 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
     @Override
     public void setColumns(Vector<String> columns) {
         this.columns = columns;
+        this.updateColumns(this.columns);
         // TODO: Actually set the columns in the JTable (have to play around with this first)
     }//end setColumns()
 
@@ -120,6 +121,19 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         for (Vector<String> row : data) {
             tableModel.addRow(row);
         }//end for
+
+        this.table.setModel(tableModel);
+        super.setViewportView(this.table);
+    }
+
+    private void updateColumns(Vector<String> columns) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        for (String column : columns) {
+            tableModel.addColumn(column);
+        }
+        for (Vector<String> row : this.data) {
+            tableModel.addRow(row);
+        }
 
         this.table.setModel(tableModel);
         super.setViewportView(this.table);
