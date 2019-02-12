@@ -1,6 +1,7 @@
 package com.company.view.table_pane;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 
 /**
@@ -38,7 +39,7 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
      * @param data The data of the table
      */
     public AbstractTablePane(final Vector<String> columns, final Vector<Vector<String>> data) {
-        super(new JTable(data, columns));
+        super();
         this.setup(columns, data);
     }//end AbstractTablePane
 
@@ -57,7 +58,9 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
     private  void setup(final Vector<String> columns, final Vector<Vector<String>> data) {
         this.columns = columns;
         this.data = data;
-        this.table = (JTable) super.getViewport().getView();
+        this.table = new JTable(this.data, this.columns);
+        this.table.setShowGrid(true);
+        super.setViewportView(this.table);
     }//end setup()
 
     /* Public */
@@ -90,6 +93,7 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
      * Sets the columns
      * @param columns The header columns
      */
+    @Override
     public void setColumns(Vector<String> columns) {
         this.columns = columns;
         // TODO: Actually set the columns in the JTable (have to play around with this first)
@@ -101,6 +105,23 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
      */
     public void setData(Vector<Vector<String>> data) {
         this.data = data;
-        // TODO: Actually set the data in the JTable (have to play around with this first)
+        this.updateData(this.data);
     }//end setData()
+
+    /**
+     * Updates the internals of the JTable by creating a new TableModel
+     * @param data The data as a matrix of strings
+     */
+    private void updateData(Vector<Vector<String>> data) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        for (int i = 0; i < this.table.getModel().getColumnCount(); i++) {
+            tableModel.addColumn(this.table.getColumnName(i));
+        }
+        for (Vector<String> row : data) {
+            tableModel.addRow(row);
+        }//end for
+
+        this.table.setModel(tableModel);
+        super.setViewportView(this.table);
+    }
 }//end AbstractTablePane

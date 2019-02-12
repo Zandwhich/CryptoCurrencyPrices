@@ -109,7 +109,6 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         super.setLocation(155, 58);
 
         this.mainController = (MainControllerInterface) super.getController();
-        this.updatePrices();
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
 
@@ -118,6 +117,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
+        this.updatePrices();
         this.setVisible(true);
 
         // TODO: Add text/labels to the window
@@ -139,6 +139,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
             websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
         }//end for each website
+        this.table.setData(this.data);
     }//end updatePrices()
 
     /**
