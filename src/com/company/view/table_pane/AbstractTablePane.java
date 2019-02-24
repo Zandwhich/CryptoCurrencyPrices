@@ -111,6 +111,19 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         this.updateData(this.data);
     }//end setData()
 
+
+    /* Protected */
+
+    /**
+     * Disables editing the table
+     */
+    protected void disableTableEditable() {
+        this.table.setDefaultEditor(Object.class, null);
+    }//end setTableEditable()
+
+
+    /* Private */
+
     /**
      * Updates the internal data of the JTable by creating a new TableModel
      * @param data The data as a matrix of strings
