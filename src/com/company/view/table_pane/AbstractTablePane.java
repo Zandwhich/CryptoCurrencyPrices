@@ -65,6 +65,51 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         super.setViewportView(this.table);
     }//end setup()
 
+    /**
+     * Updates the internal data of the JTable by creating a new TableModel
+     * @param data The data as a matrix of strings
+     */
+    private void updateData(Vector<Vector<String>> data) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        for (int i = 0; i < this.table.getModel().getColumnCount(); i++) {
+            tableModel.addColumn(this.table.getColumnName(i));
+        }//end for columns
+        for (Vector<String> row : data) {
+            tableModel.addRow(row);
+        }//end for rows
+
+        this.table.setModel(tableModel);
+        super.setViewportView(this.table);
+    }//end updateData()
+
+    /**
+     * Updates the internal columns of the JTable by creating a new TableModel
+     * @param columns The columns as a vector of strings
+     */
+    private void updateColumns(Vector<String> columns) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        for (String column : columns) {
+            tableModel.addColumn(column);
+        }//end for columns
+        for (Vector<String> row : this.data) {
+            tableModel.addRow(row);
+        }//end for rows
+
+        this.table.setModel(tableModel);
+        super.setViewportView(this.table);
+    }//end updateColumns()
+
+
+    /* Protected */
+
+    /**
+     * Disables editing the table
+     */
+    protected void disableTableEditable() {
+        this.table.setDefaultEditor(Object.class, null);
+    }//end setTableEditable()
+
+
     /* Public */
 
     // Getters
@@ -110,51 +155,4 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         this.data = data;
         this.updateData(this.data);
     }//end setData()
-
-
-    /* Protected */
-
-    /**
-     * Disables editing the table
-     */
-    protected void disableTableEditable() {
-        this.table.setDefaultEditor(Object.class, null);
-    }//end setTableEditable()
-
-
-    /* Private */
-
-    /**
-     * Updates the internal data of the JTable by creating a new TableModel
-     * @param data The data as a matrix of strings
-     */
-    private void updateData(Vector<Vector<String>> data) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        for (int i = 0; i < this.table.getModel().getColumnCount(); i++) {
-            tableModel.addColumn(this.table.getColumnName(i));
-        }//end for columns
-        for (Vector<String> row : data) {
-            tableModel.addRow(row);
-        }//end for rows
-
-        this.table.setModel(tableModel);
-        super.setViewportView(this.table);
-    }//end updateData()
-
-    /**
-     * Updates the internal columns of the JTable by creating a new TableModel
-     * @param columns The columns as a vector of strings
-     */
-    private void updateColumns(Vector<String> columns) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        for (String column : columns) {
-            tableModel.addColumn(column);
-        }//end for columns
-        for (Vector<String> row : this.data) {
-            tableModel.addRow(row);
-        }//end for rows
-
-        this.table.setModel(tableModel);
-        super.setViewportView(this.table);
-    }//end updateColumns()
 }//end AbstractTablePane
