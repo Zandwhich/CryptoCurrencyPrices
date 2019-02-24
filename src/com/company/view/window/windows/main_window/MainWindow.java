@@ -135,7 +135,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         this.data.clear();
         for (APICallerInterface website : this.websites) {
             Vector<String> websiteVec = new Vector<>();
-            websiteVec.add(website.getCryptoCurrency());
+            websiteVec.add(website.getName());
             websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
         }//end for each website
