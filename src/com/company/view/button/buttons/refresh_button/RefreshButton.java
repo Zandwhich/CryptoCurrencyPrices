@@ -17,7 +17,7 @@ public class RefreshButton extends AbstractJButtonButton implements RefreshButto
 
     /* Constants */
 
-    public static final String IMAGE_PATH = "imgs/refresh_button_image.PNG";
+    public static final String IMAGE_PATH = "src/resources/imgs/refresh_button_image.PNG";
 
     /****************
      * Constructors *
