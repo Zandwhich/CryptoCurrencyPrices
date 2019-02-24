@@ -22,11 +22,25 @@ public interface MainControllerInterface extends ControllerInterface {
      */
     public abstract ArrayList<APICallerInterface> getWebsiteList();
 
+    /**
+     * Returns the current fiat currency selected
+     * @return The current fiat currency selected
+     */
     public abstract FiatCurrencies getCurrentFiat();
 
     /**
      * Updates the currently selected fiatCurrencyPrice
      */
     public abstract void updateFiatCurrency(FiatCurrencies fiatCurrency);
+
+    /**
+     * Brings up the fiat currencies popup
+     */
+    public abstract void fiatCurrenciesPopUp();
+
+    /**
+     * Brings up the cryptocurrencies popup
+     */
+    public abstract void cryptoCurrenciesPopUp();
 
 }//end MainControllerInterface

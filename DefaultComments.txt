@@ -1,0 +1,27 @@
+    /****************
+     *    Fields    *
+     ****************/
+
+    /* Constants */
+
+    /* Variables */
+
+
+    /****************
+     * Constructors *
+     ****************/
+
+
+    /****************
+     *    Methods   *
+     ****************/
+
+    /* Private */
+
+    /* Protected */
+
+    /* Public */
+
+    // Getters
+
+    // Setters

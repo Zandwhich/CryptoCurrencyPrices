@@ -5,6 +5,8 @@ import com.company.controller.controllers.main_controller.MainControllerInterfac
 import com.company.api_calls.APICallerInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
+import com.company.view.menu_bar.main_menu_bar.MainMenuBar;
+import com.company.view.menu_bar.main_menu_bar.MainMenuBarInterface;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
 import com.company.view.button.buttons.refresh_button.RefreshButton;
@@ -83,7 +85,12 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     private JList<String> websiteNames = new JList<>();
 
+    /**
+     * The dropdown to choose the fiat currency
+     */
     private FiatDropdownInterface fiatDropdown;
+
+    private MainMenuBarInterface mainMenuBar;
 
     /****************
      * Constructors *
@@ -113,6 +120,10 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         super.setLocation(155, 58);
 
         this.mainController = (MainControllerInterface) super.getController();
+
+        this.mainMenuBar = new MainMenuBar(this.mainController);
+        super.setJMenuBar((JMenuBar) this.mainMenuBar);
+
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);

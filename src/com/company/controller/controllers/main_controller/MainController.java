@@ -188,4 +188,20 @@ public class MainController extends AbstractController implements MainController
     public void updateFiatCurrency(FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
     }//end updateFiatCurrency
+
+    /**
+     * Brings up the fiat currencies popup
+     */
+    @Override
+    public void fiatCurrenciesPopUp() {
+        // TODO: Create the fiat currencies pop-up
+    }//end fiatCurrenciesPopUp()
+
+    /**
+     * Brings up the cryptocurrencies popup
+     */
+    @Override
+    public void cryptoCurrenciesPopUp() {
+        // TODO: Create the cryptocurrencies pop-up
+    }
 }//end MainController
