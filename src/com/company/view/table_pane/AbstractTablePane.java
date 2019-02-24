@@ -2,6 +2,7 @@ package com.company.view.table_pane;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.Vector;
 
 /**
@@ -60,6 +61,7 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         this.data = data;
         this.table = new JTable(this.data, this.columns);
         this.table.setShowGrid(true);
+        this.table.setGridColor(Color.LIGHT_GRAY);
         super.setViewportView(this.table);
     }//end setup()
 
