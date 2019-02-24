@@ -1,6 +1,6 @@
 package com.company.controller;
 
-import com.company.api_calls.tools.Errors;
+import com.company.tools.Errors;
 
 /**
  * The general interface for all controllers

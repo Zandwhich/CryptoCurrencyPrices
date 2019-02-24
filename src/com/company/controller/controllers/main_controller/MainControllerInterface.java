@@ -1,6 +1,7 @@
 package com.company.controller.controllers.main_controller;
 
 import com.company.api_calls.APICallerInterface;
+import com.company.tools.FiatCurrencies;
 import com.company.controller.ControllerInterface;
 
 import java.util.ArrayList;
@@ -20,5 +21,12 @@ public interface MainControllerInterface extends ControllerInterface {
      * @return The list of websites of URLs to hit
      */
     public abstract ArrayList<APICallerInterface> getWebsiteList();
+
+    public abstract FiatCurrencies getCurrentFiat();
+
+    /**
+     * Updates the currently selected fiatCurrencyPrice
+     */
+    public abstract void updateFiatCurrency(FiatCurrencies fiatCurrency);
 
 }//end MainControllerInterface

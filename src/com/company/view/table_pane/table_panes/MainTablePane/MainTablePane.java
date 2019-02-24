@@ -34,6 +34,7 @@ public class MainTablePane extends AbstractTablePane implements MainTablePaneInt
      */
     public MainTablePane(Vector<Vector<String>> data) {
         super(MainTablePane.DEFAULT_COLUMN_HEADERS, data);
+        super.disableTableEditable();
     }//end MainTablePane()
 
     /****************

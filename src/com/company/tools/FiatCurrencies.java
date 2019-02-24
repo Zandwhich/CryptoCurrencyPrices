@@ -1,4 +1,4 @@
-package com.company.api_calls.tools;
+package com.company.tools;
 
 /**
  * An enum that holds all possible fiat currencies
@@ -178,4 +178,28 @@ public enum FiatCurrencies {
     ZMW, // Zambian Kwacha
     ZWL; // Zimbabwean Dollar
 
+    /**
+     * Returns the FiatCurrencies enum into an array
+     * @return The FiatCurrencies enum in an array
+     */
+    public static String[] toStringArray() {
+        String[] array = new String[FiatCurrencies.values().length];
+        for (int i = 0; i < FiatCurrencies.values().length; i++) {
+            array[i] = FiatCurrencies.values()[i].toString();
+        }//end for
+        return array;
+    }//end toStringArray()
+
+    /**
+     * Returns the equivalent FiatCurrency enum value for a given string;
+     * Returns null if it doesn't match any
+     * @param fiatCurrency The given string
+     * @return The FiatCurrency enum value
+     */
+    public static FiatCurrencies toFiatCurrency(String fiatCurrency) {
+        for (FiatCurrencies currency : FiatCurrencies.values())  {
+            if (fiatCurrency.equals(currency.toString())) return currency;
+        }//end for
+        return null;
+    }//end toFiatCurrency()
 }//end FiatCurrencies

@@ -3,7 +3,8 @@ package com.company.controller.controllers.main_controller;
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
-import com.company.api_calls.tools.Errors;
+import com.company.tools.Errors;
+import com.company.tools.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
@@ -24,6 +25,11 @@ public class MainController extends AbstractController implements MainController
      * The list of all of the API endpoints
      */
     private ArrayList<APICallerInterface> websiteList = new ArrayList<>();
+
+    /**
+     * The currently selected
+     */
+    private FiatCurrencies currentFiat = FiatCurrencies.USD;
 
     /**
      * The main window of the application
@@ -91,6 +97,15 @@ public class MainController extends AbstractController implements MainController
      */
     @Override
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
+
+    /**
+     * Returns the current fiat currency selected
+     * @return The current fiat currency selected
+     */
+    @Override
+    public FiatCurrencies getCurrentFiat() {
+        return this.currentFiat;
+    }//end getCurrentFiat()
 
     // Other
 
@@ -165,4 +180,12 @@ public class MainController extends AbstractController implements MainController
         }//end switch
     }//end errorDisplay()
 
+    /**
+     * Updates the fiat currency to the one passed in
+     * @param fiatCurrency The new fiat currency
+     */
+    @Override
+    public void updateFiatCurrency(FiatCurrencies fiatCurrency) {
+        this.currentFiat = fiatCurrency;
+    }//end updateFiatCurrency
 }//end MainController
