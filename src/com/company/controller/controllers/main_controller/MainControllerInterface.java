@@ -22,6 +22,8 @@ public interface MainControllerInterface extends ControllerInterface {
      */
     public abstract ArrayList<APICallerInterface> getWebsiteList();
 
+    public abstract FiatCurrencies getCurrentFiat();
+
     /**
      * Updates the currently selected fiatCurrencyPrice
      */

@@ -1,5 +1,6 @@
 package com.company.view.combo_box.fiat_dropdown;
 
+import com.company.api_calls.tools.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.combo_box.AbstractJComboBox;
 
@@ -30,8 +31,22 @@ public class FiatDropdownJComboBox<String> extends AbstractJComboBox<String> imp
 
     /* Private */
 
+    /**
+     * Returns the controller casted as the main controller interface
+     * @return The controller casted as the main controller interface
+     */
+    private MainControllerInterface getMainController() {
+        return (MainControllerInterface) super.getController();
+    }//end getMainController()
+
 
     /* Protected */
+
+    @Override
+    protected void selectedItemChanged() {
+        super.selectedItemChanged();
+        this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency((java.lang.String) super.getSelectedItem()));
+    }//end selectedItemChanged()
 
 
     /* Public */
@@ -39,9 +54,4 @@ public class FiatDropdownJComboBox<String> extends AbstractJComboBox<String> imp
     // Getters
 
 
-    @Override
-    protected void selectedItemChanged() {
-        super.selectedItemChanged();
-
-    }
 }//end FiatDropdownJComboBox

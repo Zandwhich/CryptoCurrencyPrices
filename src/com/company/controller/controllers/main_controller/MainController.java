@@ -10,6 +10,7 @@ import com.company.view.window.windows.error.errors.network_error.NetworkErrorWi
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -97,6 +98,15 @@ public class MainController extends AbstractController implements MainController
      */
     @Override
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
+
+    /**
+     * Returns the current fiat currency selected
+     * @return The current fiat currency selected
+     */
+    @Override
+    public FiatCurrencies getCurrentFiat() {
+        return this.currentFiat;
+    }//end getCurrentFiat()
 
     // Other
 
