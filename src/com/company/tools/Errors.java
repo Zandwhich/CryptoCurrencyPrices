@@ -1,4 +1,4 @@
-package com.company.api_calls.tools;
+package com.company.tools;
 
 /**
  * An enum for errors used in the project

@@ -1,8 +1,8 @@
-package com.company.api_calls.tools;
+package com.company.tools;
 
 import com.sun.istack.internal.NotNull;
-import static com.company.api_calls.tools.FiatCurrencies.*;
-import static com.company.api_calls.tools.CryptoCurrencies.*;
+import static com.company.tools.FiatCurrencies.*;
+import static com.company.tools.CryptoCurrencies.*;
 
 /**
  * TODO: Fill in

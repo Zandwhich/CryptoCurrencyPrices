@@ -1,6 +1,6 @@
 package com.company.api_calls;
 
-import com.company.api_calls.tools.Errors;
+import com.company.tools.Errors;
 import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;

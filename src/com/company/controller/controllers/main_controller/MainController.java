@@ -3,14 +3,13 @@ package com.company.controller.controllers.main_controller;
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
-import com.company.api_calls.tools.Errors;
-import com.company.api_calls.tools.FiatCurrencies;
+import com.company.tools.Errors;
+import com.company.tools.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
