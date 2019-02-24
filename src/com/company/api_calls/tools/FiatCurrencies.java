@@ -178,4 +178,11 @@ public enum FiatCurrencies {
     ZMW, // Zambian Kwacha
     ZWL; // Zimbabwean Dollar
 
+    public static String[] toStringArray() {
+        String[] array = new String[FiatCurrencies.values().length];
+        for (int i = 0; i < FiatCurrencies.values().length; i++) {
+            array[i] = FiatCurrencies.values()[i].toString();
+        }//end for
+        return array;
+    }//end toStringArray()
 }//end FiatCurrencies
