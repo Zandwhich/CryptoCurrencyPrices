@@ -109,14 +109,13 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        // TODO: Follow the online steps on how to make a table correctly
         // TODO: Make the x and y coordinates constants
         super.setLocation(155, 58);
 
         this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
-        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray());
+        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
 
         this.panel.add((JComboBox) this.fiatDropdown);
         // TODO: Figure out how to resize the image

@@ -5,5 +5,5 @@ import com.company.view.combo_box.ComboBoxInterface;
 /**
  * TODO: Fill in
  */
-public interface FiatDropdownInterface extends ComboBoxInterface {
+public interface FiatDropdownInterface<String> extends ComboBoxInterface<String> {
 }//end FiatDropdownInterface
