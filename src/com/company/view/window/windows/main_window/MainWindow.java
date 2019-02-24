@@ -133,6 +133,8 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     public void updatePrices() {
         this.websites = this.mainController.getWebsiteList();
         this.data.clear();
+
+        // TODO: Clean this up a bit?
         for (APICallerInterface website : this.websites) {
             Vector<String> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
