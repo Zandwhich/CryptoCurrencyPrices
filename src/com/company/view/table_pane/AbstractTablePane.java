@@ -107,6 +107,7 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
      */
     protected void disableTableEditable() {
         this.table.setDefaultEditor(Object.class, null);
+        this.table.getTableHeader().setReorderingAllowed(false);
     }//end setTableEditable()
 
 
