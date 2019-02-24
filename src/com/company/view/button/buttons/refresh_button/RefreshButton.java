@@ -4,6 +4,7 @@ import com.company.controller.controllers.main_controller.MainControllerInterfac
 import com.company.view.button.AbstractJButtonButton;
 import com.company.view.window.WindowInterface;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -41,6 +42,8 @@ public class RefreshButton extends AbstractJButtonButton implements RefreshButto
      */
     public RefreshButton(MainControllerInterface controller, WindowInterface window) {
         super(RefreshButton.IMAGE_PATH, controller, window);
+        super.setMaximumSize(new Dimension(100, 100));
+        super.setMinimumSize(new Dimension(10, 10));
     }//end RefreshButton()
 
     /****************

@@ -2,12 +2,15 @@ package com.company.view.window.windows.main_window;
 
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
+import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
+import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
 import com.company.view.button.buttons.refresh_button.RefreshButton;
 import com.company.view.button.buttons.refresh_button.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * The main window to display for the application
@@ -63,6 +66,16 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     private ArrayList<APICallerInterface> websites;
 
     /**
+     * The data to be displayed in the main table
+     */
+    private Vector<Vector<String>> data = new Vector<>();
+
+    /**
+     * The main table that displays all of the information
+     */
+    private MainTablePaneInterface table;
+
+    /**
      * The list of website names that are displayed
      */
     private JList<String> websiteNames = new JList<>();
@@ -94,20 +107,20 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         // TODO: Follow the online steps on how to make a table correctly
         // TODO: Make the x and y coordinates constants
         super.setLocation(155, 58);
+
         this.mainController = (MainControllerInterface) super.getController();
+        this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
+
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
-        this.panel.add(this.websiteNames);
+        this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
+
         this.updatePrices();
-
-        //this.setVisible(true);
-
-        //this.coinBaseBTC = new CoinBaseBuyBTC_USD();
+        this.setVisible(true);
 
         // TODO: Add text/labels to the window
-        // TODO: Add table functionality to the window
     }//end setup()
 
     /* Protected */
@@ -119,11 +132,16 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     public void updatePrices() {
         this.websites = this.mainController.getWebsiteList();
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+        this.data.clear();
+
+        // TODO: Clean this up a bit?
         for (APICallerInterface website : this.websites) {
-            listModel.addElement(website.getName() +":\t\t" + website.getPrice());
+            Vector<String> websiteVec = new Vector<>();
+            websiteVec.add(website.getName());
+            websiteVec.add("" + website.getPrice());
+            this.data.add(websiteVec);
         }//end for each website
-        this.websiteNames.setModel(listModel);
+        this.table.setData(this.data);
     }//end updatePrices()
 
     /**
@@ -134,10 +152,6 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         // TODO: Include an actual message that says that the information was updated in the MainController,
         //       and this is simply updating the view
         this.updatePrices();
-
-        //this.coinBaseBTC.updatePrice();
-        //String something = "" + this.coinBaseBTC.getPrice();
-        //super.setTitle(something);
     }//end doSomething
 
     /**
