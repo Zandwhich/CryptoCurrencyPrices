@@ -3,8 +3,6 @@ package com.company.view.window.windows.currency_option;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
-import javax.swing.*;
-
 /**
  * TODO: Fill in
  */
