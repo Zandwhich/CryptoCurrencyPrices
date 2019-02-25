@@ -24,7 +24,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
     /**
      * The data within the table
      */
-    private Vector<Vector<String>> data;
+    private Vector<Vector<Object>> data;
 
     /**
      * The table
@@ -43,7 +43,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    public AbstractJTablePane(final Vector<String> columns, final Vector<Vector<String>> data) {
+    public AbstractJTablePane(final Vector<String> columns, final Vector<Vector<Object>> data) {
         super();
         this.setup(columns, data);
     }//end AbstractJTablePane
@@ -60,7 +60,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    private  void setup(final Vector<String> columns, final Vector<Vector<String>> data) {
+    private  void setup(final Vector<String> columns, final Vector<Vector<Object>> data) {
         this.columns = columns;
         this.data = data;
         this.table = new JTable(this.data, this.columns);
@@ -73,12 +73,12 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * Updates the internal data of the JTable by creating a new TableModel
      * @param data The data as a matrix of strings
      */
-    private void updateData(Vector<Vector<String>> data) {
+    private void updateData(Vector<Vector<Object>> data) {
         DefaultTableModel tableModel = new DefaultTableModel();
         for (int i = 0; i < this.table.getModel().getColumnCount(); i++) {
             tableModel.addColumn(this.table.getColumnName(i));
         }//end for columns
-        for (Vector<String> row : data) {
+        for (Vector<Object> row : data) {
             tableModel.addRow(row);
         }//end for rows
 
@@ -95,7 +95,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
         for (String column : columns) {
             tableModel.addColumn(column);
         }//end for columns
-        for (Vector<String> row : this.data) {
+        for (Vector<Object> row : this.data) {
             tableModel.addRow(row);
         }//end for rows
 
@@ -139,7 +139,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @return The data of the table
      */
     @Override
-    public Vector<Vector<String>> getData() { return this.data; }//end getData()
+    public Vector<Vector<Object>> getData() { return this.data; }//end getData()
 
     /**
      * Gets the table
@@ -164,7 +164,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * Sets the data
      * @param data The data within the table
      */
-    public void setData(Vector<Vector<String>> data) {
+    public void setData(Vector<Vector<Object>> data) {
         this.data = data;
         this.updateData(this.data);
     }//end setData()

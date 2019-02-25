@@ -78,7 +78,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * The data to be displayed in the main table
      */
-    private Vector<Vector<String>> data = new Vector<>();
+    private Vector<Vector<Object>> data = new Vector<>();
 
     /**
      * The main table that displays all of the information
@@ -165,9 +165,9 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
 
         // TODO: Clean this up a bit?
         for (APICallerInterface website : this.websites) {
-            Vector<String> websiteVec = new Vector<>();
+            Vector<Object> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
-            websiteVec.add("" + website.getPrice());
+            websiteVec.add(website.getPrice());
             this.data.add(websiteVec);
         }//end for each website
         this.table.setData(this.data);
