@@ -31,6 +31,8 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      */
     private JTable table;
 
+    // TODO: Allow for different types of data, not just "[String, String]"
+
 
     /****************
      * Constructors *
