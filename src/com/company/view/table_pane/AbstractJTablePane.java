@@ -114,6 +114,14 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
         this.table.getTableHeader().setReorderingAllowed(false);
     }//end setTableEditable()
 
+    /**
+     * Sets whether or not columns can be moved
+     * @param allowed If it is allowed or not
+     */
+    protected void setColumnMovingAllowed(boolean allowed) {
+        this.table.getTableHeader().setReorderingAllowed(allowed);
+    }//end setColumnMovingAllowed()
+
 
     /* Public */
 

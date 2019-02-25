@@ -40,6 +40,7 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
      */
     public FiatCurrencyTablePane() {
         super(FiatCurrencyTablePane.COLUMN_HEADERS, null);
+        super.setColumnMovingAllowed(false);
     }//end FiatCurrencyTablePane()
 
 

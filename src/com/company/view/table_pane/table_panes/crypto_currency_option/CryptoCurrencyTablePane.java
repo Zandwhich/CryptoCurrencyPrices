@@ -39,6 +39,7 @@ public class CryptoCurrencyTablePane extends AbstractJTablePane implements Crypt
      */
     public CryptoCurrencyTablePane() {
         super(CryptoCurrencyTablePane.COLUMN_HEADERS, null);
+        super.setColumnMovingAllowed(false);
     }//end FiatCurrencyTablePane()
 
 
