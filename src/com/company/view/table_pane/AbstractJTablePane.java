@@ -1,9 +1,11 @@
 package com.company.view.table_pane;
 
+import com.company.controller.ControllerInterface;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Vector;
 
@@ -31,7 +33,10 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      */
     private JTable table;
 
-    // TODO: Allow for different types of data, not just "[String, String]"
+    /**
+     * The controller
+     */
+    private ControllerInterface controller;
 
 
     /****************
@@ -43,10 +48,15 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    public AbstractJTablePane(final Vector<String> columns, final Vector<Vector<Object>> data) {
+    public AbstractJTablePane(final ControllerInterface controller, final Vector<String> columns, final Vector<Vector<Object>> data) {
         super();
-        this.setup(columns, data);
+        this.setup(controller, columns, data);
     }//end AbstractJTablePane
+
+    public AbstractJTablePane(final ControllerInterface controller, TableModel model) {
+        super();
+        this.setup(controller, model);
+    }
 
 
     /****************
@@ -60,7 +70,9 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    private  void setup(final Vector<String> columns, final Vector<Vector<Object>> data) {
+    private void setup(ControllerInterface controller, final Vector<String> columns,
+                        final Vector<Vector<Object>> data) {
+        this.controller = controller;
         this.columns = columns;
         this.data = data;
         this.table = new JTable(this.data, this.columns);
@@ -68,6 +80,14 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
         this.table.setGridColor(Color.LIGHT_GRAY);
         super.setViewportView(this.table);
     }//end setup()
+
+    private void setup(ControllerInterface controller, TableModel model) {
+        this.controller = controller;
+        this.table = new JTable(model);
+        this.table.setShowGrid(true);
+        this.table.setGridColor(Color.LIGHT_GRAY);
+        super.setViewportView(this.table);
+    }
 
     /**
      * Updates the internal data of the JTable by creating a new TableModel
@@ -122,7 +142,6 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
         this.table.getTableHeader().setReorderingAllowed(allowed);
     }//end setColumnMovingAllowed()
 
-
     /* Public */
 
     // Getters
@@ -146,6 +165,12 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * @return The table
      */
     public JTable getTable() { return this.table; }//end getTable()
+
+    /**
+     * Returns the controller
+     * @return The controller
+     */
+    public ControllerInterface getController() { return this.controller; }//end getController()
 
     // Setters
 

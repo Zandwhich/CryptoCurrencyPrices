@@ -28,7 +28,7 @@ public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements Fi
     /**
      * The table that shows which fiat currencies are currently in use
      */
-    private FiatCurrencyTablePaneInterface table = new FiatCurrencyTablePane();
+    private FiatCurrencyTablePaneInterface table = new FiatCurrencyTablePane(super.getMainController());
 
 
     /****************

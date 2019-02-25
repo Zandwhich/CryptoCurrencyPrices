@@ -128,7 +128,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         this.mainMenuBar = new MainMenuBar(this.getMainController());
         super.setJMenuBar((JMenuBar) this.mainMenuBar);
 
-        this.table = new MainTablePane(this.data);
+        this.table = new MainTablePane(this.getMainController(), this.data);
         this.refreshButton = new RefreshButton(this.getMainController(), this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.getMainController());
 

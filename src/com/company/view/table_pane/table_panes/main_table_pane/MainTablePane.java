@@ -1,5 +1,6 @@
 package com.company.view.table_pane.table_panes.main_table_pane;
 
+import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.table_pane.AbstractJTablePane;
 
 import java.util.Arrays;
@@ -31,10 +32,11 @@ public class MainTablePane extends AbstractJTablePane implements MainTablePaneIn
 
     /**
      * The constructor for the main table pane
+     * @param controller The main controller
      * @param data The data of all of the prices of the cryptocurrencies and whatnot
      */
-    public MainTablePane(Vector<Vector<Object>> data) {
-        super(MainTablePane.DEFAULT_COLUMN_HEADERS, data);
+    public MainTablePane(MainControllerInterface controller, Vector<Vector<Object>> data) {
+        super(controller, MainTablePane.DEFAULT_COLUMN_HEADERS, data);
         super.disableTableEditable();
     }//end MainTablePane()
 

@@ -3,6 +3,7 @@ package com.company.controller.controllers.main_controller;
 import com.company.api_calls.APICallerInterface;
 import com.company.api_calls.individual.CoinBase.*;
 import com.company.api_calls.individual.CoinMarketCap.*;
+import com.company.tools.CryptoCurrencies;
 import com.company.tools.Errors;
 import com.company.tools.FiatCurrencies;
 import com.company.controller.AbstractController;
@@ -13,6 +14,9 @@ import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * The main controller of the application which controls the main page
@@ -37,6 +41,8 @@ public class MainController extends AbstractController implements MainController
      * The main window of the application
      */
     private MainWindowInterface mainWindow = new MainWindow(this);
+
+    private HashMap<FiatCurrencies, Boolean> fiatCurrenciesHash = new HashMap<>();
 
     /****************
      * Constructors *
@@ -82,6 +88,11 @@ public class MainController extends AbstractController implements MainController
         websiteList.add(new CoinMarketCapLTC_EUR(this));
         websiteList.add(new CoinMarketCapXRP_EUR(this));
         websiteList.add(new CoinMarketCapXRP_USD(this));
+
+        // Initialize the hashmaps storing which currencies we're using
+        for (FiatCurrencies currency : FiatCurrencies.values()) {
+            this.fiatCurrenciesHash.put(currency, true);
+        }//end initialize fiatCurrenciesHash
 
     }//end MainController()
 
@@ -207,4 +218,24 @@ public class MainController extends AbstractController implements MainController
     public void cryptoCurrenciesPopUp() {
         new CryptoOptionWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
     }
+
+    /**
+     * Returns the fiatCurrenciesHash as a vector of vector of objects, with the first vector being the strings,
+     * and the second vector being if they boolean values
+     * @return The fiatCurrenciesHash as a vector of 2 vectors: the keys and the values
+     */
+    @Override
+    public Vector<Vector<Object>> getFiatHashAsVector() {
+        Vector<Vector<Object>> vector = new Vector<>();
+
+        for (FiatCurrencies key : this.fiatCurrenciesHash.keySet()) {
+            Vector<Object> vec = new Vector<>();
+            vec.add(key.toString());
+            vec.add(this.fiatCurrenciesHash.get(key));
+
+            vector.add(vec);
+        }//end for each key
+
+        return vector;
+    }//end fiatHashAsVector()
 }//end MainController

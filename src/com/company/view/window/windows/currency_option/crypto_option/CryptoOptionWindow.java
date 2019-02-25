@@ -28,7 +28,7 @@ public class CryptoOptionWindow extends AbstractCurrencyOptionWindow implements 
     /**
      * The table that shows which fiat currencies are currently in use
      */
-    private CryptoCurrencyTablePaneInterface table = new CryptoCurrencyTablePane();
+    private CryptoCurrencyTablePaneInterface table = new CryptoCurrencyTablePane(super.getMainController());
 
 
     /****************

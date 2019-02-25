@@ -1,5 +1,6 @@
 package com.company.view.table_pane.table_panes.crypto_currency_option;
 
+import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.table_pane.AbstractJTablePane;
 
 import java.util.Arrays;
@@ -37,8 +38,8 @@ public class CryptoCurrencyTablePane extends AbstractJTablePane implements Crypt
     /**
      * The default constructor
      */
-    public CryptoCurrencyTablePane() {
-        super(CryptoCurrencyTablePane.COLUMN_HEADERS, null);
+    public CryptoCurrencyTablePane(MainControllerInterface controller) {
+        super(controller, CryptoCurrencyTablePane.COLUMN_HEADERS, null);
         super.setColumnMovingAllowed(false);
     }//end FiatCurrencyTablePane()
 

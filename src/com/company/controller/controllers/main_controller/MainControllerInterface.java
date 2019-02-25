@@ -5,6 +5,7 @@ import com.company.tools.FiatCurrencies;
 import com.company.controller.ControllerInterface;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * The interface for specifically the main controller
@@ -42,5 +43,12 @@ public interface MainControllerInterface extends ControllerInterface {
      * Brings up the cryptocurrencies popup
      */
     public abstract void cryptoCurrenciesPopUp();
+
+    /**
+     * Returns the fiatCurrenciesHash as a vector of vector of objects, with the first vector being the strings,
+     * and the second vector being if they boolean values
+     * @return The fiatCurrenciesHash as a vector of 2 vectors: the keys and the values
+     */
+    public abstract Vector<Vector<Object>> getFiatHashAsVector();
 
 }//end MainControllerInterface
