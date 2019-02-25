@@ -1,6 +1,6 @@
-package com.company.view.table_pane.table_panes.MainTablePane;
+package com.company.view.table_pane.table_panes.main_table_pane;
 
-import com.company.view.table_pane.AbstractTablePane;
+import com.company.view.table_pane.AbstractJTablePane;
 
 import java.util.Arrays;
 import java.util.Vector;
@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * TODO: Fill in
  */
-public class MainTablePane extends AbstractTablePane implements MainTablePaneInterface {
+public class MainTablePane extends AbstractJTablePane implements MainTablePaneInterface {
 
     /****************
      *    Fields    *
@@ -22,7 +22,8 @@ public class MainTablePane extends AbstractTablePane implements MainTablePaneInt
     /**
      * The default column headers for the main table
      */
-    public static final Vector<String> DEFAULT_COLUMN_HEADERS = new Vector<>(Arrays.asList(MainTablePane.DEFAULT_COLUMN_HEADERS_ARRAY));
+    public static final Vector<String> DEFAULT_COLUMN_HEADERS =
+            new Vector<>(Arrays.asList(MainTablePane.DEFAULT_COLUMN_HEADERS_ARRAY));
 
     /****************
      * Constructors *

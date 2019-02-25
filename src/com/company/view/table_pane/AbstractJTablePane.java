@@ -10,7 +10,7 @@ import java.util.Vector;
 /**
  * TODO: Fill in
  */
-abstract public class AbstractTablePane extends JScrollPane implements TablePaneInterface {
+abstract public class AbstractJTablePane extends JScrollPane implements TablePaneInterface {
 
     /****************
      *    Fields    *
@@ -37,14 +37,14 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
      ****************/
 
     /**
-     * AbstractTablePane constructor
+     * AbstractJTablePane constructor
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    public AbstractTablePane(final Vector<String> columns, final Vector<Vector<String>> data) {
+    public AbstractJTablePane(final Vector<String> columns, final Vector<Vector<String>> data) {
         super();
         this.setup(columns, data);
-    }//end AbstractTablePane
+    }//end AbstractJTablePane
 
 
     /****************
@@ -158,4 +158,4 @@ abstract public class AbstractTablePane extends JScrollPane implements TablePane
         this.data = data;
         this.updateData(this.data);
     }//end setData()
-}//end AbstractTablePane
+}//end AbstractJTablePane

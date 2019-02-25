@@ -7,8 +7,8 @@ import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.menu_bar.main_menu_bar.MainMenuBar;
 import com.company.view.menu_bar.main_menu_bar.MainMenuBarInterface;
-import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
-import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
+import com.company.view.table_pane.table_panes.main_table_pane.MainTablePane;
+import com.company.view.table_pane.table_panes.main_table_pane.MainTablePaneInterface;
 import com.company.view.button.buttons.refresh_button.RefreshButton;
 import com.company.view.button.buttons.refresh_button.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
@@ -44,6 +44,16 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     public final static int DEFAULT_HEIGHT = 700;
 
     /**
+     * The default x location
+     */
+    public static final int DEFAULT_X_LOCATION = 155;
+
+    /**
+     * The default y location
+     */
+    public static final int DEFAULT_Y_LOCATION = 58;
+
+    /**
      * The default visibility of the main window
      */
     public final static boolean DEFAULT_VISIBILITY = true;
@@ -59,11 +69,6 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * TODO: Fill in
      */
     private JPanel panel = new JPanel();
-
-    /**
-     * TODO: Fill in
-     */
-    private MainControllerInterface mainController;
 
     /**
      * The list of website objects
@@ -90,6 +95,9 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     private FiatDropdownInterface fiatDropdown;
 
+    /**
+     * The main menu bar displayed at the top of the screen
+     */
     private MainMenuBarInterface mainMenuBar;
 
     /****************
@@ -102,7 +110,8 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     public MainWindow(MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
-                JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
+                MainWindow.DEFAULT_X_LOCATION, MainWindow.DEFAULT_Y_LOCATION, JFrame.EXIT_ON_CLOSE,
+                MainWindow.DEFAULT_VISIBILITY);
         this.setup();
     }//end MainWindow()
 
@@ -116,17 +125,12 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        // TODO: Make the x and y coordinates constants
-        super.setLocation(155, 58);
-
-        this.mainController = (MainControllerInterface) super.getController();
-
-        this.mainMenuBar = new MainMenuBar(this.mainController);
+        this.mainMenuBar = new MainMenuBar(this.getMainController());
         super.setJMenuBar((JMenuBar) this.mainMenuBar);
 
         this.table = new MainTablePane(this.data);
-        this.refreshButton = new RefreshButton(this.mainController, this);
-        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
+        this.refreshButton = new RefreshButton(this.getMainController(), this);
+        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.getMainController());
 
         this.panel.add((JComboBox) this.fiatDropdown);
         // TODO: Figure out how to resize the image
@@ -140,6 +144,14 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
         // TODO: Add text/labels to the window
     }//end setup()
 
+    /**
+     * Returns the controller as a main controller
+     * @return The controller as a main controller
+     */
+    private MainControllerInterface getMainController() {
+        return (MainControllerInterface) super.getController();
+    }//end getMainController()
+
     /* Protected */
 
     /* Public */
@@ -148,7 +160,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * TODO: Fill this in
      */
     public void updatePrices() {
-        this.websites = this.mainController.getWebsiteList();
+        this.websites = this.getMainController().getWebsiteList();
         this.data.clear();
 
         // TODO: Clean this up a bit?

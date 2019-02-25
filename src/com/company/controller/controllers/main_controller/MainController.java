@@ -6,6 +6,8 @@ import com.company.api_calls.individual.CoinMarketCap.*;
 import com.company.tools.Errors;
 import com.company.tools.FiatCurrencies;
 import com.company.controller.AbstractController;
+import com.company.view.window.windows.currency_option.crypto_option.CryptoOptionWindow;
+import com.company.view.window.windows.currency_option.fiat_option.FiatOptionWindow;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
@@ -161,7 +163,8 @@ public class MainController extends AbstractController implements MainController
 
         switch (error) {
             case NETWORK_CONNECTION:
-                new NetworkErrorWindow(this, name);
+                new NetworkErrorWindow(this, name, this.mainWindow.getLocationX(),
+                        this.mainWindow.getLocationY());
                 return;
         }//end switch
     }//end errorDisplay()
@@ -175,7 +178,7 @@ public class MainController extends AbstractController implements MainController
 
         switch (error) {
             case NETWORK_CONNECTION:
-                new NetworkErrorWindow(this);
+                new NetworkErrorWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
                 return;
         }//end switch
     }//end errorDisplay()
@@ -194,7 +197,7 @@ public class MainController extends AbstractController implements MainController
      */
     @Override
     public void fiatCurrenciesPopUp() {
-        // TODO: Create the fiat currencies pop-up
+        new FiatOptionWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
     }//end fiatCurrenciesPopUp()
 
     /**
@@ -202,6 +205,6 @@ public class MainController extends AbstractController implements MainController
      */
     @Override
     public void cryptoCurrenciesPopUp() {
-        // TODO: Create the cryptocurrencies pop-up
+        new CryptoOptionWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
     }
 }//end MainController

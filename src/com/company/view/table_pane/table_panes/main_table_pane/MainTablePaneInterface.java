@@ -1,4 +1,4 @@
-package com.company.view.table_pane.table_panes.MainTablePane;
+package com.company.view.table_pane.table_panes.main_table_pane;
 
 import com.company.view.table_pane.TablePaneInterface;
 

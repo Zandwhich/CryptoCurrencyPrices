@@ -16,7 +16,17 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      ****************/
 
     /**
-     * TODO: Fill in
+     * The default x starting location
+     */
+    public static final int DEFAULT_X_LOCATION = 10;
+
+    /**
+     * The default y starting location
+     */
+    public static final int DEFAULT_Y_LOCATION = 10;
+
+    /**
+     * The controller
      */
     private ControllerInterface controller;
 
@@ -31,8 +41,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height) {
-        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, true);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
+                                int yLocation) {
+        this.setup(controller, title, width, height, xLocation, yLocation, JFrame.DISPOSE_ON_CLOSE, true);
     }//end AbstractJFrameWindow()
 
     /**
@@ -45,9 +56,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE, JFrame.HIDE_ON_CLOSE, or
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
-                                int closeOperation) {
-        this.setup(controller, title, width, height, closeOperation, true);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
+                                int yLocation, int closeOperation) {
+        this.setup(controller, title, width, height, xLocation, yLocation, closeOperation, true);
     }//end AbstractJFrameWindow()
 
     /**
@@ -58,9 +69,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param height The height (in pixels) of the window
      * @param isVisible If the window is visible or not
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
-                                boolean isVisible) {
-        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, isVisible);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
+                                int yLocation, boolean isVisible) {
+        this.setup(controller, title, width, height, xLocation, yLocation, JFrame.DISPOSE_ON_CLOSE, isVisible);
     }//end AbstractJFrameWindow()
 
     /**
@@ -74,9 +85,9 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      * @param isVisible If the window is visible or not
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int closeOperation,
-                                boolean isVisible) {
-        this.setup(controller, title, width, height, closeOperation, isVisible);
+    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
+                                int yLocation, int closeOperation, boolean isVisible) {
+        this.setup(controller, title, width, height, xLocation, yLocation, closeOperation, isVisible);
     }//end AbstractJFrameWindow()
 
     /****************
@@ -96,13 +107,14 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      * @param isVisible If the window is visible or not
      */
-    private void setup(ControllerInterface controller, String title, int width, int height, int closeOperation,
-                       boolean isVisible) {
+    private void setup(ControllerInterface controller, String title, int width, int height, int xLocation,
+                       int yLocation, int closeOperation, boolean isVisible) {
 
         // Setting up the window
         this.controller = controller;
         super.setTitle(title);
         super.setSize(width, height);
+        super.setLocation(xLocation, yLocation);
         super.setDefaultCloseOperation(closeOperation);
         super.setVisible(isVisible);
     }//end setup()

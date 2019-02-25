@@ -10,7 +10,7 @@ import javax.swing.*;
 /**
  * TODO: Fill in
  */
-public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
+public abstract class AbstractErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
 
     /****************
      *    Fields    *
@@ -48,9 +48,9 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      * @param height The height of the window
      * @param message The error message (body) to display
      */
-    public AbstractJFrameErrorWindow(ControllerInterface controller, String title, int width, int height,
-                                     String message) {
-        super(controller, title, width, height);
+    public AbstractErrorWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
+                               int yLocation, String message) {
+        super(controller, title, width, height, xLocation, yLocation);
         this.setup(message);
     }//end AbstractJFrameError()
 
@@ -70,7 +70,7 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
         this.closeButton = new CloseButton(super.getController(), this);
         panel.add(this.label);
         panel.add((CloseButton) this.closeButton);
-        this.add(panel);
+        super.add(panel);
     }//end setup()
 
     /* Protected */
