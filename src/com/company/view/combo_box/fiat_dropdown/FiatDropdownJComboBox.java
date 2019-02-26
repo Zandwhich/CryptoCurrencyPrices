@@ -7,7 +7,7 @@ import com.company.view.combo_box.AbstractJComboBox;
 /**
  * TODO: Fill in
  */
-public class FiatDropdownJComboBox<String> extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
+public class FiatDropdownJComboBox extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
 
     /****************
      *    Fields    *
@@ -42,10 +42,13 @@ public class FiatDropdownJComboBox<String> extends AbstractJComboBox<String> imp
 
     /* Protected */
 
+    /**
+     * Alerts the main controller when the selected fiat currency is changed
+     */
     @Override
     protected void selectedItemChanged() {
         super.selectedItemChanged();
-        this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency((java.lang.String) super.getSelectedItem()));
+        this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency(super.getSelectedItem()));
     }//end selectedItemChanged()
 
 
