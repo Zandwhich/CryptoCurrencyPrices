@@ -1,6 +1,6 @@
 package com.company.view.table_pane;
 
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
