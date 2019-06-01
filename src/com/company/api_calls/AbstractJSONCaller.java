@@ -63,7 +63,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         JSONObject jsonObject;
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = this.getUrl().openConnection();
+            URLConnection connection = super.getUrl().openConnection();
             connection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             JSONParser parser = new JSONParser();
