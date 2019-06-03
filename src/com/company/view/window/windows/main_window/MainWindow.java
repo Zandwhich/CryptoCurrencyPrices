@@ -1,8 +1,8 @@
 package com.company.view.window.windows.main_window;
 
-import com.company.tools.FiatCurrencies;
+import com.company.tools_deprecated.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
-import com.company.api_calls.APICallerInterface;
+import com.company.api_calls_deprecated.APICallerInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;

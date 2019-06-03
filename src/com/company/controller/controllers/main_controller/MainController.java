@@ -1,10 +1,10 @@
 package com.company.controller.controllers.main_controller;
 
-import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.individual.CoinBase.*;
-import com.company.api_calls.individual.CoinMarketCap.*;
-import com.company.tools.Errors;
-import com.company.tools.FiatCurrencies;
+import com.company.api_calls_deprecated.APICallerInterface;
+import com.company.api_calls_deprecated.individual.CoinBase.*;
+import com.company.api_calls_deprecated.individual.CoinMarketCap.*;
+import com.company.tools_deprecated.Errors;
+import com.company.tools_deprecated.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;

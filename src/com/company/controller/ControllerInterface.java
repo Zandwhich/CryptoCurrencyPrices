@@ -1,6 +1,6 @@
 package com.company.controller;
 
-import com.company.tools.Errors;
+import com.company.tools_deprecated.Errors;
 
 /**
  * The general interface for all controllers
