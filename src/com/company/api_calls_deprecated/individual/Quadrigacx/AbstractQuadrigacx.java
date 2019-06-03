@@ -1,6 +1,6 @@
 package com.company.api_calls_deprecated.individual.Quadrigacx;
 
-import com.company.api_calls_deprecated.AbstractJSONCaller;
+import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 
 /**

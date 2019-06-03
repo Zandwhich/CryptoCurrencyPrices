@@ -1,4 +1,4 @@
-package com.company.api_calls_deprecated;
+package com.company.api_calls;
 
 import java.net.URL;
 

@@ -1,5 +1,6 @@
-package com.company.api_calls_deprecated;
+package com.company.api_calls;
 
+import com.company.api_calls.AbstractAPICaller;
 import com.company.tools_deprecated.Errors;
 import com.company.controller.ControllerInterface;
 import json_simple.JSONObject;

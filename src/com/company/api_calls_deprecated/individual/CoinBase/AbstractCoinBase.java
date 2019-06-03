@@ -1,6 +1,6 @@
 package com.company.api_calls_deprecated.individual.CoinBase;
 
-import com.company.api_calls_deprecated.AbstractJSONCaller;
+import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
