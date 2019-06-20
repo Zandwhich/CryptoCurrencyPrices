@@ -1,10 +1,10 @@
 package com.company.controller.controllers.main_controller;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls_deprecated.individual.CoinBase.*;
-import com.company.api_calls_deprecated.individual.CoinMarketCap.*;
-import com.company.tools_deprecated.Errors;
-import com.company.tools_deprecated.FiatCurrencies;
+//import com.company.api_calls_deprecated.individual.CoinBase.*;
+//import com.company.api_calls_deprecated.individual.CoinMarketCap.*;
+import com.company.tools.Errors;
+import com.company.tools.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
@@ -52,34 +52,34 @@ public class MainController extends AbstractController implements MainController
 
         /* CoinBase */
         // Buy
-        websiteList.add(new CoinBaseBuyBCH_USD(this));
-        websiteList.add(new CoinBaseBuyBTC_USD(this));
-        websiteList.add(new CoinBaseBuyETH_USD(this));
-        websiteList.add(new CoinBaseBuyLTC_USD(this));
-        websiteList.add(new CoinBaseBuyZRX_USD(this));
-        // Sell
-        websiteList.add(new CoinBaseSellBCH_USD(this));
-        websiteList.add(new CoinBaseSellBTC_USD(this));
-        websiteList.add(new CoinBaseSellETH_USD(this));
-        websiteList.add(new CoinBaseSellLTC_USD(this));
-        websiteList.add(new CoinBaseSellZRX_USD(this));
-        // Spot
-        websiteList.add(new CoinBaseSpotBCH_USD(this));
-        websiteList.add(new CoinBaseSpotBTC_USD(this));
-        websiteList.add(new CoinBaseSpotETH_USD(this));
-        websiteList.add(new CoinBaseSpotLTC_USD(this));
-
-
-        /* CoinMarketCap */
-        websiteList.add(new CoinMarketCapBTC_USD(this));
-        websiteList.add(new CoinMarketCapETH_USD(this));
-        websiteList.add(new CoinMarketCapLTC_USD(this));
-        websiteList.add(new CoinMarketCapXRP_USD(this));
-        websiteList.add(new CoinMarketCapBTC_EUR(this));
-        websiteList.add(new CoinMarketCapETH_EUR(this));
-        websiteList.add(new CoinMarketCapLTC_EUR(this));
-        websiteList.add(new CoinMarketCapXRP_EUR(this));
-        websiteList.add(new CoinMarketCapXRP_USD(this));
+//        websiteList.add(new CoinBaseBuyBCH_USD(this));
+//        websiteList.add(new CoinBaseBuyBTC_USD(this));
+//        websiteList.add(new CoinBaseBuyETH_USD(this));
+//        websiteList.add(new CoinBaseBuyLTC_USD(this));
+//        websiteList.add(new CoinBaseBuyZRX_USD(this));
+//        // Sell
+//        websiteList.add(new CoinBaseSellBCH_USD(this));
+//        websiteList.add(new CoinBaseSellBTC_USD(this));
+//        websiteList.add(new CoinBaseSellETH_USD(this));
+//        websiteList.add(new CoinBaseSellLTC_USD(this));
+//        websiteList.add(new CoinBaseSellZRX_USD(this));
+//        // Spot
+//        websiteList.add(new CoinBaseSpotBCH_USD(this));
+//        websiteList.add(new CoinBaseSpotBTC_USD(this));
+//        websiteList.add(new CoinBaseSpotETH_USD(this));
+//        websiteList.add(new CoinBaseSpotLTC_USD(this));
+//
+//
+//        /* CoinMarketCap */
+//        websiteList.add(new CoinMarketCapBTC_USD(this));
+//        websiteList.add(new CoinMarketCapETH_USD(this));
+//        websiteList.add(new CoinMarketCapLTC_USD(this));
+//        websiteList.add(new CoinMarketCapXRP_USD(this));
+//        websiteList.add(new CoinMarketCapBTC_EUR(this));
+//        websiteList.add(new CoinMarketCapETH_EUR(this));
+//        websiteList.add(new CoinMarketCapLTC_EUR(this));
+//        websiteList.add(new CoinMarketCapXRP_EUR(this));
+//        websiteList.add(new CoinMarketCapXRP_USD(this));
 
     }//end MainController()
 

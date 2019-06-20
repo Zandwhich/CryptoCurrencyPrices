@@ -1,8 +1,9 @@
 package com.company.api_calls;
 
-import com.company.api_calls.AbstractAPICaller;
-import com.company.tools_deprecated.Errors;
+import com.company.tools.CryptoCurrencies;
+import com.company.tools.Errors;
 import com.company.controller.ControllerInterface;
+import com.company.tools.FiatCurrencies;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -33,8 +34,8 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @param url The url to hit
      * @param controller The controller that calls this JSON caller
      */
-    public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
-                              final String url, final ControllerInterface controller) {
+    public AbstractJSONCaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                              final String name, final String url, final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, name, url, controller);
     }//end AbstractJSONCaller()
 

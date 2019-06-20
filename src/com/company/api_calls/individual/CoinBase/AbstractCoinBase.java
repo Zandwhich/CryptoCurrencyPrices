@@ -1,7 +1,9 @@
-package com.company.api_calls_deprecated.individual.CoinBase;
+package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
+import com.company.tools.CryptoCurrencies;
+import com.company.tools.FiatCurrencies;
 import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
@@ -10,6 +12,23 @@ import json_simple.JSONObject;
  */
 public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
+    /* ************ *
+     *  Constants   *
+     * ************ */
+
+    /**
+     * The fiat currencies that CoinBase uses
+     */
+    public final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.AUD, FiatCurrencies.CAD,
+            FiatCurrencies.EUR, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD, FiatCurrencies.PLN,
+            FiatCurrencies.SEK, FiatCurrencies.USD};
+
+    /**
+     * The cryptocurrencies that CoinBase uses
+     */
+    public final static CryptoCurrencies[] ACCEPTED_CRYPTO_CURRENCIES = {CryptoCurrencies.BTC, CryptoCurrencies.ETH,
+            CryptoCurrencies.LTC};
+
     /****************
      *    Fields    *
      ****************/
@@ -17,7 +36,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
     /**
      * The base URL for CoinBase requests
      */
-    final static String BASE_URL = "https://api.coinbase.com/v2/prices/";
+    private static final String BASE_URL = "https://api.coinbase.com/v2/prices/";
 
     /****************
      * Constructors *
@@ -30,8 +49,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param name The name of the specific request
      * @param urlExt The extension to the base url
      */
-    public AbstractCoinBase(final String cryptoCurrency, final String fiatCurrency, final String name,
-                            final String urlExt, final ControllerInterface controller) {
+    public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                            final String name, final String urlExt, final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, name, AbstractCoinBase.BASE_URL + urlExt, controller);
     }//end AbstractCoinBase()
 

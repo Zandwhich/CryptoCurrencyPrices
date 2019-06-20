@@ -1,4 +1,4 @@
-package com.company.tools_deprecated;
+package com.company.tools;
 
 /**
  * An enum for errors used in the project
