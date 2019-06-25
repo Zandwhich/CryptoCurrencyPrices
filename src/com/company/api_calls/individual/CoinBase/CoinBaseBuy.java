@@ -43,7 +43,7 @@ public class CoinBaseBuy extends AbstractCoinBase {
      */
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Temp name for now",
+        super(cryptoCurrency, fiatCurrency, "Buy: " + fiatCurrency.getAbbreviatedName() + "/" + cryptoCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT,
                 controller);
         this.urlExt = cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT;

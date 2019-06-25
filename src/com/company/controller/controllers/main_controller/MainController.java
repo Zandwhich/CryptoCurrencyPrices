@@ -57,8 +57,11 @@ public class MainController extends AbstractController implements MainController
         // Buy
 //        websiteList.add(new CoinBaseBuyBCH_USD(this));
 //        websiteList.add(new CoinBaseBuyBTC_USD(this));
+        websiteList.add(new CoinBaseBuy(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseBuyETH_USD(this));
+        websiteList.add(new CoinBaseBuy(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseBuyLTC_USD(this));
+        websiteList.add(new CoinBaseBuy(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseBuyZRX_USD(this));
 //        // Sell
 //        websiteList.add(new CoinBaseSellBCH_USD(this));
@@ -83,8 +86,6 @@ public class MainController extends AbstractController implements MainController
 //        websiteList.add(new CoinMarketCapLTC_EUR(this));
 //        websiteList.add(new CoinMarketCapXRP_EUR(this));
 //        websiteList.add(new CoinMarketCapXRP_USD(this));
-
-        websiteList.add(new CoinBaseBuy(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
 
     }//end MainController()
 
