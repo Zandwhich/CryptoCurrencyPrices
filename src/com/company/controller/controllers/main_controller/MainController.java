@@ -5,6 +5,8 @@ import com.company.api_calls.APICallerInterface;
 //import com.company.api_calls_deprecated.individual.CoinMarketCap.*;
 import com.company.api_calls.individual.CoinBase.AbstractCoinBase;
 import com.company.api_calls.individual.CoinBase.CoinBaseBuy;
+import com.company.api_calls.individual.CoinBase.CoinBaseSell;
+import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
 import com.company.tools.CryptoCurrencies;
 import com.company.tools.Errors;
 import com.company.tools.FiatCurrencies;
@@ -66,14 +68,20 @@ public class MainController extends AbstractController implements MainController
 //        // Sell
 //        websiteList.add(new CoinBaseSellBCH_USD(this));
 //        websiteList.add(new CoinBaseSellBTC_USD(this));
+        websiteList.add(new CoinBaseSell(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseSellETH_USD(this));
+        websiteList.add(new CoinBaseSell(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseSellLTC_USD(this));
+        websiteList.add(new CoinBaseSell(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseSellZRX_USD(this));
 //        // Spot
 //        websiteList.add(new CoinBaseSpotBCH_USD(this));
 //        websiteList.add(new CoinBaseSpotBTC_USD(this));
+        websiteList.add(new CoinBaseSpot(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseSpotETH_USD(this));
+        websiteList.add(new CoinBaseSpot(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinBaseSpotLTC_USD(this));
+        websiteList.add(new CoinBaseSpot(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
 //
 //
 //        /* CoinMarketCap */
