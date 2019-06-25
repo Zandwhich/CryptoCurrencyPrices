@@ -19,7 +19,7 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
     /**
      * The base URL for CoinCap requests
      */
-    public final static String BASE_URL = "http://coincap.io/page/";
+    private final static String BASE_URL = "http://coincap.io/page/";
 
     /****************
      * Constructors *
