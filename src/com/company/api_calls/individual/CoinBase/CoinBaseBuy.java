@@ -25,11 +25,6 @@ public class CoinBaseBuy extends AbstractCoinBase {
      *    Fields    *
      * ************ */
 
-    /**
-     * The full url extension that is used
-     */
-    private String urlExt;
-
 
     /* ************ *
      * Constructors *
@@ -46,7 +41,6 @@ public class CoinBaseBuy extends AbstractCoinBase {
         super(cryptoCurrency, fiatCurrency, "Buy: " + fiatCurrency.getAbbreviatedName() + "/" + cryptoCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT,
                 controller);
-        this.urlExt = cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT;
     }//end CoinBaseBuy()
 
 
@@ -57,13 +51,5 @@ public class CoinBaseBuy extends AbstractCoinBase {
     /* Public */
 
     // Getters
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getUrlExt() {
-        return this.urlExt;
-    }
 
 }//end CoinBaseBuy

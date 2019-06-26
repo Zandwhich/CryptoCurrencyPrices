@@ -30,13 +30,15 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * The constructor for AbstractJSONCaller
      * @param cryptoCurrency The cryptocurrency in question
      * @param fiatCurrency The fiat currency in question
-     * @param name TODO: Fill in
+     * @param name The name of the endpoint
      * @param url The url to hit
+     * @param urlExt The extension of the url
      * @param controller The controller that calls this JSON caller
      */
     public AbstractJSONCaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                              final String name, final String url, final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, name, url, controller);
+                              final String name, final String url, final String urlExt,
+                              final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, name, url, urlExt, controller);
     }//end AbstractJSONCaller()
 
     /****************
@@ -98,7 +100,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @param jsonObject The returned, parsed JSON object from the call
      * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
      */
-    protected abstract double extractPrice(JSONObject jsonObject);
+    protected abstract double extractPrice(final JSONObject jsonObject);
 
     /**
      * Gets an updated price by calling the API

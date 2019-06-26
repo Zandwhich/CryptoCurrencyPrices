@@ -51,7 +51,8 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                             final String name, final String urlExt, final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "CoinBase " + name, AbstractCoinBase.BASE_URL + urlExt, controller);
+        super(cryptoCurrency, fiatCurrency, "CoinBase " + name, AbstractCoinBase.BASE_URL + urlExt, urlExt,
+                controller);
     }//end AbstractCoinBase()
 
     /****************

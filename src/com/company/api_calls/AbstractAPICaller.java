@@ -49,6 +49,11 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private URL url;
 
     /**
+     * The extension used in the url
+     */
+    private String urlExt;
+
+    /**
      * If the last attempt to update the prices ended in failure
      */
     private boolean hasFailedLastUpdate;
@@ -69,10 +74,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param fiatCurrency The fiat currency to compare against (USD, CAD, PLN, etc.)
      * @param name The name of the API endpoint
      * @param url The url to hit
+     * @param urlExt The extension of the url to hit
      * @param controller The controller that calls this API caller
      */
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                             final String name, final String url, final ControllerInterface controller) {
+                             final String name, final String url, final String urlExt,
+                             final ControllerInterface controller) {
         this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
@@ -88,6 +95,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }//end catch(MalformedURLException)
+        this.urlExt = urlExt;
     }//end AbstractAPICaller()
 
     /****************
@@ -148,7 +156,10 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Gets the URL extension of the API call
      * @return The URL extension of the API call
      */
-    public abstract String getUrlExt();
+    public String getUrlExt()
+    {
+        return this.urlExt;
+    }//end getUrlExt()
 
     /**
      * Gets if the last attempt at updating the price ended in failure
@@ -206,19 +217,19 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Sets the name of the API endpoint
      * @param name The name of the API endpoint
      */
-    public void setName(String name) { this.name = name; }//end setName()
+    public void setName(final String name) { this.name = name; }//end setName()
 
     /**
      * Sets the URL to hit
      * @param url The url to hit
      */
-    public void setUrl(URL url) { this.url = url; }//end setUrl()
+    public void setUrl(final URL url) { this.url = url; }//end setUrl()
 
     /**
      * Sets if the last update failed
      * @param hasFailedLastUpdate If the last update failed
      */
-    public void setHasFailedLastUpdate(boolean hasFailedLastUpdate) { this.hasFailedLastUpdate = hasFailedLastUpdate; }//end setHasFailedLastUpdate()
+    public void setHasFailedLastUpdate(final boolean hasFailedLastUpdate) { this.hasFailedLastUpdate = hasFailedLastUpdate; }//end setHasFailedLastUpdate()
 
     /**
      * Sets if there is a price to display

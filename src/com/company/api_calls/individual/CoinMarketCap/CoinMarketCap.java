@@ -10,16 +10,26 @@ import json_simple.JSONObject;
 /**
  * TODO: Fill in
  */
-public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
+public abstract class CoinMarketCap extends AbstractJSONCaller {
 
-    /****************
-     *    Fields    *
-     ****************/
+    /* ************ *
+     *  Constants   *
+     * ************ */
 
     /**
      * The base URL for CoinMarketCap requests
      */
     private final static String BASE_URL = "https://api.coinmarketcap.com/v2/ticker/";
+
+    /**
+     * The base name for CoinMarketCap requests
+     */
+    private final static String BASE_NAME = "CoinMarketCap ";
+
+
+    /****************
+     *    Fields    *
+     ****************/
 
 
     /****************
@@ -30,13 +40,15 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
      * The constructor for the basic CoinMarketCap requests
      * @param cryptoCurrency The cryptocurrency in the request
      * @param fiatCurrency The fiat currency in the request
-     * @param name The name of the request
-     * @param urlExt The extension of the request
      * @param controller The controller that calls this endpoint
      */
-    public AbstractCoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency, final String name,
-                                 final String urlExt, ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, name, AbstractCoinMarketCap.BASE_URL + urlExt, controller);
+    public CoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                         final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency,
+                CoinMarketCap.BASE_NAME + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
+                CoinMarketCap.BASE_URL, "URL_EXTENSION", controller);
+
+        // TODO: Figure out a way to do the extension properly
     }//end AbstractCoinMarketCap()
 
     /****************
@@ -52,7 +64,7 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
      * @return The base of the url
      */
     @Override
-    public String getBaseUrl() { return AbstractCoinMarketCap.BASE_URL; }//end getBaseUrl()
+    public String getBaseUrl() { return CoinMarketCap.BASE_URL; }//end getBaseUrl()
 
     /* Protected */
 
