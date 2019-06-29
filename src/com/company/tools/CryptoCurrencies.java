@@ -3,7 +3,7 @@ package com.company.tools;
 /**
  * An enum that holds all possible cryptocurrencies (received from http://coincap.io/map)
  */
-public enum CryptoCurrencies {
+public enum CryptoCurrencies implements Currency {
 //    A0XBTC,	// 0xBitcoin    (Actually '0XBTC')
 //    A1ST,	// FirstBlood   (Actually '1ST')
 //    A1WO,	// 1World       (Actually '1WO')
@@ -1616,6 +1616,7 @@ public enum CryptoCurrencies {
      * Returns the full name of the fiat currency
      * @return The full name of the fiat currency
      */
+    @Override
     public String getFullName() {
         return this.fullName;
     }// end getFullName()
@@ -1624,10 +1625,8 @@ public enum CryptoCurrencies {
      * Returns the abbreviated name of the fiat currency
      * @return The abbreviated name of the fiat currency
      */
+    @Override
     public String getAbbreviatedName() {
         return this.abbreviatedName;
     }//end getAbbreviatedName()
-
-
-
 }//end CryptoCurrencies

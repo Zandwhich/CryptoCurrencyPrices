@@ -3,7 +3,7 @@ package com.company.tools;
 /**
  * An enum that holds all possible fiat currencies
  */
-public enum FiatCurrencies {
+public enum FiatCurrencies implements Currency {
 
 //    AED, // United Arab Emirates Dirham
 //    AFN, // Afghan Afghani
@@ -311,6 +311,7 @@ public enum FiatCurrencies {
      * Returns the full name of the fiat currency
      * @return The full name of the fiat currency
      */
+    @Override
     public String getFullName() {
         return this.fullName;
     }// end getFullName()
@@ -319,6 +320,7 @@ public enum FiatCurrencies {
      * Returns the abbreviated name of the fiat currency
      * @return The abbreviated name of the fiat currency
      */
+    @Override
     public String getAbbreviatedName() {
         return this.abbreviatedName;
     }//end getAbbreviatedName()
