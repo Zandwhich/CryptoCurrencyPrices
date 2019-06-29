@@ -43,8 +43,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private String name;
 
     /**
-     * TODO: Figure out a better way to phrase this
-     * Eh, it's good enough
      * The url to hit
      */
     private URL url;
