@@ -60,8 +60,7 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
     // Getters
 
     /**
-     * Returns the base of the url
-     * @return The base of the url
+     * {@inheritDoc}
      */
     @Override
     public String getBaseUrl() { return CoinMarketCap.BASE_URL; }//end getBaseUrl()
@@ -69,9 +68,7 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
     /* Protected */
 
     /**
-     * TODO: Fill in
-     * @param jsonObject
-     * @return
+     * {@inheritDoc}
      */
     @Override
     protected double extractPrice(@NotNull final JSONObject jsonObject) {
