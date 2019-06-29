@@ -1486,7 +1486,7 @@ public enum CryptoCurrencies {
 //    XRE,	// RevolverCoin
 //    XRH,	// Rhenium
 //    XRL,	// Rialto
-//    XRP,	// XRP
+    XRP,	// Ripple
 //    XSG,	// SnowGem
 //    XSH,	// SHIELD
 //    XSN,	// Stakenet
@@ -1559,6 +1559,11 @@ public enum CryptoCurrencies {
      */
     private static final String LTC_FULL_NAME = "Litecoin";
 
+    /**
+     * XRP full name in English
+     */
+    private static final String XRP_FULL_NAME = "Ripple";
+
 
     /* ************ */
     /*    Fields    */
@@ -1582,16 +1587,20 @@ public enum CryptoCurrencies {
     static {
 
         // BTC
-        BTC.fullName = BTC_FULL_NAME;
+        BTC.fullName = CryptoCurrencies.BTC_FULL_NAME;
         BTC.abbreviatedName = BTC.toString();
 
         // ETH
-        ETH.fullName = ETH_FULL_NAME;
+        ETH.fullName = CryptoCurrencies.ETH_FULL_NAME;
         ETH.abbreviatedName = ETH.toString();
 
         // LTC
-        LTC.fullName = LTC_FULL_NAME;
+        LTC.fullName = CryptoCurrencies.LTC_FULL_NAME;
         LTC.abbreviatedName = LTC.toString();
+
+        // XRP
+        XRP.fullName = CryptoCurrencies.XRP_FULL_NAME;
+        XRP.abbreviatedName = XRP.toString();
     }//end static initializer
 
 

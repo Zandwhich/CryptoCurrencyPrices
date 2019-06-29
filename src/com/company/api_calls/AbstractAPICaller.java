@@ -63,6 +63,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private ControllerInterface controller;
 
+    /**
+     * The cryptocurrencies that this website can use
+     */
+    private CryptoCurrencies[] acceptedCryptoCurrencies;
+
+    /**
+     * The fiat currencies that this website can use
+     */
+    private FiatCurrencies[] acceptedFiatCurrencies;
+
 
     /****************
      * Constructors *
@@ -72,14 +82,17 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * The constructor for AbstractAPICaller
      * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
      * @param fiatCurrency The fiat currency to compare against (USD, CAD, PLN, etc.)
+     * @param acceptedCryptoCurrencies The accepted cryptocurrencies for this website
+     * @param acceptedFiatCurrencies The accepted fiat currencies for this website
      * @param name The name of the API endpoint
      * @param url The url to hit
      * @param urlExt The extension of the url to hit
      * @param controller The controller that calls this API caller
      */
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                             final String name, final String url, final String urlExt,
-                             final ControllerInterface controller) {
+                             final CryptoCurrencies[] acceptedCryptoCurrencies,
+                             final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
+                             final String urlExt, final ControllerInterface controller) {
         this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
@@ -96,6 +109,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }//end catch(MalformedURLException)
         this.urlExt = urlExt;
+        this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
+        this.acceptedFiatCurrencies = acceptedFiatCurrencies;
     }//end AbstractAPICaller()
 
     /****************
@@ -172,6 +187,22 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The controller
      */
     public ControllerInterface getController() { return this.controller; }//end getController()
+
+    /**
+     * Retruns the accepted cryptocurrencies
+     * @return The accepted cryptocurrencies
+     */
+    public CryptoCurrencies[] getAcceptedCryptoCurrencies() {
+        return this.acceptedCryptoCurrencies;
+    }//end getAcceptedCryptoCurrencies()
+
+    /**
+     * Returns the accepted fiat currencies
+     * @return The accepted fiat currencies
+     */
+    public FiatCurrencies[] getAcceptedFiatCurrencies() {
+        return this.acceptedFiatCurrencies;
+    }//end getAcceptedFiatCurrencies()
 
     // Other
 

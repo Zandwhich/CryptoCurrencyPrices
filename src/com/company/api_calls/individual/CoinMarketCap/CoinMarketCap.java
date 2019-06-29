@@ -26,6 +26,19 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
      */
     private final static String BASE_NAME = "CoinMarketCap ";
 
+    /**
+     * The cryptocurrencies that CoinMarketCap uses
+     */
+    private final static CryptoCurrencies[] ACCEPTED_CRYPTO_CURRENCIES = {CryptoCurrencies.BTC, CryptoCurrencies.ETH,
+            CryptoCurrencies.LTC, CryptoCurrencies.XRP};
+
+    /**
+     * The fiat currencies that CoinMarketCap uses
+     */
+    private final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.AUD, FiatCurrencies.CAD,
+            FiatCurrencies.EUR, FiatCurrencies.GBP, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD,
+            FiatCurrencies.PLN, FiatCurrencies.SEK, FiatCurrencies.USD};
+
 
     /****************
      *    Fields    *
@@ -44,7 +57,8 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
      */
     public CoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                          final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency,
+        super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
+                CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinMarketCap.BASE_NAME + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 CoinMarketCap.BASE_URL, "URL_EXTENSION", controller);
 

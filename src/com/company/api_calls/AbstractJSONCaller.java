@@ -30,15 +30,19 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * The constructor for AbstractJSONCaller
      * @param cryptoCurrency The cryptocurrency in question
      * @param fiatCurrency The fiat currency in question
+     * @param acceptedCryptoCurrencies The cryptocurrencies accepted by this website
+     * @param acceptedFiatCurrencies The fiat currencies accepted by this website
      * @param name The name of the endpoint
      * @param url The url to hit
      * @param urlExt The extension of the url
      * @param controller The controller that calls this JSON caller
      */
     public AbstractJSONCaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                              final String name, final String url, final String urlExt,
-                              final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, name, url, urlExt, controller);
+                              final CryptoCurrencies[] acceptedCryptoCurrencies,
+                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
+                              final String urlExt, final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url, urlExt,
+                controller);
     }//end AbstractJSONCaller()
 
     /****************

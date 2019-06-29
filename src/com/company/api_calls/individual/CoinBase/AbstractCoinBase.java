@@ -17,17 +17,17 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * ************ */
 
     /**
-     * The fiat currencies that CoinBase uses
-     */
-    public final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.AUD, FiatCurrencies.CAD,
-            FiatCurrencies.EUR, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD, FiatCurrencies.PLN,
-            FiatCurrencies.SEK, FiatCurrencies.USD};
-
-    /**
      * The cryptocurrencies that CoinBase uses
      */
-    public final static CryptoCurrencies[] ACCEPTED_CRYPTO_CURRENCIES = {CryptoCurrencies.BTC, CryptoCurrencies.ETH,
-            CryptoCurrencies.LTC};
+    private final static CryptoCurrencies[] ACCEPTED_CRYPTO_CURRENCIES = {CryptoCurrencies.BTC, CryptoCurrencies.ETH,
+            CryptoCurrencies.LTC, CryptoCurrencies.XRP};
+
+    /**
+     * The fiat currencies that CoinBase uses
+     */
+    private final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.AUD, FiatCurrencies.CAD,
+            FiatCurrencies.EUR, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD, FiatCurrencies.PLN,
+            FiatCurrencies.SEK, FiatCurrencies.USD};
 
     /****************
      *    Fields    *
@@ -43,7 +43,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      ****************/
 
     /**
-     * A constructor for the AbstractCoinBase class
+     * The constructor for the AbstractCoinBase class
      * @param cryptoCurrency The cryptocurrency
      * @param fiatCurrency The fiat currency
      * @param name The name of the specific request
@@ -51,8 +51,9 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                             final String name, final String urlExt, final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "CoinBase " + name, AbstractCoinBase.BASE_URL + urlExt, urlExt,
-                controller);
+        super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
+                AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
+                AbstractCoinBase.BASE_URL + urlExt, urlExt, controller);
     }//end AbstractCoinBase()
 
     /****************
