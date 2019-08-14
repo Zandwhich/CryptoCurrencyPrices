@@ -60,7 +60,7 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinMarketCap.BASE_NAME + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
-                CoinMarketCap.BASE_URL, "URL_EXTENSION", controller);
+                CoinMarketCap.BASE_URL, controller);
 
         // TODO: Figure out a way to do the extension properly
     }//end AbstractCoinMarketCap()

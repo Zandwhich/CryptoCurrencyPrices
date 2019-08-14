@@ -48,11 +48,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private URL url;
 
     /**
-     * The extension used in the url
-     */
-    private String urlExt;
-
-    /**
      * If the last attempt to update the prices ended in failure
      */
     private boolean hasFailedLastUpdate;
@@ -85,13 +80,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param acceptedFiatCurrencies The accepted fiat currencies for this website
      * @param name The name of the API endpoint
      * @param url The url to hit
-     * @param urlExt The extension of the url to hit
      * @param controller The controller that calls this API caller
      */
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                              final CryptoCurrencies[] acceptedCryptoCurrencies,
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                             final String urlExt, final ControllerInterface controller) {
+                             final ControllerInterface controller) {
         this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
@@ -107,7 +101,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }//end catch(MalformedURLException)
-        this.urlExt = urlExt;
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
     }//end AbstractAPICaller()
@@ -165,15 +158,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The Base URL of the API call
      */
     public abstract String getBaseUrl();
-
-    /**
-     * Gets the URL extension of the API call
-     * @return The URL extension of the API call
-     */
-    public String getUrlExt()
-    {
-        return this.urlExt;
-    }//end getUrlExt()
 
     /**
      * Gets if the last attempt at updating the price ended in failure
