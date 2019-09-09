@@ -69,7 +69,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         JSONObject jsonObject;
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = this.getUrl().openConnection();
+            final URLConnection connection = this.getUrl().openConnection();
             connection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             JSONParser parser = new JSONParser();
@@ -122,4 +122,6 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         setHasPrice(true);
         return extractedPrice;
     }//end getNewPrice()
+
+    // TODO: Create a static method to be overwritten that returns the full URL
 }//end AbstractJSONCaller

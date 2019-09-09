@@ -10,7 +10,7 @@ import json_simple.JSONObject;
 /**
  * TODO: Fill in
  */
-public abstract class CoinMarketCap extends AbstractJSONCaller {
+public class CoinMarketCap extends AbstractJSONCaller {
 
     /* ************ *
      *  Constants   *
@@ -39,10 +39,32 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
             FiatCurrencies.EUR, FiatCurrencies.GBP, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD,
             FiatCurrencies.PLN, FiatCurrencies.SEK, FiatCurrencies.USD};
 
+    /**
+     * The number that CoinMarketCap uses for BTC in its URLs
+     */
+    private static final String BTC_NUMBER = "1";
+
+    /**
+     * The number that CoinMarketCap uses for ETH in its URLs
+     */
+    private static final String ETH_NUMBER = "1027";
+
+    /**
+     * The number that CoinMarketCap uses for LTC in its URLs
+     */
+    private static final String LTC_NUMBER = "2";
+
+    /**
+     * The number that CoinMarketCap uses for XRP in its URLs
+     */
+    private static final String XRP_NUMBER = "57";
+
 
     /****************
      *    Fields    *
      ****************/
+
+    private String cryptoNumber;
 
 
     /****************
@@ -59,10 +81,12 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
                          final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinMarketCap.BASE_NAME + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
-                CoinMarketCap.BASE_URL, controller);
-
-        // TODO: Figure out a way to do the extension properly
+                CoinMarketCap.BASE_NAME + ": " + cryptoCurrency.getAbbreviatedName() + "/" +
+                        fiatCurrency.getAbbreviatedName(),
+                CoinMarketCap.BASE_URL + convertCryptoCurrency(cryptoCurrency) + "/?convert=" +
+                        fiatCurrency.getAbbreviatedName(),
+                controller);
+        this.cryptoNumber = convertCryptoCurrency(cryptoCurrency);
     }//end AbstractCoinMarketCap()
 
     /****************
@@ -79,6 +103,30 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
     @Override
     public String getBaseUrl() { return CoinMarketCap.BASE_URL; }//end getBaseUrl()
 
+    // Other
+
+    /**
+     * Converts the given cryptocurrency into the respective CoinMarketCap specified number
+     * @param cryptoCurrency The cryptocurrency
+     * @return The CoinMarketCap specified number
+     */
+    public static String convertCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    {
+        switch (cryptoCurrency) {
+            case BTC:
+                return CoinMarketCap.BTC_NUMBER;
+            case ETH:
+                return CoinMarketCap.ETH_NUMBER;
+            case LTC:
+                return CoinMarketCap.LTC_NUMBER;
+            case XRP:
+                return CoinMarketCap.XRP_NUMBER;
+            default:
+                // TODO: Throw an error that gets caught internally and simply doesn't display anything
+                return "";
+        }//end switch
+    }//end convertCryptoCurrency()
+
     /* Protected */
 
     /**
@@ -86,21 +134,16 @@ public abstract class CoinMarketCap extends AbstractJSONCaller {
      */
     @Override
     protected double extractPrice(@NotNull final JSONObject jsonObject) {
-        JSONObject data = (JSONObject) jsonObject.get("data");
+        final JSONObject data = (JSONObject) jsonObject.get("data");
 
-        if (data == null) return -1;
+        if (data == null) return -1; // TODO: Throw an error
 
-        JSONObject quotes = (JSONObject) data.get("quotes");
+        final JSONObject quotes = (JSONObject) data.get("quotes");
 
-        if (quotes == null) return -1;
+        if (quotes == null) return -1; // TODO: Throw an error
 
-        return this.extractFiat(quotes);
+        final JSONObject fiat = (JSONObject) quotes.get(this.getFiatCurrency().getAbbreviatedName());
+
+        return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
     }//end extractPrice()
-
-    /**
-     * TODO: Fill in
-     * @param quotes
-     * @return
-     */
-    protected abstract double extractFiat(JSONObject quotes);
 }//end AbstractCoinMarketCap

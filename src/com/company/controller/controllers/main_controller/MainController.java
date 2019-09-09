@@ -7,6 +7,7 @@ import com.company.api_calls.individual.CoinBase.AbstractCoinBase;
 import com.company.api_calls.individual.CoinBase.CoinBaseBuy;
 import com.company.api_calls.individual.CoinBase.CoinBaseSell;
 import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
+import com.company.api_calls.individual.CoinMarketCap.CoinMarketCap;
 import com.company.tools.CryptoCurrencies;
 import com.company.tools.Errors;
 import com.company.tools.FiatCurrencies;
@@ -86,14 +87,21 @@ public class MainController extends AbstractController implements MainController
 //
 //        /* CoinMarketCap */
 //        websiteList.add(new CoinMarketCapBTC_USD(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinMarketCapETH_USD(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinMarketCapLTC_USD(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinMarketCapXRP_USD(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.XRP, FiatCurrencies.USD, this));
 //        websiteList.add(new CoinMarketCapBTC_EUR(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.BTC, FiatCurrencies.EUR, this));
 //        websiteList.add(new CoinMarketCapETH_EUR(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.ETH, FiatCurrencies.EUR, this));
 //        websiteList.add(new CoinMarketCapLTC_EUR(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.LTC, FiatCurrencies.EUR, this));
 //        websiteList.add(new CoinMarketCapXRP_EUR(this));
-//        websiteList.add(new CoinMarketCapXRP_USD(this));
+        websiteList.add(new CoinMarketCap(CryptoCurrencies.XRP, FiatCurrencies.EUR, this));
 
     }//end MainController()
 

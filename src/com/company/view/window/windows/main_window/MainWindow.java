@@ -34,7 +34,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * The default width of the main window
      */
-    public final static int DEFAULT_WIDTH = 1000;
+    public final static int DEFAULT_WIDTH = 1100;
 
     /**
      * The default height of the main window
