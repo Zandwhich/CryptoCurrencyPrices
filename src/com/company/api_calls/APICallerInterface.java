@@ -1,5 +1,8 @@
 package com.company.api_calls;
 
+import com.company.tools.CryptoCurrencies;
+import com.company.tools.FiatCurrencies;
+
 import java.net.URL;
 
 /**
@@ -19,17 +22,17 @@ public interface APICallerInterface {
      * Returns the cryptocurrency
      * @return The cryptocurrency
      */
-    public abstract String getCryptoCurrency();
+    public abstract CryptoCurrencies getCryptoCurrency();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the fiat currency
+     * @return The fiat currency
      */
-    public abstract String getFiatCurrency();
+    public abstract FiatCurrencies getFiatCurrency();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns if a price has been obtained
+     * @return If a price has been obtained
      */
     public abstract boolean getHasPrice();
 
@@ -39,14 +42,14 @@ public interface APICallerInterface {
     public abstract void updatePrice();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the name of the API endpoint
+     * @return The name of the API endpoint
      */
     public abstract String getName();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the URL of the endpoint
+     * @return The URL of the endpoint
      */
     public abstract URL getUrl();
 

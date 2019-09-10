@@ -1,6 +1,9 @@
 package com.company.api_calls;
 
+import com.company.api_calls.APICallerInterface;
 import com.company.controller.ControllerInterface;
+import com.company.tools.CryptoCurrencies;
+import com.company.tools.FiatCurrencies;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,12 +25,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The crypto currency (i.e. BTC, ETH, LTC, etc.)
      */
-    private String cryptoCurrency;
+    private CryptoCurrencies cryptoCurrency;
 
     /**
      * The fiat currency (i.e. USD, CAD, PLN, etc.)
      */
-    private String fiatCurrency;
+    private FiatCurrencies fiatCurrency;
 
     /**
      * If the API has a price to display
@@ -40,7 +43,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private String name;
 
     /**
-     * TODO: Figure out a better way to phrase this
      * The url to hit
      */
     private URL url;
@@ -55,6 +57,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private ControllerInterface controller;
 
+    /**
+     * The cryptocurrencies that this website can use
+     */
+    private CryptoCurrencies[] acceptedCryptoCurrencies;
+
+    /**
+     * The fiat currencies that this website can use
+     */
+    private FiatCurrencies[] acceptedFiatCurrencies;
+
 
     /****************
      * Constructors *
@@ -64,12 +76,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * The constructor for AbstractAPICaller
      * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
      * @param fiatCurrency The fiat currency to compare against (USD, CAD, PLN, etc.)
+     * @param acceptedCryptoCurrencies The accepted cryptocurrencies for this website
+     * @param acceptedFiatCurrencies The accepted fiat currencies for this website
      * @param name The name of the API endpoint
      * @param url The url to hit
      * @param controller The controller that calls this API caller
      */
-    public AbstractAPICaller(final String cryptoCurrency, final String fiatCurrency, final String name,
-                             final String url, final ControllerInterface controller) {
+    public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                             final CryptoCurrencies[] acceptedCryptoCurrencies,
+                             final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
+                             final ControllerInterface controller) {
         this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
@@ -85,6 +101,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }//end catch(MalformedURLException)
+        this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
+        this.acceptedFiatCurrencies = acceptedFiatCurrencies;
     }//end AbstractAPICaller()
 
     /****************
@@ -96,42 +114,36 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     // Getters
 
     /**
-     * Gets the last received price
-     * @return The last received price
+     * {@inheritDoc}
      */
     @Override
     public double getPrice() { return this.price; }//end getPrice()
 
     /**
-     * Gets the crypto currency (i.e. BTC, ETH, LTC, etc.)
-     * @return The crypto currency (i.e. BTC, ETH, LTC, etc.)
+     * {@inheritDoc}
      */
     @Override
-    public String getCryptoCurrency() { return this.cryptoCurrency; }//end getCryptoCurrency()
+    public CryptoCurrencies getCryptoCurrency() { return this.cryptoCurrency; }//end getCryptoCurrency()
 
     /**
-     * Gets the fiat currency (i.e. USD, CAD, PLN, etc.)
-     * @return The fiat currency (i.e. USD, CAD, PLN, etc.)
+     * {@inheritDoc}
      */
-    public String getFiatCurrency() { return this.fiatCurrency; }//end getFiatCurrency()
+    public FiatCurrencies getFiatCurrency() { return this.fiatCurrency; }//end getFiatCurrency()
 
     /**
-     * Gets if the API has received a price
-     * @return If the API ahs received a price
+     * {@inheritDoc}
      */
     @Override
     public boolean getHasPrice() { return this.hasPrice; }//end getHasPrice()
 
     /**
-     * Gets the name of the API endpoint
-     * @return The name of the API endpoint
+     * {@inheritDoc}
      */
     @Override
     public String getName() { return this.name; }//end getName()
 
     /**
-     * Gets the URL to update the prices
-     * @return The URL to update the prices
+     * {@inheritDoc}
      */
     public URL getUrl() { return this.url; }//end getUrl()
 
@@ -148,12 +160,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public abstract String getBaseUrl();
 
     /**
-     * Gets the URL extension of the API call
-     * @return The URL extension of the API call
-     */
-    public abstract String getUrlExt();
-
-    /**
      * Gets if the last attempt at updating the price ended in failure
      * @return If the last attempt at updating the price ended in failure
      */
@@ -164,6 +170,22 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The controller
      */
     public ControllerInterface getController() { return this.controller; }//end getController()
+
+    /**
+     * Retruns the accepted cryptocurrencies
+     * @return The accepted cryptocurrencies
+     */
+    public CryptoCurrencies[] getAcceptedCryptoCurrencies() {
+        return this.acceptedCryptoCurrencies;
+    }//end getAcceptedCryptoCurrencies()
+
+    /**
+     * Returns the accepted fiat currencies
+     * @return The accepted fiat currencies
+     */
+    public FiatCurrencies[] getAcceptedFiatCurrencies() {
+        return this.acceptedFiatCurrencies;
+    }//end getAcceptedFiatCurrencies()
 
     // Other
 
@@ -197,31 +219,31 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Sets the cryptocurrency
      * @param cryptoCurrency The cryptocurrency
      */
-    protected void setCryptoCurrency(final String cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }//end setCryptoCurrency()
+    protected void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }//end setCryptoCurrency()
 
     /**
      * Sets the fiat currency
      * @param fiatCurrency The fiat currency
      */
-    protected void setFiatCurrency(final String fiatCurrency) { this.fiatCurrency = fiatCurrency; }//end fiatCurrency()
+    protected void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }//end fiatCurrency()
 
     /**
      * Sets the name of the API endpoint
      * @param name The name of the API endpoint
      */
-    public void setName(String name) { this.name = name; }//end setName()
+    public void setName(final String name) { this.name = name; }//end setName()
 
     /**
      * Sets the URL to hit
      * @param url The url to hit
      */
-    public void setUrl(URL url) { this.url = url; }//end setUrl()
+    public void setUrl(final URL url) { this.url = url; }//end setUrl()
 
     /**
      * Sets if the last update failed
      * @param hasFailedLastUpdate If the last update failed
      */
-    public void setHasFailedLastUpdate(boolean hasFailedLastUpdate) { this.hasFailedLastUpdate = hasFailedLastUpdate; }//end setHasFailedLastUpdate()
+    public void setHasFailedLastUpdate(final boolean hasFailedLastUpdate) { this.hasFailedLastUpdate = hasFailedLastUpdate; }//end setHasFailedLastUpdate()
 
     /**
      * Sets if there is a price to display

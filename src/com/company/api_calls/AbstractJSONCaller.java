@@ -1,7 +1,9 @@
 package com.company.api_calls;
 
+import com.company.tools.CryptoCurrencies;
 import com.company.tools.Errors;
 import com.company.controller.ControllerInterface;
+import com.company.tools.FiatCurrencies;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -28,13 +30,17 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * The constructor for AbstractJSONCaller
      * @param cryptoCurrency The cryptocurrency in question
      * @param fiatCurrency The fiat currency in question
-     * @param name TODO: Fill in
+     * @param acceptedCryptoCurrencies The cryptocurrencies accepted by this website
+     * @param acceptedFiatCurrencies The fiat currencies accepted by this website
+     * @param name The name of the endpoint
      * @param url The url to hit
      * @param controller The controller that calls this JSON caller
      */
-    public AbstractJSONCaller(final String cryptoCurrency, final String fiatCurrency, final String name,
-                              final String url, final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, name, url, controller);
+    public AbstractJSONCaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                              final CryptoCurrencies[] acceptedCryptoCurrencies,
+                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
+                              final ControllerInterface controller) {
+        super(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url, controller);
     }//end AbstractJSONCaller()
 
     /****************
@@ -63,7 +69,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         JSONObject jsonObject;
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = this.getUrl().openConnection();
+            final URLConnection connection = this.getUrl().openConnection();
             connection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             JSONParser parser = new JSONParser();
@@ -96,7 +102,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      * @param jsonObject The returned, parsed JSON object from the call
      * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
      */
-    protected abstract double extractPrice(JSONObject jsonObject);
+    protected abstract double extractPrice(final JSONObject jsonObject);
 
     /**
      * Gets an updated price by calling the API
@@ -116,4 +122,6 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         setHasPrice(true);
         return extractedPrice;
     }//end getNewPrice()
+
+    // TODO: Create a static method to be overwritten that returns the full URL
 }//end AbstractJSONCaller
