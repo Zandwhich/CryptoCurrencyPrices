@@ -88,7 +88,7 @@ public abstract class AbstractController implements  ControllerInterface {
         }//end catch(MalformedURLException)
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = url.openConnection();
+            final URLConnection connection = url.openConnection();
             connection.connect();
         }
         catch (IOException exception) {
