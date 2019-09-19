@@ -8,9 +8,9 @@ import com.company.api_calls.individual.CoinBase.CoinBaseBuy;
 import com.company.api_calls.individual.CoinBase.CoinBaseSell;
 import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
 import com.company.api_calls.individual.CoinMarketCap.CoinMarketCap;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.Errors;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.Errors;
+import com.company.tools.enums.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
@@ -33,9 +33,14 @@ public class MainController extends AbstractController implements MainController
     private ArrayList<APICallerInterface> websiteList = new ArrayList<>();
 
     /**
-     * The currently selected
+     * The currently selected fiat currency
      */
     private FiatCurrencies currentFiat = FiatCurrencies.USD;
+
+    /**
+     * The currently selected cryptocurrency
+     */
+    private CryptoCurrencies currentCrypto = CryptoCurrencies.BTC;
 
     /**
      * The main window of the application
@@ -87,6 +92,31 @@ public class MainController extends AbstractController implements MainController
      *    Methods   *
      ****************/
 
+    /* Private */
+
+    private void updateWebsiteFiat()
+    {
+        // For now, delete all of the websites and recreate them with the new fiat currencies
+        // TODO: First check if the fiat currency can be put in, then if it can be simply change it, otherwise delete the object
+        this.websiteList.clear();
+
+        /* CoinBase */
+        if (AbstractCoinBase.canUseFiatCurrency(this.currentFiat))
+        {
+            this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+            this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+            this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        }//end if CoinBase
+
+        /* CoinMarketCap */
+        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
+        {
+            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        }//end if CoinMarketCap
+
+        this.refresh();
+    }//end updateWebsiteFiat()
+
     /* Public */
 
     // Getters
@@ -136,7 +166,7 @@ public class MainController extends AbstractController implements MainController
      * Calls on each of the websites to update their individual prices.
      */
     public void updatePrices() {
-        for (APICallerInterface website : this.websiteList) {
+        for (final APICallerInterface website : this.websiteList) {
             website.updatePrice();
         }//end for websites
         this.updateViewPrices();
@@ -157,7 +187,7 @@ public class MainController extends AbstractController implements MainController
      * @param name The name of who called this error
      */
     @Override
-    public void errorDisplay(Errors error, String name) {
+    public void errorDisplay(final Errors error, final String name) {
 
         switch (error) {
             case NETWORK_CONNECTION:
@@ -171,7 +201,7 @@ public class MainController extends AbstractController implements MainController
      * @param error The type of error
      */
     @Override
-    public void errorDisplay(Errors error) {
+    public void errorDisplay(final Errors error) {
 
         switch (error) {
             case NETWORK_CONNECTION:
@@ -185,7 +215,8 @@ public class MainController extends AbstractController implements MainController
      * @param fiatCurrency The new fiat currency
      */
     @Override
-    public void updateFiatCurrency(FiatCurrencies fiatCurrency) {
+    public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
+        this.updateWebsiteFiat();
     }//end updateFiatCurrency
 }//end MainController

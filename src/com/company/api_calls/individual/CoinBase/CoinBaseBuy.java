@@ -1,8 +1,8 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.controller.ControllerInterface;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 
 /**
  * The implementation of the CoinBase API that hits the 'buy' endpoint
@@ -38,7 +38,7 @@ public class CoinBaseBuy extends AbstractCoinBase {
      */
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Buy: " + fiatCurrency.getAbbreviatedName() + "/" + cryptoCurrency.getAbbreviatedName(),
+        super(cryptoCurrency, fiatCurrency, "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT,
                 controller);
     }//end CoinBaseBuy()

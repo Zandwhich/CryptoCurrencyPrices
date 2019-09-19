@@ -7,8 +7,8 @@
 //
 //import com.company.api_calls.AbstractJSONCaller;
 //import com.company.controller.ControllerInterface;
-//import com.company.tools.CryptoCurrencies;
-//import com.company.tools.FiatCurrencies;
+//import com.company.tools.enums.CryptoCurrencies;
+//import com.company.tools.enums.FiatCurrencies;
 //import com.sun.istack.internal.NotNull;
 //import json_simple.JSONObject;
 //

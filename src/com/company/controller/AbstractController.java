@@ -43,7 +43,8 @@ public abstract class AbstractController implements  ControllerInterface {
      * Sets if the application is connected to the internet
      * @param isConnected The connection to the internet
      */
-    protected void setConnected(boolean isConnected) { this.isConnected = isConnected;
+    protected void setConnected(final boolean isConnected) {
+        this.isConnected = isConnected;
     }//end setConnected()
 
 

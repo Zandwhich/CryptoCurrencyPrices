@@ -1,4 +1,4 @@
-package com.company.tools;
+package com.company.tools.enums;
 
 /**
  * An enum for errors used in the project
