@@ -1,8 +1,8 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.controller.ControllerInterface;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 
 /**
  * The implementation for the sell endpoint for CoinBase
@@ -36,7 +36,7 @@ public class CoinBaseSell extends AbstractCoinBase {
      */
     public CoinBaseSell(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Sell: " + fiatCurrency.getAbbreviatedName() + "/" + cryptoCurrency.getAbbreviatedName(),
+        super(cryptoCurrency, fiatCurrency, "Sell: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseSell.SELL_EXT,
                 controller);
     }//end CoinBaseBuy()

@@ -1,7 +1,7 @@
 package com.company.api_calls;
 
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 
 import java.net.URL;
 
@@ -54,8 +54,8 @@ public interface APICallerInterface {
     public abstract URL getUrl();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the URL in a String format
+     * @return The URL in a String format
      */
     public abstract String getUrlString();
 

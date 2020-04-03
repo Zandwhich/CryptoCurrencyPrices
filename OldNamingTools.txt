@@ -1,10 +1,10 @@
 package com.company.tools_deprecated;
 
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 import com.sun.istack.internal.NotNull;
-import static com.company.tools.FiatCurrencies.*;
-import static com.company.tools.CryptoCurrencies.*;
+import static com.company.tools.enums.FiatCurrencies.*;
+import static com.company.tools.enums.CryptoCurrencies.*;
 
 /**
  * TODO: Fill in

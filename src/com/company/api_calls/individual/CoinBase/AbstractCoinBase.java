@@ -2,8 +2,8 @@ package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
@@ -70,6 +70,38 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      */
     @Override
     public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }//end getBaseUrl()
+
+    // Other
+
+    /**
+     * Returns if the given fiat currency can be used with CoinBase
+     * TODO: Make this static somehow
+     * @param fiatCurrency The given fiat currency
+     * @return If the given fiat currency can be used with CoinBase
+     */
+    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    {
+        for (final FiatCurrencies currency : AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES)
+        {
+            if (currency.equals(fiatCurrency)) return true;
+        }//end for
+        return false;
+    }//end canUseFiatCurrency()
+
+    /**
+     * Returns if the given cryptocurrency can be used with CoinBase
+     * TODO: Make this static somehow
+     * @param cryptoCurrency The given cryptocurrency
+     * @return If the given cryptocurrency can be used with CoinBase
+     */
+    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    {
+        for (final CryptoCurrencies currency : AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES)
+        {
+            if (currency.equals(cryptoCurrency)) return true;
+        }//end for
+        return false;
+    }//end canUseCryptoCurrency()
 
     /* Protected */
 

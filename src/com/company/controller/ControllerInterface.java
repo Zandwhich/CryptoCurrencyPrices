@@ -1,6 +1,6 @@
 package com.company.controller;
 
-import com.company.tools.Errors;
+import com.company.tools.enums.Errors;
 
 /**
  * The general interface for all controllers

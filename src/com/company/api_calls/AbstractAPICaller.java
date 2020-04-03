@@ -1,9 +1,8 @@
 package com.company.api_calls;
 
-import com.company.api_calls.APICallerInterface;
 import com.company.controller.ControllerInterface;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -258,5 +257,22 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @return The new updated price from the API endpoint
      */
     protected abstract double getNewPrice();
+
+
+    /**
+     * Returns if the given fiat currency can be used with this website
+     * TODO: Make this static somehow
+     * @param fiatCurrency The given fiat currency
+     * @return If the given fiat currency can be used with this website
+     */
+    //public abstract boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency);
+
+    /**
+     * Returns if the given cryptocurrency can be used with this website
+     * TODO: Make this static somehow
+     * @param cryptoCurrency The given cryptocurrency
+     * @return If the given cryptocurrency can be used with this website
+     */
+    //public abstract boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency);
 
 }//end AbstractModel

@@ -1,8 +1,8 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.controller.ControllerInterface;
-import com.company.tools.CryptoCurrencies;
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.FiatCurrencies;
 
 /**
  * The implementation for the spot endpoint in CoinBase
@@ -36,7 +36,7 @@ public class CoinBaseSpot extends AbstractCoinBase {
      */
     public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                         final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Spot: " + fiatCurrency.getAbbreviatedName() + "/" + cryptoCurrency.getAbbreviatedName(),
+        super(cryptoCurrency, fiatCurrency, "Spot: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseSpot.SPOT_EXT,
                 controller);
     }//end CoinBaseBuy()

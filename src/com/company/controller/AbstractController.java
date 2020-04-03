@@ -43,7 +43,8 @@ public abstract class AbstractController implements  ControllerInterface {
      * Sets if the application is connected to the internet
      * @param isConnected The connection to the internet
      */
-    protected void setConnected(boolean isConnected) { this.isConnected = isConnected;
+    protected void setConnected(final boolean isConnected) {
+        this.isConnected = isConnected;
     }//end setConnected()
 
 
@@ -87,7 +88,7 @@ public abstract class AbstractController implements  ControllerInterface {
         }//end catch(MalformedURLException)
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = url.openConnection();
+            final URLConnection connection = url.openConnection();
             connection.connect();
         }
         catch (IOException exception) {
