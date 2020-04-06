@@ -68,7 +68,7 @@ public abstract class AbstractController implements  ControllerInterface {
 
     /**
      * Checks the internet connection and returns if it is connected or not
-     * Also alters the method isConnected
+     * Also alters the field isConnected
      * Currently just checks if it can hit yahoo.com
      * TODO: Figure out a better way of doing this
      * @return If there is a connection to the internet

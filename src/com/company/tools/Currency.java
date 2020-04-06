@@ -5,6 +5,9 @@ package com.company.tools;
  */
 public interface Currency {
 
+    // TODO: Create the currency folder underneath the enum folder, and put this interface in that with
+    //  CryptoCurrencies and FiatCurrencies
+
     /**
      * Returns the full name of the currency
      * @return The full name of the currency
