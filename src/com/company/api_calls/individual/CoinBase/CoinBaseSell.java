@@ -7,7 +7,7 @@ import com.company.tools.enums.FiatCurrencies;
 /**
  * The implementation for the sell endpoint for CoinBase
  */
-public class CoinBaseSell extends AbstractCoinBase {
+final public class CoinBaseSell extends AbstractCoinBase {
 
     /* ************ *
      *  Constants   *

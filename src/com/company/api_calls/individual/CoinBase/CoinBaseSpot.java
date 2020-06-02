@@ -7,7 +7,7 @@ import com.company.tools.enums.FiatCurrencies;
 /**
  * The implementation for the spot endpoint in CoinBase
  */
-public class CoinBaseSpot extends AbstractCoinBase {
+final public class CoinBaseSpot extends AbstractCoinBase {
 
     /* ************ *
      *  Constants   *

@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * TODO: Fill in
  */
-public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
+final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
 
     /****************
      *    Fields    *

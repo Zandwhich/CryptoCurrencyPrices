@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * The main controller of the application which controls the main page
  */
-public class MainController extends AbstractController implements MainControllerInterface {
+final public class MainController extends AbstractController implements MainControllerInterface {
 
     /****************
      *    Fields    *

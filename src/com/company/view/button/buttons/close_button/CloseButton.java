@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 /**
  * TODO: Fill in
  */
-public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
+final public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
 
     /****************
      *    Fields    *

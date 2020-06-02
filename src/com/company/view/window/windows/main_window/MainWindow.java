@@ -18,7 +18,7 @@ import java.util.Vector;
 /**
  * The main window to display for the application
  */
-public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
+final public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
 
     /****************
      *    Fields    *

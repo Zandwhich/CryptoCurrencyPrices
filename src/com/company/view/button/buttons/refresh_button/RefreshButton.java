@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 /**
  * The refresh button that is displayed on the main page
  */
-public class RefreshButton extends AbstractJButtonButton implements RefreshButtonInterface {
+final public class RefreshButton extends AbstractJButtonButton implements RefreshButtonInterface {
 
     /****************
      *    Fields    *

@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * TODO: Fill in
  */
-public class MainTablePane extends AbstractTablePane implements MainTablePaneInterface {
+final public class MainTablePane extends AbstractTablePane implements MainTablePaneInterface {
 
     /****************
      *    Fields    *
