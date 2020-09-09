@@ -4,7 +4,6 @@ import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.FiatCurrencies;
-import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -163,7 +162,7 @@ public class CoinMarketCap extends AbstractJSONCaller {
      * {@inheritDoc}
      */
     @Override
-    protected double extractPrice(@NotNull final JSONObject jsonObject) {
+    protected double extractPrice(final JSONObject jsonObject) {
         final JSONObject data = (JSONObject) jsonObject.get("data");
 
         if (data == null) return -1; // TODO: Throw an error
