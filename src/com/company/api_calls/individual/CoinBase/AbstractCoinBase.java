@@ -99,6 +99,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
         {
             if (currency.equals(cryptoCurrency)) return true;
         }//end for
+        
         return false;
     }//end canUseCryptoCurrency()
 
