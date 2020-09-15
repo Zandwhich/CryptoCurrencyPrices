@@ -59,6 +59,16 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     public final static boolean DEFAULT_VISIBILITY = true;
 
+    /**
+     * The text to display above the fiat currency dropdown
+     */
+    public final static String FIAT_DROPDOWN_TEXT = "Fiat Currency";
+
+    /**
+     * The text to display above the cryptocurrency dropdown
+     */
+    public final static String CRYPTO_DROPDOWN_TEXT = "Cryptocurrency";
+
     /* Private */
 
     /**
@@ -138,7 +148,14 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
         this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
+        final JTextField fiat_dropdown_text = new JTextField(MainWindow.FIAT_DROPDOWN_TEXT);
+        fiat_dropdown_text.setEditable(false);
+        final JTextField crypto_dropdown_text = new JTextField(MainWindow.CRYPTO_DROPDOWN_TEXT);
+        crypto_dropdown_text.setEditable(false);
+
+        this.panel.add(fiat_dropdown_text);
         this.panel.add((JComboBox) this.fiatDropdown);
+        this.panel.add(crypto_dropdown_text);
         this.panel.add((JComboBox) this.cryptoDropdown);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
