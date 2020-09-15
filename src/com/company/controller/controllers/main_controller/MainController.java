@@ -58,9 +58,6 @@ final public class MainController extends AbstractController implements MainCont
 
         // TODO: CoinBase added in a bunch of new cryptocurrencies that need to be added in
 
-        // All of the websites we currently have. In the future, we will only add a select amount at a time
-        // TODO: Do the thing above
-
         /* CoinBase */
         websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
         websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));

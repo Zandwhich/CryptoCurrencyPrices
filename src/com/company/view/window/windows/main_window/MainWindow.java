@@ -1,8 +1,11 @@
 package com.company.view.window.windows.main_window;
 
+import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
@@ -40,6 +43,16 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      * The default height of the main window
      */
     public final static int DEFAULT_HEIGHT = 700;
+
+    /**
+     * The default x position of the window
+     */
+    public final static int DEFAULT_X = 155;
+
+    /**
+     * The default y position of the window
+     */
+    public final static int DEFAULT_Y = 58;
 
     /**
      * The default visibility of the main window
@@ -83,7 +96,15 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     private JList<String> websiteNames = new JList<>();
 
+    /**
+     * The dropdown to choose the fiat currency
+     */
     private FiatDropdownInterface fiatDropdown;
+
+    /**
+     * The dropdown to choose the cryptocurrency
+     */
+    private CryptoDropdownInterface cryptoDropdown;
 
     /****************
      * Constructors *
@@ -109,15 +130,16 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        // TODO: Make the x and y coordinates constants
-        super.setLocation(155, 58);
+        super.setLocation(MainWindow.DEFAULT_X, MainWindow.DEFAULT_Y);
 
         this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
+        this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
         this.panel.add((JComboBox) this.fiatDropdown);
+        this.panel.add((JComboBox) this.cryptoDropdown);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add((JScrollPane) this.table);

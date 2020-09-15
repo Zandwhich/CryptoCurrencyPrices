@@ -1631,4 +1631,29 @@ public enum CryptoCurrencies implements Currency {
     public String getAbbreviatedName() {
         return this.abbreviatedName;
     }//end getAbbreviatedName()
+
+    /**
+     * Returns the Cryptocurrencies enum into an array
+     * @return The Cryptocurrencies enum in an array
+     */
+    public static String[] toStringArray() {
+        String[] array = new String[CryptoCurrencies.values().length];
+        for (int i = 0; i < CryptoCurrencies.values().length; i++) {
+            array[i] = CryptoCurrencies.values()[i].toString();
+        }//end for
+        return array;
+    }//end toStringArray()
+
+    /**
+     * Returns the equivalent Cryptocurrency enum value for a given string;
+     * Returns null if it doesn't match any
+     * @param cryptocurrency The given string
+     * @return The Cryptocurrency enum value
+     */
+    public static CryptoCurrencies toCryptoCurrency(String cryptocurrency) {
+        for (CryptoCurrencies currency : CryptoCurrencies.values())  {
+            if (cryptocurrency.equals(currency.toString())) return currency;
+        }//end for
+        return null;
+    }//end toFiatCurrency()
 }//end CryptoCurrencies
