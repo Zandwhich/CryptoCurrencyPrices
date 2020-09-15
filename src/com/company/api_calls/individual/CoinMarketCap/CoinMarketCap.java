@@ -9,7 +9,7 @@ import json_simple.JSONObject;
 /**
  * TODO: Fill in
  */
-public class CoinMarketCap extends AbstractJSONCaller {
+final public class CoinMarketCap extends AbstractJSONCaller {
 
     /* ************ *
      *  Constants   *

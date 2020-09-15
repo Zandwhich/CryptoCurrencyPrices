@@ -7,7 +7,7 @@ import com.company.view.combo_box.AbstractJComboBox;
 /**
  * TODO: Fill in
  */
-public class FiatDropdownJComboBox extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
+final public class FiatDropdownJComboBox extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
 
     /****************
      *    Fields    *

@@ -57,9 +57,6 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            /* TODO: Figure out if overriding onClick actually works as expected in this case (also if I can construct
-             * it at the super-class level or if it needs to be done at the sub-class level)
-             */
 
             onClick(e);
         }//end actionPerformed()
