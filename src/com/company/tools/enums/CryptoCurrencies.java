@@ -1631,4 +1631,51 @@ public enum CryptoCurrencies implements Currency {
     public String getAbbreviatedName() {
         return this.abbreviatedName;
     }//end getAbbreviatedName()
+
+    /**
+     * Returns the Cryptocurrencies enum into an array
+     * @return The Cryptocurrencies enum in an array
+     */
+    public static String[] toStringArray() {
+        String[] array = new String[CryptoCurrencies.values().length];
+        for (int i = 0; i < CryptoCurrencies.values().length; i++) {
+            array[i] = CryptoCurrencies.values()[i].toString();
+        }//end for
+        return array;
+    }//end toStringArray()
+
+    /**
+     * Returns the equivalent Cryptocurrency enum value for a given string;
+     * Returns null if it doesn't match any
+     * @param cryptocurrency The given string
+     * @return The Cryptocurrency enum value
+     */
+    public static CryptoCurrencies toCryptoCurrency(String cryptocurrency) {
+        for (CryptoCurrencies currency : CryptoCurrencies.values())  {
+            if (cryptocurrency.equals(currency.toString())) return currency;
+        }//end for
+        return null;
+    }//end toFiatCurrency()
+
+    /**
+     * Returns the index of the given cryptocurrency as a String from the String array
+     * @param cryptocurrency The given cryptocurrency as a String
+     * @return The index in the String array
+     */
+    public static int indexOf(final String cryptocurrency) {
+        final String[] array = CryptoCurrencies.toStringArray();
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(cryptocurrency)) return i;
+        }//end for
+        return -1;
+    }//end indexOf()
+
+    /**
+     * Returns the index of the given cryptocurrency from the String array
+     * @param cryptocurrency The given cryptocurrency
+     * @return The index in the String array
+     */
+    public static int indexOf(final CryptoCurrencies cryptocurrency) {
+        return CryptoCurrencies.indexOf(cryptocurrency.abbreviatedName);
+    }//end indexOf()
 }//end CryptoCurrencies

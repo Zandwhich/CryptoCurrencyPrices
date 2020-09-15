@@ -56,36 +56,17 @@ final public class MainController extends AbstractController implements MainCont
      */
     public MainController() {
 
-        // TODO: CoinBase added in a bunch of new cryptocurrencies that need to be added in
-
-        // All of the websites we currently have. In the future, we will only add a select amount at a time
-        // TODO: Do the thing above
-
         /* CoinBase */
-        // Buy
-        websiteList.add(new CoinBaseBuy(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseBuy(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseBuy(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
-        // Sell
-        websiteList.add(new CoinBaseSell(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseSell(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseSell(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
-        // Spot
-        websiteList.add(new CoinBaseSpot(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseSpot(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
-        websiteList.add(new CoinBaseSpot(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
-
+        websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+        websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+        websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
 
         /* CoinMarketCap */
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.BTC, FiatCurrencies.USD, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.ETH, FiatCurrencies.USD, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.LTC, FiatCurrencies.USD, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.XRP, FiatCurrencies.USD, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.BTC, FiatCurrencies.EUR, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.ETH, FiatCurrencies.EUR, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.LTC, FiatCurrencies.EUR, this));
-        websiteList.add(new CoinMarketCap(CryptoCurrencies.XRP, FiatCurrencies.EUR, this));
+        websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
 
+        this.refresh();
+
+        this.mainWindow.updateDropdowns();
     }//end MainController()
 
     /****************
@@ -94,10 +75,11 @@ final public class MainController extends AbstractController implements MainCont
 
     /* Private */
 
-    private void updateWebsiteFiat()
-    {
+    /**
+     * Changes the fiat currency that is being used in each of the endpoints
+     */
+    private void updateWebsiteFiat() {
         // For now, delete all of the websites and recreate them with the new fiat currencies
-        // TODO: First check if the fiat currency can be put in, then if it can be simply change it, otherwise delete the object
         this.websiteList.clear();
 
         /* CoinBase */
@@ -117,6 +99,30 @@ final public class MainController extends AbstractController implements MainCont
         this.refresh();
     }//end updateWebsiteFiat()
 
+    /**
+     * Changes the cryptocurrency that is begin used in each of the endpoints
+     */
+    private void updateWebsitesCrypto() {
+        // For now, delete all of the websites and recreate them with the new cryptocurrency
+        this.websiteList.clear();
+
+        /* CoinBase */
+        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto))
+        {
+            this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+            this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+            this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        }//end if CoinBase
+
+        /* CoinMarketCap */
+        if (CoinMarketCap.canUseCryptoCurrency(this.currentCrypto))
+        {
+            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        }//end if CoinMarketCap
+
+        this.refresh();
+    }//end updateWebsitesCrypto()
+
     /* Public */
 
     // Getters
@@ -129,13 +135,20 @@ final public class MainController extends AbstractController implements MainCont
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
 
     /**
-     * Returns the current fiat currency selected
-     * @return The current fiat currency selected
+     * {@inheritDoc}
      */
     @Override
     public FiatCurrencies getCurrentFiat() {
         return this.currentFiat;
     }//end getCurrentFiat()
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CryptoCurrencies getCurrentCrypto() {
+        return this.currentCrypto;
+    }//end getCurrentCrypto()
 
     // Other
 
@@ -218,5 +231,14 @@ final public class MainController extends AbstractController implements MainCont
     public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
         this.updateWebsiteFiat();
-    }//end updateFiatCurrency
+    }//end updateFiatCurrency()
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateCryptocurrency(final CryptoCurrencies cryptoCurrency) {
+        this.currentCrypto = cryptoCurrency;
+        this.updateWebsitesCrypto();
+    }//end updateCryptocurrency()
 }//end MainController

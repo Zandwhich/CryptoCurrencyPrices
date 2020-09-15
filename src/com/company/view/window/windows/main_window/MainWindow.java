@@ -1,8 +1,11 @@
 package com.company.view.window.windows.main_window;
 
+import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
@@ -42,9 +45,29 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     public final static int DEFAULT_HEIGHT = 700;
 
     /**
+     * The default x position of the window
+     */
+    public final static int DEFAULT_X = 155;
+
+    /**
+     * The default y position of the window
+     */
+    public final static int DEFAULT_Y = 58;
+
+    /**
      * The default visibility of the main window
      */
     public final static boolean DEFAULT_VISIBILITY = true;
+
+    /**
+     * The text to display above the fiat currency dropdown
+     */
+    public final static String FIAT_DROPDOWN_TEXT = "Fiat Currency";
+
+    /**
+     * The text to display above the cryptocurrency dropdown
+     */
+    public final static String CRYPTO_DROPDOWN_TEXT = "Cryptocurrency";
 
     /* Private */
 
@@ -83,7 +106,15 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     private JList<String> websiteNames = new JList<>();
 
-    private FiatDropdownInterface fiatDropdown;
+    /**
+     * The dropdown to choose the fiat currency
+     */
+    private FiatDropdownJComboBox fiatDropdown;
+
+    /**
+     * The dropdown to choose the cryptocurrency
+     */
+    private CryptoDropdownJComboBox cryptoDropdown;
 
     /****************
      * Constructors *
@@ -109,22 +140,30 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        // TODO: Make the x and y coordinates constants
-        super.setLocation(155, 58);
+        super.setLocation(MainWindow.DEFAULT_X, MainWindow.DEFAULT_Y);
 
         this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainTablePane(this.data);
         this.refreshButton = new RefreshButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
+        this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
-        this.panel.add((JComboBox) this.fiatDropdown);
+        final JTextField fiat_dropdown_text = new JTextField(MainWindow.FIAT_DROPDOWN_TEXT);
+        fiat_dropdown_text.setEditable(false);
+        final JTextField crypto_dropdown_text = new JTextField(MainWindow.CRYPTO_DROPDOWN_TEXT);
+        crypto_dropdown_text.setEditable(false);
+
+        this.panel.add(fiat_dropdown_text);
+        this.panel.add(this.fiatDropdown);
+        this.panel.add(crypto_dropdown_text);
+        this.panel.add(this.cryptoDropdown);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
         this.updatePrices();
-        this.setVisible(true);
+        this.setVisible(MainWindow.DEFAULT_VISIBILITY);
 
         // TODO: Add text/labels to the window
     }//end setup()
@@ -132,6 +171,15 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     /* Protected */
 
     /* Public */
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateDropdowns() {
+        this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
+        this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
+    }//end updateDropdowns()
 
     /**
      * TODO: Fill this in
