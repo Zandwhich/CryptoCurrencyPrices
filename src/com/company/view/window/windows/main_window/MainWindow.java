@@ -109,12 +109,12 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     /**
      * The dropdown to choose the fiat currency
      */
-    private FiatDropdownInterface fiatDropdown;
+    private FiatDropdownJComboBox fiatDropdown;
 
     /**
      * The dropdown to choose the cryptocurrency
      */
-    private CryptoDropdownInterface cryptoDropdown;
+    private CryptoDropdownJComboBox cryptoDropdown;
 
     /****************
      * Constructors *
@@ -154,16 +154,16 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         crypto_dropdown_text.setEditable(false);
 
         this.panel.add(fiat_dropdown_text);
-        this.panel.add((JComboBox) this.fiatDropdown);
+        this.panel.add(this.fiatDropdown);
         this.panel.add(crypto_dropdown_text);
-        this.panel.add((JComboBox) this.cryptoDropdown);
+        this.panel.add(this.cryptoDropdown);
         // TODO: Figure out how to resize the image
         this.panel.add((JButton) this.refreshButton);
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
         this.updatePrices();
-        this.setVisible(true);
+        this.setVisible(MainWindow.DEFAULT_VISIBILITY);
 
         // TODO: Add text/labels to the window
     }//end setup()
@@ -171,6 +171,15 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     /* Protected */
 
     /* Public */
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateDropdowns() {
+        this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
+        this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
+    }//end updateDropdowns()
 
     /**
      * TODO: Fill this in

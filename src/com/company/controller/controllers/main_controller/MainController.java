@@ -56,8 +56,6 @@ final public class MainController extends AbstractController implements MainCont
      */
     public MainController() {
 
-        // TODO: CoinBase added in a bunch of new cryptocurrencies that need to be added in
-
         /* CoinBase */
         websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
         websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
@@ -68,6 +66,7 @@ final public class MainController extends AbstractController implements MainCont
 
         this.refresh();
 
+        this.mainWindow.updateDropdowns();
     }//end MainController()
 
     /****************
@@ -136,13 +135,20 @@ final public class MainController extends AbstractController implements MainCont
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
 
     /**
-     * Returns the current fiat currency selected
-     * @return The current fiat currency selected
+     * {@inheritDoc}
      */
     @Override
     public FiatCurrencies getCurrentFiat() {
         return this.currentFiat;
     }//end getCurrentFiat()
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CryptoCurrencies getCurrentCrypto() {
+        return this.currentCrypto;
+    }//end getCurrentCrypto()
 
     // Other
 

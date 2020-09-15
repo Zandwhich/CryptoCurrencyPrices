@@ -351,4 +351,28 @@ public enum FiatCurrencies implements Currency {
         }//end for
         return null;
     }//end toFiatCurrency()
+
+    /**
+     * Returns the index of the given fiat currency as a String from the String array
+     * @param fiatCurrency The given fiat currency as a String
+     * @return The index in the String array
+     */
+    public static int indexOf(final String fiatCurrency) {
+        final String[] array = FiatCurrencies.toStringArray();
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Comparing " + fiatCurrency + " and " + array[i]);
+            if (array[i].equals(fiatCurrency)) return i;
+        }//end for
+        System.out.println("Returning -1");
+        return -1;
+    }//end indexOf()
+
+    /**
+     * Returns the index of the given fiat currency from the String array
+     * @param fiatCurrency The given fiat currency
+     * @return The index in the String array
+     */
+    public static int indexOf(final FiatCurrencies fiatCurrency) {
+        return FiatCurrencies.indexOf(fiatCurrency.abbreviatedName);
+    }//end indexOf()
 }//end FiatCurrencies

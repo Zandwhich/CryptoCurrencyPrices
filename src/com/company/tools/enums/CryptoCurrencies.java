@@ -1656,4 +1656,26 @@ public enum CryptoCurrencies implements Currency {
         }//end for
         return null;
     }//end toFiatCurrency()
+
+    /**
+     * Returns the index of the given cryptocurrency as a String from the String array
+     * @param cryptocurrency The given cryptocurrency as a String
+     * @return The index in the String array
+     */
+    public static int indexOf(final String cryptocurrency) {
+        final String[] array = CryptoCurrencies.toStringArray();
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(cryptocurrency)) return i;
+        }//end for
+        return -1;
+    }//end indexOf()
+
+    /**
+     * Returns the index of the given cryptocurrency from the String array
+     * @param cryptocurrency The given cryptocurrency
+     * @return The index in the String array
+     */
+    public static int indexOf(final CryptoCurrencies cryptocurrency) {
+        return CryptoCurrencies.indexOf(cryptocurrency.abbreviatedName);
+    }//end indexOf()
 }//end CryptoCurrencies

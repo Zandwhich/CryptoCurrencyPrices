@@ -23,7 +23,17 @@ public interface MainControllerInterface extends ControllerInterface {
      */
     public abstract ArrayList<APICallerInterface> getWebsiteList();
 
+    /**
+     * Returns the current fiat currency selected
+     * @return The current fiat currency selected
+     */
     public abstract FiatCurrencies getCurrentFiat();
+
+    /**
+     * Returns the current cryptocurrency selected
+     * @return The current cryptocurrency selected
+     */
+    public abstract CryptoCurrencies getCurrentCrypto();
 
     /**
      * Updates the currently selected fiatCurrencyPrice
@@ -36,5 +46,4 @@ public interface MainControllerInterface extends ControllerInterface {
      * @param cryptoCurrency The cryptocurrency to be passed in
      */
     public abstract void updateCryptocurrency(CryptoCurrencies cryptoCurrency);
-
 }//end MainControllerInterface
