@@ -50,7 +50,7 @@ final public class CoinCap extends AbstractJSONCaller {
     public CoinCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                    final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName(),  controller);
+                CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
     }//end AbstractCoinCap()
 
     /****************
@@ -106,10 +106,12 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
+        System.out.println(super.getUrl().toString());
+        System.out.println(jsonObject.toJSONString());
         final JSONObject data = (JSONObject) jsonObject.get("data");
         if (data == null) return -1;
 
-        return (double) data.get("rateUsd");
+        return Double.parseDouble((String) data.get("rateUsd"));
     }//end extractPrice()
 
 }//end AbstractCoinCap
