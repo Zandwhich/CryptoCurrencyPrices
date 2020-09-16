@@ -1,7 +1,6 @@
 package com.company.api_calls.individual.CoinCap;
 
 import com.company.api_calls.AbstractJSONCaller;
-import com.company.api_calls.individual.CoinBase.AbstractCoinBase;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.FiatCurrencies;
@@ -71,9 +70,9 @@ final public class CoinCap extends AbstractJSONCaller {
     // Others
 
     /**
-     * Returns if the given fiat currency can be used with CoinBase
+     * Returns if the given fiat currency can be used with CoinCap
      * @param fiatCurrency The given fiat currency
-     * @return If the given fiat currency can be used with CoinBase
+     * @return If the given fiat currency can be used with CoinCap
      */
     public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
@@ -81,13 +80,14 @@ final public class CoinCap extends AbstractJSONCaller {
         {
             if (currency.equals(fiatCurrency)) return true;
         }//end for
+
         return false;
     }//end canUseFiatCurrency()
 
     /**
-     * Returns if the given cryptocurrency can be used with CoinBase
+     * Returns if the given cryptocurrency can be used with CoinCap
      * @param cryptoCurrency The given cryptocurrency
-     * @return If the given cryptocurrency can be used with CoinBase
+     * @return If the given cryptocurrency can be used with CoinCap
      */
     public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
@@ -106,12 +106,10 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
-        System.out.println(super.getUrl().toString());
-        System.out.println(jsonObject.toJSONString());
         final JSONObject data = (JSONObject) jsonObject.get("data");
         if (data == null) return -1;
 
         return Double.parseDouble((String) data.get("rateUsd"));
     }//end extractPrice()
 
-}//end AbstractCoinCap
+}//end CoinCap
