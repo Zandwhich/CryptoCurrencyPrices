@@ -6,6 +6,6 @@ package com.company.api_calls.individual.ShapeShift;
 final public class ShapeShift {
 
     // This class exchanges crypto/crypto, and not fiat/crypto...
-    //  not going to implement it
+    //  not going to implement it (at least for now)
 
 }//end ShapeShift
