@@ -9,6 +9,7 @@ import com.company.api_calls.individual.CoinBase.CoinBaseSell;
 import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
 import com.company.api_calls.individual.CoinCap.CoinCap;
 import com.company.api_calls.individual.CoinMarketCap.CoinMarketCap;
+import com.company.api_calls.individual.CryptoCompare.CryptoCompare;
 import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.Errors;
 import com.company.tools.enums.FiatCurrencies;
@@ -73,6 +74,12 @@ final public class MainController extends AbstractController implements MainCont
             websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
         }
 
+        /* CryptoCompare */
+        if (CryptoCompare.canUseCryptoCurrency(this.currentCrypto) &&
+                CryptoCompare.canUseFiatCurrency(this.currentFiat)) {
+            websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        }
+
         this.refresh();
 
         // Get the dropdown to display the default currencies
@@ -86,9 +93,10 @@ final public class MainController extends AbstractController implements MainCont
     /* Private */
 
     /**
-     * Changes the fiat currency that is being used in each of the endpoints
+     * Because the logic for changing either cryptocurrency or fiat currency is the same, have one method
+     * that both methods call
      */
-    private void updateWebsiteFiat() {
+    private void updateChangedCurrency() {
         // For now, delete all of the websites and recreate them with the new fiat currencies
         this.websiteList.clear();
 
@@ -109,38 +117,29 @@ final public class MainController extends AbstractController implements MainCont
         /* CoinCap */
         if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
             this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        }
+        }//end if CoinCap
+
+        /* CryptoCompare */
+        if (CryptoCompare.canUseFiatCurrency(this.currentFiat) &&
+                CryptoCompare.canUseCryptoCurrency(this.currentCrypto)) {
+            this.websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        }//end if CryptoCompare
 
         this.refresh();
+    }// updateChangedCurrency()
+
+    /**
+     * Changes the fiat currency that is being used in each of the endpoints
+     */
+    private void updateWebsiteFiat() {
+        this.updateChangedCurrency();
     }//end updateWebsiteFiat()
 
     /**
      * Changes the cryptocurrency that is begin used in each of the endpoints
      */
     private void updateWebsitesCrypto() {
-        // For now, delete all of the websites and recreate them with the new cryptocurrency
-        this.websiteList.clear();
-
-        /* CoinBase */
-        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto) &&
-                AbstractCoinBase.canUseFiatCurrency(this.currentFiat)) {
-            this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        }//end if CoinBase
-
-        /* CoinMarketCap */
-//        if (CoinMarketCap.canUseCryptoCurrency(this.currentCrypto))
-//        {
-//            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-//        }//end if CoinMarketCap
-
-        /* CoinCap */
-        if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
-            this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        }
-
-        this.refresh();
+        this.updateChangedCurrency();
     }//end updateWebsitesCrypto()
 
     /* Public */
