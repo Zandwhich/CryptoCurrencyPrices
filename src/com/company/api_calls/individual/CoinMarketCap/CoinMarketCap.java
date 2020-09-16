@@ -7,7 +7,8 @@ import com.company.tools.enums.FiatCurrencies;
 import json_simple.JSONObject;
 
 /**
- * TODO: Fill in
+ * The API endpoint for CoinMarketCap
+ * TODO: Get this to work? Idk if I'll ever get around to this...
  */
 final public class CoinMarketCap extends AbstractJSONCaller {
 
@@ -18,7 +19,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
     /**
      * The base URL for CoinMarketCap requests
      */
-    private final static String BASE_URL = "https://api.coinmarketcap.com/v2/ticker/";
+    private final static String BASE_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
 
     /**
      * The base name for CoinMarketCap requests
@@ -38,33 +39,6 @@ final public class CoinMarketCap extends AbstractJSONCaller {
             FiatCurrencies.EUR, FiatCurrencies.GBP, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD,
             FiatCurrencies.PLN, FiatCurrencies.SEK, FiatCurrencies.USD};
 
-    /**
-     * The number that CoinMarketCap uses for BTC in its URLs
-     */
-    private static final String BTC_NUMBER = "1";
-
-    /**
-     * The number that CoinMarketCap uses for ETH in its URLs
-     */
-    private static final String ETH_NUMBER = "1027";
-
-    /**
-     * The number that CoinMarketCap uses for LTC in its URLs
-     */
-    private static final String LTC_NUMBER = "2";
-
-    /**
-     * The number that CoinMarketCap uses for XRP in its URLs
-     */
-    private static final String XRP_NUMBER = "57";
-
-
-    /****************
-     *    Fields    *
-     ****************/
-
-    private String cryptoNumber;
-
 
     /****************
      * Constructors *
@@ -82,10 +56,9 @@ final public class CoinMarketCap extends AbstractJSONCaller {
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinMarketCap.BASE_NAME + ": " + cryptoCurrency.getAbbreviatedName() + "/" +
                         fiatCurrency.getAbbreviatedName(),
-                CoinMarketCap.BASE_URL + convertCryptoCurrency(cryptoCurrency) + "/?convert=" +
-                        fiatCurrency.getAbbreviatedName(),
+                CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
+                        "&convert=" + fiatCurrency.getAbbreviatedName(),
                 controller);
-        this.cryptoNumber = convertCryptoCurrency(cryptoCurrency);
     }//end AbstractCoinMarketCap()
 
     /****************
@@ -105,30 +78,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
     // Other
 
     /**
-     * Converts the given cryptocurrency into the respective CoinMarketCap specified number
-     * @param cryptoCurrency The cryptocurrency
-     * @return The CoinMarketCap specified number
-     */
-    public static String convertCryptoCurrency(final CryptoCurrencies cryptoCurrency)
-    {
-        switch (cryptoCurrency) {
-            case BTC:
-                return CoinMarketCap.BTC_NUMBER;
-            case ETH:
-                return CoinMarketCap.ETH_NUMBER;
-            case LTC:
-                return CoinMarketCap.LTC_NUMBER;
-            case XRP:
-                return CoinMarketCap.XRP_NUMBER;
-            default:
-                // TODO: Throw an error that gets caught internally and simply doesn't display anything
-                return "";
-        }//end switch
-    }//end convertCryptoCurrency()
-
-    /**
      * Returns if the given fiat currency can be used with CoinMarketCap
-     * TODO: Make this static somehow
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinMarketCap
      */
@@ -143,7 +93,6 @@ final public class CoinMarketCap extends AbstractJSONCaller {
 
     /**
      * Returns if the given cryptocurrency can be used with CoinMarketCap
-     * TODO: Make this static somehow
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinMarketCap
      */
