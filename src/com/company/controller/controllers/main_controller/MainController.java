@@ -7,6 +7,7 @@ import com.company.api_calls.individual.CoinBase.AbstractCoinBase;
 import com.company.api_calls.individual.CoinBase.CoinBaseBuy;
 import com.company.api_calls.individual.CoinBase.CoinBaseSell;
 import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
+import com.company.api_calls.individual.CoinCap.CoinCap;
 import com.company.api_calls.individual.CoinMarketCap.CoinMarketCap;
 import com.company.tools.enums.CryptoCurrencies;
 import com.company.tools.enums.Errors;
@@ -57,15 +58,24 @@ final public class MainController extends AbstractController implements MainCont
     public MainController() {
 
         /* CoinBase */
-        websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-        websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-        websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto) &&
+                AbstractCoinBase.canUseFiatCurrency(this.currentFiat)) {
+            websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+            websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+            websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        }
 
         /* CoinMarketCap */
-        websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        //websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+
+        /* CoinCap */
+        if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
+            websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        }
 
         this.refresh();
 
+        // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns();
     }//end MainController()
 
@@ -83,18 +93,23 @@ final public class MainController extends AbstractController implements MainCont
         this.websiteList.clear();
 
         /* CoinBase */
-        if (AbstractCoinBase.canUseFiatCurrency(this.currentFiat))
-        {
+        if (AbstractCoinBase.canUseFiatCurrency(this.currentFiat) &&
+                AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto)) {
             this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
         }//end if CoinBase
 
         /* CoinMarketCap */
-        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
-        {
-            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-        }//end if CoinMarketCap
+//        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
+//        {
+//            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+//        }//end if CoinMarketCap
+
+        /* CoinCap */
+        if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
+            this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        }
 
         this.refresh();
     }//end updateWebsiteFiat()
@@ -107,18 +122,23 @@ final public class MainController extends AbstractController implements MainCont
         this.websiteList.clear();
 
         /* CoinBase */
-        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto))
-        {
+        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto) &&
+                AbstractCoinBase.canUseFiatCurrency(this.currentFiat)) {
             this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
         }//end if CoinBase
 
         /* CoinMarketCap */
-        if (CoinMarketCap.canUseCryptoCurrency(this.currentCrypto))
-        {
-            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-        }//end if CoinMarketCap
+//        if (CoinMarketCap.canUseCryptoCurrency(this.currentCrypto))
+//        {
+//            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+//        }//end if CoinMarketCap
+
+        /* CoinCap */
+        if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
+            this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        }
 
         this.refresh();
     }//end updateWebsitesCrypto()

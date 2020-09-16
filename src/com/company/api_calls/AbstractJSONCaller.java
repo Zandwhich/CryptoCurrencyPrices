@@ -88,6 +88,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         catch (IOException e) {
             // openConnection() failed
             super.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
+            e.printStackTrace();
 
             jsonObject = null;
         }//end catch IOException

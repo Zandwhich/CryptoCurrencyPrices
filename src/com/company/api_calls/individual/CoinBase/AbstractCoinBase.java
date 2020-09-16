@@ -74,7 +74,6 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
     /**
      * Returns if the given fiat currency can be used with CoinBase
-     * TODO: Make this static somehow
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinBase
      */
@@ -89,7 +88,6 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
 
     /**
      * Returns if the given cryptocurrency can be used with CoinBase
-     * TODO: Make this static somehow
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinBase
      */
