@@ -111,9 +111,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
      */
     @Override
     protected double getNewPrice() {
-        // TODO: Make sure this logic is sound
-
-        JSONObject response = getRequestCall();
+        final JSONObject response = this.getRequestCall();
         if (response == null) return -1;
 
         double extractedPrice = extractPrice(response);

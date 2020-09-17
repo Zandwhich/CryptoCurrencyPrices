@@ -12,6 +12,34 @@ import java.net.URL;
  */
 public abstract class AbstractAPICaller implements APICallerInterface {
 
+
+    /**
+     * The thread to call the endpoint
+     */
+    private class CallThread extends Thread {
+
+        /**
+         * The constructor for the input thread
+         * @param threadName The name of the thread
+         */
+        public CallThread(String threadName) {
+            super(threadName);
+        }//end InputThread()
+
+        /* Methods */
+
+        // Public
+
+        /**
+         * Deals with getting and receiving data from the participant
+         */
+        @Override
+        public void run() {
+            updatePrice();
+        }//end run()
+
+    }//end CallThread()
+
     /****************
      *    Fields    *
      ****************/
@@ -47,6 +75,11 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private URL url;
 
     /**
+     * The thread that will make the endpoint call
+     */
+    private final CallThread callThread;
+
+    /**
      * If the last attempt to update the prices ended in failure
      */
     private boolean hasFailedLastUpdate;
@@ -54,17 +87,17 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The controller that calls this API caller
      */
-    private ControllerInterface controller;
+    private final ControllerInterface controller;
 
     /**
      * The cryptocurrencies that this website can use
      */
-    private CryptoCurrencies[] acceptedCryptoCurrencies;
+    private final CryptoCurrencies[] acceptedCryptoCurrencies;
 
     /**
      * The fiat currencies that this website can use
      */
-    private FiatCurrencies[] acceptedFiatCurrencies;
+    private final FiatCurrencies[] acceptedFiatCurrencies;
 
 
     /****************
@@ -98,10 +131,17 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         }//end try
         catch (MalformedURLException e) {
             // Bad URL inputted
+            e.printStackTrace();
+
+            // Not really sure, but I feel like this should be set to true
+            this.hasFailedLastUpdate = true;
+
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }//end catch(MalformedURLException)
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
+
+        this.callThread = new CallThread(this.name + " Thread");
     }//end AbstractAPICaller()
 
     /****************
@@ -191,8 +231,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * Updates the price
      */
-    @Override
-    public void updatePrice() {
+    private void updatePrice() {
         double newPrice = this.getNewPrice();
         if (newPrice != -1) {
             this.price = newPrice;
@@ -203,6 +242,15 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             this.hasFailedLastUpdate = true;
         }//end else there has not been a new price received successfully
     }//end updatePrice()
+
+    /**
+     * Updates the price and notifies the controller
+     */
+    public void updatePriceAndNotify() {
+        callThread.run();
+        this.updatePrice();
+        this.controller.notifyWindowOfUpdate();
+    }//end updatePriceAndNotify()
 
     /* Protected */
 

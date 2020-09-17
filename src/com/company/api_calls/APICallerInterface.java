@@ -39,7 +39,7 @@ public interface APICallerInterface {
     /**
      * TODO: Fill this out
      */
-    public abstract void updatePrice();
+    public abstract void updatePriceAndNotify();
 
     /**
      * Returns the name of the API endpoint

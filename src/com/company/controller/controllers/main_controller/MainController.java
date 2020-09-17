@@ -199,7 +199,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     public void updatePrices() {
         for (final APICallerInterface website : this.websiteList) {
-            website.updatePrice();
+            website.updatePriceAndNotify();
         }//end for websites
         this.updateViewPrices();
     }//end updatePrices()
@@ -260,4 +260,12 @@ final public class MainController extends AbstractController implements MainCont
         this.currentCrypto = cryptoCurrency;
         this.updateWebsitesCrypto();
     }//end updateCryptocurrency()
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void notifyWindowOfUpdate() {
+        this.updateViewPrices();
+    }//end notifyWindowOfUpdate()
 }//end MainController

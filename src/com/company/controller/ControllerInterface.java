@@ -41,4 +41,9 @@ public interface ControllerInterface {
      */
     public abstract boolean checkConnection();
 
+    /**
+     * The method to call when there is an update to data and the window should be redrawn
+     */
+    public abstract void notifyWindowOfUpdate();
+
 }//end ControllerInterface
