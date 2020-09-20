@@ -32,7 +32,7 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The list of all of the API endpoints
      */
-    private ArrayList<APICallerInterface> websiteList = new ArrayList<>();
+    private final ArrayList<APICallerInterface> websiteList = new ArrayList<>();
 
     /**
      * The currently selected fiat currency
@@ -47,7 +47,7 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The main window of the application
      */
-    private MainWindowInterface mainWindow = new MainWindow(this);
+    private final MainWindowInterface mainWindow = new MainWindow(this);
 
     /****************
      * Constructors *
