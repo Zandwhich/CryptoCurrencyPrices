@@ -247,7 +247,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Updates the price and notifies the controller
      */
     public void updatePriceAndNotify() {
-        callThread.run();
+        callThread.start();
         this.updatePrice();
         this.controller.notifyWindowOfUpdate();
     }//end updatePriceAndNotify()
