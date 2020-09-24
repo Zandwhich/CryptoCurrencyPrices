@@ -77,7 +77,7 @@ final public class MainController extends AbstractController implements MainCont
             websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
         }
 
-        this.refresh();
+        //this.refresh();
 
         // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns();
@@ -180,11 +180,10 @@ final public class MainController extends AbstractController implements MainCont
     }//end run()
 
     /**
-     * Refreshes the controller
+     * {@inheritDoc}
      */
     @Override
     public void refresh() {
-        // TODO: First check if there is a network connection, then attempt to get the prices
         super.checkConnection();
         if (!super.isConnected()) this.errorDisplay(Errors.NETWORK_CONNECTION);
         else this.updatePrices();
@@ -196,9 +195,9 @@ final public class MainController extends AbstractController implements MainCont
      */
     public void updatePrices() {
         for (final APICallerInterface website : this.websiteList) {
-            website.updatePriceAndNotify();
+            new Thread(website::updatePriceAndNotify).start(); // Do this asynchronously
         }//end for websites
-        this.updateViewPrices();
+        //this.updateViewPrices();
     }//end updatePrices()
 
     /**
@@ -208,12 +207,8 @@ final public class MainController extends AbstractController implements MainCont
         this.mainWindow.updatePrices();
     }//end updateViewPrices()
 
-    // TODO: Add in a method that updates the View somehow (Do I still need this?)
-
     /**
-     * Pops up a window that displays an error message
-     * @param error The type of error
-     * @param name The name of who called this error
+     * {@inheritDoc}
      */
     @Override
     public void errorDisplay(final Errors error, final String name) {
@@ -226,8 +221,7 @@ final public class MainController extends AbstractController implements MainCont
     }//end errorDisplay()
 
     /**
-     * Pops up a window that displays an error message
-     * @param error The type of error
+     * {@inheritDoc}
      */
     @Override
     public void errorDisplay(final Errors error) {
@@ -240,8 +234,7 @@ final public class MainController extends AbstractController implements MainCont
     }//end errorDisplay()
 
     /**
-     * Updates the fiat currency to the one passed in
-     * @param fiatCurrency The new fiat currency
+     * {@inheritDoc}
      */
     @Override
     public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {

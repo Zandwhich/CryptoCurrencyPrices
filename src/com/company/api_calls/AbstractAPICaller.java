@@ -12,34 +12,6 @@ import java.net.URL;
  */
 public abstract class AbstractAPICaller implements APICallerInterface {
 
-
-    /**
-     * The thread to call the endpoint
-     */
-    private class CallThread extends Thread {
-
-        /**
-         * The constructor for the input thread
-         * @param threadName The name of the thread
-         */
-        public CallThread(String threadName) {
-            super(threadName);
-        }//end InputThread()
-
-        /* Methods */
-
-        // Public
-
-        /**
-         * Deals with getting and receiving data from the participant
-         */
-        @Override
-        public void run() {
-            updatePrice();
-        }//end run()
-
-    }//end CallThread()
-
     /****************
      *    Fields    *
      ****************/
@@ -73,11 +45,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * The url to hit
      */
     private URL url;
-
-    /**
-     * The thread that will make the endpoint call
-     */
-    private final CallThread callThread;
 
     /**
      * If the last attempt to update the prices ended in failure
@@ -140,8 +107,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         }//end catch(MalformedURLException)
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
-
-        this.callThread = new CallThread(this.name + " Thread");
+        
     }//end AbstractAPICaller()
 
     /****************
@@ -247,7 +213,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Updates the price and notifies the controller
      */
     public void updatePriceAndNotify() {
-        callThread.start();
         this.updatePrice();
         this.controller.notifyWindowOfUpdate();
     }//end updatePriceAndNotify()
