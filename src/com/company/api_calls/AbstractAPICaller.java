@@ -177,7 +177,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public ControllerInterface getController() { return this.controller; }//end getController()
 
     /**
-     * Retruns the accepted cryptocurrencies
+     * Returns the accepted cryptocurrencies
      * @return The accepted cryptocurrencies
      */
     public CryptoCurrencies[] getAcceptedCryptoCurrencies() {
