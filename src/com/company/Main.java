@@ -5,7 +5,7 @@ import com.company.controller.controllers.main_controller.MainController;
 /**
  * The main class which launches the application
  */
-public class Main {
+public final class Main {
 
     /**
      * The main method which launches the application
