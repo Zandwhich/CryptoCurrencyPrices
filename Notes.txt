@@ -1,0 +1,2 @@
+To look at when I redo the code base:
+https://intellij-support.jetbrains.com/hc/en-us/community/posts/207078375-How-to-include-resource-files-in-the-jar-
