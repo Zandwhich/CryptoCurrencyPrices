@@ -2,7 +2,6 @@ package com.company.api_calls.individual.CoinMarketCap;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
-import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -59,7 +58,7 @@ public abstract class AbstractCoinMarketCap extends AbstractJSONCaller {
      * @return
      */
     @Override
-    protected double extractPrice(@NotNull final JSONObject jsonObject) {
+    protected double extractPrice(final JSONObject jsonObject) {
         JSONObject data = (JSONObject) jsonObject.get("data");
 
         if (data == null) return -1;

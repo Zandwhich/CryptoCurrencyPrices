@@ -2,7 +2,6 @@ package com.company.api_calls.individual.CoinCap;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
-import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -71,6 +70,6 @@ public abstract class AbstractCoinCap extends AbstractJSONCaller {
      * @param jsonObject
      * @return
      */
-    protected abstract double extractFiat(@NotNull final JSONObject jsonObject);
+    protected abstract double extractFiat(final JSONObject jsonObject);
 
 }//end AbstractCoinCap

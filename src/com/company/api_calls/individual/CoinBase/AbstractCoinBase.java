@@ -2,7 +2,6 @@ package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
-import com.sun.istack.internal.NotNull;
 import json_simple.JSONObject;
 
 /**
@@ -58,7 +57,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @return The price from the JSON object
      */
     @Override
-    protected double extractPrice(@NotNull final JSONObject jsonObject) {
+    protected double extractPrice(final JSONObject jsonObject) {
         JSONObject data = (JSONObject) jsonObject.get("data");
 
         if (data == null || !data.containsKey("amount")) return -1;

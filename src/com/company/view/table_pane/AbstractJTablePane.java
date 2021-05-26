@@ -1,7 +1,6 @@
 package com.company.view.table_pane;
 
 import com.company.controller.ControllerInterface;
-import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -110,7 +109,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * Updates the internal columns of the JTable by creating a new TableModel
      * @param columns The columns as a vector of strings
      */
-    private void updateColumns(@NotNull Vector<String> columns) {
+    private void updateColumns(Vector<String> columns) {
         DefaultTableModel tableModel = new DefaultTableModel();
         for (String column : columns) {
             tableModel.addColumn(column);
