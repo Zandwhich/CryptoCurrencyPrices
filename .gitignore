@@ -20,3 +20,4 @@
 # ...but ignore these specific folders:
 out/
 venv/
+.idea/
