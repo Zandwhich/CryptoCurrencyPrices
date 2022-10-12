@@ -1,8 +1,8 @@
 package com.company.api_calls.individual.CoinBase;
 
 import com.company.controller.ControllerInterface;
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 
 /**
  * The implementation for the sell endpoint for CoinBase

@@ -1,7 +1,7 @@
 package com.company.api_calls;
 
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 
 import java.net.URL;
 
@@ -37,7 +37,7 @@ public interface APICallerInterface {
     boolean getHasPrice();
 
     /**
-     * TODO: Fill this out
+     * Updates the price and notifies the controller
      */
     void updatePriceAndNotify();
 

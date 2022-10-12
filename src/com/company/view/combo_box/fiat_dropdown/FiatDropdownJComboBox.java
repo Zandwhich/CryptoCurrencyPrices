@@ -1,6 +1,6 @@
 package com.company.view.combo_box.fiat_dropdown;
 
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.combo_box.AbstractJComboBox;
 

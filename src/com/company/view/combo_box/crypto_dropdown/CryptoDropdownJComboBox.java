@@ -1,8 +1,7 @@
 package com.company.view.combo_box.crypto_dropdown;
 
 import com.company.controller.controllers.main_controller.MainControllerInterface;
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.view.combo_box.AbstractJComboBox;
 
 /**
