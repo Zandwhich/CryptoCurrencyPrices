@@ -9,6 +9,6 @@ public interface ComboBoxInterface<T> {
      * Returns the currently selected item
      * @return The currently selected item
      */
-    public abstract T getSelectedItem();
+    T getSelectedItem();
 
 }
