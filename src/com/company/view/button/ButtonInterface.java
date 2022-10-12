@@ -1,7 +1,7 @@
 package com.company.view.button;
 
 /**
- * TODO: Fill this out
+ * The generic interfaces that all buttons inherit
  */
 public interface ButtonInterface {
 

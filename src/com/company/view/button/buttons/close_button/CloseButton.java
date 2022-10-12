@@ -7,7 +7,7 @@ import com.company.view.window.WindowInterface;
 import java.awt.event.ActionEvent;
 
 /**
- * TODO: Fill in
+ * The button used to close a window
  */
 final public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
 

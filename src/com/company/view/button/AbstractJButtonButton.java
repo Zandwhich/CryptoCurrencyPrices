@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * TODO: Fill this out
+ * The abstract class that all buttons inherit from
  */
 public abstract class AbstractJButtonButton extends JButton implements ButtonInterface {
 
@@ -143,13 +143,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /* Protected */
 
     /**
-     * TODO: Fill this in
-     * @param event TODO: Fill this in
+     * Sets the action to happen when the button is pressed
      */
     protected abstract void onClick(ActionEvent event);
 
     /**
-     * TODO: Fill in
+     * Sets the image of the button
      * @param imagePath The path of the image displayed by the button
      */
     public void setImage(String imagePath) {

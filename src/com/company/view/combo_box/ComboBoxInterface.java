@@ -1,7 +1,7 @@
 package com.company.view.combo_box;
 
 /**
- * TODO: Fill in
+ * The base combo box interface which all extend from
  */
 public interface ComboBoxInterface<T> {
 

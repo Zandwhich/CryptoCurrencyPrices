@@ -3,7 +3,7 @@ package com.company.view.label;
 import javax.swing.*;
 
 /**
- * TODO: Fill this in
+ * The JLabel that all labels extend from
  */
 public abstract class AbstractJLabelLabel extends JLabel implements LabelInterface {
 
@@ -16,8 +16,8 @@ public abstract class AbstractJLabelLabel extends JLabel implements LabelInterfa
      * ************ */
 
     /**
-     * TODO: Fill this in
-     * @param text
+     * The constructor that takes in a text to print on the label
+     * @param text The text to print on the label
      */
     public AbstractJLabelLabel(String text) { super(text); }
 
