@@ -36,4 +36,4 @@ public interface TablePaneInterface {
      */
     public abstract void setData(Vector<Vector<String>> data);
 
-}//end TablePaneInterface
+}

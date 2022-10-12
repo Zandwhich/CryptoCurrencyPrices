@@ -13,6 +13,6 @@ final public class TitleLabel extends AbstractJLabelLabel implements LabelInterf
 
     public TitleLabel() {
         super("Currency");
-    }//end TitleLabel()
+    }
 
-}// end TitleLabel
+}

@@ -17,4 +17,4 @@ public interface ButtonInterface {
      */
     public abstract int getHeight();
 
-}//end ButtonInterface
+}

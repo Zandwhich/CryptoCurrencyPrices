@@ -21,4 +21,4 @@ public interface MainWindowInterface extends WindowInterface {
      * Update the fiat currency and cryptocurrency dropdowns to reflect the current crypto selected
      */
     public abstract void updateDropdowns();
-}//end MainWindowInterface
+}

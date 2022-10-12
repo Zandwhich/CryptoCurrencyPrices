@@ -17,4 +17,4 @@ public interface LabelInterface {
      */
     public abstract void setText(String text);
 
-}//end LabelInterface
+}

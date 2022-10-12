@@ -3,7 +3,7 @@ package com.company.tools.enums;
 import com.company.tools.Currency;
 
 /**
- * An enum that holds all possible cryptocurrencies (received from http://coincap.io/map)
+ * An enum that holds all possible cryptocurrencies (received from <a href="http://coincap.io/map">http://coincap.io/map</a>)
  */
 public enum CryptoCurrencies implements Currency {
 //    A0XBTC,	// 0xBitcoin    (Actually '0XBTC')
@@ -1603,7 +1603,7 @@ public enum CryptoCurrencies implements Currency {
         // XRP
         XRP.fullName = CryptoCurrencies.XRP_FULL_NAME;
         XRP.abbreviatedName = XRP.toString();
-    }//end static initializer
+    }
 
 
     /* ************ */
@@ -1621,7 +1621,7 @@ public enum CryptoCurrencies implements Currency {
     @Override
     public String getFullName() {
         return this.fullName;
-    }// end getFullName()
+    }
 
     /**
      * Returns the abbreviated name of the fiat currency
@@ -1630,7 +1630,7 @@ public enum CryptoCurrencies implements Currency {
     @Override
     public String getAbbreviatedName() {
         return this.abbreviatedName;
-    }//end getAbbreviatedName()
+    }
 
     /**
      * Returns the Cryptocurrencies enum into an array
@@ -1640,9 +1640,9 @@ public enum CryptoCurrencies implements Currency {
         String[] array = new String[CryptoCurrencies.values().length];
         for (int i = 0; i < CryptoCurrencies.values().length; i++) {
             array[i] = CryptoCurrencies.values()[i].toString();
-        }//end for
+        }
         return array;
-    }//end toStringArray()
+    }
 
     /**
      * Returns the equivalent Cryptocurrency enum value for a given string;
@@ -1653,9 +1653,9 @@ public enum CryptoCurrencies implements Currency {
     public static CryptoCurrencies toCryptoCurrency(String cryptocurrency) {
         for (CryptoCurrencies currency : CryptoCurrencies.values())  {
             if (cryptocurrency.equals(currency.toString())) return currency;
-        }//end for
+        }
         return null;
-    }//end toFiatCurrency()
+    }
 
     /**
      * Returns the index of the given cryptocurrency as a String from the String array
@@ -1666,9 +1666,9 @@ public enum CryptoCurrencies implements Currency {
         final String[] array = CryptoCurrencies.toStringArray();
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(cryptocurrency)) return i;
-        }//end for
+        }
         return -1;
-    }//end indexOf()
+    }
 
     /**
      * Returns the index of the given cryptocurrency from the String array
@@ -1677,5 +1677,5 @@ public enum CryptoCurrencies implements Currency {
      */
     public static int indexOf(final CryptoCurrencies cryptocurrency) {
         return CryptoCurrencies.indexOf(cryptocurrency.abbreviatedName);
-    }//end indexOf()
-}//end CryptoCurrencies
+    }
+}

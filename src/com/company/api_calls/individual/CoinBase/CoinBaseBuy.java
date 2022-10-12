@@ -41,7 +41,7 @@ final public class CoinBaseBuy extends AbstractCoinBase {
         super(cryptoCurrency, fiatCurrency, "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT,
                 controller);
-    }//end CoinBaseBuy()
+    }
 
 
     /* ************ *
@@ -52,4 +52,4 @@ final public class CoinBaseBuy extends AbstractCoinBase {
 
     // Getters
 
-}//end CoinBaseBuy
+}

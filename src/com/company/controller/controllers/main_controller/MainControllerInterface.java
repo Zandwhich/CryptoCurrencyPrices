@@ -46,4 +46,4 @@ public interface MainControllerInterface extends ControllerInterface {
      * @param cryptoCurrency The cryptocurrency to be passed in
      */
     public abstract void updateCryptocurrency(CryptoCurrencies cryptoCurrency);
-}//end MainControllerInterface
+}

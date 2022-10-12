@@ -23,9 +23,9 @@ import java.util.Vector;
  */
 final public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -74,12 +74,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     /**
      * TODO: Fill in
      */
-    private RefreshButtonInterface refreshButton;
-
-    /**
-     * TODO: Fill in
-     */
-    private JPanel panel = new JPanel();
+    private final JPanel panel = new JPanel();
 
     /**
      * TODO: Fill in
@@ -87,24 +82,19 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     private MainControllerInterface mainController;
 
     /**
-     * The list of website objects
-     */
-    private ArrayList<APICallerInterface> websites;
-
-    /**
      * The data to be displayed in the main table
      */
-    private Vector<Vector<String>> data = new Vector<>();
+    private final Vector<Vector<String>> data = new Vector<>();
 
     /**
-     * The main table that displays all of the information
+     * The main table that displays all the information
      */
     private MainTablePaneInterface table;
 
     /**
      * The list of website names that are displayed
      */
-    private JList<String> websiteNames = new JList<>();
+    private final JList<String> websiteNames = new JList<>();
 
     /**
      * The dropdown to choose the fiat currency
@@ -116,9 +106,9 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     private CryptoDropdownJComboBox cryptoDropdown;
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor for the main window
@@ -128,11 +118,11 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
                 JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
         this.setup();
-    }//end MainWindow()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -144,7 +134,8 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
 
         this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainTablePane(this.data);
-        this.refreshButton = new RefreshButton(this.mainController, this);
+
+        final RefreshButtonInterface refreshButton = new RefreshButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
         this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
@@ -158,7 +149,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         this.panel.add(crypto_dropdown_text);
         this.panel.add(this.cryptoDropdown);
         // TODO: Figure out how to resize the image
-        this.panel.add((JButton) this.refreshButton);
+        this.panel.add((JButton) refreshButton);
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
@@ -166,7 +157,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         this.setVisible(MainWindow.DEFAULT_VISIBILITY);
 
         // TODO: Add text/labels to the window
-    }//end setup()
+    }
 
     /* Protected */
 
@@ -179,24 +170,24 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     public void updateDropdowns() {
         this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
         this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
-    }//end updateDropdowns()
+    }
 
     /**
      * TODO: Fill this in
      */
     public void updatePrices() {
-        this.websites = this.mainController.getWebsiteList();
+        final ArrayList<APICallerInterface> websites = this.mainController.getWebsiteList();
         this.data.clear();
 
         // TODO: Clean this up a bit?
-        for (APICallerInterface website : this.websites) {
+        for (APICallerInterface website : websites) {
             Vector<String> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
             websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
-        }//end for each website
+        }
         this.table.setData(this.data);
-    }//end updatePrices()
+    }
 
     /**
      * TODO: Fill this out
@@ -206,7 +197,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         // TODO: Include an actual message that says that the information was updated in the MainController,
         //       and this is simply updating the view
         this.updatePrices();
-    }//end doSomething
+    }
 
     /**
      * TODO: Fill in
@@ -214,11 +205,11 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     @Override
     public void close() {
         // TODO: Figure out how to close the window, but close the whole application as well
-    }//end close()
+    }
 
 
 
     // TODO: Include more MainWindow-specific things (layout, buttons, etc.)
     // TODO: Include abstract buttons and whatnot
 
-}//end MainWindow
+}

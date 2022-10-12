@@ -59,4 +59,4 @@ public interface APICallerInterface {
      */
     public abstract String getUrlString();
 
-}//end AbstractAPICaller
+}

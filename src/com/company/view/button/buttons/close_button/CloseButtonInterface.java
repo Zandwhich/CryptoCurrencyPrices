@@ -6,4 +6,4 @@ import com.company.view.button.ButtonInterface;
  * TODO: Fill in
  */
 public interface CloseButtonInterface extends ButtonInterface {
-}//end CloseButtonInterface
+}

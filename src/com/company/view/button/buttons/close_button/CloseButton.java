@@ -11,15 +11,18 @@ import java.awt.event.ActionEvent;
  */
 final public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
+    /**
+     * The text to be displayed in the button
+     */
     public static final String TEXT = "Close";
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * Constructor for the close button
@@ -29,11 +32,11 @@ final public class CloseButton extends AbstractJButtonButton implements CloseBut
     public CloseButton(ControllerInterface controller, WindowInterface window) {
         super(controller, window);
         super.setText(CloseButton.TEXT);
-    }//end CloseButton
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -44,5 +47,5 @@ final public class CloseButton extends AbstractJButtonButton implements CloseBut
     @Override
     public void onClick(ActionEvent actionEvent) {
         super.getWindow().close();
-    }//end onClick()
-}//end CloseButton
+    }
+}

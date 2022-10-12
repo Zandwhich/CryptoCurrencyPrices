@@ -11,9 +11,9 @@ import javax.swing.*;
  */
 final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Public Constants */
 
@@ -37,9 +37,9 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      */
     public static final int HEIGHT = 75;
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the window that displays a network error
@@ -49,7 +49,7 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
         super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
                 NetworkErrorWindow.MESSAGE);
         this.setup();
-    }//end NetworkErrorWindow()
+    }
 
     /**
      * The constructor for the window that displays a network error along with the name of the connection that caused the error
@@ -60,11 +60,11 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
         super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
                 messageWithName(name));
         this.setup();
-    }//end NetworkErrorWindow()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -73,7 +73,7 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      */
     private void setup() {
 
-    }//end setup()
+    }
 
     /**
      * Returns the message formatted to hold the cryptocurrency's name that tried to call a network connection
@@ -82,7 +82,7 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      */
     private static String messageWithName(String name) {
         return "There appears to be a network connection error. This error occurred while trying to connect to " + name + ".\nPlease check your connection and try again.";
-    }//end messageWithName()
+    }
 
 
     /* Protected */
@@ -94,4 +94,4 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
     // Setters
 
     // Others
-}//end NetworkErrorWindow
+}

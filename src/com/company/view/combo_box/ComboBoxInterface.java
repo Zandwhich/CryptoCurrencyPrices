@@ -11,4 +11,4 @@ public interface ComboBoxInterface<T> {
      */
     public abstract T getSelectedItem();
 
-}//end ComboBoxInterface
+}

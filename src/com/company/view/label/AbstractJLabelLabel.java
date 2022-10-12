@@ -7,21 +7,21 @@ import javax.swing.*;
  */
 public abstract class AbstractJLabelLabel extends JLabel implements LabelInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * TODO: Fill this in
      * @param text
      */
-    public AbstractJLabelLabel(String text) { super(text); }//end AbstractJLabelLabel()
+    public AbstractJLabelLabel(String text) { super(text); }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 }//end AbstractJLabelLabel

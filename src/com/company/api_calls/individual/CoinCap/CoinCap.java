@@ -11,9 +11,9 @@ import json_simple.JSONObject;
  */
 final public class CoinCap extends AbstractJSONCaller {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
      * The base URL for CoinCap requests
@@ -36,9 +36,9 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     private final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.USD};
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the basic CoinCap requests
@@ -50,11 +50,11 @@ final public class CoinCap extends AbstractJSONCaller {
                    final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
-    }//end AbstractCoinCap()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -65,7 +65,7 @@ final public class CoinCap extends AbstractJSONCaller {
      * @return The base url
      */
     @Override
-    public String getBaseUrl() { return CoinCap.BASE_URL; }//end getBaseUrl()
+    public String getBaseUrl() { return CoinCap.BASE_URL; }
 
     // Others
 
@@ -79,10 +79,10 @@ final public class CoinCap extends AbstractJSONCaller {
         for (final FiatCurrencies currency : CoinCap.ACCEPTED_FIAT_CURRENCIES)
         {
             if (currency.equals(fiatCurrency)) return true;
-        }//end for
+        }
 
         return false;
-    }//end canUseFiatCurrency()
+    }
 
     /**
      * Returns if the given cryptocurrency can be used with CoinCap
@@ -94,10 +94,10 @@ final public class CoinCap extends AbstractJSONCaller {
         for (final CryptoCurrencies currency : CoinCap.ACCEPTED_CRYPTOCURRENCIES)
         {
             if (currency.equals(cryptoCurrency)) return true;
-        }//end for
+        }
 
         return false;
-    }//end canUseCryptoCurrency()
+    }
 
     /* Protected */
 
@@ -110,6 +110,6 @@ final public class CoinCap extends AbstractJSONCaller {
         if (data == null) return -1;
 
         return Double.parseDouble((String) data.get("rateUsd"));
-    }//end extractPrice()
+    }
 
-}//end CoinCap
+}

@@ -20,4 +20,4 @@ public interface Currency {
      */
     String getAbbreviatedName();
 
-}//end Currency
+}

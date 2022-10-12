@@ -41,4 +41,4 @@ public interface TextInterface {
      */
     public abstract void setWidth(int width);
 
-}//end TextInterface
+}

@@ -56,7 +56,7 @@ final public class CryptoCompare extends AbstractJSONCaller {
                 CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
                         fiatCurrency.getAbbreviatedName(),
                 controller);
-    }//end AbstractCoinCap()
+    }
 
     /* ************ *
      *   Methods    *
@@ -71,7 +71,7 @@ final public class CryptoCompare extends AbstractJSONCaller {
      * @return The base url
      */
     @Override
-    public String getBaseUrl() { return CryptoCompare.BASE_URL; }//end getBaseUrl()
+    public String getBaseUrl() { return CryptoCompare.BASE_URL; }
 
     // Others
 
@@ -85,10 +85,10 @@ final public class CryptoCompare extends AbstractJSONCaller {
         for (final FiatCurrencies currency : CryptoCompare.ACCEPTED_FIAT_CURRENCIES)
         {
             if (currency.equals(fiatCurrency)) return true;
-        }//end for
+        }
 
         return false;
-    }//end canUseFiatCurrency()
+    }
 
     /**
      * Returns if the given cryptocurrency can be used with CryptoCompare
@@ -103,7 +103,7 @@ final public class CryptoCompare extends AbstractJSONCaller {
         }//end for
 
         return false;
-    }//end canUseCryptoCurrency()
+    }
 
     /* Protected */
 
@@ -114,6 +114,6 @@ final public class CryptoCompare extends AbstractJSONCaller {
     protected double extractPrice(final JSONObject jsonObject) {
         // Ok, so I don't know why, but casting it to a regular 'double' wasn't working. This does, so I'm leaving it
         return ((Double) jsonObject.get(super.getFiatCurrency().getAbbreviatedName()));
-    }//end extractPrice()
+    }
 
-}//end CryptoCompare
+}

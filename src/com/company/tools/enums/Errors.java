@@ -7,4 +7,4 @@ public enum Errors {
 
     NETWORK_CONNECTION
 
-}//end Errors
+}

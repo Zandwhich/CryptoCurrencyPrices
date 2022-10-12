@@ -7,9 +7,9 @@ import com.company.tools.enums.Errors;
  */
 public interface ControllerInterface {
 
-    /****************
+    /* ************ *
      *    Methods   *
-     *****************/
+     * ************ */
 
     /**
      * Refreshes the controller
@@ -46,4 +46,4 @@ public interface ControllerInterface {
      */
     public abstract void notifyWindowOfUpdate();
 
-}//end ControllerInterface
+}
