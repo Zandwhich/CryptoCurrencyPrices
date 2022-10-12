@@ -10,29 +10,29 @@ import java.net.URLConnection;
  */
 public abstract class AbstractController implements  ControllerInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
      * Variable to denote if connected to the internet
      */
     private static boolean isConnected = false;
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the abstract controller
      */
     public AbstractController() {
 
-    }//end AbstractController()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -45,7 +45,7 @@ public abstract class AbstractController implements  ControllerInterface {
      */
     protected void setConnected(final boolean isConnected) {
         this.isConnected = isConnected;
-    }//end setConnected()
+    }
 
 
     /* Public */
@@ -59,7 +59,7 @@ public abstract class AbstractController implements  ControllerInterface {
     @Override
     public boolean isConnected() {
         return isConnected;
-    }//end isConnected()
+    }
 
 
     // Setters
@@ -80,12 +80,12 @@ public abstract class AbstractController implements  ControllerInterface {
         URL url;
         try {
             url = new URL(yahoo);
-        }//end try
+        }
         catch (MalformedURLException e) {
             url = null;
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-        }//end catch(MalformedURLException)
+        }
         try {
             // Setup the connection and get the input stream
             final URLConnection connection = url.openConnection();
@@ -98,6 +98,6 @@ public abstract class AbstractController implements  ControllerInterface {
 
         isConnected = internet;
         return isConnected();
-    }//end checkConnection()
+    }
 
-}//end AbstractController
+}

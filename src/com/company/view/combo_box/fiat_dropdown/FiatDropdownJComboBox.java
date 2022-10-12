@@ -9,13 +9,13 @@ import com.company.view.combo_box.AbstractJComboBox;
  */
 final public class FiatDropdownJComboBox extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * A constructor for the combo box
@@ -23,21 +23,21 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
      */
     public FiatDropdownJComboBox(String[] items, MainControllerInterface mainController) {
         super(items, mainController);
-    }//end AbstractJComboBox()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
     /**
-     * Returns the controller casted as the main controller interface
-     * @return The controller casted as the main controller interface
+     * Returns the controller cast as the main controller interface
+     * @return The controller cast as the main controller interface
      */
     private MainControllerInterface getMainController() {
         return (MainControllerInterface) super.getController();
-    }//end getMainController()
+    }
 
 
     /* Protected */
@@ -49,7 +49,7 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
     protected void selectedItemChanged() {
         super.selectedItemChanged();
         this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency(super.getSelectedItem()));
-    }//end selectedItemChanged()
+    }
 
 
     /* Public */
@@ -57,4 +57,4 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
     // Getters
 
 
-}//end FiatDropdownJComboBox
+}

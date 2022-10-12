@@ -7,38 +7,38 @@ public interface TextInterface {
 
     /**
      * TODO: Write documentation
-     * @return
+     * @return TODO: Write documentation
      */
-    public abstract String getText();
+    String getText();
 
     /**
      * TODO: Write documentation
-     * @param text
+     * @param text TODO: Write documentation
      */
-    public abstract void setText(String text);
+    void setText(String text);
 
     /**
      * Gets the height of the text field
      * @return The height of the text field
      */
-    public abstract int getHeight();
+    int getHeight();
 
     /**
      * Gets the width of the text field
      * @return The width of the text field
      */
-    public abstract int getWidth();
+    int getWidth();
 
     /**
      * Sets the height of the text field
      * @param height The height of the text field
      */
-    public abstract void setHeight(int height);
+    void setHeight(int height);
 
     /**
      * Sets the width of the text field
      * @param width The width of the text field
      */
-    public abstract void setWidth(int width);
+    void setWidth(int width);
 
-}//end TextInterface
+}

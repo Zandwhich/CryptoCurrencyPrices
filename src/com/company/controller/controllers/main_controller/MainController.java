@@ -22,12 +22,12 @@ import java.util.ArrayList;
  */
 final public class MainController extends AbstractController implements MainControllerInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
-     * The list of all of the API endpoints
+     * The list of all the API endpoints
      */
     private final ArrayList<APICallerInterface> websiteList = new ArrayList<>();
 
@@ -46,9 +46,9 @@ final public class MainController extends AbstractController implements MainCont
      */
     private final MainWindowInterface mainWindow = new MainWindow(this);
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the MainController
@@ -81,11 +81,11 @@ final public class MainController extends AbstractController implements MainCont
 
         // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns();
-    }//end MainController()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -94,7 +94,7 @@ final public class MainController extends AbstractController implements MainCont
      * that both methods call
      */
     private void updateChangedCurrency() {
-        // For now, delete all of the websites and recreate them with the new fiat currencies
+        // For now, delete all the websites and recreate them with the new fiat currencies
         this.websiteList.clear();
 
         /* CoinBase */
@@ -103,7 +103,7 @@ final public class MainController extends AbstractController implements MainCont
             this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        }//end if CoinBase
+        }
 
         /* CoinMarketCap */
 //        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
@@ -114,30 +114,30 @@ final public class MainController extends AbstractController implements MainCont
         /* CoinCap */
         if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
             this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        }//end if CoinCap
+        }
 
         /* CryptoCompare */
         if (CryptoCompare.canUseFiatCurrency(this.currentFiat) &&
                 CryptoCompare.canUseCryptoCurrency(this.currentCrypto)) {
             this.websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
-        }//end if CryptoCompare
+        }
 
         this.refresh();
-    }// updateChangedCurrency()
+    }
 
     /**
      * Changes the fiat currency that is being used in each of the endpoints
      */
     private void updateWebsiteFiat() {
         this.updateChangedCurrency();
-    }//end updateWebsiteFiat()
+    }
 
     /**
      * Changes the cryptocurrency that is begin used in each of the endpoints
      */
     private void updateWebsitesCrypto() {
         this.updateChangedCurrency();
-    }//end updateWebsitesCrypto()
+    }
 
     /* Public */
 
@@ -148,7 +148,7 @@ final public class MainController extends AbstractController implements MainCont
      * @return The list of websites of URLs to hit
      */
     @Override
-    public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }//end getWebsiteList()
+    public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }
 
     /**
      * {@inheritDoc}
@@ -156,7 +156,7 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public FiatCurrencies getCurrentFiat() {
         return this.currentFiat;
-    }//end getCurrentFiat()
+    }
 
     /**
      * {@inheritDoc}
@@ -164,7 +164,7 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public CryptoCurrencies getCurrentCrypto() {
         return this.currentCrypto;
-    }//end getCurrentCrypto()
+    }
 
     // Other
 
@@ -175,9 +175,9 @@ final public class MainController extends AbstractController implements MainCont
       
         while(true) {
             // System.out.println("Current window location: (" + this.mainWindow.getLocationX() + ", " + this.mainWindow.getLocationY() + ")");
-        }//end while
+        }
 
-    }//end run()
+    }
 
     /**
      * {@inheritDoc}
@@ -187,7 +187,7 @@ final public class MainController extends AbstractController implements MainCont
         super.checkConnection();
         if (!super.isConnected()) this.errorDisplay(Errors.NETWORK_CONNECTION);
         else this.updatePrices();
-    }//end refresh()
+    }
 
     /**
      * Updates the prices displayed on the controller.
@@ -196,16 +196,16 @@ final public class MainController extends AbstractController implements MainCont
     public void updatePrices() {
         for (final APICallerInterface website : this.websiteList) {
             new Thread(website::updatePriceAndNotify).start(); // Do this asynchronously
-        }//end for websites
+        }
         //this.updateViewPrices();
-    }//end updatePrices()
+    }
 
     /**
      * Updates the prices in the view
      */
     public void updateViewPrices() {
         this.mainWindow.updatePrices();
-    }//end updateViewPrices()
+    }
 
     /**
      * {@inheritDoc}
@@ -217,8 +217,8 @@ final public class MainController extends AbstractController implements MainCont
             case NETWORK_CONNECTION:
                 new NetworkErrorWindow(this, name);
                 return;
-        }//end switch
-    }//end errorDisplay()
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -230,8 +230,8 @@ final public class MainController extends AbstractController implements MainCont
             case NETWORK_CONNECTION:
                 new NetworkErrorWindow(this);
                 return;
-        }//end switch
-    }//end errorDisplay()
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -240,7 +240,7 @@ final public class MainController extends AbstractController implements MainCont
     public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
         this.updateWebsiteFiat();
-    }//end updateFiatCurrency()
+    }
 
     /**
      * {@inheritDoc}
@@ -249,7 +249,7 @@ final public class MainController extends AbstractController implements MainCont
     public void updateCryptocurrency(final CryptoCurrencies cryptoCurrency) {
         this.currentCrypto = cryptoCurrency;
         this.updateWebsitesCrypto();
-    }//end updateCryptocurrency()
+    }
 
     /**
      * {@inheritDoc}
@@ -257,5 +257,5 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public void notifyWindowOfUpdate() {
         this.updateViewPrices();
-    }//end notifyWindowOfUpdate()
-}//end MainController
+    }
+}

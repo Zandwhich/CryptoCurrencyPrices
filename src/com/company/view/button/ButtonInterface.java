@@ -9,12 +9,12 @@ public interface ButtonInterface {
      * Gets the width (in pixels) of the button
      * @return The width (in pixels) of the button
      */
-    public abstract int getWidth();
+    int getWidth();
 
     /**
      * Gets the height (in pixels) of the button
      * @return The height (in pixels) of the button
      */
-    public abstract int getHeight();
+    int getHeight();
 
-}//end ButtonInterface
+}

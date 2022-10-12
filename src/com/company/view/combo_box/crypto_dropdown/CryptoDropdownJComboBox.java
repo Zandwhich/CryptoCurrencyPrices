@@ -23,7 +23,7 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
      */
     public CryptoDropdownJComboBox(final String[] items, final MainControllerInterface mainController) {
         super(items, mainController);
-    }//end AbstractJComboBox()
+    }
 
     /* ******* *
      * Methods *
@@ -32,12 +32,12 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
     /* Private */
 
     /**
-     * Returns the controller casted as the main controller interface
-     * @return The controller casted as the main controller interface
+     * Returns the controller cast as the main controller interface
+     * @return The controller cast as the main controller interface
      */
     private MainControllerInterface getMainController() {
         return (MainControllerInterface) super.getController();
-    }//end getMainController()
+    }
 
 
     /* Protected */
@@ -49,5 +49,5 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
     protected void selectedItemChanged() {
         super.selectedItemChanged();
         this.getMainController().updateCryptocurrency(CryptoCurrencies.toCryptoCurrency(super.getSelectedItem()));
-    }//end selectedItemChanged()
-}//end CryptoDropdownJComboBox
+    }
+}

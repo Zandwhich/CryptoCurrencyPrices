@@ -12,17 +12,17 @@ import java.awt.event.ActionEvent;
  */
 final public class RefreshButton extends AbstractJButtonButton implements RefreshButtonInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
     public static final String IMAGE_PATH = "src/resources/imgs/refresh_button_image.PNG";
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * A constructor for the RefreshButton
@@ -33,7 +33,7 @@ final public class RefreshButton extends AbstractJButtonButton implements Refres
      */
     public RefreshButton(MainControllerInterface controller, WindowInterface window, int width, int height) {
         super(width, height, controller, window);
-    }//end RefreshButton()
+    }
 
     /**
      * A constructor for the refresh button
@@ -44,11 +44,11 @@ final public class RefreshButton extends AbstractJButtonButton implements Refres
         super(RefreshButton.IMAGE_PATH, controller, window);
         super.setMaximumSize(new Dimension(100, 100));
         super.setMinimumSize(new Dimension(10, 10));
-    }//end RefreshButton()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -61,8 +61,8 @@ final public class RefreshButton extends AbstractJButtonButton implements Refres
     @Override
     protected void onClick(ActionEvent event) {
         super.getController().refresh();
-    }//end onClick()
+    }
 
     /* Public */
 
-}//end RefreshButton
+}

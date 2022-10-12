@@ -18,13 +18,13 @@ import java.net.URLConnection;
  */
 public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for AbstractJSONCaller
@@ -41,11 +41,11 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
                               final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
                               final ControllerInterface controller) {
         super(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url, controller);
-    }//end AbstractJSONCaller()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -78,23 +78,23 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
             // TODO: Eventually get rid of this simple casting. It could prove problematic in the future
             try {
                 jsonObject = (JSONObject) parser.parse(in);
-            }//end try
+            }
             catch (ParseException e) {
                 System.out.println("In ParseException");
                 // TODO: Figure out what to do with a ParseException
                 jsonObject = null;
-            }//end catch (ParseException)
-        }//end try
+            }
+        }
         catch (IOException e) {
             // openConnection() failed
             super.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
             e.printStackTrace();
 
             jsonObject = null;
-        }//end catch IOException
+        }
 
         return jsonObject;
-    }//end getRequestCall()
+    }
 
     /* Protected */
 
@@ -120,7 +120,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
         setHasPrice(true);
         return extractedPrice;
-    }//end getNewPrice()
+    }
 
     // TODO: Create a static method to be overwritten that returns the full URL
-}//end AbstractJSONCaller
+}

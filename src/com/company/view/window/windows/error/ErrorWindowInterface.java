@@ -6,4 +6,4 @@ import com.company.view.window.WindowInterface;
  * TODO: Fill in
  */
 public interface ErrorWindowInterface extends WindowInterface {
-}//end ErrorWindowInterface
+}

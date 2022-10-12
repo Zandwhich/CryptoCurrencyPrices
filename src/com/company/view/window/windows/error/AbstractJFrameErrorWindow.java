@@ -12,33 +12,18 @@ import javax.swing.*;
  */
 public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
-     * The error message (body) to display
+     * The panel that holds all the components of the page together
      */
-    private String message;
+    private final JPanel panel = new JPanel();
 
-    /**
-     * The label that holds the message
-     */
-    private JLabel label;
-
-    /**
-     * The panel that holds all of the components of the page together
-     */
-    private JPanel panel = new JPanel();
-
-    /**
-     * The button that can close the screen
-     */
-    private CloseButtonInterface closeButton;
-
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * TODO: The constructor for the window that displays an error
@@ -52,11 +37,11 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
                                      String message) {
         super(controller, title, width, height);
         this.setup(message);
-    }//end AbstractJFrameError()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -65,13 +50,16 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      * @param message The error message (body) of the window
      */
     private void setup(String message) {
-        this.message = message;
-        this.label = new JLabel(this.message);
-        this.closeButton = new CloseButton(super.getController(), this);
-        panel.add(this.label);
-        panel.add((CloseButton) this.closeButton);
+        // The label that holds the message
+        JLabel label = new JLabel(message);
+
+        // The button that can close the screen
+        CloseButton closeButton = new CloseButton(super.getController(), this);
+
+        panel.add(label);
+        panel.add(closeButton);
         this.add(panel);
-    }//end setup()
+    }
 
     /* Protected */
 
@@ -83,4 +71,4 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
 
     // Others
 
-}//end AbstractJFrameError
+}

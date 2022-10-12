@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
  */
 public abstract class AbstractJButtonButton extends JButton implements ButtonInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -59,12 +59,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         public void actionPerformed(ActionEvent e) {
 
             onClick(e);
-        }//end actionPerformed()
-    }//end ClickListener
+        }
+    }
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * A constructor for AbstractJButtonButton
@@ -75,7 +75,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(int width, int height, ControllerInterface controller, WindowInterface window) {
         this.setup(width, height, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
     /**
      * A constructor for AbstractJButtonButton
@@ -84,7 +84,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(ControllerInterface controller, WindowInterface window) {
         this.setup(AbstractJButtonButton.DEFAULT_WIDTH, AbstractJButtonButton.DEFAULT_HEIGHT, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
     /**
      * A constructor for AbstractJButtonButton
@@ -94,11 +94,11 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(String imagePath, ControllerInterface controller, WindowInterface window) {
         this.setup(imagePath, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -115,7 +115,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         //if (!name.equals("")) super.setName(name);
         //System.out.println("Width: " + width + ", Height: " + height);
         super.setSize(width, height);
-    }//end setup()
+    }
 
     /**
      * The setup method that is run by the constructor who gets passed in an imagePath and a controller
@@ -127,7 +127,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
         this.imagePath = imagePath;
         this.setImage(this.imagePath);
-    }//end setup()
+    }
 
     /**
      * The method that is run by any of the setup methods
@@ -138,7 +138,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         this.window = window;
         this.addActionListener(new ClickListener());
         super.setVisible(true);
-    }//end generalSetup()
+    }
 
     /* Protected */
 
@@ -155,7 +155,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     public void setImage(String imagePath) {
         this.imagePath = imagePath;
         super.setIcon(new ImageIcon(this.imagePath));
-    }//end setImage()
+    }
 
     /* Public */
 
@@ -165,19 +165,19 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * Gets the controller that the button is posting to
      * @return The controller that the button is posting to
      */
-    public ControllerInterface getController() { return this.controller; }//end getController()
+    public ControllerInterface getController() { return this.controller; }
 
     /**
      * Gets the path of the image of the button. If no image is used, returns 'null'
      * @return The path of the image of the button. If no image is used, returns 'null'
      */
-    public String getImagePath() { return this.imagePath; }//end getImagePath()
+    public String getImagePath() { return this.imagePath; }
 
     /**
      * Gets the window that holds the button
      * @return The window that holds the button
      */
-    public WindowInterface getWindow() { return this.window; }//end getWindow()
+    public WindowInterface getWindow() { return this.window; }
 
     // Setters
 
@@ -185,12 +185,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * Sets the width (in pixels) of the button
      * @param width The new width (in pixels) of the button
      */
-    public void setWidth(int width) { super.setSize(width, this.getHeight()); }//end setWidth()
+    public void setWidth(int width) { super.setSize(width, this.getHeight()); }
 
     /**
      * Sets the height (in pixels) of the button
      * @param height The new height (in pixels) of the button
      */
-    public void setHeight(int height) { super.setSize(this.getWidth(), height); }//end setHeight()
+    public void setHeight(int height) { super.setSize(this.getWidth(), height); }
 
-}//end AbstractJButtonButton
+}

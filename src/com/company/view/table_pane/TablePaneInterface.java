@@ -13,13 +13,13 @@ public interface TablePaneInterface {
      * Gets the columns
      * @return The columns
      */
-    public abstract Vector<String> getColumns();
+    Vector<String> getColumns();
 
     /**
      * Gets the data
      * @return The data
      */
-    public abstract Vector<Vector<String>> getData();
+    Vector<Vector<String>> getData();
 
 
     // Setters
@@ -28,12 +28,12 @@ public interface TablePaneInterface {
      * Sets the header columns' names
      * @param columns The header columns
      */
-    public abstract void setColumns(Vector<String> columns);
+    void setColumns(Vector<String> columns);
 
     /**
      * Sets the data within the table
      * @param data The data within the table
      */
-    public abstract void setData(Vector<Vector<String>> data);
+    void setData(Vector<Vector<String>> data);
 
-}//end TablePaneInterface
+}

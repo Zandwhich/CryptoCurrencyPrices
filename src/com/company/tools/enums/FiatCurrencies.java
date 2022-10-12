@@ -298,7 +298,7 @@ public enum FiatCurrencies implements Currency {
         // USD
         USD.fullName = FiatCurrencies.USD_FULL_NAME;
         USD.abbreviatedName = USD.toString();
-    }// end static initializer
+    }
 
 
     /* ************ */
@@ -316,7 +316,7 @@ public enum FiatCurrencies implements Currency {
     @Override
     public String getFullName() {
         return this.fullName;
-    }// end getFullName()
+    }
 
     /**
      * Returns the abbreviated name of the fiat currency
@@ -325,7 +325,7 @@ public enum FiatCurrencies implements Currency {
     @Override
     public String getAbbreviatedName() {
         return this.abbreviatedName;
-    }//end getAbbreviatedName()
+    }
 
     /**
      * Returns the FiatCurrencies enum into an array
@@ -335,9 +335,9 @@ public enum FiatCurrencies implements Currency {
         String[] array = new String[FiatCurrencies.values().length];
         for (int i = 0; i < FiatCurrencies.values().length; i++) {
             array[i] = FiatCurrencies.values()[i].toString();
-        }//end for
+        }
         return array;
-    }//end toStringArray()
+    }
 
     /**
      * Returns the equivalent FiatCurrency enum value for a given string;
@@ -348,9 +348,9 @@ public enum FiatCurrencies implements Currency {
     public static FiatCurrencies toFiatCurrency(String fiatCurrency) {
         for (FiatCurrencies currency : FiatCurrencies.values())  {
             if (fiatCurrency.equals(currency.toString())) return currency;
-        }//end for
+        }
         return null;
-    }//end toFiatCurrency()
+    }
 
     /**
      * Returns the index of the given fiat currency as a String from the String array
@@ -362,10 +362,10 @@ public enum FiatCurrencies implements Currency {
         for (int i = 0; i < array.length; i++) {
             System.out.println("Comparing " + fiatCurrency + " and " + array[i]);
             if (array[i].equals(fiatCurrency)) return i;
-        }//end for
+        }
         System.out.println("Returning -1");
         return -1;
-    }//end indexOf()
+    }
 
     /**
      * Returns the index of the given fiat currency from the String array
@@ -374,5 +374,5 @@ public enum FiatCurrencies implements Currency {
      */
     public static int indexOf(final FiatCurrencies fiatCurrency) {
         return FiatCurrencies.indexOf(fiatCurrency.abbreviatedName);
-    }//end indexOf()
-}//end FiatCurrencies
+    }
+}

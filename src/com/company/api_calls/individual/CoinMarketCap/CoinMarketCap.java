@@ -40,9 +40,9 @@ final public class CoinMarketCap extends AbstractJSONCaller {
             FiatCurrencies.PLN, FiatCurrencies.SEK, FiatCurrencies.USD};
 
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the basic CoinMarketCap requests
@@ -59,11 +59,11 @@ final public class CoinMarketCap extends AbstractJSONCaller {
                 CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
                         "&convert=" + fiatCurrency.getAbbreviatedName(),
                 controller);
-    }//end AbstractCoinMarketCap()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -73,7 +73,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
      * {@inheritDoc}
      */
     @Override
-    public String getBaseUrl() { return CoinMarketCap.BASE_URL; }//end getBaseUrl()
+    public String getBaseUrl() { return CoinMarketCap.BASE_URL; }
 
     // Other
 
@@ -89,7 +89,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
             if (currency.equals(fiatCurrency)) return true;
         }//end for
         return false;
-    }//end canUseFiatCurrency()
+    }
 
     /**
      * Returns if the given cryptocurrency can be used with CoinMarketCap
@@ -103,7 +103,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
             if (currency.equals(cryptoCurrency)) return true;
         }//end for
         return false;
-    }//end canUseCryptoCurrency()
+    }
 
     /* Protected */
 
@@ -123,5 +123,5 @@ final public class CoinMarketCap extends AbstractJSONCaller {
         final JSONObject fiat = (JSONObject) quotes.get(this.getFiatCurrency().getAbbreviatedName());
 
         return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
-    }//end extractPrice()
-}//end AbstractCoinMarketCap
+    }
+}

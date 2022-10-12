@@ -28,18 +28,18 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
             FiatCurrencies.EUR, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD, FiatCurrencies.PLN,
             FiatCurrencies.SEK, FiatCurrencies.USD};
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
      * The base URL for CoinBase requests
      */
     private static final String BASE_URL = "https://api.coinbase.com/v2/prices/";
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the AbstractCoinBase class
@@ -55,9 +55,9 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
                 AbstractCoinBase.BASE_URL + urlExt, controller);
     }//end AbstractCoinBase()
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -68,7 +68,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @return The base url
      */
     @Override
-    public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }//end getBaseUrl()
+    public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }
 
     // Other
 
@@ -82,9 +82,9 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
         for (final FiatCurrencies currency : AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES)
         {
             if (currency.equals(fiatCurrency)) return true;
-        }//end for
+        }
         return false;
-    }//end canUseFiatCurrency()
+    }
 
     /**
      * Returns if the given cryptocurrency can be used with CoinBase
@@ -96,10 +96,10 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
         for (final CryptoCurrencies currency : AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES)
         {
             if (currency.equals(cryptoCurrency)) return true;
-        }//end for
+        }
 
         return false;
-    }//end canUseCryptoCurrency()
+    }
 
     /* Protected */
 
@@ -115,6 +115,6 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
         if (data == null || !data.containsKey("amount")) return -1;
 
         return Double.parseDouble((String) data.get("amount"));
-    }//end extractPrice()
+    }
 
-}//end AbstractCoinBase
+}
