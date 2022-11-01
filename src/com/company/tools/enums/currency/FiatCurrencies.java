@@ -134,7 +134,7 @@ public enum FiatCurrencies implements Currency {
 //    SAR, // Saudi Riyal
 //    SBD, // Solomon Islands Dollar
 //    SCR, // Seychellois Rupee
-    SEK, // Swedish Krona
+    SEK, // Swedish Króna
 //    SGD, // Singapore Dollar
 //    SHP, // Saint Helenian Pound
 //    SLL, // Sierra Leonean Leone
