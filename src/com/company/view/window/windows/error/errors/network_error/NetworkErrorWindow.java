@@ -7,7 +7,7 @@ import com.company.view.window.windows.error.AbstractJFrameErrorWindow;
 import javax.swing.*;
 
 /**
- * TODO: Fill in
+ * The error to throw if there is a network error
  */
 final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
 

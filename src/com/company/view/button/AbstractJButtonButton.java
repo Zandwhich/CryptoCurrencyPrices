@@ -46,18 +46,16 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     private String imagePath;
 
     /**
-     * TODO: Fill this out
-     * Not too sure exactly how this works. Need to research this further. All I know is that it works.
+     * The click listener
      */
     private class ClickListener implements ActionListener {
 
         /**
-         * TODO: Fill this in
-         * @param e TODO: Fill this in
+         * The action to perform when a click happens
+         * @param e The action passed in
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-
             onClick(e);
         }
     }

@@ -8,7 +8,7 @@ import com.company.view.window.AbstractJFrameWindow;
 import javax.swing.*;
 
 /**
- * TODO: Fill in
+ * The generic window for any error
  */
 public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
 
@@ -26,7 +26,7 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      * ************ */
 
     /**
-     * TODO: The constructor for the window that displays an error
+     * The constructor for the window that displays an error
      * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width of the window
