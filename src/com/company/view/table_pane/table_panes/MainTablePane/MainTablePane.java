@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Vector;
 
 /**
- * TODO: Fill in
+ * The main table that displays the prices
  */
 final public class MainTablePane extends AbstractTablePane implements MainTablePaneInterface {
 

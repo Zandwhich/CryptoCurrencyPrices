@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.Vector;
 
 /**
- * TODO: Fill in
+ * The generic table pane that provides base functionality, from which all table panes extend
  */
 abstract public class AbstractTablePane extends JScrollPane implements TablePaneInterface {
 

@@ -7,9 +7,9 @@ import com.company.api_calls.individual.CoinBase.CoinBaseSell;
 import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
 import com.company.api_calls.individual.CoinCap.CoinCap;
 import com.company.api_calls.individual.CryptoCompare.CryptoCompare;
-import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.Errors;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
@@ -133,7 +133,7 @@ final public class MainController extends AbstractController implements MainCont
     }
 
     /**
-     * Changes the cryptocurrency that is begin used in each of the endpoints
+     * Changes the cryptocurrency that is being used in each of the endpoints
      */
     private void updateWebsitesCrypto() {
         this.updateChangedCurrency();

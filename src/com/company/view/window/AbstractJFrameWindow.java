@@ -16,7 +16,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * ************ */
 
     /**
-     * TODO: Fill in
+     * The controller for the window
      */
     private ControllerInterface controller;
 
@@ -218,7 +218,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
     // Other
 
     /**
-     * TODO: Fill in
+     * Refreshes the window
      */
     public void refreshWindow() {
         this.setIsVisible(false);

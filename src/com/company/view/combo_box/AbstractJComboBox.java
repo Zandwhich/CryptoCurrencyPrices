@@ -4,7 +4,7 @@ import com.company.controller.ControllerInterface;
 import javax.swing.*;
 
 /**
- * TODO: Fill in
+ * The default class
  */
 public abstract class AbstractJComboBox<T> extends JComboBox<T> implements ComboBoxInterface<T> {
 

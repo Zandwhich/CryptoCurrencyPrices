@@ -1,12 +1,9 @@
-package com.company.tools;
+package com.company.tools.enums.currency;
 
 /**
  * A parent enum to both FiatCurrencies and CryptoCurrencies
  */
 public interface Currency {
-
-    // TODO: Create the currency folder underneath the enum folder, and put this interface in that with
-    //  CryptoCurrencies and FiatCurrencies
 
     /**
      * Returns the full name of the currency

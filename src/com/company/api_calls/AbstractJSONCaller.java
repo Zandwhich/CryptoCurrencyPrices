@@ -1,9 +1,9 @@
 package com.company.api_calls;
 
-import com.company.tools.enums.CryptoCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.Errors;
 import com.company.controller.ControllerInterface;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -15,6 +15,10 @@ import java.net.URLConnection;
 
 /**
  * The abstract class of all 'callers' which use JSON
+ * <p>
+ * NOTE: I realize now that this class is unnecessary (as in, there's nothing special about JSON
+ *       that should be extended from the API Caller).
+ *       I should combine AbstractJSONCaller and AbstractAPICaller together in the future
  */
 public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
@@ -68,7 +72,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
         JSONObject jsonObject;
         try {
-            // Setup the connection and get the input stream
+            // Set up the connection and get the input stream
             final URLConnection connection = this.getUrl().openConnection();
             connection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

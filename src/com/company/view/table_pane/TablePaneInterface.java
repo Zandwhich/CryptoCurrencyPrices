@@ -3,7 +3,7 @@ package com.company.view.table_pane;
 import java.util.Vector;
 
 /**
- * TODO: Fill in
+ * The interface for all Table Panes
  */
 public interface TablePaneInterface {
 

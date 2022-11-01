@@ -1,6 +1,4 @@
-package com.company.tools.enums;
-
-import com.company.tools.Currency;
+package com.company.tools.enums.currency;
 
 /**
  * An enum that holds all possible fiat currencies

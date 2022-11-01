@@ -1,8 +1,8 @@
 package com.company.controller.controllers.main_controller;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.ControllerInterface;
 
 import java.util.ArrayList;

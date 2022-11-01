@@ -1,12 +1,10 @@
 package com.company.view.window.windows.main_window;
 
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
-import com.company.view.combo_box.crypto_dropdown.CryptoDropdownInterface;
 import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;
-import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
@@ -72,12 +70,12 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     /* Private */
 
     /**
-     * TODO: Fill in
+     * The panel which holds all the other ui components
      */
     private final JPanel panel = new JPanel();
 
     /**
-     * TODO: Fill in
+     * The main controller, which controls this window
      */
     private MainControllerInterface mainController;
 
@@ -155,8 +153,6 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
 
         this.updatePrices();
         this.setVisible(MainWindow.DEFAULT_VISIBILITY);
-
-        // TODO: Add text/labels to the window
     }
 
     /* Protected */
@@ -173,8 +169,9 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     }
 
     /**
-     * TODO: Fill this in
+     * {@inheritDoc}
      */
+    @Override
     public void updatePrices() {
         final ArrayList<APICallerInterface> websites = this.mainController.getWebsiteList();
         this.data.clear();
@@ -190,26 +187,8 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     }
 
     /**
-     * TODO: Fill this out
+     * Closes the window and the application
      */
     @Override
-    public void refresh() {
-        // TODO: Include an actual message that says that the information was updated in the MainController,
-        //       and this is simply updating the view
-        this.updatePrices();
-    }
-
-    /**
-     * TODO: Fill in
-     */
-    @Override
-    public void close() {
-        // TODO: Figure out how to close the window, but close the whole application as well
-    }
-
-
-
-    // TODO: Include more MainWindow-specific things (layout, buttons, etc.)
-    // TODO: Include abstract buttons and whatnot
-
+    public void close() { }
 }

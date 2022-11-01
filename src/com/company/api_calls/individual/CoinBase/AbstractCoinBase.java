@@ -2,8 +2,8 @@ package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
-import com.company.tools.enums.CryptoCurrencies;
-import com.company.tools.enums.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
 
 /**

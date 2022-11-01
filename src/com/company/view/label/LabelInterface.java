@@ -1,7 +1,7 @@
 package com.company.view.label;
 
 /**
- * TODO: Fill this in
+ * The base label interface that all other interfaces extend from
  */
 public interface LabelInterface {
 
