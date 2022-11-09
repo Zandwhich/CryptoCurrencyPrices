@@ -195,7 +195,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     public void updatePrices() {
         for (final APICallerInterface website : this.websiteList) {
-            new Thread(website::updatePriceAndNotify).start(); // Do this asynchronously
+            new Thread(website::updatePriceAndNotify).start();
         }
         //this.updateViewPrices();
     }
