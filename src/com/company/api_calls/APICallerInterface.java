@@ -1,5 +1,8 @@
 package com.company.api_calls;
 
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
+
 import java.net.URL;
 
 /**
@@ -13,47 +16,47 @@ public interface APICallerInterface {
      * Returns the current price
      * @return The current price
      */
-    public abstract double getPrice();
+    double getPrice();
 
     /**
      * Returns the cryptocurrency
      * @return The cryptocurrency
      */
-    public abstract String getCryptoCurrency();
+    CryptoCurrencies getCryptoCurrency();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the fiat currency
+     * @return The fiat currency
      */
-    public abstract String getFiatCurrency();
+    FiatCurrencies getFiatCurrency();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns if a price has been obtained
+     * @return If a price has been obtained
      */
-    public abstract boolean getHasPrice();
+    boolean getHasPrice();
 
     /**
-     * TODO: Fill this out
+     * Updates the price and notifies the controller
      */
-    public abstract void updatePrice();
+    void updatePriceAndNotify();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the name of the API endpoint
+     * @return The name of the API endpoint
      */
-    public abstract String getName();
+    String getName();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the URL of the endpoint
+     * @return The URL of the endpoint
      */
-    public abstract URL getUrl();
+    URL getUrl();
 
     /**
-     * TODO: Fill this out
-     * @return
+     * Returns the URL in a String format
+     * @return The URL in a String format
      */
-    public abstract String getUrlString();
+    String getUrlString();
 
-}//end AbstractAPICaller
+}

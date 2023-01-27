@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * TODO: Fill this out
+ * The abstract class that all buttons inherit from
  */
 public abstract class AbstractJButtonButton extends JButton implements ButtonInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -46,28 +46,23 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     private String imagePath;
 
     /**
-     * TODO: Fill this out
-     * Not too sure exactly how this works. Need to research this further. All I know is that it works.
+     * The click listener
      */
     private class ClickListener implements ActionListener {
 
         /**
-         * TODO: Fill this in
-         * @param e TODO: Fill this in
+         * The action to perform when a click happens
+         * @param e The action passed in
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            /* TODO: Figure out if overriding onClick actually works as expected in this case (also if I can construct
-             * it at the super-class level or if it needs to be done at the sub-class level)
-             */
-
             onClick(e);
-        }//end actionPerformed()
-    }//end ClickListener
+        }
+    }
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * A constructor for AbstractJButtonButton
@@ -78,7 +73,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(int width, int height, ControllerInterface controller, WindowInterface window) {
         this.setup(width, height, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
     /**
      * A constructor for AbstractJButtonButton
@@ -87,7 +82,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(ControllerInterface controller, WindowInterface window) {
         this.setup(AbstractJButtonButton.DEFAULT_WIDTH, AbstractJButtonButton.DEFAULT_HEIGHT, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
     /**
      * A constructor for AbstractJButtonButton
@@ -97,11 +92,11 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      */
     public AbstractJButtonButton(String imagePath, ControllerInterface controller, WindowInterface window) {
         this.setup(imagePath, controller, window);
-    }//end AbstractJButtonButton()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -118,7 +113,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         //if (!name.equals("")) super.setName(name);
         //System.out.println("Width: " + width + ", Height: " + height);
         super.setSize(width, height);
-    }//end setup()
+    }
 
     /**
      * The setup method that is run by the constructor who gets passed in an imagePath and a controller
@@ -130,7 +125,7 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
         this.imagePath = imagePath;
         this.setImage(this.imagePath);
-    }//end setup()
+    }
 
     /**
      * The method that is run by any of the setup methods
@@ -141,24 +136,23 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         this.window = window;
         this.addActionListener(new ClickListener());
         super.setVisible(true);
-    }//end generalSetup()
+    }
 
     /* Protected */
 
     /**
-     * TODO: Fill this in
-     * @param event TODO: Fill this in
+     * Sets the action to happen when the button is pressed
      */
     protected abstract void onClick(ActionEvent event);
 
     /**
-     * TODO: Fill in
+     * Sets the image of the button
      * @param imagePath The path of the image displayed by the button
      */
     public void setImage(String imagePath) {
         this.imagePath = imagePath;
         super.setIcon(new ImageIcon(this.imagePath));
-    }//end setImage()
+    }
 
     /* Public */
 
@@ -168,19 +162,19 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * Gets the controller that the button is posting to
      * @return The controller that the button is posting to
      */
-    public ControllerInterface getController() { return this.controller; }//end getController()
+    public ControllerInterface getController() { return this.controller; }
 
     /**
      * Gets the path of the image of the button. If no image is used, returns 'null'
      * @return The path of the image of the button. If no image is used, returns 'null'
      */
-    public String getImagePath() { return this.imagePath; }//end getImagePath()
+    public String getImagePath() { return this.imagePath; }
 
     /**
      * Gets the window that holds the button
      * @return The window that holds the button
      */
-    public WindowInterface getWindow() { return this.window; }//end getWindow()
+    public WindowInterface getWindow() { return this.window; }
 
     // Setters
 
@@ -188,12 +182,12 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * Sets the width (in pixels) of the button
      * @param width The new width (in pixels) of the button
      */
-    public void setWidth(int width) { super.setSize(width, this.getHeight()); }//end setWidth()
+    public void setWidth(int width) { super.setSize(width, this.getHeight()); }
 
     /**
      * Sets the height (in pixels) of the button
      * @param height The new height (in pixels) of the button
      */
-    public void setHeight(int height) { super.setSize(this.getWidth(), height); }//end setHeight()
+    public void setHeight(int height) { super.setSize(this.getWidth(), height); }
 
-}//end AbstractJButtonButton
+}

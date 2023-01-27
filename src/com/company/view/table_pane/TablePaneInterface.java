@@ -19,7 +19,7 @@ public interface TablePaneInterface {
      * Gets the data
      * @return The data
      */
-    public abstract Vector<Vector<Object>> getData();
+    Vector<Vector<String>> getData();
 
 
     // Setters
@@ -28,12 +28,12 @@ public interface TablePaneInterface {
      * Sets the header columns' names
      * @param columns The header columns
      */
-    public abstract void setColumns(Vector<String> columns);
+    void setColumns(Vector<String> columns);
 
     /**
      * Sets the data within the table
      * @param data The data within the table
      */
-    public abstract void setData(Vector<Vector<Object>> data);
+    void setData(Vector<Vector<String>> data);
 
-}//end TablePaneInterface
+}

@@ -2,61 +2,45 @@ package com.company.view.window.windows.error;
 
 import com.company.controller.ControllerInterface;
 import com.company.view.button.buttons.close_button.CloseButton;
-import com.company.view.button.buttons.close_button.CloseButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
 
 /**
- * TODO: Fill in
+ * The generic window for any error
  */
-public abstract class AbstractErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
+public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow implements ErrorWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
-     * The error message (body) to display
+     * The panel that holds all the components of the page together
      */
-    private String message;
+    private final JPanel panel = new JPanel();
 
-    /**
-     * The label that holds the message
-     */
-    private JLabel label;
-
-    /**
-     * The panel that holds all of the components of the page together
-     */
-    private JPanel panel = new JPanel();
-
-    /**
-     * The button that can close the screen
-     */
-    private CloseButtonInterface closeButton;
-
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
-     * TODO: The constructor for the window that displays an error
+     * The constructor for the window that displays an error
      * @param controller The controller in charge of the window
      * @param title The title of the window
      * @param width The width of the window
      * @param height The height of the window
      * @param message The error message (body) to display
      */
-    public AbstractErrorWindow(ControllerInterface controller, String title, int width, int height, int xLocation,
-                               int yLocation, String message) {
-        super(controller, title, width, height, xLocation, yLocation);
+    public AbstractJFrameErrorWindow(ControllerInterface controller, String title, int width, int height,
+                                     String message) {
+        super(controller, title, width, height);
         this.setup(message);
-    }//end AbstractJFrameError()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -65,13 +49,16 @@ public abstract class AbstractErrorWindow extends AbstractJFrameWindow implement
      * @param message The error message (body) of the window
      */
     private void setup(String message) {
-        this.message = message;
-        this.label = new JLabel(this.message);
-        this.closeButton = new CloseButton(super.getController(), this);
-        panel.add(this.label);
-        panel.add((CloseButton) this.closeButton);
-        super.add(panel);
-    }//end setup()
+        // The label that holds the message
+        final JLabel label = new JLabel(message);
+
+
+        final CloseButton closeButton = new CloseButton(super.getController(), this);
+
+        panel.add(label);
+        panel.add(closeButton);
+        this.add(panel);
+    }
 
     /* Protected */
 
@@ -83,4 +70,4 @@ public abstract class AbstractErrorWindow extends AbstractJFrameWindow implement
 
     // Others
 
-}//end AbstractJFrameError
+}

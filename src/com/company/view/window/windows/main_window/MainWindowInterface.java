@@ -3,18 +3,17 @@ package com.company.view.window.windows.main_window;
 import com.company.view.window.WindowInterface;
 
 /**
- * TODO: Fill this out
+ * The intractable interface for the main window
  */
 public interface MainWindowInterface extends WindowInterface {
 
     /**
-     * Refreshes the page with the newest cryptocurrency rates
+     * Fetches the latest prices and updates the window with the new prices
      */
-    abstract public void refresh();
+    void updatePrices();
 
     /**
-     * TODO: Fill in
+     * Update the fiat currency and cryptocurrency dropdowns to reflect the current crypto selected
      */
-    abstract public void updatePrices();
-
-}//end MainWindowInterface
+    void updateDropdowns();
+}

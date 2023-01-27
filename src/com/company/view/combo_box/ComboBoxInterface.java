@@ -1,7 +1,7 @@
 package com.company.view.combo_box;
 
 /**
- * TODO: Fill in
+ * The base combo box interface which all extend from
  */
 public interface ComboBoxInterface<T> {
 
@@ -9,6 +9,6 @@ public interface ComboBoxInterface<T> {
      * Returns the currently selected item
      * @return The currently selected item
      */
-    public abstract T getSelectedItem();
+    T getSelectedItem();
 
-}//end ComboBoxInterface
+}

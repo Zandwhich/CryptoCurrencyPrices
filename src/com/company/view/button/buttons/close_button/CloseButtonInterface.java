@@ -3,7 +3,7 @@ package com.company.view.button.buttons.close_button;
 import com.company.view.button.ButtonInterface;
 
 /**
- * TODO: Fill in
+ * The interface of the button used to close a window
  */
 public interface CloseButtonInterface extends ButtonInterface {
-}//end CloseButtonInterface
+}

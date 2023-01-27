@@ -7,19 +7,22 @@ import com.company.view.window.WindowInterface;
 import java.awt.event.ActionEvent;
 
 /**
- * TODO: Fill in
+ * The button used to close a window
  */
-public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
+final public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
+    /**
+     * The text to be displayed in the button
+     */
     public static final String TEXT = "Close";
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * Constructor for the close button
@@ -29,11 +32,11 @@ public class CloseButton extends AbstractJButtonButton implements CloseButtonInt
     public CloseButton(ControllerInterface controller, WindowInterface window) {
         super(controller, window);
         super.setText(CloseButton.TEXT);
-    }//end CloseButton
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -44,5 +47,5 @@ public class CloseButton extends AbstractJButtonButton implements CloseButtonInt
     @Override
     public void onClick(ActionEvent actionEvent) {
         super.getWindow().close();
-    }//end onClick()
-}//end CloseButton
+    }
+}
