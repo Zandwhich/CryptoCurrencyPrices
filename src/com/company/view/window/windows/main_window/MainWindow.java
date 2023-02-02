@@ -113,7 +113,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      * The default constructor for the main window
      * @param mainController The MainController of the application
      */
-    public MainWindow(MainControllerInterface mainController) {
+    public MainWindow(final MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
                 JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
         this.setup();
