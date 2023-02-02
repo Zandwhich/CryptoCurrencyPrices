@@ -12,9 +12,9 @@ import java.util.Vector;
  */
 public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCurrencyTablePaneInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -38,34 +38,34 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
 
         public TableModel(Vector<Vector<Object>> data) {
             this.data = data;
-        }//end TableModel()
+        }
 
         @Override
         public int getRowCount() {
             return data.size();
-        }//end getRowCount()
+        }
 
         @Override
         public int getColumnCount() {
             return FiatCurrencyTablePane.COLUMN_HEADERS.size();
-        }//end getColumnCount()
+        }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             return data.get(rowIndex).get(columnIndex);
-        }//end getValueAt()
+        }
 
         @Override
         public Class<?> getColumnClass(int columnIndex) {
             if (columnIndex == 1) return Boolean.class;
             return super.getColumnClass(columnIndex);
-        }//end getColumnClass()
-    }//end TableModel
+        }
+    }
 
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor
@@ -79,41 +79,41 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
             @Override
             public int getRowCount() {
                 return data.size();
-            }//end getRowCount()
+            }
 
             @Override
             public int getColumnCount() {
                 return FiatCurrencyTablePane.COLUMN_HEADERS.size();
-            }//end getColumnCount()
+            }
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 return data.get(rowIndex).get(columnIndex);
-            }//end getValueAt()
+            }
 
             @Override
             public String getColumnName(int column) {
                 return FiatCurrencyTablePane.COLUMN_HEADERS_ARRAY[column];
-            }//end getColumnName()
+            }
 
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return columnIndex == 1;
-            }//end isCellEditable()
+            }
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 if (columnIndex == 1) return Boolean.class;
                 return super.getColumnClass(columnIndex);
-            }//end getColumnClass()
+            }
         });
         super.setColumnMovingAllowed(false);
-    }//end FiatCurrencyTablePane()
+    }
 
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -123,7 +123,7 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
      */
     private MainControllerInterface getMainController() {
         return (MainControllerInterface) super.getController();
-    }//end getMainController()
+    }
 
     /* Protected */
 
@@ -133,4 +133,4 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
 
     // Setters
 
-}//end FiatCurrencyTablePane
+}

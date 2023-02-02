@@ -275,7 +275,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     @Override
     public void fiatCurrenciesPopUp() {
-        new FiatOptionWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
+        new FiatOptionWindow(this);
     }
 
     /**
