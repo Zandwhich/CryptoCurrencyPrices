@@ -17,7 +17,10 @@
 # ...and folders in general: ...
 !*/
 
-# ...but ignore these specific folders:
+# ...but ignore this specific file...
+secrets.json
+
+# ...and ignore these specific folders:
 out/
 venv/
 .idea/

@@ -12,9 +12,9 @@ import javax.swing.*;
  */
 public class CryptoOptionWindow extends AbstractCurrencyOptionWindow implements CryptoOptionWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -25,31 +25,23 @@ public class CryptoOptionWindow extends AbstractCurrencyOptionWindow implements 
 
     /* Variables */
 
-    /**
-     * The table that shows which fiat currencies are currently in use
-     */
-    private CryptoCurrencyTablePaneInterface table = new CryptoCurrencyTablePane(super.getMainController());
-
-
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor
      * @param controller The controller
-     * @param xLocation The x position
-     * @param yLocation The y position
      */
-    public CryptoOptionWindow(MainControllerInterface controller, int xLocation, int yLocation) {
-        super(CryptoOptionWindow.TITLE, controller, xLocation, yLocation);
-        super.add((JScrollPane) this.table);
-    }//end FiatOptionWindow()
+    public CryptoOptionWindow(MainControllerInterface controller) {
+        super(CryptoOptionWindow.TITLE, controller);
+        super.add(new CryptoCurrencyTablePane());
+    }
 
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -61,4 +53,4 @@ public class CryptoOptionWindow extends AbstractCurrencyOptionWindow implements 
 
     // Setters
 
-}//end CryptoOptionWindow
+}

@@ -1,9 +1,10 @@
 package com.company.view.window.windows.main_window;
 
-import com.company.tools.FiatCurrencies;
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.api_calls.APICallerInterface;
-import com.company.view.combo_box.fiat_dropdown.FiatDropdownInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.menu_bar.main_menu_bar.MainMenuBar;
 import com.company.view.menu_bar.main_menu_bar.MainMenuBarInterface;
@@ -20,11 +21,11 @@ import java.util.Vector;
 /**
  * The main window to display for the application
  */
-public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
+final public class MainWindow extends AbstractJFrameWindow implements MainWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Public */
 
@@ -36,7 +37,7 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     /**
      * The default width of the main window
      */
-    public final static int DEFAULT_WIDTH = 1000;
+    public final static int DEFAULT_WIDTH = 1300;
 
     /**
      * The default height of the main window
@@ -44,65 +45,75 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
     public final static int DEFAULT_HEIGHT = 700;
 
     /**
-     * The default x location
+     * The default x position of the window
      */
-    public static final int DEFAULT_X_LOCATION = 155;
+    public final static int DEFAULT_X = 155;
 
     /**
-     * The default y location
+     * The default y position of the window
      */
-    public static final int DEFAULT_Y_LOCATION = 58;
+    public final static int DEFAULT_Y = 58;
 
     /**
      * The default visibility of the main window
      */
     public final static boolean DEFAULT_VISIBILITY = true;
 
+    /**
+     * The text to display above the fiat currency dropdown
+     */
+    public final static String FIAT_DROPDOWN_TEXT = "Fiat Currency";
+
+    /**
+     * The text to display above the cryptocurrency dropdown
+     */
+    public final static String CRYPTO_DROPDOWN_TEXT = "Cryptocurrency";
+
     /* Private */
 
     /**
-     * TODO: Fill in
+     * The panel which holds all the other ui components
      */
-    private RefreshButtonInterface refreshButton;
+    private final JPanel panel = new JPanel();
 
     /**
-     * TODO: Fill in
+     * The main controller, which controls this window
      */
-    private JPanel panel = new JPanel();
-
-    /**
-     * The list of website objects
-     */
-    private ArrayList<APICallerInterface> websites;
+    private MainControllerInterface mainController;
 
     /**
      * The data to be displayed in the main table
      */
-    private Vector<Vector<Object>> data = new Vector<>();
+    private final Vector<Vector<String>> data = new Vector<>();
 
     /**
-     * The main table that displays all of the information
+     * The main table that displays all the information
      */
     private MainTablePaneInterface table;
 
     /**
      * The list of website names that are displayed
      */
-    private JList<String> websiteNames = new JList<>();
+    private final JList<String> websiteNames = new JList<>();
 
     /**
      * The dropdown to choose the fiat currency
      */
-    private FiatDropdownInterface fiatDropdown;
+    private FiatDropdownJComboBox fiatDropdown;
+
+    /**
+     * The dropdown to choose the cryptocurrency
+     */
+    private CryptoDropdownJComboBox cryptoDropdown;
 
     /**
      * The main menu bar displayed at the top of the screen
      */
     private MainMenuBarInterface mainMenuBar;
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor for the main window
@@ -110,14 +121,13 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      */
     public MainWindow(MainControllerInterface mainController) {
         super(mainController, MainWindow.TITLE, MainWindow.DEFAULT_WIDTH, MainWindow.DEFAULT_HEIGHT,
-                MainWindow.DEFAULT_X_LOCATION, MainWindow.DEFAULT_Y_LOCATION, JFrame.EXIT_ON_CLOSE,
-                MainWindow.DEFAULT_VISIBILITY);
+                JFrame.EXIT_ON_CLOSE, MainWindow.DEFAULT_VISIBILITY);
         this.setup();
-    }//end MainWindow()
+    }
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -125,75 +135,70 @@ public class MainWindow extends AbstractJFrameWindow implements MainWindowInterf
      * The general setup method that is used for maximum abstraction
      */
     private void setup() {
-        this.mainMenuBar = new MainMenuBar(this.getMainController());
+        super.setLocation(MainWindow.DEFAULT_X, MainWindow.DEFAULT_Y);
+
+        this.mainController = (MainControllerInterface) super.getController();
+        this.table = new MainTablePane(this.data);
+
+        this.mainMenuBar = new MainMenuBar(this.mainController);
         super.setJMenuBar((JMenuBar) this.mainMenuBar);
 
-        this.table = new MainTablePane(this.getMainController(), this.data);
-        this.refreshButton = new RefreshButton(this.getMainController(), this);
-        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.getMainController());
+        final RefreshButtonInterface refreshButton = new RefreshButton(this.mainController, this);
+        this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
+        this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
-        this.panel.add((JComboBox) this.fiatDropdown);
+        final JTextField fiat_dropdown_text = new JTextField(MainWindow.FIAT_DROPDOWN_TEXT);
+        fiat_dropdown_text.setEditable(false);
+        final JTextField crypto_dropdown_text = new JTextField(MainWindow.CRYPTO_DROPDOWN_TEXT);
+        crypto_dropdown_text.setEditable(false);
+
+        this.panel.add(fiat_dropdown_text);
+        this.panel.add(this.fiatDropdown);
+        this.panel.add(crypto_dropdown_text);
+        this.panel.add(this.cryptoDropdown);
         // TODO: Figure out how to resize the image
-        this.panel.add((JButton) this.refreshButton);
+        this.panel.add((JButton) refreshButton);
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
         this.updatePrices();
-        this.setVisible(true);
-
-        // TODO: Add text/labels to the window
-    }//end setup()
-
-    /**
-     * Returns the controller as a main controller
-     * @return The controller as a main controller
-     */
-    private MainControllerInterface getMainController() {
-        return (MainControllerInterface) super.getController();
-    }//end getMainController()
+        this.setVisible(MainWindow.DEFAULT_VISIBILITY);
+    }
 
     /* Protected */
 
     /* Public */
 
     /**
-     * TODO: Fill this in
+     * {@inheritDoc}
      */
+    @Override
+    public void updateDropdowns() {
+        this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
+        this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updatePrices() {
-        this.websites = this.getMainController().getWebsiteList();
+        final ArrayList<APICallerInterface> websites = this.mainController.getWebsiteList();
         this.data.clear();
 
         // TODO: Clean this up a bit?
-        for (APICallerInterface website : this.websites) {
-            Vector<Object> websiteVec = new Vector<>();
+        for (APICallerInterface website : websites) {
+            Vector<String> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
-            websiteVec.add(website.getPrice());
+            websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
-        }//end for each website
+        }
         this.table.setData(this.data);
-    }//end updatePrices()
+    }
 
     /**
-     * TODO: Fill this out
+     * Closes the window and the application
      */
     @Override
-    public void refresh() {
-        // TODO: Include an actual message that says that the information was updated in the MainController,
-        //       and this is simply updating the view
-        this.updatePrices();
-    }//end doSomething
-
-    /**
-     * TODO: Fill in
-     */
-    @Override
-    public void close() {
-        // TODO: Figure out how to close the window, but close the whole application as well
-    }//end close()
-
-
-
-    // TODO: Include more MainWindow-specific things (layout, buttons, etc.)
-    // TODO: Include abstract buttons and whatnot
-
-}//end MainWindow
+    public void close() { }
+}

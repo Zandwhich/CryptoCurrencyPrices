@@ -8,9 +8,9 @@ import com.company.view.window.AbstractJFrameWindow;
  */
 public abstract class AbstractCurrencyOptionWindow extends AbstractJFrameWindow implements CurrencyOptionWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -28,26 +28,23 @@ public abstract class AbstractCurrencyOptionWindow extends AbstractJFrameWindow 
     /* Variables */
 
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor
      * @param title The title of the window
      * @param controller The controller
-     * @param xLocation The x position
-     * @param yLocation The y position
      */
-    public AbstractCurrencyOptionWindow(String title, MainControllerInterface controller, int xLocation, int yLocation) {
-        super(controller, title, AbstractCurrencyOptionWindow.WIDTH, AbstractCurrencyOptionWindow.HEIGHT, xLocation,
-                yLocation);
-    }//end AbstractCurrencyOptionWindow()
+    public AbstractCurrencyOptionWindow(final String title, final MainControllerInterface controller) {
+        super(controller, title, AbstractCurrencyOptionWindow.WIDTH, AbstractCurrencyOptionWindow.HEIGHT);
+    }
 
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -59,7 +56,7 @@ public abstract class AbstractCurrencyOptionWindow extends AbstractJFrameWindow 
      */
     protected MainControllerInterface getMainController() {
         return (MainControllerInterface) super.getController();
-    }//end getMainController()
+    }
 
     /* Public */
 
@@ -67,4 +64,4 @@ public abstract class AbstractCurrencyOptionWindow extends AbstractJFrameWindow 
 
     // Setters
 
-}//end AbstractCurrencyOptionWindow
+}

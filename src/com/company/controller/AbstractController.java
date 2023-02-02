@@ -6,33 +6,33 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * TODO: Fill in
+ * The base controller from which to extend controllers
  */
 public abstract class AbstractController implements  ControllerInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /**
      * Variable to denote if connected to the internet
      */
     private static boolean isConnected = false;
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The constructor for the abstract controller
      */
     public AbstractController() {
 
-    }//end AbstractController()
+    }
 
-    /****************
+    /* ************ *
      *   Methods    *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -43,8 +43,9 @@ public abstract class AbstractController implements  ControllerInterface {
      * Sets if the application is connected to the internet
      * @param isConnected The connection to the internet
      */
-    protected void setConnected(boolean isConnected) { this.isConnected = isConnected;
-    }//end setConnected()
+    protected void setConnected(final boolean isConnected) {
+        this.isConnected = isConnected;
+    }
 
 
     /* Public */
@@ -58,7 +59,7 @@ public abstract class AbstractController implements  ControllerInterface {
     @Override
     public boolean isConnected() {
         return isConnected;
-    }//end isConnected()
+    }
 
 
     // Setters
@@ -67,7 +68,7 @@ public abstract class AbstractController implements  ControllerInterface {
 
     /**
      * Checks the internet connection and returns if it is connected or not
-     * Also alters the method isConnected
+     * Also alters the field isConnected
      * Currently just checks if it can hit yahoo.com
      * TODO: Figure out a better way of doing this
      * @return If there is a connection to the internet
@@ -79,15 +80,15 @@ public abstract class AbstractController implements  ControllerInterface {
         URL url;
         try {
             url = new URL(yahoo);
-        }//end try
+        }
         catch (MalformedURLException e) {
             url = null;
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-        }//end catch(MalformedURLException)
+        }
         try {
             // Setup the connection and get the input stream
-            URLConnection connection = url.openConnection();
+            final URLConnection connection = url.openConnection();
             connection.connect();
         }
         catch (IOException exception) {
@@ -97,6 +98,6 @@ public abstract class AbstractController implements  ControllerInterface {
 
         isConnected = internet;
         return isConnected();
-    }//end checkConnection()
+    }
 
-}//end AbstractController
+}

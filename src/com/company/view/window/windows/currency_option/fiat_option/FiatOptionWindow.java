@@ -12,9 +12,9 @@ import javax.swing.*;
  */
 public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements FiatOptionWindowInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -25,31 +25,23 @@ public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements Fi
 
     /* Variables */
 
-    /**
-     * The table that shows which fiat currencies are currently in use
-     */
-    private FiatCurrencyTablePaneInterface table = new FiatCurrencyTablePane(super.getMainController());
-
-
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor
      * @param controller The controller
-     * @param xLocation The x position
-     * @param yLocation The y position
      */
-    public FiatOptionWindow(MainControllerInterface controller, int xLocation, int yLocation) {
-        super(FiatOptionWindow.TITLE, controller, xLocation, yLocation);
-        super.add((JScrollPane) this.table);
-    }//end FiatOptionWindow()
+    public FiatOptionWindow(final MainControllerInterface controller) {
+        super(FiatOptionWindow.TITLE, controller);
+        super.add(new FiatCurrencyTablePane(super.getMainController()));
+    }
 
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -61,4 +53,4 @@ public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements Fi
 
     // Setters
 
-}//end FiatOptionWindow
+}
