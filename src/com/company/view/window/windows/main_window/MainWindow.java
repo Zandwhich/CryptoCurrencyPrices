@@ -106,7 +106,6 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     private CryptoDropdownJComboBox cryptoDropdown;
 
-    /* ************ *
     /**
      * The main menu bar displayed at the top of the screen
      */
@@ -139,7 +138,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         super.setLocation(MainWindow.DEFAULT_X, MainWindow.DEFAULT_Y);
 
         this.mainController = (MainControllerInterface) super.getController();
-        this.table = new MainTablePane(this.mainController, this.data);
+        this.table = new MainTablePane(this.data);
 
         this.mainMenuBar = new MainMenuBar(this.mainController);
         super.setJMenuBar((JMenuBar) this.mainMenuBar);
