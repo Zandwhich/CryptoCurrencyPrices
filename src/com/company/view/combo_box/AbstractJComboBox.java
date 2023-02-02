@@ -24,8 +24,9 @@ public abstract class AbstractJComboBox<T> extends JComboBox<T> implements Combo
     /**
      * A constructor for the combo box
      * @param items A string of items that is displayed
+     * @param controller The controller interface for this combo box
      */
-    public AbstractJComboBox(T[] items, ControllerInterface controller) {
+    public AbstractJComboBox(final T[] items, final ControllerInterface controller) {
         super(items);
         this.controller = controller;
     }
@@ -45,8 +46,7 @@ public abstract class AbstractJComboBox<T> extends JComboBox<T> implements Combo
     // Getters
 
     /**
-     * Returns the currently selected item
-     * @return The currently selected item
+     * {@inheritDoc}
      */
     @Override
     public T getSelectedItem() {
