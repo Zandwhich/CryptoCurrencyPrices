@@ -117,14 +117,6 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
 
     /* Private */
 
-    /**
-     * Returns the controller as the main controller
-     * @return The controller as the main controller
-     */
-    private MainControllerInterface getMainController() {
-        return (MainControllerInterface) super.getController();
-    }
-
     /* Protected */
 
     /* Public */
