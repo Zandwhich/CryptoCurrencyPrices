@@ -25,12 +25,6 @@ public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements Fi
 
     /* Variables */
 
-    /**
-     * The table that shows which fiat currencies are currently in use
-     */
-    private final FiatCurrencyTablePaneInterface table = new FiatCurrencyTablePane(super.getMainController());
-
-
     /* ************ *
      * Constructors *
      * ************ */
@@ -41,7 +35,7 @@ public class FiatOptionWindow extends AbstractCurrencyOptionWindow implements Fi
      */
     public FiatOptionWindow(final MainControllerInterface controller) {
         super(FiatOptionWindow.TITLE, controller);
-        super.add((JScrollPane) this.table);
+        super.add(new FiatCurrencyTablePane(super.getMainController()));
     }
 
 

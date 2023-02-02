@@ -283,7 +283,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     @Override
     public void cryptoCurrenciesPopUp() {
-        new CryptoOptionWindow(this, this.mainWindow.getLocationX(), this.mainWindow.getLocationY());
+        new CryptoOptionWindow(this);
     }
 
     /**
