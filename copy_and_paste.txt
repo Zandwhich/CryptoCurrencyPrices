@@ -1,0 +1,13 @@
+A file meant simply for common things that I copy-and-paste all the time
+
+/* ************ *
+ *    Fields    *
+ * ************ */
+
+/* ************ *
+ * Constructors *
+ * ************ */
+
+/* ************ *
+ *   Methods    *
+ * ************ */

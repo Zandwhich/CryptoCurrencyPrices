@@ -44,7 +44,7 @@ public abstract class AbstractController implements  ControllerInterface {
      * @param isConnected The connection to the internet
      */
     protected void setConnected(final boolean isConnected) {
-        this.isConnected = isConnected;
+        AbstractController.isConnected = isConnected;
     }
 
 
@@ -76,18 +76,18 @@ public abstract class AbstractController implements  ControllerInterface {
     @Override
     public boolean checkConnection() {
         boolean internet = true;
-        String yahoo = "https://yahoo.com";
+        final String yahoo = "https://yahoo.com";
         URL url;
         try {
             url = new URL(yahoo);
         }
-        catch (MalformedURLException e) {
+        catch (final MalformedURLException e) {
             url = null;
             // Bad URL inputted
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
         }
         try {
-            // Setup the connection and get the input stream
+            // Set up the connection and get the input stream
             final URLConnection connection = url.openConnection();
             connection.connect();
         }
@@ -96,7 +96,7 @@ public abstract class AbstractController implements  ControllerInterface {
             internet = false;
         }
 
-        isConnected = internet;
+        AbstractController.isConnected = internet;
         return isConnected();
     }
 

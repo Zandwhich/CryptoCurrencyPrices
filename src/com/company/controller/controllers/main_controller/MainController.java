@@ -258,4 +258,12 @@ final public class MainController extends AbstractController implements MainCont
     public void notifyWindowOfUpdate() {
         this.updateViewPrices();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void aboutPagePopUp() {
+        System.out.println("About has been pressed");
+    }
 }

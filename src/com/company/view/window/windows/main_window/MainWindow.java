@@ -6,6 +6,7 @@ import com.company.controller.controllers.main_controller.MainControllerInterfac
 import com.company.api_calls.APICallerInterface;
 import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
+import com.company.view.menu_bar.main_menu_bar.MainJMenuBar;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
 import com.company.view.button.buttons.refresh_button.RefreshButton;
@@ -132,6 +133,8 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
 
         this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainTablePane(this.data);
+
+        super.setJMenuBar(new MainJMenuBar(this.mainController));
 
         final RefreshButtonInterface refreshButton = new RefreshButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
