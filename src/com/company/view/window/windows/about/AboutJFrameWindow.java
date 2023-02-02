@@ -63,7 +63,7 @@ public final class AboutJFrameWindow extends AbstractJFrameWindow implements Abo
      * ************ */
 
     /**
-     * Sets up the parts of the window
+     * Sets up the parts of the window and lays out the text so that it is very nice (and resizes with the window).
      */
     private void setup() {
         this.getContentPane().setLayout(new GridBagLayout());
@@ -83,7 +83,7 @@ public final class AboutJFrameWindow extends AbstractJFrameWindow implements Abo
         c.gridx = 1;
         c.gridy = 2;
         c.gridwidth = 3;
-        c.weighty = 0.5;
+        c.weighty = 0.3;
         c.anchor = GridBagConstraints.PAGE_END;
         this.getContentPane().add(message2, c);
     }
