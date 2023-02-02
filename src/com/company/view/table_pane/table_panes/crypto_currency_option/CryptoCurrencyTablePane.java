@@ -11,9 +11,9 @@ import java.util.Vector;
  */
 public class CryptoCurrencyTablePane extends AbstractJTablePane implements CryptoCurrencyTablePaneInterface {
 
-    /****************
+    /* ************ *
      *    Fields    *
-     ****************/
+     * ************ */
 
     /* Constants */
 
@@ -31,22 +31,22 @@ public class CryptoCurrencyTablePane extends AbstractJTablePane implements Crypt
     /* Variables */
 
 
-    /****************
+    /* ************ *
      * Constructors *
-     ****************/
+     * ************ */
 
     /**
      * The default constructor
      */
-    public CryptoCurrencyTablePane(MainControllerInterface controller) {
+    public CryptoCurrencyTablePane(final MainControllerInterface controller) {
         super(controller, CryptoCurrencyTablePane.COLUMN_HEADERS, null);
         super.setColumnMovingAllowed(false);
-    }//end FiatCurrencyTablePane()
+    }
 
 
-    /****************
+    /* ************ *
      *    Methods   *
-     ****************/
+     * ************ */
 
     /* Private */
 
@@ -58,4 +58,4 @@ public class CryptoCurrencyTablePane extends AbstractJTablePane implements Crypt
 
     // Setters
 
-}//end CryptoCurrencyTablePane
+}
