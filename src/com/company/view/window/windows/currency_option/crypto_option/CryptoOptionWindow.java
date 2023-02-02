@@ -35,7 +35,7 @@ public class CryptoOptionWindow extends AbstractCurrencyOptionWindow implements 
      */
     public CryptoOptionWindow(MainControllerInterface controller) {
         super(CryptoOptionWindow.TITLE, controller);
-        super.add(new CryptoCurrencyTablePane(super.getMainController()));
+        super.add(new CryptoCurrencyTablePane());
     }
 
 

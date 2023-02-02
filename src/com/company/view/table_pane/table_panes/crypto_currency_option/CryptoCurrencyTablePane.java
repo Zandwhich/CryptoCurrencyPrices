@@ -38,8 +38,8 @@ public class CryptoCurrencyTablePane extends AbstractJTablePane implements Crypt
     /**
      * The default constructor
      */
-    public CryptoCurrencyTablePane(final MainControllerInterface controller) {
-        super(controller, CryptoCurrencyTablePane.COLUMN_HEADERS, null);
+    public CryptoCurrencyTablePane() {
+        super(CryptoCurrencyTablePane.COLUMN_HEADERS, null);
         super.setColumnMovingAllowed(false);
     }
 
