@@ -5,7 +5,7 @@ import com.company.view.menu_item.about_menu_item.AboutJMenuItem;
 import com.company.view.menu_item.about_menu_item.AboutMenuItemContractInterface;
 
 /**
- * The instantiation of the "Help" menu
+ * The instantiation of the "CryptoCurrency Prices" menu
  */
 final public class CryptoCurrencyPrices extends AbstractJMenu implements CryptoCurrencyPricesInterface {
 
