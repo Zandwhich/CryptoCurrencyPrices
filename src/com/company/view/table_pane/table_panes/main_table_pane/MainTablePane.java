@@ -1,8 +1,6 @@
 package com.company.view.table_pane.table_panes.main_table_pane;
 
-import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.view.table_pane.AbstractJTablePane;
-import com.company.view.table_pane.table_panes.main_table_pane.MainTablePaneInterface;
 
 import java.util.Arrays;
 import java.util.Vector;
