@@ -11,6 +11,7 @@ import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.Errors;
 import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
+import com.company.view.window.windows.about.AboutJFrameWindow;
 import com.company.view.window.windows.error.errors.network_error.NetworkErrorWindow;
 import com.company.view.window.windows.main_window.MainWindow;
 import com.company.view.window.windows.main_window.MainWindowInterface;
@@ -257,5 +258,13 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public void notifyWindowOfUpdate() {
         this.updateViewPrices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void aboutPagePopUp() {
+        new AboutJFrameWindow(this);
     }
 }

@@ -1,7 +1,7 @@
 package com.company.view.window;
 
 
-import com.company.controller.ControllerInterface;
+import com.company.controller.ControllerInterface;;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
@@ -20,6 +20,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      */
     private ControllerInterface controller;
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -31,7 +32,8 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param width The width (in pixels) of the window
      * @param height The height (in pixels) of the window
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height) {
+    public AbstractJFrameWindow(final ControllerInterface controller, final String title, final int width,
+                                final int height) {
         this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, true);
     }
 
@@ -44,40 +46,22 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param closeOperation The operation to be carried out on the closing of the window (should be one of:
      *                       JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE, JFrame.HIDE_ON_CLOSE, or
      *                       JFrame.DO_NOTHING_ON_CLOSE)
-     */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
-                                int closeOperation) {
-        this.setup(controller, title, width, height, closeOperation, true);
-    }
-
-    /**
-     * Constructor for an AbstractJFrameWindow
-     * @param controller The controller in charge of the window
-     * @param title The title of the window
-     * @param width The width (in pixels) of the window
-     * @param height The height (in pixels) of the window
      * @param isVisible If the window is visible or not
      */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height,
-                                boolean isVisible) {
-        this.setup(controller, title, width, height, JFrame.DISPOSE_ON_CLOSE, isVisible);
-    }
-
-    /**
-     * Constructor for an AbstractJFrameWindow
-     * @param controller The controller in charge of the window
-     * @param title The title of the window
-     * @param width The width (in pixels) of the window
-     * @param height The height (in pixels) of the window
-     * @param closeOperation The operation to be carried out on the closing of the window (should be one of:
-     *                       JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE, JFrame.HIDE_ON_CLOSE, or
-     *                       JFrame.DO_NOTHING_ON_CLOSE)
-     * @param isVisible If the window is visible or not
-     */
-    public AbstractJFrameWindow(ControllerInterface controller, String title, int width, int height, int closeOperation,
-                                boolean isVisible) {
+    public AbstractJFrameWindow(final ControllerInterface controller, final String title, final int width,
+                                final int height, final int closeOperation, final boolean isVisible) {
         this.setup(controller, title, width, height, closeOperation, isVisible);
     }
+
+    /**
+     * Constructor for an AbstractJFrameWindow that will not set the size of the window by default
+     * @param controller The controller in charge of the window
+     * @param title The title of the window
+     */
+    public AbstractJFrameWindow(final ControllerInterface controller, final String title) {
+        this.setup(controller, title);
+    }
+
 
     /* ************ *
      *    Methods   *
@@ -96,8 +80,8 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      *                       JFrame.DO_NOTHING_ON_CLOSE)
      * @param isVisible If the window is visible or not
      */
-    private void setup(ControllerInterface controller, String title, int width, int height, int closeOperation,
-                       boolean isVisible) {
+    private void setup(final ControllerInterface controller, final String title, final int width, final int height,
+                       final int closeOperation, final boolean isVisible) {
 
         // Setting up the window
         this.controller = controller;
@@ -107,30 +91,40 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
         super.setVisible(isVisible);
     }
 
+    /**
+     * The redundant setup that is run when there is no sizing to be done for the window
+     * @param controller The controller in charge of the window
+     * @param title The title of the window
+     */
+    private void setup(final ControllerInterface controller, final String title) {
+        // Setting up the window
+        this.controller = controller;
+        super.setTitle(title);
+        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        super.setVisible(true);
+    }
+
     /* Public */
 
     // Getters
 
     /**
-     * Gets the title of the window
-     * @return The title of the window
+     * {@inheritDoc}
      */
     @Override
-    public String getTitle() { return super.getTitle(); }
+    public final String getTitle() { return super.getTitle(); }
 
     /**
-     * Gets the width (in pixels) of the window
-     * @return The width (in pixels) of the window
+     * {@inheritDoc}
      */
     @Override
-    public int getWidth() { return super.getWidth(); }
+    public final int getWidth() { return super.getWidth(); }
 
     /**
-     * Gets the height (in pixels) of the window
-     * @return The height (in pixels) of the window
+     * {@inheritDoc}
      */
     @Override
-    public int getHeight() { return super.getHeight(); }
+    public final int getHeight() { return super.getHeight(); }
 
     /**
      * Gets the operation to be carried out on close. Should be one of JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE,
@@ -138,58 +132,53 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @return The operation to be carried out on close. Should be one of JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE,
      * JFrame.HIDE_ON_CLOSE, or JFrame.DO_NOTHING_ON_CLOSE
      */
-    public int getCloseOperation() { return super.getDefaultCloseOperation(); }
+    public final int getCloseOperation() { return super.getDefaultCloseOperation(); }
 
     /**
      * Gets if the window is visible or not
      * @return If the window is visible or not
      */
-    public boolean getIsVisible() { return super.isVisible(); }
+    public final boolean getIsVisible() { return super.isVisible(); }
 
     /**
      * Gets the controller of the window
      * @return The controller of the window
      */
-    public ControllerInterface getController() { return this.controller; }
+    public final ControllerInterface getController() { return this.controller; }
 
     /**
-     * Gets the window's x coordinate for the top-left corner
-     * @return The top-left corner's x coordinate of the window
+     * {@inheritDoc}
      */
     @Override
-    public int getLocationX() {
+    public final int getLocationX() {
         return super.getLocation().x;
     }
 
     /**
-     * Gets the window's y coordinate for the top-left corner
-     * @return The top-left corner's y coordinate of the window
+     * {@inheritDoc}
      */
     @Override
-    public int getLocationY() {
+    public final int getLocationY() {
         return super.getLocation().y;
     }
 
     // Setters
 
     /**
-     * Sets the title of the window
-     * @param title The title of the window
+     * {@inheritDoc}
      */
     @Override
-    public void setTitle(String title) { super.setTitle(title); }
+    public void setTitle(final String title) { super.setTitle(title); }
 
     /**
-     * Sets the width (in pixels) of the window
-     * @param width The width (in pixels) of the window
+     * {@inheritDoc}
      */
-    public void setWidth(int width) { super.setSize(width, super.getHeight()); }
+    public void setWidth(final int width) { super.setSize(width, super.getHeight()); }
 
     /**
-     * Sets the height (in pixels) of the window
-     * @param height The height (in pixels) of the window
+     * {@inheritDoc}
      */
-    public void setHeight(int height) { super.setSize(super.getWidth(), height); }
+    public void setHeight(final int height) { super.setSize(super.getWidth(), height); }
 
     /**
      * Sets the operation to be carried out on close. Should be one of JFrame.EXIT_ON_CLOSE, JFrame.DISPOSE_ON_CLOSE,
@@ -197,21 +186,19 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * @param closeOperation The operation to be carried out on close. Should be one of JFrame.EXIT_ON_CLOSE,
      *                       JFrame.DISPOSE_ON_CLOSE, JFrame.HIDE_ON_CLOSE, or JFrame.DO_NOTHING_ON_CLOSE
      */
-    public void setCloseOperation(int closeOperation) { super.setDefaultCloseOperation(closeOperation); }
+    public void setCloseOperation(final int closeOperation) { super.setDefaultCloseOperation(closeOperation); }
 
     /**
      * Sets if the window is visible or not
      * @param isVisible If the window is visible or not
      */
-    public void setIsVisible(boolean isVisible) { super.setVisible(isVisible); }
+    public void setIsVisible(final boolean isVisible) { super.setVisible(isVisible); }
 
     /**
-     * Sets the window's location on the screen
-     * @param x The x coordinate of the top left of the screen
-     * @param y The y coordinate of the top left of the screen
+     * {@inheritDoc}
      */
     @Override
-    public void setLocation(int x, int y) {
+    public void setLocation(final int x, final int y) {
         super.setLocation(x, y);
     }
 
@@ -226,7 +213,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
     }
 
     /**
-     * Closes the window
+     * {@inheritDoc}
      */
     @Override
     public void close() {
