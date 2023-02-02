@@ -51,7 +51,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     private final MainWindowInterface mainWindow = new MainWindow(this);
 
-    private HashMap<FiatCurrencies, Boolean> fiatCurrenciesHash = new HashMap<>();
+    private final HashMap<FiatCurrencies, Boolean> fiatCurrenciesHash = new HashMap<>();
 
     /* ************ *
      * Constructors *
@@ -94,7 +94,7 @@ final public class MainController extends AbstractController implements MainCont
 
     }//end MainController()
 
-    /****************
+    /* ************ *
      *    Methods   *
      * ************ */
 
@@ -293,15 +293,15 @@ final public class MainController extends AbstractController implements MainCont
      */
     @Override
     public Vector<Vector<Object>> getFiatHashAsVector() {
-        Vector<Vector<Object>> vector = new Vector<>();
+        final Vector<Vector<Object>> vector = new Vector<>();
 
-        for (FiatCurrencies key : this.fiatCurrenciesHash.keySet()) {
-            Vector<Object> vec = new Vector<>();
+        for (final FiatCurrencies key : this.fiatCurrenciesHash.keySet()) {
+            final Vector<Object> vec = new Vector<>();
             vec.add(key.toString());
             vec.add(this.fiatCurrenciesHash.get(key));
 
             vector.add(vec);
-        }//end for each key
+        }
 
         return vector;
     }
