@@ -72,9 +72,9 @@ public class FiatCurrencyTablePane extends AbstractJTablePane implements FiatCur
      * @param controller The main controller
      */
     public FiatCurrencyTablePane(MainControllerInterface controller) {
-        super(controller, new AbstractTableModel() {
+        super(new AbstractTableModel() {
 
-            Vector<Vector<Object>> data = controller.getFiatHashAsVector();
+            final Vector<Vector<Object>> data = controller.getFiatHashAsVector();
 
             @Override
             public int getRowCount() {

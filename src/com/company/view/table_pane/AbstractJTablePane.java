@@ -82,12 +82,12 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * Updates the internal data of the JTable by creating a new TableModel
      * @param data The data as a matrix of strings
      */
-    private void updateData(Vector<Vector<String>> data) {
-        DefaultTableModel tableModel = new DefaultTableModel();
+    private void updateData(final Vector<Vector<String>> data) {
+        final DefaultTableModel tableModel = new DefaultTableModel();
         for (int i = 0; i < this.table.getModel().getColumnCount(); i++) {
             tableModel.addColumn(this.table.getColumnName(i));
         }
-        for (Vector<String> row : data) {
+        for (final Vector<String> row : data) {
             tableModel.addRow(row);
         }
 
@@ -99,12 +99,12 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
      * Updates the internal columns of the JTable by creating a new TableModel
      * @param columns The columns as a vector of strings
      */
-    private void updateColumns(Vector<String> columns) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        for (String column : columns) {
+    private void updateColumns(final Vector<String> columns) {
+        final DefaultTableModel tableModel = new DefaultTableModel();
+        for (final String column : columns) {
             tableModel.addColumn(column);
         }
-        for (Vector<String> row : this.data) {
+        for (final Vector<String> row : this.data) {
             tableModel.addRow(row);
         }
 
@@ -125,7 +125,7 @@ abstract public class AbstractJTablePane extends JScrollPane implements TablePan
 
     /**
      * Sets whether columns can be moved
-     * @param allowed If it is allowed or not
+     * @param allowed If moving the columns is allowed or not
      */
     protected void setColumnMovingAllowed(boolean allowed) {
         this.table.getTableHeader().setReorderingAllowed(allowed);
