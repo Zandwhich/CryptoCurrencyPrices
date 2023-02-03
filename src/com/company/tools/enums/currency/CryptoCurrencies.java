@@ -1540,9 +1540,9 @@ public enum CryptoCurrencies implements Currency {
 //    ZZC 	// ZoZoCoin
 ;
 
-    /* ************ *
-     *  Constants   *
-     * ************ */
+    /* ************ */
+    /*    Fields    */
+    /* ************ */
 
     /**
      * BTC full name in English
@@ -1563,11 +1563,6 @@ public enum CryptoCurrencies implements Currency {
      * XRP full name in English
      */
     private static final String XRP_FULL_NAME = "Ripple";
-
-
-    /* ************ */
-    /*    Fields    */
-    /* ************ */
 
     /**
      * The full name of the fiat currency
@@ -1608,13 +1603,8 @@ public enum CryptoCurrencies implements Currency {
     /*    Methods   */
     /* ************ */
 
-    /* Public */
-
-    // Getters
-
     /**
-     * Returns the full name of the fiat currency
-     * @return The full name of the fiat currency
+     * {@inheritDoc}
      */
     @Override
     public String getFullName() {
@@ -1622,8 +1612,7 @@ public enum CryptoCurrencies implements Currency {
     }
 
     /**
-     * Returns the abbreviated name of the fiat currency
-     * @return The abbreviated name of the fiat currency
+     * {@inheritDoc}
      */
     @Override
     public String getAbbreviatedName() {
@@ -1635,7 +1624,7 @@ public enum CryptoCurrencies implements Currency {
      * @return The Cryptocurrencies enum in an array
      */
     public static String[] toStringArray() {
-        String[] array = new String[CryptoCurrencies.values().length];
+        final String[] array = new String[CryptoCurrencies.values().length];
         for (int i = 0; i < CryptoCurrencies.values().length; i++) {
             array[i] = CryptoCurrencies.values()[i].toString();
         }
@@ -1649,7 +1638,7 @@ public enum CryptoCurrencies implements Currency {
      * @return The Cryptocurrency enum value
      */
     public static CryptoCurrencies toCryptoCurrency(String cryptocurrency) {
-        for (CryptoCurrencies currency : CryptoCurrencies.values())  {
+        for (final CryptoCurrencies currency : CryptoCurrencies.values())  {
             if (cryptocurrency.equals(currency.toString())) return currency;
         }
         return null;

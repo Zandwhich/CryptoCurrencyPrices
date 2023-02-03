@@ -10,20 +10,13 @@ import com.company.tools.enums.currency.FiatCurrencies;
 final public class CoinBaseBuy extends AbstractCoinBase {
 
     /* ************ *
-     *  Constants   *
+     *    Fields    *
      * ************ */
 
     /**
      * The url extension that hits the buy endpoint at CoinBase
      */
-    private final static String BUY_EXT = "/buy";
-
-    // BTC-USD/buy
-
-
-    /* ************ *
-     *    Fields    *
-     * ************ */
+    private static final String BUY_EXT = "/buy";
 
 
     /* ************ *
@@ -38,18 +31,11 @@ final public class CoinBaseBuy extends AbstractCoinBase {
      */
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
-                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT,
+        super(cryptoCurrency, fiatCurrency,
+                "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
+                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                        CoinBaseBuy.BUY_EXT,
                 controller);
     }
-
-
-    /* ************ *
-     *    Methods   *
-     * ************ */
-
-    /* Public */
-
-    // Getters
 
 }

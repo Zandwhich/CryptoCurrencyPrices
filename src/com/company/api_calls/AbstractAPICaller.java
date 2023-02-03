@@ -2,6 +2,7 @@ package com.company.api_calls;
 
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.Currency;
 import com.company.tools.enums.currency.FiatCurrencies;
 
 import java.net.MalformedURLException;
@@ -97,26 +98,24 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             this.url = new URL(url);
         }
         catch (MalformedURLException e) {
-            // Bad URL inputted
+            // Bad URL input
             e.printStackTrace();
 
             // Not really sure, but I feel like this should be set to true
             this.hasFailedLastUpdate = true;
 
             // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+            //       Throw an error?
         }
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
         
     }
 
+
     /* ************ *
      *    Methods   *
      * ************ */
-
-    /* Public */
-
-    // Getters
 
     /**
      * {@inheritDoc}
@@ -150,12 +149,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public URL getUrl() { return this.url; }
 
     /**
-     * Gets the URL in a string format
-     * @return The URL in a string format
+     * {@inheritDoc}
      */
+    @Override
     public String getUrlString() { return this.url.toString(); }
 
     /**
@@ -177,35 +177,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public ControllerInterface getController() { return this.controller; }
 
     /**
-     * Returns the accepted cryptocurrencies
-     * @return The accepted cryptocurrencies
-     */
-    public CryptoCurrencies[] getAcceptedCryptoCurrencies() {
-        return this.acceptedCryptoCurrencies;
-    }
-
-    /**
-     * Returns the accepted fiat currencies
-     * @return The accepted fiat currencies
-     */
-    public FiatCurrencies[] getAcceptedFiatCurrencies() {
-        return this.acceptedFiatCurrencies;
-    }
-
-    // Other
-
-    /**
      * Updates the price
      */
     private void updatePrice() {
-        double newPrice = this.getNewPrice();
+        final double newPrice = this.getNewPrice();
+        // TODO: Once we start throwing errors this will be changed
         if (newPrice != -1) {
-            this.price = newPrice;
-            this.hasFailedLastUpdate = false;
-            this.hasPrice = true;
+            this.setPrice(newPrice);
+            this.setHasFailedLastUpdate(false);
+            this.setHasPrice(true);
         }
         else {
-            this.hasFailedLastUpdate = true;
+            this.setHasFailedLastUpdate(true);
         }
     }
 
@@ -216,10 +199,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.updatePrice();
         this.controller.notifyWindowOfUpdate();
     }
-
-    /* Protected */
-
-    // Setters
 
     /**
      * Sets the price
@@ -263,29 +242,26 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected void setHasPrice(final boolean hasPrice) { this.hasPrice = hasPrice; }
 
-    // Other
-
     /**
      * Gets the new updated price from the API endpoint
      * @return The new updated price from the API endpoint
      */
     protected abstract double getNewPrice();
 
-
     /**
-     * Returns if the given fiat currency can be used with this website
-     * TODO: Make this static somehow
-     * @param fiatCurrency The given fiat currency
-     * @return If the given fiat currency can be used with this website
+     * A method to avoid duplication in implementation of the "canUseCryptoCurrency" and "canUseFiatCurrency" methods
+     * that are in each of the children classes. This method is to only be called by the children classes
+     * @param acceptedCurrencies The array of accepted currencies for this endpoint
+     * @param attemptedCurrency The currency in question to see if it is in the list of accepted currencies for this
+     *                          endpoint
+     * @return If the attemptedCurrency is in the list of acceptedCurrencies
      */
-    //public abstract boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency);
+    protected static boolean canUseCurrency(final Currency[] acceptedCurrencies, final Currency attemptedCurrency) {
+        for (final Currency acceptedCurrency : acceptedCurrencies) {
+            if (acceptedCurrency.equals(attemptedCurrency)) return true;
+        }
 
-    /**
-     * Returns if the given cryptocurrency can be used with this website
-     * TODO: Make this static somehow
-     * @param cryptoCurrency The given cryptocurrency
-     * @return If the given cryptocurrency can be used with this website
-     */
-    //public abstract boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency);
+        return false;
+    }
 
 }
