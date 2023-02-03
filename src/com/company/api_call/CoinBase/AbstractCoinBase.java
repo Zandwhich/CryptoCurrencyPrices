@@ -54,13 +54,13 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
                 AbstractCoinBase.BASE_URL + urlExt, controller);
     }
 
+
     /* ************ *
      *   Methods    *
      * ************ */
 
     /**
-     * Returns the base url
-     * @return The base url
+     * {@inheritDoc}
      */
     @Override
     public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }
