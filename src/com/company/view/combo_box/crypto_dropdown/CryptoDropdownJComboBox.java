@@ -1,6 +1,5 @@
 package com.company.view.combo_box.crypto_dropdown;
 
-import com.company.controller.controllers.main_controller.MainControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.view.combo_box.AbstractJComboBox;
 
@@ -16,8 +15,8 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
      * A constructor for the combo box
      * @param items A string of items that is displayed
      */
-    public CryptoDropdownJComboBox(final String[] items, final MainControllerInterface mainController) {
-        super(items, mainController);
+    public CryptoDropdownJComboBox(final String[] items, final CryptoDropdownContractInterface controller) {
+        super(items, controller);
     }
 
 
@@ -26,11 +25,11 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
      * ************ */
 
     /**
-     * Returns the controller cast as the main controller interface
-     * @return The controller cast as the main controller interface
+     * {@inheritDoc}
      */
-    private MainControllerInterface getMainController() {
-        return (MainControllerInterface) super.getController();
+    @Override
+    public CryptoDropdownContractInterface getController() {
+        return (CryptoDropdownContractInterface) super.getController();
     }
 
     /**
@@ -39,6 +38,7 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
     @Override
     protected void selectedItemChanged() {
         super.selectedItemChanged();
-        this.getMainController().updateCryptocurrency(CryptoCurrencies.toCryptoCurrency(super.getSelectedItem()));
+        this.getController().updateCryptocurrency(CryptoCurrencies.toCryptoCurrency(super.getSelectedItem()));
     }
+
 }

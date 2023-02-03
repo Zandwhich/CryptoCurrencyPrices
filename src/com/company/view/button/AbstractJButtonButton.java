@@ -1,6 +1,7 @@
 package com.company.view.button;
 
 import com.company.controller.ControllerInterface;
+import com.company.view.window.AbstractJFrameWindow;
 import com.company.view.window.WindowInterface;
 
 import javax.swing.*;
@@ -25,16 +26,6 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * The default height of a button
      */
     public static final int DEFAULT_HEIGHT = 100;
-
-    /**
-     * The controller that holds and subscribes to the button
-     */
-    private ControllerInterface controller;
-
-    /**
-     * The window that holds the button
-     */
-    private WindowInterface window;
 
     /**
      * The path to the image file
@@ -64,22 +55,17 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
     /**
      * A constructor for AbstractJButtonButton
-     * @param controller The controller that holds and subscribes to the button
-     * @param window The window that holds the button
      */
-    public AbstractJButtonButton(final ControllerInterface controller, final WindowInterface window) {
-        this.setup(AbstractJButtonButton.DEFAULT_WIDTH, AbstractJButtonButton.DEFAULT_HEIGHT, controller, window);
+    public AbstractJButtonButton() {
+        this.setup(AbstractJButtonButton.DEFAULT_WIDTH, AbstractJButtonButton.DEFAULT_HEIGHT);
     }
 
     /**
      * A constructor for AbstractJButtonButton
      * @param imagePath The path for the image of the button
-     * @param controller The controller that holds and subscribes to the button
-     * @param window The window that holds the button
      */
-    public AbstractJButtonButton(final String imagePath, final ControllerInterface controller,
-                                 final WindowInterface window) {
-        this.setup(imagePath, controller, window);
+    public AbstractJButtonButton(final String imagePath) {
+        this.setup(imagePath);
     }
 
 
@@ -91,11 +77,9 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
      * The method that is run during the constructor in order to abstract the process as much as possible
      * @param width The width (in pixels) of the button
      * @param height The height (in pixels) of the button
-     * @param controller The controller that holds and subscribes to the button
      */
-    private void setup(final int width, final int height, final ControllerInterface controller,
-                       final WindowInterface window) {
-        this.generalSetup(controller, window);
+    private void setup(final int width, final int height) {
+        this.generalSetup();
 
         // Setting up the window
         //if (!name.equals("")) super.setName(name);
@@ -106,10 +90,9 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
     /**
      * The setup method that is run by the constructor who gets passed in an imagePath and a controller
      * @param imagePath The path for the image of the button
-     * @param controller The controller that holds and subscribes to the button
      */
-    private void setup(final String imagePath, final ControllerInterface controller, final WindowInterface window) {
-        this.generalSetup(controller, window);
+    private void setup(final String imagePath) {
+        this.generalSetup();
 
         this.imagePath = imagePath;
         this.setImage(this.imagePath);
@@ -117,11 +100,8 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
 
     /**
      * The method that is run by any of the setup methods
-     * @param controller The controller that holds and subscribes to the button
      */
-    private void generalSetup(final ControllerInterface controller, final WindowInterface window) {
-        this.controller = controller;
-        this.window = window;
+    private void generalSetup() {
         this.addActionListener(new ClickListener());
         super.setVisible(true);
     }
@@ -139,17 +119,5 @@ public abstract class AbstractJButtonButton extends JButton implements ButtonInt
         this.imagePath = imagePath;
         super.setIcon(new ImageIcon(this.imagePath));
     }
-
-    /**
-     * Gets the controller that the button is posting to
-     * @return The controller that the button is posting to
-     */
-    public ControllerInterface getController() { return this.controller; }
-
-    /**
-     * Gets the window that holds the button
-     * @return The window that holds the button
-     */
-    public WindowInterface getWindow() { return this.window; }
 
 }
