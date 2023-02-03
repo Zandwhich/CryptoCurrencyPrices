@@ -24,6 +24,7 @@ final public class MainTablePane extends AbstractTablePane implements MainTableP
      */
     public static final Vector<String> DEFAULT_COLUMN_HEADERS = new Vector<>(Arrays.asList(MainTablePane.DEFAULT_COLUMN_HEADERS_ARRAY));
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -32,13 +33,9 @@ final public class MainTablePane extends AbstractTablePane implements MainTableP
      * The constructor for the main table pane
      * @param data The data of all the prices of the cryptocurrencies and whatnot
      */
-    public MainTablePane(Vector<Vector<String>> data) {
+    public MainTablePane(final Vector<Vector<String>> data) {
         super(MainTablePane.DEFAULT_COLUMN_HEADERS, data);
         super.disableTableEditable();
     }
-
-    /* ************ *
-     *    Methods   *
-     * ************ */
 
 }

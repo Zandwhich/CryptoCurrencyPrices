@@ -87,4 +87,5 @@ public final class AboutJFrameWindow extends AbstractJFrameWindow implements Abo
         c.anchor = GridBagConstraints.PAGE_END;
         this.getContentPane().add(message2, c);
     }
+
 }

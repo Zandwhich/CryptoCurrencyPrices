@@ -15,12 +15,11 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      *    Fields    *
      * ************ */
 
-    /* Public Constants */
-
     /**
      * The message of the error's window
      */
-    public static final String MESSAGE = "There appears to be a network connection error.\nPlease check your connection and try again.";
+    public static final String MESSAGE = "There appears to be a network connection error.\n" +
+            "Please check your connection and try again.";
 
     /**
      * The title of the error's window
@@ -68,14 +67,10 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      *    Methods   *
      * ************ */
 
-    /* Private */
-
     /**
      * The method used to do duplicate setup work throughout multiple controllers
      */
-    private void setup() {
-
-    }
+    private void setup() { }
 
     /**
      * Returns the message formatted to hold the cryptocurrency's name that tried to call a network connection
@@ -83,17 +78,8 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      * @return The message formatted to hold the cryptocurrency's name that tried to call a network connection
      */
     private static String messageWithName(final String name) {
-        return "There appears to be a network connection error. This error occurred while trying to connect to " + name + ".\nPlease check your connection and try again.";
+        return "There appears to be a network connection error. This error occurred while trying to connect to " +
+                name + ".\nPlease check your connection and try again.";
     }
 
-
-    /* Protected */
-
-    /* Public */
-
-    // Getters
-
-    // Setters
-
-    // Others
 }

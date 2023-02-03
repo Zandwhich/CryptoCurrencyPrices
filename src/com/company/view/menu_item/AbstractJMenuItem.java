@@ -7,7 +7,6 @@ import javax.swing.*;
  */
 public abstract class AbstractJMenuItem extends JMenuItem implements MenuItemInterface {
 
-
     /* ************ *
      * Constructors *
      * ************ */
@@ -19,4 +18,5 @@ public abstract class AbstractJMenuItem extends JMenuItem implements MenuItemInt
     public AbstractJMenuItem(final String name) {
         super(name);
     }
+
 }
