@@ -1,7 +1,6 @@
 package com.company.view.combo_box.fiat_dropdown;
 
 import com.company.tools.enums.currency.FiatCurrencies;
-import com.company.controller.main.MainControllerInterface;
 import com.company.view.combo_box.AbstractJComboBox;
 
 /**
@@ -17,8 +16,8 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
      * A constructor for the combo box
      * @param items A string of items that is displayed
      */
-    public FiatDropdownJComboBox(final String[] items, final MainControllerInterface mainController) {
-        super(items, mainController);
+    public FiatDropdownJComboBox(final String[] items, final FiatDropdownContractInterface controller) {
+        super(items, controller);
     }
 
 
@@ -27,11 +26,11 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
      * ************ */
 
     /**
-     * Returns the controller cast as the main controller interface
-     * @return The controller cast as the main controller interface
+     * {@inheritDoc}
      */
-    private MainControllerInterface getMainController() {
-        return (MainControllerInterface) super.getController();
+    @Override
+    public FiatDropdownContractInterface getController() {
+        return (FiatDropdownContractInterface) super.getController();
     }
 
     /**
@@ -40,7 +39,7 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
     @Override
     protected void selectedItemChanged() {
         super.selectedItemChanged();
-        this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency(super.getSelectedItem()));
+        this.getController().updateFiatCurrency(FiatCurrencies.toFiatCurrency(super.getSelectedItem()));
     }
 
 }

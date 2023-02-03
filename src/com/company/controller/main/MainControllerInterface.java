@@ -4,6 +4,8 @@ import com.company.api_call.APICallerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.ControllerInterface;
+import com.company.view.combo_box.crypto_dropdown.CryptoDropdownContractInterface;
+import com.company.view.combo_box.fiat_dropdown.FiatDropdownContractInterface;
 import com.company.view.menu_item.about.AboutMenuItemContractInterface;
 
 import java.util.ArrayList;
@@ -11,7 +13,12 @@ import java.util.ArrayList;
 /**
  * The interface for specifically the main controller
  */
-public interface MainControllerInterface extends ControllerInterface, AboutMenuItemContractInterface {
+public interface MainControllerInterface extends
+        ControllerInterface,
+        AboutMenuItemContractInterface,
+        CryptoDropdownContractInterface,
+        FiatDropdownContractInterface
+{
 
     /**
      * Update the prices that are listed on the main screen
@@ -35,16 +42,4 @@ public interface MainControllerInterface extends ControllerInterface, AboutMenuI
      * @return The current cryptocurrency selected
      */
     CryptoCurrencies getCurrentCrypto();
-
-    /**
-     * Updates the currently selected fiatCurrencyPrice
-     * @param fiatCurrency The fiat currency to be passed in
-     */
-    void updateFiatCurrency(final FiatCurrencies fiatCurrency);
-
-    /**
-     * Updates the currently selected cryptocurrencyPrice
-     * @param cryptoCurrency The cryptocurrency to be passed in
-     */
-    void updateCryptocurrency(final CryptoCurrencies cryptoCurrency);
 }

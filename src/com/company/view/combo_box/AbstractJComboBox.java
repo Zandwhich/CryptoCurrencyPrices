@@ -1,6 +1,5 @@
 package com.company.view.combo_box;
 
-import com.company.controller.ControllerInterface;
 import javax.swing.*;
 
 /**
@@ -15,7 +14,7 @@ public abstract class AbstractJComboBox<T> extends JComboBox<T> implements Combo
     /**
      * The controller
      */
-    private final ControllerInterface controller;
+    private final ComboBoxContractInterface controller;
 
 
     /* ************ *
@@ -26,7 +25,7 @@ public abstract class AbstractJComboBox<T> extends JComboBox<T> implements Combo
      * A constructor for the combo box
      * @param items A string of items that is displayed
      */
-    public AbstractJComboBox(final T[] items, final ControllerInterface controller) {
+    public AbstractJComboBox(final T[] items, final ComboBoxContractInterface controller) {
         super(items);
         this.controller = controller;
     }
@@ -45,10 +44,10 @@ public abstract class AbstractJComboBox<T> extends JComboBox<T> implements Combo
     }
 
     /**
-     * Returns the controller
-     * @return The controller
+     * Returns the controller that implemented the required methods
+     * @return The controller that implemented the required methods
      */
-    public ControllerInterface getController() {
+    public ComboBoxContractInterface getController() {
         return this.controller;
     }
 
