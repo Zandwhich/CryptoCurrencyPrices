@@ -12,7 +12,7 @@ public final class Main {
      * @param args Standard main method args
      */
     public static void main(String[] args) {
-        MainController controller = new MainController();
+        final MainController controller = new MainController();
         controller.run();
     }
 }
