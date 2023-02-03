@@ -2,7 +2,7 @@ package com.company.api_calls.individual.CoinMarketCap;
 
 import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
-import com.company.controller.ControllerInterface;
+import com.company.api_calls.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -49,10 +49,10 @@ final public class CoinMarketCap extends AbstractJSONCaller {
      * The constructor for the basic CoinMarketCap requests
      * @param cryptoCurrency The cryptocurrency in the request
      * @param fiatCurrency The fiat currency in the request
-     * @param controller The controller that calls this endpoint
+     * @param controller The controller that implements the required method
      */
     public CoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                         final ControllerInterface controller) {
+                         final JSONCallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinMarketCap.BASE_NAME + ": " + cryptoCurrency.getAbbreviatedName() + "/" +
@@ -110,4 +110,5 @@ final public class CoinMarketCap extends AbstractJSONCaller {
 
         return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
     }
+
 }

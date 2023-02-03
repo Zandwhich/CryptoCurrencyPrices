@@ -1,11 +1,13 @@
 package com.company.controller;
 
+import com.company.api_calls.APICallerContract;
+import com.company.api_calls.JSONCallerContract;
 import com.company.tools.enums.Errors;
 
 /**
  * The general interface for all controllers
  */
-public interface ControllerInterface {
+public interface ControllerInterface extends APICallerContract, JSONCallerContract {
 
     /**
      * Refreshes the controller
@@ -17,19 +19,6 @@ public interface ControllerInterface {
      * @param error The type of error
      */
     void errorDisplay(final Errors error);
-
-    /**
-     * Pops up a window that displays an error message
-     * @param error The type of error
-     * @param name The name of who called this error
-     */
-    void errorDisplay(final Errors error, final String name);
-
-    /**
-     * Returns true if connected to the internet, otherwise false
-     * @return True if connected to the internet, otherwise false
-     */
-    boolean isConnected();
 
     /**
      * Checks the internet connection and returns if it is connected or not

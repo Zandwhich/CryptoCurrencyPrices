@@ -1,6 +1,5 @@
 package com.company.api_calls;
 
-import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.Currency;
 import com.company.tools.enums.currency.FiatCurrencies;
@@ -55,7 +54,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The controller that calls this API caller
      */
-    private final ControllerInterface controller;
+    private final APICallerContract controller;
 
     /**
      * The cryptocurrencies that this website can use
@@ -85,7 +84,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                              final CryptoCurrencies[] acceptedCryptoCurrencies,
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                             final ControllerInterface controller) {
+                             final APICallerContract controller) {
         this.controller = controller;
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
@@ -174,7 +173,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Gets the controller
      * @return The controller
      */
-    public ControllerInterface getController() { return this.controller; }
+    public APICallerContract getController() { return this.controller; }
 
     /**
      * Updates the price

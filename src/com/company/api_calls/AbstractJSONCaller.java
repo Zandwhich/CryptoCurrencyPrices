@@ -2,7 +2,6 @@ package com.company.api_calls;
 
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.Errors;
-import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
@@ -41,7 +40,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     public AbstractJSONCaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                               final CryptoCurrencies[] acceptedCryptoCurrencies,
                               final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                              final ControllerInterface controller) {
+                              final JSONCallerContract controller) {
         super(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url, controller);
     }
 
@@ -57,7 +56,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
     private JSONObject getRequestCall() {
 
         // If it's not connected, don't try to get the request
-        if (!super.getController().isConnected()) return null;  // TODO: Throw error?
+        if (!this.getController().isConnected()) return null;  // TODO: Throw error?
 
         /*
         Refer to:
@@ -89,7 +88,7 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
         }
         catch (IOException e) {
             // openConnection() failed
-            super.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
+            this.getController().errorDisplay(Errors.NETWORK_CONNECTION, super.getName());
             e.printStackTrace();
 
             // TODO: Throw error?
@@ -122,6 +121,14 @@ public abstract class AbstractJSONCaller extends AbstractAPICaller {
 
         super.setHasPrice(true);
         return extractedPrice;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JSONCallerContract getController() {
+        return (JSONCallerContract) super.getController();
     }
 
 }

@@ -2,6 +2,7 @@ package com.company.api_calls.individual.CryptoCompare;
 
 import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
+import com.company.api_calls.JSONCallerContract;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
@@ -48,10 +49,10 @@ final public class CryptoCompare extends AbstractJSONCaller {
      * The constructor for the basic CryptoCompare requests
      * @param cryptoCurrency The cryptocurrency
      * @param fiatCurrency The fiat currency
-     * @param controller The controller that calls this endpoint
+     * @param controller The controller that implements the required methods
      */
     public CryptoCompare(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                   final ControllerInterface controller) {
+                   final JSONCallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CryptoCompare.ACCEPTED_CRYPTOCURRENCIES,
                 CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
                 CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +

@@ -2,7 +2,7 @@ package com.company.api_calls.individual.CoinBase;
 
 import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
-import com.company.controller.ControllerInterface;
+import com.company.api_calls.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -45,9 +45,10 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param fiatCurrency The fiat currency
      * @param name The name of the specific request
      * @param urlExt The extension to the base url
+     * @param controller The controller that implements the required methods
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                            final String name, final String urlExt, final ControllerInterface controller) {
+                            final String name, final String urlExt, final JSONCallerContract controller) {
         super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
                 AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
                 AbstractCoinBase.BASE_URL + urlExt, controller);
