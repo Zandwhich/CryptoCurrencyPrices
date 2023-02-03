@@ -10,18 +10,13 @@ import com.company.tools.enums.currency.FiatCurrencies;
 final public class CoinBaseSpot extends AbstractCoinBase {
 
     /* ************ *
-     *  Constants   *
+     *    Fields    *
      * ************ */
 
     /**
      * The url extension that hits the spot endpoint at CoinBase
      */
     private final static String SPOT_EXT = "/spot";
-
-
-    /* ************ *
-     *    Fields    *
-     * ************ */
 
 
     /* ************ *
@@ -36,18 +31,11 @@ final public class CoinBaseSpot extends AbstractCoinBase {
      */
     public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                         final ControllerInterface controller) {
-        super(cryptoCurrency, fiatCurrency, "Spot: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
-                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseSpot.SPOT_EXT,
+        super(cryptoCurrency, fiatCurrency,
+                "Spot: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
+                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                        CoinBaseSpot.SPOT_EXT,
                 controller);
     }
-
-
-    /* ************ *
-     *    Methods   *
-     * ************ */
-
-    /* Public */
-
-    // Getters
 
 }

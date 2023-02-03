@@ -40,11 +40,11 @@ public interface MainControllerInterface extends ControllerInterface, AboutMenuI
      * Updates the currently selected fiatCurrencyPrice
      * @param fiatCurrency The fiat currency to be passed in
      */
-    void updateFiatCurrency(FiatCurrencies fiatCurrency);
+    void updateFiatCurrency(final FiatCurrencies fiatCurrency);
 
     /**
      * Updates the currently selected cryptocurrencyPrice
      * @param cryptoCurrency The cryptocurrency to be passed in
      */
-    void updateCryptocurrency(CryptoCurrencies cryptoCurrency);
+    void updateCryptocurrency(final CryptoCurrencies cryptoCurrency);
 }

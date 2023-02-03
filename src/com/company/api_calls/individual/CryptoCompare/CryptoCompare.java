@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CryptoCompare;
 
+import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
@@ -38,6 +39,7 @@ final public class CryptoCompare extends AbstractJSONCaller {
             FiatCurrencies.EUR, FiatCurrencies.GBP, FiatCurrencies.JPY, FiatCurrencies.MXN, FiatCurrencies.NZD,
             FiatCurrencies.PLN, FiatCurrencies.SEK, FiatCurrencies.USD};
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -57,13 +59,10 @@ final public class CryptoCompare extends AbstractJSONCaller {
                 controller);
     }
 
+
     /* ************ *
      *   Methods    *
      * ************ */
-
-    /* Public */
-
-    // Getters
 
     /**
      * Returns the base url
@@ -72,8 +71,6 @@ final public class CryptoCompare extends AbstractJSONCaller {
     @Override
     public String getBaseUrl() { return CryptoCompare.BASE_URL; }
 
-    // Others
-
     /**
      * Returns if the given fiat currency can be used with CryptoCompare
      * @param fiatCurrency The given fiat currency
@@ -81,12 +78,7 @@ final public class CryptoCompare extends AbstractJSONCaller {
      */
     public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
-        for (final FiatCurrencies currency : CryptoCompare.ACCEPTED_FIAT_CURRENCIES)
-        {
-            if (currency.equals(fiatCurrency)) return true;
-        }
-
-        return false;
+        return AbstractAPICaller.canUseCurrency(CryptoCompare.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
 
     /**
@@ -96,15 +88,8 @@ final public class CryptoCompare extends AbstractJSONCaller {
      */
     public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
-        for (final CryptoCurrencies currency : CryptoCompare.ACCEPTED_CRYPTOCURRENCIES)
-        {
-            if (currency.equals(cryptoCurrency)) return true;
-        }//end for
-
-        return false;
+        return AbstractAPICaller.canUseCurrency(CryptoCompare.ACCEPTED_CRYPTOCURRENCIES, cryptoCurrency);
     }
-
-    /* Protected */
 
     /**
      * {@inheritDoc}

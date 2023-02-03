@@ -5,5 +5,4 @@ import com.company.view.button.ButtonInterface;
 /**
  * The interface of the button used to close a window
  */
-public interface CloseButtonInterface extends ButtonInterface {
-}
+public interface CloseButtonInterface extends ButtonInterface { }

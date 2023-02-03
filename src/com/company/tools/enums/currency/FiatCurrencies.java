@@ -180,7 +180,7 @@ public enum FiatCurrencies implements Currency {
 ;
 
     /* ************ */
-    /*  Constants   */
+    /*    Fields    */
     /* ************ */
 
     /**
@@ -233,11 +233,6 @@ public enum FiatCurrencies implements Currency {
      */
     private static final String USD_FULL_NAME = "United States Dollar";
 
-
-    /* ************ */
-    /*    Fields    */
-    /* ************ */
-
     /**
      * The full name of the fiat currency
      */
@@ -247,6 +242,7 @@ public enum FiatCurrencies implements Currency {
      * The abbreviated name of the fiat currency
      */
     private String abbreviatedName;
+
 
     /* ************ */
     /* Initializers */
@@ -303,13 +299,8 @@ public enum FiatCurrencies implements Currency {
     /*    Methods   */
     /* ************ */
 
-    /* Public */
-
-    // Getters
-
     /**
-     * Returns the full name of the fiat currency
-     * @return The full name of the fiat currency
+     * {@inheritDoc}
      */
     @Override
     public String getFullName() {
@@ -317,8 +308,7 @@ public enum FiatCurrencies implements Currency {
     }
 
     /**
-     * Returns the abbreviated name of the fiat currency
-     * @return The abbreviated name of the fiat currency
+     * {@inheritDoc}
      */
     @Override
     public String getAbbreviatedName() {
@@ -330,7 +320,7 @@ public enum FiatCurrencies implements Currency {
      * @return The FiatCurrencies enum in an array
      */
     public static String[] toStringArray() {
-        String[] array = new String[FiatCurrencies.values().length];
+        final String[] array = new String[FiatCurrencies.values().length];
         for (int i = 0; i < FiatCurrencies.values().length; i++) {
             array[i] = FiatCurrencies.values()[i].toString();
         }
@@ -343,8 +333,8 @@ public enum FiatCurrencies implements Currency {
      * @param fiatCurrency The given string
      * @return The FiatCurrency enum value
      */
-    public static FiatCurrencies toFiatCurrency(String fiatCurrency) {
-        for (FiatCurrencies currency : FiatCurrencies.values())  {
+    public static FiatCurrencies toFiatCurrency(final String fiatCurrency) {
+        for (final FiatCurrencies currency : FiatCurrencies.values())  {
             if (fiatCurrency.equals(currency.toString())) return currency;
         }
         return null;
@@ -373,4 +363,5 @@ public enum FiatCurrencies implements Currency {
     public static int indexOf(final FiatCurrencies fiatCurrency) {
         return FiatCurrencies.indexOf(fiatCurrency.abbreviatedName);
     }
+
 }

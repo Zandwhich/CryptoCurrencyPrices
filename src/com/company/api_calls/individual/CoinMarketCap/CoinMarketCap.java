@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinMarketCap;
 
+import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
@@ -13,7 +14,7 @@ import json_simple.JSONObject;
 final public class CoinMarketCap extends AbstractJSONCaller {
 
     /* ************ *
-     *  Constants   *
+     *    Fields    *
      * ************ */
 
     /**
@@ -61,21 +62,16 @@ final public class CoinMarketCap extends AbstractJSONCaller {
                 controller);
     }
 
+
     /* ************ *
      *   Methods    *
      * ************ */
-
-    /* Public */
-
-    // Getters
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String getBaseUrl() { return CoinMarketCap.BASE_URL; }
-
-    // Other
 
     /**
      * Returns if the given fiat currency can be used with CoinMarketCap
@@ -84,11 +80,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
      */
     public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
-        for (final FiatCurrencies currency : CoinMarketCap.ACCEPTED_FIAT_CURRENCIES)
-        {
-            if (currency.equals(fiatCurrency)) return true;
-        }//end for
-        return false;
+        return AbstractAPICaller.canUseCurrency(CoinMarketCap.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
 
     /**
@@ -98,14 +90,8 @@ final public class CoinMarketCap extends AbstractJSONCaller {
      */
     public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
-        for (final CryptoCurrencies currency : CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES)
-        {
-            if (currency.equals(cryptoCurrency)) return true;
-        }//end for
-        return false;
+        return AbstractAPICaller.canUseCurrency(CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
-
-    /* Protected */
 
     /**
      * {@inheritDoc}

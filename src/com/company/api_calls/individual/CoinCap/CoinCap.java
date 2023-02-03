@@ -1,5 +1,6 @@
 package com.company.api_calls.individual.CoinCap;
 
+import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
@@ -36,6 +37,7 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     private final static FiatCurrencies[] ACCEPTED_FIAT_CURRENCIES = {FiatCurrencies.USD};
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -52,13 +54,10 @@ final public class CoinCap extends AbstractJSONCaller {
                 CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
     }
 
+
     /* ************ *
      *   Methods    *
      * ************ */
-
-    /* Public */
-
-    // Getters
 
     /**
      * Returns the base url
@@ -67,8 +66,6 @@ final public class CoinCap extends AbstractJSONCaller {
     @Override
     public String getBaseUrl() { return CoinCap.BASE_URL; }
 
-    // Others
-
     /**
      * Returns if the given fiat currency can be used with CoinCap
      * @param fiatCurrency The given fiat currency
@@ -76,12 +73,7 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
-        for (final FiatCurrencies currency : CoinCap.ACCEPTED_FIAT_CURRENCIES)
-        {
-            if (currency.equals(fiatCurrency)) return true;
-        }
-
-        return false;
+        return AbstractAPICaller.canUseCurrency(CoinCap.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
 
     /**
@@ -91,15 +83,8 @@ final public class CoinCap extends AbstractJSONCaller {
      */
     public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
-        for (final CryptoCurrencies currency : CoinCap.ACCEPTED_CRYPTOCURRENCIES)
-        {
-            if (currency.equals(cryptoCurrency)) return true;
-        }
-
-        return false;
+        return AbstractAPICaller.canUseCurrency(CoinCap.ACCEPTED_CRYPTOCURRENCIES, cryptoCurrency);
     }
-
-    /* Protected */
 
     /**
      * {@inheritDoc}
@@ -107,6 +92,8 @@ final public class CoinCap extends AbstractJSONCaller {
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
         final JSONObject data = (JSONObject) jsonObject.get("data");
+
+        // TODO: Should throw an error here?
         if (data == null) return -1;
 
         return Double.parseDouble((String) data.get("rateUsd"));

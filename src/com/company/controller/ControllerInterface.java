@@ -7,10 +7,6 @@ import com.company.tools.enums.Errors;
  */
 public interface ControllerInterface {
 
-    /* ************ *
-     *    Methods   *
-     * ************ */
-
     /**
      * Refreshes the controller
      */
@@ -20,14 +16,14 @@ public interface ControllerInterface {
      * Pops up a window that displays an error message
      * @param error The type of error
      */
-    void errorDisplay(Errors error);
+    void errorDisplay(final Errors error);
 
     /**
      * Pops up a window that displays an error message
      * @param error The type of error
      * @param name The name of who called this error
      */
-    void errorDisplay(Errors error, String name);
+    void errorDisplay(final Errors error, final String name);
 
     /**
      * Returns true if connected to the internet, otherwise false

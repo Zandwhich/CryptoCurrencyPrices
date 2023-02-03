@@ -8,7 +8,6 @@ import javax.swing.*;
  */
 public abstract class AbstractJMenu extends JMenu implements MenuInterface {
 
-
     /* ************ *
      * Constructors *
      * ************ */

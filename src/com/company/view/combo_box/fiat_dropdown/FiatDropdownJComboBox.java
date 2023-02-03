@@ -10,10 +10,6 @@ import com.company.view.combo_box.AbstractJComboBox;
 final public class FiatDropdownJComboBox extends AbstractJComboBox<String> implements FiatDropdownInterface<String> {
 
     /* ************ *
-     *    Fields    *
-     * ************ */
-
-    /* ************ *
      * Constructors *
      * ************ */
 
@@ -21,15 +17,14 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
      * A constructor for the combo box
      * @param items A string of items that is displayed
      */
-    public FiatDropdownJComboBox(String[] items, MainControllerInterface mainController) {
+    public FiatDropdownJComboBox(final String[] items, final MainControllerInterface mainController) {
         super(items, mainController);
     }
+
 
     /* ************ *
      *    Methods   *
      * ************ */
-
-    /* Private */
 
     /**
      * Returns the controller cast as the main controller interface
@@ -39,9 +34,6 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
         return (MainControllerInterface) super.getController();
     }
 
-
-    /* Protected */
-
     /**
      * Alerts the main controller when the selected fiat currency is changed
      */
@@ -50,11 +42,5 @@ final public class FiatDropdownJComboBox extends AbstractJComboBox<String> imple
         super.selectedItemChanged();
         this.getMainController().updateFiatCurrency(FiatCurrencies.toFiatCurrency(super.getSelectedItem()));
     }
-
-
-    /* Public */
-
-    // Getters
-
 
 }

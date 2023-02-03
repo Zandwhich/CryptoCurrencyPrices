@@ -9,10 +9,6 @@ import com.company.view.combo_box.AbstractJComboBox;
  */
 final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> implements CryptoDropdownInterface<String> {
 
-    /* ****** *
-     * Fields *
-     * ****** */
-
     /* ************ *
      * Constructors *
      * ************ */
@@ -24,11 +20,10 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
         super(items, mainController);
     }
 
-    /* ******* *
-     * Methods *
-     * ******* */
 
-    /* Private */
+    /* ************ *
+     *   Methods    *
+     * ************ */
 
     /**
      * Returns the controller cast as the main controller interface
@@ -37,9 +32,6 @@ final public class CryptoDropdownJComboBox extends AbstractJComboBox<String> imp
     private MainControllerInterface getMainController() {
         return (MainControllerInterface) super.getController();
     }
-
-
-    /* Protected */
 
     /**
      * Alerts the main controller when the selected cryptocurrency is changed

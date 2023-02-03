@@ -29,4 +29,5 @@ final public class AboutJMenuItem extends AbstractJMenuItem implements AboutMenu
         super(AboutJMenuItem.NAME);
         this.addActionListener(e -> controller.aboutPagePopUp());
     }
+
 }
