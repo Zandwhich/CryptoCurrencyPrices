@@ -108,29 +108,7 @@ public abstract class AbstractJFrameWindow extends JFrame implements WindowInter
      * {@inheritDoc}
      */
     @Override
-    public int getLocationX() {
-        return super.getLocation().x;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getLocationY() {
-        return super.getLocation().y;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setTitle(final String title) { super.setTitle(title); }
-
-    /**
-     * Sets if the window is visible or not
-     * @param isVisible If the window is visible or not
-     */
-    public void setIsVisible(final boolean isVisible) { super.setVisible(isVisible); }
 
     /**
      * {@inheritDoc}
