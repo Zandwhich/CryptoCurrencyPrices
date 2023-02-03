@@ -1,16 +1,14 @@
 package com.company.controller;
 
+import com.company.api_call.APICallerContract;
+import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.Errors;
+import com.company.view.button.refresh.RefreshButtonContractInterface;
 
 /**
  * The general interface for all controllers
  */
-public interface ControllerInterface {
-
-    /**
-     * Refreshes the controller
-     */
-    void refresh();
+public interface ControllerInterface extends APICallerContract, JSONCallerContract, RefreshButtonContractInterface {
 
     /**
      * Pops up a window that displays an error message
@@ -19,27 +17,9 @@ public interface ControllerInterface {
     void errorDisplay(final Errors error);
 
     /**
-     * Pops up a window that displays an error message
-     * @param error The type of error
-     * @param name The name of who called this error
-     */
-    void errorDisplay(final Errors error, final String name);
-
-    /**
-     * Returns true if connected to the internet, otherwise false
-     * @return True if connected to the internet, otherwise false
-     */
-    boolean isConnected();
-
-    /**
      * Checks the internet connection and returns if it is connected or not
      * @return If there is a connection to the internet
      */
     boolean checkConnection();
-
-    /**
-     * The method to call when there is an update to data and the window should be redrawn
-     */
-    void notifyWindowOfUpdate();
 
 }
