@@ -1,4 +1,4 @@
-package com.company.api_calls.individual.CoinMarketCap;
+package com.company.api_calls.CoinMarketCap;
 
 import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;

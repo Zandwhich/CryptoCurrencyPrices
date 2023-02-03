@@ -1,22 +1,22 @@
-package com.company.api_calls.individual.CoinBase;
+package com.company.api_calls.CoinBase;
 
 import com.company.api_calls.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 
 /**
- * The implementation of the CoinBase API that hits the 'buy' endpoint
+ * The implementation for the spot endpoint in CoinBase
  */
-final public class CoinBaseBuy extends AbstractCoinBase {
+final public class CoinBaseSpot extends AbstractCoinBase {
 
     /* ************ *
      *    Fields    *
      * ************ */
 
     /**
-     * The url extension that hits the buy endpoint at CoinBase
+     * The url extension that hits the spot endpoint at CoinBase
      */
-    private static final String BUY_EXT = "/buy";
+    private final static String SPOT_EXT = "/spot";
 
 
     /* ************ *
@@ -29,12 +29,12 @@ final public class CoinBaseBuy extends AbstractCoinBase {
      * @param fiatCurrency The fiat currency in the endpoint
      * @param controller The controller that implements the required methods
      */
-    public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                       final JSONCallerContract controller) {
+    public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                        final JSONCallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
-                "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
+                "Spot: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                        CoinBaseBuy.BUY_EXT,
+                        CoinBaseSpot.SPOT_EXT,
                 controller);
     }
 

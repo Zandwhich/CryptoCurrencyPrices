@@ -1,4 +1,4 @@
-package com.company.api_calls.individual.CoinBase;
+package com.company.api_calls.CoinBase;
 
 import com.company.api_calls.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;

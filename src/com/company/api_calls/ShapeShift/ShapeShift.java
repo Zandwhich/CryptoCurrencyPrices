@@ -1,4 +1,4 @@
-package com.company.api_calls.individual.ShapeShift;
+package com.company.api_calls.ShapeShift;
 
 /**
  * The endpoint that hits the ShapeShift API

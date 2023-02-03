@@ -1,9 +1,8 @@
-package com.company.api_calls.individual.CryptoCompare;
+package com.company.api_calls.CryptoCompare;
 
 import com.company.api_calls.AbstractAPICaller;
 import com.company.api_calls.AbstractJSONCaller;
 import com.company.api_calls.JSONCallerContract;
-import com.company.controller.ControllerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;

@@ -1,12 +1,12 @@
 package com.company.controller.controllers.main_controller;
 
 import com.company.api_calls.APICallerInterface;
-import com.company.api_calls.individual.CoinBase.AbstractCoinBase;
-import com.company.api_calls.individual.CoinBase.CoinBaseBuy;
-import com.company.api_calls.individual.CoinBase.CoinBaseSell;
-import com.company.api_calls.individual.CoinBase.CoinBaseSpot;
-import com.company.api_calls.individual.CoinCap.CoinCap;
-import com.company.api_calls.individual.CryptoCompare.CryptoCompare;
+import com.company.api_calls.CoinBase.AbstractCoinBase;
+import com.company.api_calls.CoinBase.CoinBaseBuy;
+import com.company.api_calls.CoinBase.CoinBaseSell;
+import com.company.api_calls.CoinBase.CoinBaseSpot;
+import com.company.api_calls.CoinCap.CoinCap;
+import com.company.api_calls.CryptoCompare.CryptoCompare;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.Errors;
 import com.company.tools.enums.currency.FiatCurrencies;
