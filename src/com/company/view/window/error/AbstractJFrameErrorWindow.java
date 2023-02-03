@@ -35,8 +35,8 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      */
     public AbstractJFrameErrorWindow(final ControllerInterface controller, final String title, final int width,
                                      final int height, final String message) {
-        super(controller, title, width, height);
-        this.setup(message);
+        super(title, width, height);
+        this.setup(controller, message);
     }
 
 
@@ -48,12 +48,12 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
      * The redundant setup that is run for each constructor
      * @param message The error message (body) of the window
      */
-    private void setup(final String message) {
+    private void setup(final ControllerInterface controller, final String message) {
         // The label that holds the message
         panel.add(new JLabel(message));
 
         // The button that can close the screen
-        panel.add(new CloseJButton(super.getController(), this));
+        panel.add(new CloseJButton(controller, this));
 
         this.add(panel);
     }

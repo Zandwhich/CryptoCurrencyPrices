@@ -259,7 +259,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     @Override
     public void aboutPagePopUp() {
-        new AboutJFrameWindow(this);
+        new AboutJFrameWindow();
     }
 
 }

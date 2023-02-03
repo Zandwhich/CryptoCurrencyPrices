@@ -110,9 +110,9 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
      * @param mainController The MainController of the application
      */
     public MainJFrameWindow(final MainControllerInterface mainController) {
-        super(mainController, MainJFrameWindow.TITLE, MainJFrameWindow.DEFAULT_WIDTH, MainJFrameWindow.DEFAULT_HEIGHT,
+        super(MainJFrameWindow.TITLE, MainJFrameWindow.DEFAULT_WIDTH, MainJFrameWindow.DEFAULT_HEIGHT,
                 JFrame.EXIT_ON_CLOSE, MainJFrameWindow.DEFAULT_VISIBILITY);
-        this.setup();
+        this.setup(mainController);
     }
 
 
@@ -123,10 +123,11 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
     /**
      * The general setup method that is used for maximum abstraction
      */
-    private void setup() {
+    private void setup(final MainControllerInterface mainController) {
+        this.mainController = mainController;
+
         super.setLocation(MainJFrameWindow.DEFAULT_X, MainJFrameWindow.DEFAULT_Y);
 
-        this.mainController = (MainControllerInterface) super.getController();
         this.table = new MainJScrollPane(this.data);
 
         super.setJMenuBar(new MainJMenuBar(this.mainController));

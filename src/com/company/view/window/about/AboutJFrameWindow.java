@@ -48,10 +48,9 @@ public final class AboutJFrameWindow extends AbstractJFrameWindow implements Abo
 
     /**
      * The constructor for the About page
-     * @param controller The controller that handles this page
      */
-    public AboutJFrameWindow(final ControllerInterface controller) {
-        super(controller, AboutJFrameWindow.TITLE, AboutJFrameWindow.WIDTH, AboutJFrameWindow.HEIGHT);
+    public AboutJFrameWindow() {
+        super(AboutJFrameWindow.TITLE, AboutJFrameWindow.WIDTH, AboutJFrameWindow.HEIGHT);
 
         this.setup();
     }
