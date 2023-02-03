@@ -35,7 +35,7 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
     /**
      * The height of the error window
      */
-    public static final int HEIGHT = 75;
+    public static final int HEIGHT = 100;
 
 
     /* ************ *
