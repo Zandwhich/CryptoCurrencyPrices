@@ -1,4 +1,4 @@
-package com.company.api_calls;
+package com.company.api_call;
 
 import com.company.tools.enums.Errors;
 

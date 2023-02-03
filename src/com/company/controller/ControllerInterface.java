@@ -1,7 +1,7 @@
 package com.company.controller;
 
-import com.company.api_calls.APICallerContract;
-import com.company.api_calls.JSONCallerContract;
+import com.company.api_call.APICallerContract;
+import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.Errors;
 
 /**

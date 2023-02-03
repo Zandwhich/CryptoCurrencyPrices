@@ -1,6 +1,6 @@
-package com.company.api_calls.CoinBase;
+package com.company.api_call.CoinBase;
 
-import com.company.api_calls.JSONCallerContract;
+import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 

@@ -1,4 +1,4 @@
-package com.company.api_calls;
+package com.company.api_call;
 
 /**
  * Whoever wants to use an instantiation of APICallerInterface needs to provide these methods
