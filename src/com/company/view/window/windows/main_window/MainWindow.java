@@ -9,7 +9,7 @@ import com.company.view.combo_box.fiat_dropdown.FiatDropdownJComboBox;
 import com.company.view.menu_bar.main_menu_bar.MainJMenuBar;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePane;
 import com.company.view.table_pane.table_panes.MainTablePane.MainTablePaneInterface;
-import com.company.view.button.buttons.refresh_button.RefreshButton;
+import com.company.view.button.buttons.refresh_button.RefreshJButton;
 import com.company.view.button.buttons.refresh_button.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
@@ -91,11 +91,6 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
     private MainTablePaneInterface table;
 
     /**
-     * The list of website names that are displayed
-     */
-    private final JList<String> websiteNames = new JList<>();
-
-    /**
      * The dropdown to choose the fiat currency
      */
     private FiatDropdownJComboBox fiatDropdown;
@@ -104,6 +99,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      * The dropdown to choose the cryptocurrency
      */
     private CryptoDropdownJComboBox cryptoDropdown;
+
 
     /* ************ *
      * Constructors *
@@ -119,11 +115,10 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         this.setup();
     }
 
+
     /* ************ *
      *    Methods   *
      * ************ */
-
-    /* Private */
 
     /**
      * The general setup method that is used for maximum abstraction
@@ -136,7 +131,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
 
         super.setJMenuBar(new MainJMenuBar(this.mainController));
 
-        final RefreshButtonInterface refreshButton = new RefreshButton(this.mainController, this);
+        final RefreshButtonInterface refreshButton = new RefreshJButton(this.mainController, this);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
         this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 
@@ -158,10 +153,6 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
         this.setVisible(MainWindow.DEFAULT_VISIBILITY);
     }
 
-    /* Protected */
-
-    /* Public */
-
     /**
      * {@inheritDoc}
      */
@@ -181,7 +172,7 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
 
         // TODO: Clean this up a bit?
         for (APICallerInterface website : websites) {
-            Vector<String> websiteVec = new Vector<>();
+            final Vector<String> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
             websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
@@ -194,4 +185,5 @@ final public class MainWindow extends AbstractJFrameWindow implements MainWindow
      */
     @Override
     public void close() { }
+
 }

@@ -5,5 +5,4 @@ import com.company.view.table_pane.TablePaneInterface;
 /**
  * The interface for the main table
  */
-public interface MainTablePaneInterface extends TablePaneInterface {
-}
+public interface MainTablePaneInterface extends TablePaneInterface { }

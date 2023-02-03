@@ -6,5 +6,4 @@ import com.company.controller.ControllerInterface;
  * The base menu interface from which all other menus will extend.
  * Provides base menu interaction
  */
-public interface MenuInterface {
-}
+public interface MenuInterface { }

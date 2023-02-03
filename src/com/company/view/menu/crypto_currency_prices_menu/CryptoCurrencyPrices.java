@@ -32,4 +32,5 @@ final public class CryptoCurrencyPrices extends AbstractJMenu implements CryptoC
 
         super.add(new AboutJMenuItem(controller));
     }
+
 }

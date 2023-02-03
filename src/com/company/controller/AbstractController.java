@@ -19,6 +19,7 @@ public abstract class AbstractController implements  ControllerInterface {
      */
     private static boolean isConnected = false;
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -26,18 +27,12 @@ public abstract class AbstractController implements  ControllerInterface {
     /**
      * The constructor for the abstract controller
      */
-    public AbstractController() {
+    public AbstractController() {}
 
-    }
 
     /* ************ *
      *   Methods    *
      * ************ */
-
-    /* Private */
-
-
-    /* Protected */
 
     /**
      * Sets if the application is connected to the internet
@@ -47,24 +42,13 @@ public abstract class AbstractController implements  ControllerInterface {
         AbstractController.isConnected = isConnected;
     }
 
-
-    /* Public */
-
-    // Getters
-
     /**
-     * Returns true if connected to the internet, otherwise false
-     * @return True if connected to the internet, otherwise false
+     * {@inheritDoc}
      */
     @Override
     public boolean isConnected() {
         return isConnected;
     }
-
-
-    // Setters
-
-    // Others
 
     /**
      * Checks the internet connection and returns if it is connected or not
@@ -88,6 +72,7 @@ public abstract class AbstractController implements  ControllerInterface {
         }
         try {
             // Set up the connection and get the input stream
+            assert url != null;
             final URLConnection connection = url.openConnection();
             connection.connect();
         }
@@ -97,7 +82,7 @@ public abstract class AbstractController implements  ControllerInterface {
         }
 
         AbstractController.isConnected = internet;
-        return isConnected();
+        return this.isConnected();
     }
 
 }

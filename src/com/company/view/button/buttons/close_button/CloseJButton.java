@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 /**
  * The button used to close a window
  */
-final public class CloseButton extends AbstractJButtonButton implements CloseButtonInterface {
+final public class CloseJButton extends AbstractJButtonButton implements CloseButtonInterface {
 
     /* ************ *
      *    Fields    *
@@ -20,6 +20,7 @@ final public class CloseButton extends AbstractJButtonButton implements CloseBut
      */
     public static final String TEXT = "Close";
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -29,23 +30,23 @@ final public class CloseButton extends AbstractJButtonButton implements CloseBut
      * @param controller The controller that subscribes to the button
      * @param window The window that holds the button
      */
-    public CloseButton(ControllerInterface controller, WindowInterface window) {
+    public CloseJButton(final ControllerInterface controller, final WindowInterface window) {
         super(controller, window);
-        super.setText(CloseButton.TEXT);
+        super.setText(CloseJButton.TEXT);
     }
+
 
     /* ************ *
      *   Methods    *
      * ************ */
-
-    /* Public */
 
     /**
      * The action performed on clicking the button. In this case it closes the window
      * @param actionEvent The action event passed in
      */
     @Override
-    public void onClick(ActionEvent actionEvent) {
+    public void onClick(final ActionEvent actionEvent) {
         super.getWindow().close();
     }
+
 }

@@ -10,8 +10,6 @@ import java.net.URL;
  */
 public interface APICallerInterface {
 
-    // Getters
-
     /**
      * Returns the current price
      * @return The current price

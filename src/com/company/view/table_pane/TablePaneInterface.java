@@ -7,8 +7,6 @@ import java.util.Vector;
  */
 public interface TablePaneInterface {
 
-    // Getters
-
     /**
      * Gets the columns
      * @return The columns
@@ -21,19 +19,16 @@ public interface TablePaneInterface {
      */
     Vector<Vector<String>> getData();
 
-
-    // Setters
-
     /**
      * Sets the header columns' names
      * @param columns The header columns
      */
-    void setColumns(Vector<String> columns);
+    void setColumns(final Vector<String> columns);
 
     /**
      * Sets the data within the table
      * @param data The data within the table
      */
-    void setData(Vector<Vector<String>> data);
+    void setData(final Vector<Vector<String>> data);
 
 }

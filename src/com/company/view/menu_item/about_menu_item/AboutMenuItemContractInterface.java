@@ -11,4 +11,5 @@ public interface AboutMenuItemContractInterface extends MenuItemContractInterfac
      * Pops up a page that displays information about this application
      */
     void aboutPagePopUp();
+
 }

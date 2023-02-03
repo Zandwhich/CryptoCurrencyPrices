@@ -47,6 +47,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     private final MainWindowInterface mainWindow = new MainWindow(this);
 
+
     /* ************ *
      * Constructors *
      * ************ */
@@ -65,7 +66,7 @@ final public class MainController extends AbstractController implements MainCont
         }
 
         /* CoinMarketCap */
-        //websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        // websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
 
         /* CoinCap */
         if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
@@ -78,17 +79,16 @@ final public class MainController extends AbstractController implements MainCont
             websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
         }
 
-        //this.refresh();
+        // this.refresh();
 
         // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns();
     }
 
+
     /* ************ *
      *    Methods   *
      * ************ */
-
-    /* Private */
 
     /**
      * Because the logic for changing either cryptocurrency or fiat currency is the same, have one method
@@ -110,7 +110,7 @@ final public class MainController extends AbstractController implements MainCont
 //        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
 //        {
 //            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-//        }//end if CoinMarketCap
+//        }
 
         /* CoinCap */
         if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
@@ -140,13 +140,8 @@ final public class MainController extends AbstractController implements MainCont
         this.updateChangedCurrency();
     }
 
-    /* Public */
-
-    // Getters
-
     /**
-     * Gets the list of websites of URLs to hit
-     * @return The list of websites of URLs to hit
+     * {@inheritDoc}
      */
     @Override
     public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }
@@ -167,14 +162,12 @@ final public class MainController extends AbstractController implements MainCont
         return this.currentCrypto;
     }
 
-    // Other
-
     /**
      * The method to be run on a near-infinite loop to run the program
      */
     public void run() {
       
-        while(true) {
+        while (true) {
             // System.out.println("Current window location: (" + this.mainWindow.getLocationX() + ", " + this.mainWindow.getLocationY() + ")");
         }
 
@@ -198,7 +191,8 @@ final public class MainController extends AbstractController implements MainCont
         for (final APICallerInterface website : this.websiteList) {
             new Thread(website::updatePriceAndNotify).start();
         }
-        //this.updateViewPrices();
+
+        // this.updateViewPrices();
     }
 
     /**
@@ -267,4 +261,5 @@ final public class MainController extends AbstractController implements MainCont
     public void aboutPagePopUp() {
         new AboutJFrameWindow(this);
     }
+
 }

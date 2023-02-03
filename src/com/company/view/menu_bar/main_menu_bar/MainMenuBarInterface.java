@@ -5,5 +5,4 @@ import com.company.view.menu_bar.MenuBarInterface;
 /**
  * The interface and functions for the main menu bar
  */
-public interface MainMenuBarInterface extends MenuBarInterface {
-}
+public interface MainMenuBarInterface extends MenuBarInterface { }
