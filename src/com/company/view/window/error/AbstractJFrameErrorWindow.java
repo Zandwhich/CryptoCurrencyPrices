@@ -53,7 +53,7 @@ public abstract class AbstractJFrameErrorWindow extends AbstractJFrameWindow imp
         panel.add(new JLabel(message));
 
         // The button that can close the screen
-        panel.add(new CloseJButton(controller, this));
+        panel.add(new CloseJButton(this));
 
         this.add(panel);
     }

@@ -20,6 +20,11 @@ final public class CloseJButton extends AbstractJButtonButton implements CloseBu
      */
     public static final String TEXT = "Close";
 
+    /**
+     * The window that holds this button (needed for its <code>close()</code> operation)
+     */
+    private final WindowInterface window;
+
 
     /* ************ *
      * Constructors *
@@ -27,11 +32,12 @@ final public class CloseJButton extends AbstractJButtonButton implements CloseBu
 
     /**
      * Constructor for the close button
-     * @param controller The controller that subscribes to the button
      * @param window The window that holds the button
      */
-    public CloseJButton(final ControllerInterface controller, final WindowInterface window) {
-        super(controller, window);
+    public CloseJButton(final WindowInterface window) {
+        super();
+
+        this.window = window;
         super.setText(CloseJButton.TEXT);
     }
 
@@ -46,7 +52,7 @@ final public class CloseJButton extends AbstractJButtonButton implements CloseBu
      */
     @Override
     public void onClick(final ActionEvent actionEvent) {
-        super.getWindow().close();
+        this.window.close();
     }
 
 }

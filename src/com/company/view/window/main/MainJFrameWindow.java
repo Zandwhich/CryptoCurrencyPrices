@@ -132,7 +132,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
 
         super.setJMenuBar(new MainJMenuBar(this.mainController));
 
-        final RefreshButtonInterface refreshButton = new RefreshJButton(this.mainController, this);
+        final RefreshButtonInterface refreshButton = new RefreshJButton(this.mainController);
         this.fiatDropdown = new FiatDropdownJComboBox(FiatCurrencies.toStringArray(), this.mainController);
         this.cryptoDropdown = new CryptoDropdownJComboBox(CryptoCurrencies.toStringArray(), this.mainController);
 

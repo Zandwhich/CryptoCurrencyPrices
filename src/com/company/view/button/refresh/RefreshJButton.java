@@ -16,7 +16,15 @@ final public class RefreshJButton extends AbstractJButtonButton implements Refre
      *    Fields    *
      * ************ */
 
+    /**
+     * The path to the image for the refresh button
+     */
     public static final String IMAGE_PATH = "src/resources/images/refresh_button_image.PNG";
+
+    /**
+     * The controller that implements the contract for the refresh button
+     */
+    private RefreshButtonContractInterface controller;
 
 
     /* ************ *
@@ -26,10 +34,10 @@ final public class RefreshJButton extends AbstractJButtonButton implements Refre
     /**
      * A constructor for the refresh button
      * @param controller The controller that holds and subscribes to the button that will be refreshed
-     * @param window The window that holds the button
      */
-    public RefreshJButton(final MainControllerInterface controller, final WindowInterface window) {
-        super(RefreshJButton.IMAGE_PATH, controller, window);
+    public RefreshJButton(final RefreshButtonContractInterface controller) {
+        super(RefreshJButton.IMAGE_PATH);
+        this.controller = controller;
 
         // TODO: This doesn't work, sadly...
         super.setMaximumSize(new Dimension(100, 100));
@@ -47,7 +55,7 @@ final public class RefreshJButton extends AbstractJButtonButton implements Refre
      */
     @Override
     protected void onClick(ActionEvent event) {
-        super.getController().refresh();
+        this.controller.refresh();
     }
 
 }
