@@ -26,9 +26,4 @@ public interface ControllerInterface extends APICallerContract, JSONCallerContra
      */
     boolean checkConnection();
 
-    /**
-     * The method to call when there is an update to data and the window should be redrawn
-     */
-    void notifyWindowOfUpdate();
-
 }
