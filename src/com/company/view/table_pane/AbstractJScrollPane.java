@@ -64,6 +64,8 @@ abstract public class AbstractJScrollPane extends JScrollPane implements TablePa
     }
 
     /**
+     * // TODO: Do I need to put the main table in a lock so that no two threads try to modify it at the same time?
+     *
      * Updates the internal data of the JTable by creating a new TableModel
      * @param data The data as a matrix of strings
      */

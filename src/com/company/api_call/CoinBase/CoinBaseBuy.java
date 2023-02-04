@@ -1,6 +1,6 @@
 package com.company.api_call.CoinBase;
 
-import com.company.api_call.JSONCallerContract;
+import com.company.api_call.APICallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 
@@ -30,7 +30,7 @@ final public class CoinBaseBuy extends AbstractCoinBase {
      * @param controller The controller that implements the required methods
      */
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                       final JSONCallerContract controller) {
+                       final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
                 "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
                 cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +

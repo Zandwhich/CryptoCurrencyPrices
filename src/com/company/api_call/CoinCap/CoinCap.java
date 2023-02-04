@@ -1,8 +1,7 @@
 package com.company.api_call.CoinCap;
 
+import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.api_call.AbstractJSONCaller;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -10,7 +9,7 @@ import json_simple.JSONObject;
 /**
  * The basic class for all CoinCap requests
  */
-final public class CoinCap extends AbstractJSONCaller {
+final public class CoinCap extends AbstractAPICaller {
 
     /* ************ *
      *    Fields    *
@@ -49,7 +48,7 @@ final public class CoinCap extends AbstractJSONCaller {
      * @param controller The controller that implements the required methods
      */
     public CoinCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                   final JSONCallerContract controller) {
+                   final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
     }
