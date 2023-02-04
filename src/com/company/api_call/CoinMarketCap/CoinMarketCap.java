@@ -1,8 +1,7 @@
 package com.company.api_call.CoinMarketCap;
 
+import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.api_call.AbstractJSONCaller;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -11,7 +10,7 @@ import json_simple.JSONObject;
  * The API endpoint for CoinMarketCap
  * TODO: Get this to work? Idk if I'll ever get around to this...
  */
-final public class CoinMarketCap extends AbstractJSONCaller {
+final public class CoinMarketCap extends AbstractAPICaller {
 
     /* ************ *
      *    Fields    *
@@ -52,7 +51,7 @@ final public class CoinMarketCap extends AbstractJSONCaller {
      * @param controller The controller that implements the required method
      */
     public CoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                         final JSONCallerContract controller) {
+                         final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinMarketCap.BASE_NAME + ": " + cryptoCurrency.getAbbreviatedName() + "/" +

@@ -1,8 +1,7 @@
 package com.company.api_call.CoinBase;
 
+import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.api_call.AbstractJSONCaller;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -10,7 +9,7 @@ import json_simple.JSONObject;
 /**
  * The basic class for all CoinBase requests
  */
-public abstract class AbstractCoinBase extends AbstractJSONCaller {
+public abstract class AbstractCoinBase extends AbstractAPICaller {
 
     /* ************ *
      *    Fields    *
@@ -48,7 +47,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param controller The controller that implements the required methods
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                            final String name, final String urlExt, final JSONCallerContract controller) {
+                            final String name, final String urlExt, final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
                 AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
                 AbstractCoinBase.BASE_URL + urlExt, controller);
