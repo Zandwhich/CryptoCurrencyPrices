@@ -216,12 +216,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * Sets the cryptocurrency
      * @param cryptoCurrency The cryptocurrency
+     *
+     * TODO: If this cryptocurrency is not one of the supported ones, throw an error
      */
     protected void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
 
     /**
      * Sets the fiat currency
      * @param fiatCurrency The fiat currency
+     *
+     * TODO: If this fiat currency is not one of the supported ones, throw an error
      */
     protected void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
 
