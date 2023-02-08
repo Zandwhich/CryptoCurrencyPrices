@@ -99,4 +99,12 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
         return Double.parseDouble((String) data.get("amount"));
     }
 
+    /**
+     * Updates the url to hit for the endpoint, provided that the extension is passed in
+     * @param urlExtension The extension for the CoinBase endpoint
+     */
+    protected void updateUrlWithNewExtension(final String urlExtension) {
+        super.updateUrl(AbstractCoinBase.BASE_URL + urlExtension);
+    }
+
 }

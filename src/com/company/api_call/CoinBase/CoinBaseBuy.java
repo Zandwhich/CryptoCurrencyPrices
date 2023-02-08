@@ -32,10 +32,34 @@ final public class CoinBaseBuy extends AbstractCoinBase {
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
-                "Buy: " + cryptoCurrency.getAbbreviatedName() + "/" + fiatCurrency.getAbbreviatedName(),
-                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                "Buy", cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
                         CoinBaseBuy.BUY_EXT,
                 controller);
     }
 
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint for the CoinBase calls
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        super.setCryptoCurrency(cryptoCurrency);
+        super.updateUrlWithNewExtension(cryptoCurrency.getAbbreviatedName() + "-" +
+                super.getCurrentFiatCurrency().getAbbreviatedName() + CoinBaseBuy.BUY_EXT);
+    }
+
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint for the CoinBase calls
+     * @param fiatCurrency The fiat currency to be used for this endpoint
+     */
+    @Override
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+        super.setFiatCurrency(fiatCurrency);
+        super.updateUrlWithNewExtension(super.getCurrentCryptoCurrency().getAbbreviatedName() + "-" +
+                fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT);
+    }
 }

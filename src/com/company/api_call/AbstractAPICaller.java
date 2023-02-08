@@ -233,16 +233,24 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
 
     /**
-     * Sets the name of the API endpoint
-     * @param name The name of the API endpoint
+     * Updates the url with a new url
+     * @param newUrl The new url in String form
      */
-    public void setName(final String name) { this.name = name; }
+    protected void updateUrl(final String newUrl) {
+        try {
+            this.url = new URL(newUrl);
+        }
+        catch (final MalformedURLException e) {
+            // Bad URL input
+            e.printStackTrace();
 
-    /**
-     * Sets the URL to hit
-     * @param url The url to hit
-     */
-    public void setUrl(final URL url) { this.url = url; }
+            // Not really sure, but I feel like this should be set to true
+            this.hasFailedLastUpdate = true;
+
+            // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+            //       Throw an error?
+        }
+    }
 
     /**
      * Sets if the last update failed
