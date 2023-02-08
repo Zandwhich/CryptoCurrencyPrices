@@ -57,6 +57,8 @@ final public class MainController extends AbstractController implements MainCont
      */
     public MainController() {
 
+        // TODO: Work to be done in the refactor_api_calls branch: update this so that if the endpoint doesn't accept
+        //       the starting currencies, it gets its currencies set to null
         /* CoinBase */
         if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
