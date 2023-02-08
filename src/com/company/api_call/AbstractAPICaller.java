@@ -74,6 +74,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private final FiatCurrencies[] acceptedFiatCurrencies;
 
+    /**
+     * The flag to check when going through to see if this API endpoint should be updated.
+     * </p>
+     * The flag's setter can be overwritten as well if we for some reason we don't want to use a certain endpoint.
+     */
+    private boolean isActive = false;
+
 
     /* ************ *
      * Constructors *
@@ -101,6 +108,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.hasFailedLastUpdate = false;
         this.price = 0.0;
         this.name = name;
+        this.isActive = false;
         try {
             this.url = new URL(url);
         }
@@ -164,6 +172,21 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     @Override
     public String getUrlString() { return this.url.toString(); }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isActive() {
+        return isActive;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setActive(final boolean active) {
+        isActive = active;
+    }
 
     /**
      * Gets the Base URL of the API call

@@ -57,4 +57,16 @@ public interface APICallerInterface {
      */
     String getUrlString();
 
+    /**
+     * Returns if this API endpoint is currently active
+     * @return If this API endpoint is currently active
+     */
+    boolean isActive();
+
+    /**
+     * Sets if this API endpoint should be currently active
+     * @param active If this endpoint is active or not
+     */
+    void setActive(final boolean active);
+
 }
