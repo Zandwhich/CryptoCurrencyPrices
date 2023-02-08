@@ -24,7 +24,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
     /**
      * The base name for CoinMarketCap requests
      */
-    private final static String BASE_NAME = "CoinMarketCap ";
+    private final static String BASE_NAME = "CoinMarketCap";
 
     /**
      * The cryptocurrencies that CoinMarketCap uses
@@ -54,9 +54,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
                          final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinMarketCap.BASE_NAME + ": " + cryptoCurrency.getAbbreviatedName() + "/" +
-                        fiatCurrency.getAbbreviatedName(),
-                CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
+                CoinMarketCap.BASE_NAME, CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
                         "&convert=" + fiatCurrency.getAbbreviatedName(),
                 controller);
     }
@@ -110,4 +108,29 @@ final public class CoinMarketCap extends AbstractAPICaller {
         return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
     }
 
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        super.setCryptoCurrency(cryptoCurrency);
+        super.updateUrl(CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
+                "&convert=" + super.getCurrentFiatCurrency().getAbbreviatedName());
+    }
+
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param fiatCurrency The fiat currency to be used for this endpoint
+     */
+    @Override
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+        super.setFiatCurrency(fiatCurrency);
+        super.updateUrl(CoinMarketCap.BASE_URL + "?symbol=" +
+                super.getCurrentFiatCurrency().getAbbreviatedName() + "&convert=" + fiatCurrency.getAbbreviatedName());
+    }
 }
