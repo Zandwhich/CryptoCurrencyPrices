@@ -98,4 +98,15 @@ final public class CoinCap extends AbstractAPICaller {
         return Double.parseDouble((String) data.get("rateUsd"));
     }
 
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        super.setCryptoCurrency(cryptoCurrency);
+        super.updateUrl(CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase());
+    }
 }
