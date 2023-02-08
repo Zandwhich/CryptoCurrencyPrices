@@ -2,6 +2,7 @@ package com.company.api_call.CryptoCompare;
 
 import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
+import com.company.api_call.CoinMarketCap.CoinMarketCap;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -23,7 +24,7 @@ final public class CryptoCompare extends AbstractAPICaller {
     /**
      * The base name for the endpoint
      */
-    private final static String BASE_NAME = "CryptoCompare ";
+    private final static String BASE_NAME = "CryptoCompare";
 
     /**
      * The accepted cryptocurrencies for CryptoCompare
@@ -99,4 +100,29 @@ final public class CryptoCompare extends AbstractAPICaller {
         return ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
     }
 
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        super.setCryptoCurrency(cryptoCurrency);
+        super.updateUrl(CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
+                super.getCurrentFiatCurrency().getAbbreviatedName());
+    }
+
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param fiatCurrency The fiat currency to be used for this endpoint
+     */
+    @Override
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+        super.setFiatCurrency(fiatCurrency);
+        super.updateUrl(CryptoCompare.BASE_URL + "?fsym=" +
+                super.getCurrentCryptoCurrency().getAbbreviatedName() + "&tsyms=" + fiatCurrency.getAbbreviatedName());
+    }
 }
