@@ -69,7 +69,7 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinBase
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -79,7 +79,7 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinBase
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }

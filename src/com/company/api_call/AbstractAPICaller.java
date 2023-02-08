@@ -142,18 +142,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * {@inheritDoc}
      */
     @Override
-    public CryptoCurrencies getCryptoCurrency() { return this.cryptoCurrency; }
+    public CryptoCurrencies getCurrentCryptoCurrency() { return this.cryptoCurrency; }
 
     /**
      * {@inheritDoc}
      */
-    public FiatCurrencies getFiatCurrency() { return this.fiatCurrency; }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean getHasPrice() { return this.hasPrice; }
+    public FiatCurrencies getCurrentFiatCurrency() { return this.fiatCurrency; }
 
     /**
      * {@inheritDoc}
@@ -166,12 +160,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     @Override
     public URL getUrl() { return this.url; }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getUrlString() { return this.url.toString(); }
 
     /**
      * {@inheritDoc}
@@ -236,21 +224,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected void setPrice(final double price) { this.price = price; }
 
-    /**
-     * Sets the cryptocurrency
-     * @param cryptoCurrency The cryptocurrency
-     *
-     * TODO: If this cryptocurrency is not one of the supported ones, throw an error
-     */
-    protected void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
+    // TODO: If this cryptocurrency is not one of the supported ones, throw an error
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
 
-    /**
-     * Sets the fiat currency
-     * @param fiatCurrency The fiat currency
-     *
-     * TODO: If this fiat currency is not one of the supported ones, throw an error
-     */
-    protected void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
+    // TODO: If this fiat currency is not one of the supported ones, throw an error
+    @Override
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
 
     /**
      * Sets the name of the API endpoint
@@ -275,6 +255,24 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param hasPrice If there is a price to display
      */
     protected void setHasPrice(final boolean hasPrice) { this.hasPrice = hasPrice; }
+
+    @Override
+    public boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        for (final CryptoCurrencies crypto : this.acceptedCryptoCurrencies) {
+            if (crypto.equals(cryptoCurrency)) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canUseFiatCurrency(FiatCurrencies fiatCurrency) {
+        for (final FiatCurrencies fiat : this.acceptedFiatCurrencies) {
+            if (fiat.equals(fiatCurrency)) return true;
+        }
+
+        return false;
+    }
 
     /**
      * Gets an updated price by calling the API

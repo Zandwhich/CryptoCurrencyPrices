@@ -58,8 +58,8 @@ final public class MainController extends AbstractController implements MainCont
     public MainController() {
 
         /* CoinBase */
-        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto) &&
-                AbstractCoinBase.canUseFiatCurrency(this.currentFiat)) {
+        if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
             websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
@@ -69,13 +69,14 @@ final public class MainController extends AbstractController implements MainCont
         // websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
 
         /* CoinCap */
-        if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
+        if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
             websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
         }
 
         /* CryptoCompare */
-        if (CryptoCompare.canUseCryptoCurrency(this.currentCrypto) &&
-                CryptoCompare.canUseFiatCurrency(this.currentFiat)) {
+        if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
             websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
         }
 
@@ -95,32 +96,15 @@ final public class MainController extends AbstractController implements MainCont
      * that both methods call
      */
     private void updateChangedCurrency() {
-        // For now, delete all the websites and recreate them with the new fiat currencies
-        this.websiteList.clear();
-
-        /* CoinBase */
-        if (AbstractCoinBase.canUseFiatCurrency(this.currentFiat) &&
-                AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        }
-
-        /* CoinMarketCap */
-//        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
-//        {
-//            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-//        }
-
-        /* CoinCap */
-        if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        }
-
-        /* CryptoCompare */
-        if (CryptoCompare.canUseFiatCurrency(this.currentFiat) &&
-                CryptoCompare.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        for (final APICallerInterface website : this.websiteList) {
+            if (website.canUseCryptoCurrency(this.currentCrypto) && website.canUseFiatCurrency(this.currentFiat)) {
+                website.setCryptoCurrency(this.currentCrypto);
+                website.setFiatCurrency(this.currentFiat);
+                website.setActive(true);
+            } else {
+                // TODO: Should I set the currencies to null in this instance?
+                website.setActive(false);
+            }
         }
 
         this.refresh();
@@ -189,7 +173,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     public void updatePrices() {
         for (final APICallerInterface website : this.websiteList) {
-            new Thread(website::updatePriceAndNotify).start();
+            if (website.isActive()) new Thread(website::updatePriceAndNotify).start();
         }
 
         // this.updateViewPrices();

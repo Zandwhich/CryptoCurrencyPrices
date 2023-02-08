@@ -75,7 +75,7 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CryptoCompare
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CryptoCompare.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -85,7 +85,7 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CryptoCompare
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CryptoCompare.ACCEPTED_CRYPTOCURRENCIES, cryptoCurrency);
     }
@@ -96,7 +96,7 @@ final public class CryptoCompare extends AbstractAPICaller {
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
         // Ok, so I don't know why, but casting it to a regular 'double' wasn't working. This does, so I'm leaving it
-        return ((Double) jsonObject.get(super.getFiatCurrency().getAbbreviatedName()));
+        return ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
     }
 
 }

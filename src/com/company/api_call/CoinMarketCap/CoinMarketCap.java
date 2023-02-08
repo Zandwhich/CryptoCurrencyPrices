@@ -77,7 +77,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinMarketCap
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CoinMarketCap.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -87,7 +87,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinMarketCap
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
@@ -105,7 +105,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
 
         if (quotes == null) return -1; // TODO: Throw an error
 
-        final JSONObject fiat = (JSONObject) quotes.get(this.getFiatCurrency().getAbbreviatedName());
+        final JSONObject fiat = (JSONObject) quotes.get(this.getCurrentFiatCurrency().getAbbreviatedName());
 
         return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
     }
