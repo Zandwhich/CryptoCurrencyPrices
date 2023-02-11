@@ -201,15 +201,20 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Updates the price
      */
     private void updatePrice() {
-        final double newPrice = this.getNewPrice();
-        // TODO: Once we start throwing errors this will be changed
-        if (newPrice != -1) {
-            this.setPrice(newPrice);
-            this.setHasFailedLastUpdate(false);
-            this.setHasPrice(true);
-        }
-        else {
-            this.setHasFailedLastUpdate(true);
+        if (this.isActive) {
+            final double newPrice = this.getNewPrice();
+            // TODO: Once we start throwing errors this will be changed
+            if (newPrice != -1) {
+                this.setPrice(newPrice);
+                this.setHasFailedLastUpdate(false);
+                this.setHasPrice(true);
+            }
+            else {
+                this.setHasFailedLastUpdate(true);
+            }
+        } else {
+            // TODO: Should this be -1...? Can this be cleaner somehow?
+            this.setPrice(-1);
         }
     }
 
@@ -218,7 +223,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     public void updatePriceAndNotify() {
         this.updatePrice();
-        this.controller.notifyWindowOfUpdate();
+        this.controller.updatePrice(this.name, this.price, !this.hasFailedLastUpdate);
     }
 
     /**

@@ -17,6 +17,7 @@ import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The main controller of the application which controls the main page
@@ -30,7 +31,7 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The list of all the API endpoints
      */
-    private final ArrayList<APICallerInterface> websiteList = new ArrayList<>();
+    private final ArrayList<APICallerInterface> endpointList = new ArrayList<>();
 
     /**
      * The currently selected fiat currency
@@ -62,13 +63,13 @@ final public class MainController extends AbstractController implements MainCont
         /* CoinBase */
         if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-            websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-            websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
         } else {
-            websiteList.add(new CoinBaseBuy(null, null, this));
-            websiteList.add(new CoinBaseSell(null, null, this));
-            websiteList.add(new CoinBaseSell(null, null, this));
+            endpointList.add(new CoinBaseBuy(null, null, this));
+            endpointList.add(new CoinBaseSell(null, null, this));
+            endpointList.add(new CoinBaseSell(null, null, this));
         }
 
         /* CoinMarketCap */
@@ -77,23 +78,28 @@ final public class MainController extends AbstractController implements MainCont
         /* CoinCap */
         if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
         } else {
-            websiteList.add(new CoinCap(null, null, this));
+            endpointList.add(new CoinCap(null, null, this));
         }
 
         /* CryptoCompare */
         if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
         } else {
-            websiteList.add(new CryptoCompare(null, null, this));
+            endpointList.add(new CryptoCompare(null, null, this));
         }
 
         // this.refresh();
 
         // Get the dropdown to display the default currencies
-        this.mainWindow.updateDropdowns();
+
+        this.mainWindow.setEndpoints(
+                endpointList
+                        .stream()
+                        .map(APICallerInterface::getName)
+                        .collect(Collectors.toList()));
     }
 
 
@@ -106,7 +112,7 @@ final public class MainController extends AbstractController implements MainCont
      * that both methods call
      */
     private void updateChangedCurrency() {
-        for (final APICallerInterface website : this.websiteList) {
+        for (final APICallerInterface website : this.endpointList) {
             if (website.canUseCryptoCurrency(this.currentCrypto) && website.canUseFiatCurrency(this.currentFiat)) {
                 website.setCryptoCurrency(this.currentCrypto);
                 website.setFiatCurrency(this.currentFiat);
@@ -140,7 +146,7 @@ final public class MainController extends AbstractController implements MainCont
      * {@inheritDoc}
      */
     @Override
-    public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }
+    public ArrayList<APICallerInterface> getEndpointList() { return this.endpointList; }
 
     /**
      * {@inheritDoc}
@@ -184,11 +190,15 @@ final public class MainController extends AbstractController implements MainCont
      * Calls on each of the websites to update their individual prices.
      */
     public void updatePrices() {
-        for (final APICallerInterface website : this.websiteList) {
-            if (website.isActive()) new Thread(website::updatePriceAndNotify).start();
+        for (final APICallerInterface website : this.endpointList) {
+            new Thread(website::updatePriceAndNotify).start();
         }
 
         // this.updateViewPrices();
+    }
+
+    public void updatePrice(final String name, final double price, final boolean hasSucceeded) {
+        this.mainWindow.updatePrice(name, price, hasSucceeded);
     }
 
     /**

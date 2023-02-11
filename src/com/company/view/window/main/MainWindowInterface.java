@@ -13,6 +13,21 @@ public interface MainWindowInterface extends WindowInterface {
     void updatePrices();
 
     /**
+     * Updates a single endpoint's price and success icon
+     * @param name The name of the endpoint (used to identify the endpoint in the table)
+     * @param price The new price of the endpoint
+     * @param hasSucceeded If the call to update the price succeeded or not
+     */
+    void updatePrice(final String name, final double price, final boolean hasSucceeded);
+
+    /**
+     * Sets the endpoints that this table will have. (This is normally done at the beginning of the program.)
+     * @param endpointNames This list of the names of the endpoints. These will be the names that they will be
+     *                      referenced when updating them in the future.
+     */
+    void setEndpoints(final Iterable<String> endpointNames);
+
+    /**
      * Update the fiat currency and cryptocurrency dropdowns to reflect the current crypto selected
      */
     void updateDropdowns();
