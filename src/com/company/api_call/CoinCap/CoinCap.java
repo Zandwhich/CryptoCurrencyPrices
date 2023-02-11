@@ -111,6 +111,8 @@ final public class CoinCap extends AbstractAPICaller {
     @Override
     public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
         super.setCryptoCurrency(cryptoCurrency);
-        super.updateUrl(CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase());
+        super.updateUrl(cryptoCurrency == null ?
+                null :
+                CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase());
     }
 }

@@ -120,8 +120,10 @@ final public class CoinMarketCap extends AbstractAPICaller {
     @Override
     public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
         super.setCryptoCurrency(cryptoCurrency);
-        super.updateUrl(CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
-                "&convert=" + super.getCurrentFiatCurrency().getAbbreviatedName());
+        super.updateUrl(cryptoCurrency == null ?
+                null :
+                CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() + "&convert=" +
+                        super.getCurrentFiatCurrency().getAbbreviatedName());
     }
 
     /**
@@ -133,7 +135,9 @@ final public class CoinMarketCap extends AbstractAPICaller {
     @Override
     public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
         super.setFiatCurrency(fiatCurrency);
-        super.updateUrl(CoinMarketCap.BASE_URL + "?symbol=" +
-                super.getCurrentFiatCurrency().getAbbreviatedName() + "&convert=" + fiatCurrency.getAbbreviatedName());
+        super.updateUrl(fiatCurrency == null ?
+                null :
+                CoinMarketCap.BASE_URL + "?symbol=" + super.getCurrentFiatCurrency().getAbbreviatedName() + "&convert="
+                        + fiatCurrency.getAbbreviatedName());
     }
 }

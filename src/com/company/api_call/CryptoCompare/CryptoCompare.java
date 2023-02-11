@@ -98,8 +98,16 @@ final public class CryptoCompare extends AbstractAPICaller {
      */
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
-        // Ok, so I don't know why, but casting it to a regular 'double' wasn't working. This does, so I'm leaving it
-        return ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
+        double price;
+        try {
+            // Ok, so I don't know why, but casting it to a regular 'double' wasn't working.
+            //  This works, so I'm leaving it
+            price = ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
+        } catch (final ClassCastException e) {
+            // Sometimes when the price has too many digits, it gets returned as a long
+            price = ((Long) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName())).doubleValue();
+        }
+        return price;
     }
 
     /**
@@ -111,8 +119,10 @@ final public class CryptoCompare extends AbstractAPICaller {
     @Override
     public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
         super.setCryptoCurrency(cryptoCurrency);
-        super.updateUrl(CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
-                super.getCurrentFiatCurrency().getAbbreviatedName());
+        super.updateUrl(cryptoCurrency == null ?
+                null :
+                CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
+                        super.getCurrentFiatCurrency().getAbbreviatedName());
     }
 
     /**
@@ -124,7 +134,9 @@ final public class CryptoCompare extends AbstractAPICaller {
     @Override
     public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
         super.setFiatCurrency(fiatCurrency);
-        super.updateUrl(CryptoCompare.BASE_URL + "?fsym=" +
-                super.getCurrentCryptoCurrency().getAbbreviatedName() + "&tsyms=" + fiatCurrency.getAbbreviatedName());
+        super.updateUrl(fiatCurrency == null ?
+                null :
+                CryptoCompare.BASE_URL + "?fsym=" + super.getCurrentCryptoCurrency().getAbbreviatedName() + "&tsyms=" +
+                        fiatCurrency.getAbbreviatedName());
     }
 }

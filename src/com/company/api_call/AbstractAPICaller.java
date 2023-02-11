@@ -121,8 +121,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
                 //       Throw an error?
             }
 
-
-            this.hasFailedLastUpdate = true;
             this.isActive = false;
         }
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
@@ -246,14 +244,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             this.url = new URL(newUrl);
         }
         catch (final MalformedURLException e) {
-            // Bad URL input
-            e.printStackTrace();
+            // The url is set to null if either of the cryptocurrency or fiat currency are null
+            if (!(e.getCause() instanceof NullPointerException)) {
+                // Bad URL input
+                e.printStackTrace();
 
-            // Not really sure, but I feel like this should be set to true
-            this.hasFailedLastUpdate = true;
+                // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+                //       Throw an error?
+            }
 
-            // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-            //       Throw an error?
+            this.isActive = false;
         }
     }
 

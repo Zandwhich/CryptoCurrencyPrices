@@ -113,6 +113,8 @@ final public class MainController extends AbstractController implements MainCont
                 website.setActive(true);
             } else {
                 // TODO: Should I set the currencies to null in this instance?
+                website.setCryptoCurrency(null);
+                website.setFiatCurrency(null);
                 website.setActive(false);
             }
         }

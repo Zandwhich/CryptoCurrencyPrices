@@ -49,8 +49,10 @@ final public class CoinBaseBuy extends AbstractCoinBase {
     @Override
     public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
         super.setCryptoCurrency(cryptoCurrency);
-        super.updateUrlWithNewExtension(cryptoCurrency.getAbbreviatedName() + "-" +
-                super.getCurrentFiatCurrency().getAbbreviatedName() + CoinBaseBuy.BUY_EXT);
+        super.updateUrlWithNewExtension(cryptoCurrency == null ?
+                null :
+                cryptoCurrency.getAbbreviatedName() + "-" + super.getCurrentFiatCurrency().getAbbreviatedName() +
+                        CoinBaseBuy.BUY_EXT);
     }
 
     /**
@@ -62,7 +64,9 @@ final public class CoinBaseBuy extends AbstractCoinBase {
     @Override
     public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
         super.setFiatCurrency(fiatCurrency);
-        super.updateUrlWithNewExtension(super.getCurrentCryptoCurrency().getAbbreviatedName() + "-" +
-                fiatCurrency.getAbbreviatedName() + CoinBaseBuy.BUY_EXT);
+        super.updateUrlWithNewExtension(fiatCurrency == null ?
+                null :
+                super.getCurrentCryptoCurrency().getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                        CoinBaseBuy.BUY_EXT);
     }
 }
