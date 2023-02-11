@@ -47,7 +47,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The name of the API endpoint
      */
-    private String name;
+    private final String name;
 
     /**
      * The url to hit
