@@ -50,7 +50,11 @@ final public class CoinCap extends AbstractAPICaller {
     public CoinCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                    final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
+                CoinCap.BASE_NAME,
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),
+                controller);
     }
 
 

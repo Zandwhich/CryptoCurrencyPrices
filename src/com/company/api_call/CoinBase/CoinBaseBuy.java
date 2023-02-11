@@ -32,8 +32,11 @@ final public class CoinBaseBuy extends AbstractCoinBase {
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
-                "Buy", cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                        CoinBaseBuy.BUY_EXT,
+                "Buy",
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                                CoinBaseBuy.BUY_EXT,
                 controller);
     }
 

@@ -54,8 +54,10 @@ final public class CryptoCompare extends AbstractAPICaller {
                    final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CryptoCompare.ACCEPTED_CRYPTOCURRENCIES,
                 CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
-                CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
-                        fiatCurrency.getAbbreviatedName(),
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
+                                fiatCurrency.getAbbreviatedName(),
                 controller);
     }
 

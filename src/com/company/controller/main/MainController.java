@@ -35,12 +35,12 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The currently selected fiat currency
      */
-    private FiatCurrencies currentFiat = FiatCurrencies.USD;
+    private FiatCurrencies currentFiat = FiatCurrencies.EUR;
 
     /**
      * The currently selected cryptocurrency
      */
-    private CryptoCurrencies currentCrypto = CryptoCurrencies.BTC;
+    private CryptoCurrencies currentCrypto = CryptoCurrencies.LTC;
 
     /**
      * The main window of the application
@@ -65,6 +65,10 @@ final public class MainController extends AbstractController implements MainCont
             websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        } else {
+            websiteList.add(new CoinBaseBuy(null, null, this));
+            websiteList.add(new CoinBaseSell(null, null, this));
+            websiteList.add(new CoinBaseSell(null, null, this));
         }
 
         /* CoinMarketCap */
@@ -74,12 +78,16 @@ final public class MainController extends AbstractController implements MainCont
         if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
             websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        } else {
+            websiteList.add(new CoinCap(null, null, this));
         }
 
         /* CryptoCompare */
         if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
                 CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
             websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        } else {
+            websiteList.add(new CryptoCompare(null, null, this));
         }
 
         // this.refresh();

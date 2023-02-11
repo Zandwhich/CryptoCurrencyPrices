@@ -32,8 +32,11 @@ final public class CoinBaseSell extends AbstractCoinBase {
     public CoinBaseSell(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
-                "Sell", cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                        CoinBaseSell.SELL_EXT,
+                "Sell",
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                                CoinBaseSell.SELL_EXT,
                 controller);
     }
 

@@ -54,8 +54,11 @@ final public class CoinMarketCap extends AbstractAPICaller {
                          final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinMarketCap.BASE_NAME, CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() +
-                        "&convert=" + fiatCurrency.getAbbreviatedName(),
+                CoinMarketCap.BASE_NAME,
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() + "&convert=" +
+                                fiatCurrency.getAbbreviatedName(),
                 controller);
     }
 

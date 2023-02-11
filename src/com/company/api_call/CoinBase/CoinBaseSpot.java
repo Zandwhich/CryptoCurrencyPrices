@@ -32,8 +32,11 @@ final public class CoinBaseSpot extends AbstractCoinBase {
     public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                         final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency,
-                "Spot", cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                        CoinBaseSpot.SPOT_EXT,
+                "Spot",
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
+                                CoinBaseSpot.SPOT_EXT,
                 controller);
     }
 

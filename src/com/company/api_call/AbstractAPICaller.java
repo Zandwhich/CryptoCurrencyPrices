@@ -101,30 +101,35 @@ public abstract class AbstractAPICaller implements APICallerInterface {
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
                              final APICallerContract controller) {
         this.controller = controller;
-        this.cryptoCurrency = cryptoCurrency;
-        this.fiatCurrency = fiatCurrency;
         this.hasPrice = false;
         // There has not been a failure to update, as there hasn't been a request made yet
         this.hasFailedLastUpdate = false;
         this.price = 0.0;
         this.name = name;
-        this.isActive = false;
+
+        this.isActive = true;
         try {
             this.url = new URL(url);
         }
-        catch (MalformedURLException e) {
-            // Bad URL input
-            e.printStackTrace();
+        catch (final MalformedURLException e) {
+            // The url is set to null if either of the cryptocurrency or fiat currency are null
+            if (!(e.getCause() instanceof NullPointerException)) {
+                // Bad URL input
+                e.printStackTrace();
 
-            // Not really sure, but I feel like this should be set to true
+                // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+                //       Throw an error?
+            }
+
+
             this.hasFailedLastUpdate = true;
-
-            // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-            //       Throw an error?
+            this.isActive = false;
         }
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
-        
+
+        this.cryptoCurrency = cryptoCurrency;
+        this.fiatCurrency = fiatCurrency;
     }
 
 
