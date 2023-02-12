@@ -4,7 +4,6 @@ import com.company.api_call.APICallerInterface;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.controller.ControllerInterface;
-import com.company.view.button.refresh.RefreshButtonContractInterface;
 import com.company.view.combo_box.crypto_dropdown.CryptoDropdownContractInterface;
 import com.company.view.combo_box.fiat_dropdown.FiatDropdownContractInterface;
 import com.company.view.menu_item.about.AboutMenuItemContractInterface;
@@ -30,7 +29,7 @@ public interface MainControllerInterface extends
      * Gets the list of websites of URLs to hit
      * @return The list of websites of URLs to hit
      */
-    ArrayList<APICallerInterface> getWebsiteList();
+    ArrayList<APICallerInterface> getEndpointList();
 
     /**
      * Returns the current fiat currency selected

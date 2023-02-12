@@ -17,22 +17,42 @@ public interface APICallerInterface {
     double getPrice();
 
     /**
+     * Returns if the API endpoint can use the given cryptocurrency
+     * @param cryptoCurrency The cryptocurrency to check
+     * @return If the given cryptocurrency can be used with this endpoint
+     */
+    boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency);
+
+    /**
+     * Returns if the API endpoint can use the given fiat currency
+     * @param fiatCurrency The fiat currency to check
+     * @return If the given fiat currency can be used with this endpoint
+     */
+    boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency);
+
+    /**
+     * Sets the current cryptocurrency that will be used for this endpoint
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    void setCryptoCurrency(final CryptoCurrencies cryptoCurrency);
+
+    /**
+     * Sets the current fiat currency that will be used for this endpoint
+     * @param fiatCurrency The fiat currency to be used for this endpoint
+     */
+    void setFiatCurrency(final FiatCurrencies fiatCurrency);
+
+    /**
      * Returns the cryptocurrency
      * @return The cryptocurrency
      */
-    CryptoCurrencies getCryptoCurrency();
+    CryptoCurrencies getCurrentCryptoCurrency();
 
     /**
      * Returns the fiat currency
      * @return The fiat currency
      */
-    FiatCurrencies getFiatCurrency();
-
-    /**
-     * Returns if a price has been obtained
-     * @return If a price has been obtained
-     */
-    boolean getHasPrice();
+    FiatCurrencies getCurrentFiatCurrency();
 
     /**
      * Updates the price and notifies the controller
@@ -52,9 +72,15 @@ public interface APICallerInterface {
     URL getUrl();
 
     /**
-     * Returns the URL in a String format
-     * @return The URL in a String format
+     * Returns if this API endpoint is currently active
+     * @return If this API endpoint is currently active
      */
-    String getUrlString();
+    boolean isActive();
+
+    /**
+     * Sets if this API endpoint should be currently active
+     * @param active If this endpoint is active or not
+     */
+    void setActive(final boolean active);
 
 }

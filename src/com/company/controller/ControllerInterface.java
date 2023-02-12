@@ -1,14 +1,13 @@
 package com.company.controller;
 
 import com.company.api_call.APICallerContract;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.Errors;
 import com.company.view.button.refresh.RefreshButtonContractInterface;
 
 /**
  * The general interface for all controllers
  */
-public interface ControllerInterface extends APICallerContract, JSONCallerContract, RefreshButtonContractInterface {
+public interface ControllerInterface extends APICallerContract, RefreshButtonContractInterface {
 
     /**
      * Pops up a window that displays an error message

@@ -1,8 +1,7 @@
 package com.company.api_call.CoinCap;
 
+import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.api_call.AbstractJSONCaller;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -10,7 +9,7 @@ import json_simple.JSONObject;
 /**
  * The basic class for all CoinCap requests
  */
-final public class CoinCap extends AbstractJSONCaller {
+final public class CoinCap extends AbstractAPICaller {
 
     /* ************ *
      *    Fields    *
@@ -49,9 +48,13 @@ final public class CoinCap extends AbstractJSONCaller {
      * @param controller The controller that implements the required methods
      */
     public CoinCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                   final JSONCallerContract controller) {
+                   final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinCap.BASE_NAME, CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),  controller);
+                CoinCap.BASE_NAME,
+                cryptoCurrency == null || fiatCurrency == null ?
+                        null :
+                        CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),
+                controller);
     }
 
 
@@ -71,7 +74,7 @@ final public class CoinCap extends AbstractJSONCaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinCap
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CoinCap.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -81,7 +84,7 @@ final public class CoinCap extends AbstractJSONCaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinCap
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(CoinCap.ACCEPTED_CRYPTOCURRENCIES, cryptoCurrency);
     }
@@ -99,4 +102,17 @@ final public class CoinCap extends AbstractJSONCaller {
         return Double.parseDouble((String) data.get("rateUsd"));
     }
 
+    /**
+     * {@inheritDoc}
+     * </p>
+     * In addition, it also updates the endpoint
+     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
+     */
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        super.setCryptoCurrency(cryptoCurrency);
+        super.updateUrl(cryptoCurrency == null ?
+                null :
+                CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase());
+    }
 }

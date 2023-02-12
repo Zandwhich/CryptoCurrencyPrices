@@ -1,8 +1,7 @@
 package com.company.api_call.CoinBase;
 
+import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.api_call.AbstractJSONCaller;
-import com.company.api_call.JSONCallerContract;
 import com.company.tools.enums.currency.CryptoCurrencies;
 import com.company.tools.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
@@ -10,7 +9,7 @@ import json_simple.JSONObject;
 /**
  * The basic class for all CoinBase requests
  */
-public abstract class AbstractCoinBase extends AbstractJSONCaller {
+public abstract class AbstractCoinBase extends AbstractAPICaller {
 
     /* ************ *
      *    Fields    *
@@ -48,7 +47,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param controller The controller that implements the required methods
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                            final String name, final String urlExt, final JSONCallerContract controller) {
+                            final String name, final String urlExt, final APICallerContract controller) {
         super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
                 AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
                 AbstractCoinBase.BASE_URL + urlExt, controller);
@@ -70,7 +69,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinBase
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -80,7 +79,7 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinBase
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
@@ -98,6 +97,14 @@ public abstract class AbstractCoinBase extends AbstractJSONCaller {
         if (data == null || !data.containsKey("amount")) return -1;
 
         return Double.parseDouble((String) data.get("amount"));
+    }
+
+    /**
+     * Updates the url to hit for the endpoint, provided that the extension is passed in
+     * @param urlExtension The extension for the CoinBase endpoint
+     */
+    protected void updateUrlWithNewExtension(final String urlExtension) {
+        super.updateUrl(AbstractCoinBase.BASE_URL + urlExtension);
     }
 
 }
