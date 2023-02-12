@@ -3,6 +3,8 @@ package com.company.api_call.CoinBase;
 import com.company.api_call.APICallerContract;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 
 /**
  * The implementation for the sell endpoint for CoinBase
@@ -47,7 +49,7 @@ final public class CoinBaseSell extends AbstractCoinBase {
      * @param cryptoCurrency The cryptocurrency to be used for this endpoint
      */
     @Override
-    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
         super.setCryptoCurrency(cryptoCurrency);
         super.updateUrlWithNewExtension(cryptoCurrency == null ?
                 null :
@@ -62,7 +64,7 @@ final public class CoinBaseSell extends AbstractCoinBase {
      * @param fiatCurrency The fiat currency to be used for this endpoint
      */
     @Override
-    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
         super.setFiatCurrency(fiatCurrency);
         super.updateUrlWithNewExtension(fiatCurrency == null ?
                 null :

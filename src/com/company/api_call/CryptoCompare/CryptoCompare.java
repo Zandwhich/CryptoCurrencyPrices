@@ -4,6 +4,8 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
 
 /**
@@ -116,7 +118,7 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param cryptoCurrency The cryptocurrency to be used for this endpoint
      */
     @Override
-    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
         super.setCryptoCurrency(cryptoCurrency);
         super.updateUrl(cryptoCurrency == null ?
                 null :
@@ -131,7 +133,7 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param fiatCurrency The fiat currency to be used for this endpoint
      */
     @Override
-    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
         super.setFiatCurrency(fiatCurrency);
         super.updateUrl(fiatCurrency == null ?
                 null :

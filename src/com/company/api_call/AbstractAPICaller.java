@@ -4,6 +4,8 @@ import com.company.tool.enums.Errors;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.Currency;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -232,13 +234,21 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected void setPrice(final double price) { this.price = price; }
 
-    // TODO: If this cryptocurrency is not one of the supported ones, throw an error
     @Override
-    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
+        if (canUseCryptoCurrency(cryptoCurrency))
+            this.cryptoCurrency = cryptoCurrency;
+        else
+            throw new CryptoCurrencyNotSupported(cryptoCurrency);
+    }
 
-    // TODO: If this fiat currency is not one of the supported ones, throw an error
     @Override
-    public void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
+        if (canUseFiatCurrency(fiatCurrency))
+            this.fiatCurrency = fiatCurrency;
+        else
+            throw new FiatCurrencyNotSupported(fiatCurrency);
+    }
 
     /**
      * Updates the url with a new url
