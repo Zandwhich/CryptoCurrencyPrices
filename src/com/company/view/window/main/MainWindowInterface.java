@@ -1,5 +1,7 @@
 package com.company.view.window.main;
 
+import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tools.enums.currency.FiatCurrencies;
 import com.company.view.window.WindowInterface;
 
 /**
@@ -29,7 +31,9 @@ public interface MainWindowInterface extends WindowInterface {
 
     /**
      * Update the fiat currency and cryptocurrency dropdowns to reflect the current crypto selected
+     * @param currentCrypto The current cryptocurrency selected
+     * @param currentFiat The current fiat currency selected
      */
-    void updateDropdowns();
+    void updateDropdowns(final CryptoCurrencies currentCrypto, final FiatCurrencies currentFiat);
 
 }

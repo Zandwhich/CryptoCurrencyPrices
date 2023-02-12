@@ -58,6 +58,9 @@ final public class MainController extends AbstractController implements MainCont
      */
     public MainController() {
 
+        // Get the dropdown to display the default currencies
+        this.mainWindow.updateDropdowns(this.currentCrypto, this.currentFiat);
+
         // TODO: Work to be done in the refactor_api_calls branch: update this so that if the endpoint doesn't accept
         //       the starting currencies, it gets its currencies set to null
         /* CoinBase */
@@ -91,15 +94,13 @@ final public class MainController extends AbstractController implements MainCont
             endpointList.add(new CryptoCompare(null, null, this));
         }
 
-        // this.refresh();
-
-        // Get the dropdown to display the default currencies
-
         this.mainWindow.setEndpoints(
                 endpointList
                         .stream()
                         .map(APICallerInterface::getName)
                         .collect(Collectors.toList()));
+
+        this.refresh();
     }
 
 
@@ -132,14 +133,14 @@ final public class MainController extends AbstractController implements MainCont
      * Changes the fiat currency that is being used in each of the endpoints
      */
     private void updateWebsiteFiat() {
-        this.updateChangedCurrency();
+        new Thread(this::updateChangedCurrency).start();
     }
 
     /**
      * Changes the cryptocurrency that is being used in each of the endpoints
      */
     private void updateWebsitesCrypto() {
-        this.updateChangedCurrency();
+        new Thread(this::updateChangedCurrency).start();
     }
 
     /**
@@ -208,9 +209,6 @@ final public class MainController extends AbstractController implements MainCont
         this.mainWindow.updatePrices();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void errorDisplay(final Errors error, final String name) {
 

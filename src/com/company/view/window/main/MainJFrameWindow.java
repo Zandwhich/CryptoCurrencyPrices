@@ -154,13 +154,10 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
         this.setVisible(MainJFrameWindow.DEFAULT_VISIBILITY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void updateDropdowns() {
-        this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
-        this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
+    public void updateDropdowns(final CryptoCurrencies currentCrypto, final FiatCurrencies currentFiat) {
+        this.cryptoDropdown.setSelectedItem(currentCrypto.getAbbreviatedName());
+        this.fiatDropdown.setSelectedItem(currentFiat.getAbbreviatedName());
     }
 
     @Override
