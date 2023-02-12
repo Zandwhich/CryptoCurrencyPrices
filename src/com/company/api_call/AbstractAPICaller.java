@@ -101,7 +101,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                              final CryptoCurrencies[] acceptedCryptoCurrencies,
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                             final APICallerContract controller) {
+                             final APICallerContract controller) throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+
+        // The order here is important
+        this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
+        this.acceptedFiatCurrencies = acceptedFiatCurrencies;
+        if (!canUseCryptoCurrency(cryptoCurrency)) throw new CryptoCurrencyNotSupported(cryptoCurrency);
+        if (!canUseFiatCurrency(fiatCurrency)) throw new FiatCurrencyNotSupported(fiatCurrency);
+
         this.controller = controller;
         this.hasPrice = false;
         // There has not been a failure to update, as there hasn't been a request made yet
@@ -125,8 +132,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
             this.isActive = false;
         }
-        this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
-        this.acceptedFiatCurrencies = acceptedFiatCurrencies;
 
         this.cryptoCurrency = cryptoCurrency;
         this.fiatCurrency = fiatCurrency;
