@@ -29,7 +29,7 @@ public interface MainControllerInterface extends
      * Gets the list of websites of URLs to hit
      * @return The list of websites of URLs to hit
      */
-    ArrayList<APICallerInterface> getWebsiteList();
+    ArrayList<APICallerInterface> getEndpointList();
 
     /**
      * Returns the current fiat currency selected

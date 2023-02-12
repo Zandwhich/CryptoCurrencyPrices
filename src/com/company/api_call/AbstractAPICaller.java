@@ -47,7 +47,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The name of the API endpoint
      */
-    private String name;
+    private final String name;
 
     /**
      * The url to hit
@@ -74,6 +74,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     private final FiatCurrencies[] acceptedFiatCurrencies;
 
+    /**
+     * The flag to check when going through to see if this API endpoint should be updated.
+     * </p>
+     * The flag's setter can be overwritten as well if we for some reason we don't want to use a certain endpoint.
+     */
+    private boolean isActive = false;
+
 
     /* ************ *
      * Constructors *
@@ -94,29 +101,33 @@ public abstract class AbstractAPICaller implements APICallerInterface {
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
                              final APICallerContract controller) {
         this.controller = controller;
-        this.cryptoCurrency = cryptoCurrency;
-        this.fiatCurrency = fiatCurrency;
         this.hasPrice = false;
         // There has not been a failure to update, as there hasn't been a request made yet
         this.hasFailedLastUpdate = false;
         this.price = 0.0;
         this.name = name;
+
+        this.isActive = true;
         try {
             this.url = new URL(url);
         }
-        catch (MalformedURLException e) {
-            // Bad URL input
-            e.printStackTrace();
+        catch (final MalformedURLException e) {
+            // The url is set to null if either of the cryptocurrency or fiat currency are null
+            if (!(e.getCause() instanceof NullPointerException)) {
+                // Bad URL input
+                e.printStackTrace();
 
-            // Not really sure, but I feel like this should be set to true
-            this.hasFailedLastUpdate = true;
+                // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+                //       Throw an error?
+            }
 
-            // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-            //       Throw an error?
+            this.isActive = false;
         }
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
-        
+
+        this.cryptoCurrency = cryptoCurrency;
+        this.fiatCurrency = fiatCurrency;
     }
 
 
@@ -134,18 +145,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * {@inheritDoc}
      */
     @Override
-    public CryptoCurrencies getCryptoCurrency() { return this.cryptoCurrency; }
+    public CryptoCurrencies getCurrentCryptoCurrency() { return this.cryptoCurrency; }
 
     /**
      * {@inheritDoc}
      */
-    public FiatCurrencies getFiatCurrency() { return this.fiatCurrency; }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean getHasPrice() { return this.hasPrice; }
+    public FiatCurrencies getCurrentFiatCurrency() { return this.fiatCurrency; }
 
     /**
      * {@inheritDoc}
@@ -163,7 +168,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * {@inheritDoc}
      */
     @Override
-    public String getUrlString() { return this.url.toString(); }
+    public boolean isActive() {
+        return isActive;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setActive(final boolean active) {
+        isActive = active;
+    }
 
     /**
      * Gets the Base URL of the API call
@@ -187,15 +201,20 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Updates the price
      */
     private void updatePrice() {
-        final double newPrice = this.getNewPrice();
-        // TODO: Once we start throwing errors this will be changed
-        if (newPrice != -1) {
-            this.setPrice(newPrice);
-            this.setHasFailedLastUpdate(false);
-            this.setHasPrice(true);
-        }
-        else {
-            this.setHasFailedLastUpdate(true);
+        if (this.isActive) {
+            final double newPrice = this.getNewPrice();
+            // TODO: Once we start throwing errors this will be changed
+            if (newPrice != -1) {
+                this.setPrice(newPrice);
+                this.setHasFailedLastUpdate(false);
+                this.setHasPrice(true);
+            }
+            else {
+                this.setHasFailedLastUpdate(true);
+            }
+        } else {
+            // TODO: Should this be -1...? Can this be cleaner somehow?
+            this.setPrice(-1);
         }
     }
 
@@ -204,7 +223,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     public void updatePriceAndNotify() {
         this.updatePrice();
-        this.controller.notifyWindowOfUpdate();
+        this.controller.updatePrice(this.name, this.price, !this.hasFailedLastUpdate);
     }
 
     /**
@@ -213,33 +232,35 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      */
     protected void setPrice(final double price) { this.price = price; }
 
-    /**
-     * Sets the cryptocurrency
-     * @param cryptoCurrency The cryptocurrency
-     *
-     * TODO: If this cryptocurrency is not one of the supported ones, throw an error
-     */
-    protected void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
+    // TODO: If this cryptocurrency is not one of the supported ones, throw an error
+    @Override
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) { this.cryptoCurrency = cryptoCurrency; }
+
+    // TODO: If this fiat currency is not one of the supported ones, throw an error
+    @Override
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
 
     /**
-     * Sets the fiat currency
-     * @param fiatCurrency The fiat currency
-     *
-     * TODO: If this fiat currency is not one of the supported ones, throw an error
+     * Updates the url with a new url
+     * @param newUrl The new url in String form
      */
-    protected void setFiatCurrency(final FiatCurrencies fiatCurrency) { this.fiatCurrency = fiatCurrency; }
+    protected void updateUrl(final String newUrl) {
+        try {
+            this.url = new URL(newUrl);
+        }
+        catch (final MalformedURLException e) {
+            // The url is set to null if either of the cryptocurrency or fiat currency are null
+            if (!(e.getCause() instanceof NullPointerException)) {
+                // Bad URL input
+                e.printStackTrace();
 
-    /**
-     * Sets the name of the API endpoint
-     * @param name The name of the API endpoint
-     */
-    public void setName(final String name) { this.name = name; }
+                // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
+                //       Throw an error?
+            }
 
-    /**
-     * Sets the URL to hit
-     * @param url The url to hit
-     */
-    public void setUrl(final URL url) { this.url = url; }
+            this.isActive = false;
+        }
+    }
 
     /**
      * Sets if the last update failed
@@ -252,6 +273,24 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param hasPrice If there is a price to display
      */
     protected void setHasPrice(final boolean hasPrice) { this.hasPrice = hasPrice; }
+
+    @Override
+    public boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        for (final CryptoCurrencies crypto : this.acceptedCryptoCurrencies) {
+            if (crypto.equals(cryptoCurrency)) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canUseFiatCurrency(FiatCurrencies fiatCurrency) {
+        for (final FiatCurrencies fiat : this.acceptedFiatCurrencies) {
+            if (fiat.equals(fiatCurrency)) return true;
+        }
+
+        return false;
+    }
 
     /**
      * Gets an updated price by calling the API

@@ -17,6 +17,7 @@ import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The main controller of the application which controls the main page
@@ -30,17 +31,17 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The list of all the API endpoints
      */
-    private final ArrayList<APICallerInterface> websiteList = new ArrayList<>();
+    private final ArrayList<APICallerInterface> endpointList = new ArrayList<>();
 
     /**
      * The currently selected fiat currency
      */
-    private FiatCurrencies currentFiat = FiatCurrencies.USD;
+    private FiatCurrencies currentFiat = FiatCurrencies.EUR;
 
     /**
      * The currently selected cryptocurrency
      */
-    private CryptoCurrencies currentCrypto = CryptoCurrencies.BTC;
+    private CryptoCurrencies currentCrypto = CryptoCurrencies.LTC;
 
     /**
      * The main window of the application
@@ -57,32 +58,49 @@ final public class MainController extends AbstractController implements MainCont
      */
     public MainController() {
 
+        // Get the dropdown to display the default currencies
+        this.mainWindow.updateDropdowns(this.currentCrypto, this.currentFiat);
+
+        // TODO: Work to be done in the refactor_api_calls branch: update this so that if the endpoint doesn't accept
+        //       the starting currencies, it gets its currencies set to null
         /* CoinBase */
-        if (AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto) &&
-                AbstractCoinBase.canUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-            websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-            websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
+            endpointList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
+            endpointList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
+        } else {
+            endpointList.add(new CoinBaseBuy(null, null, this));
+            endpointList.add(new CoinBaseSell(null, null, this));
+            endpointList.add(new CoinBaseSell(null, null, this));
         }
 
         /* CoinMarketCap */
-        // websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        // endpointList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
 
         /* CoinCap */
-        if (CoinCap.canUseCryptoCurrency(this.currentCrypto) && CoinCap.canUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
+            endpointList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
+        } else {
+            endpointList.add(new CoinCap(null, null, this));
         }
 
         /* CryptoCompare */
-        if (CryptoCompare.canUseCryptoCurrency(this.currentCrypto) &&
-                CryptoCompare.canUseFiatCurrency(this.currentFiat)) {
-            websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
+                CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
+            endpointList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        } else {
+            endpointList.add(new CryptoCompare(null, null, this));
         }
 
-        // this.refresh();
+        this.mainWindow.setEndpoints(
+                endpointList
+                        .stream()
+                        .map(APICallerInterface::getName)
+                        .collect(Collectors.toList()));
 
-        // Get the dropdown to display the default currencies
-        this.mainWindow.updateDropdowns();
+        this.refresh();
     }
 
 
@@ -95,32 +113,17 @@ final public class MainController extends AbstractController implements MainCont
      * that both methods call
      */
     private void updateChangedCurrency() {
-        // For now, delete all the websites and recreate them with the new fiat currencies
-        this.websiteList.clear();
-
-        /* CoinBase */
-        if (AbstractCoinBase.canUseFiatCurrency(this.currentFiat) &&
-                AbstractCoinBase.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
-            this.websiteList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        }
-
-        /* CoinMarketCap */
-//        if (CoinMarketCap.canUseFiatCurrency(this.currentFiat))
-//        {
-//            this.websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-//        }
-
-        /* CoinCap */
-        if (CoinCap.canUseFiatCurrency(this.currentFiat) && CoinCap.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        }
-
-        /* CryptoCompare */
-        if (CryptoCompare.canUseFiatCurrency(this.currentFiat) &&
-                CryptoCompare.canUseCryptoCurrency(this.currentCrypto)) {
-            this.websiteList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
+        for (final APICallerInterface website : this.endpointList) {
+            if (website.canUseCryptoCurrency(this.currentCrypto) && website.canUseFiatCurrency(this.currentFiat)) {
+                website.setCryptoCurrency(this.currentCrypto);
+                website.setFiatCurrency(this.currentFiat);
+                website.setActive(true);
+            } else {
+                // TODO: Should I set the currencies to null in this instance?
+                website.setCryptoCurrency(null);
+                website.setFiatCurrency(null);
+                website.setActive(false);
+            }
         }
 
         this.refresh();
@@ -130,33 +133,24 @@ final public class MainController extends AbstractController implements MainCont
      * Changes the fiat currency that is being used in each of the endpoints
      */
     private void updateWebsiteFiat() {
-        this.updateChangedCurrency();
+        new Thread(this::updateChangedCurrency).start();
     }
 
     /**
      * Changes the cryptocurrency that is being used in each of the endpoints
      */
     private void updateWebsitesCrypto() {
-        this.updateChangedCurrency();
+        new Thread(this::updateChangedCurrency).start();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public ArrayList<APICallerInterface> getWebsiteList() { return this.websiteList; }
+    public ArrayList<APICallerInterface> getEndpointList() { return this.endpointList; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FiatCurrencies getCurrentFiat() {
         return this.currentFiat;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public CryptoCurrencies getCurrentCrypto() {
         return this.currentCrypto;
@@ -173,9 +167,6 @@ final public class MainController extends AbstractController implements MainCont
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void refresh() {
         super.checkConnection();
@@ -183,16 +174,18 @@ final public class MainController extends AbstractController implements MainCont
         else this.updatePrices();
     }
 
-    /**
-     * Updates the prices displayed on the controller.
-     * Calls on each of the websites to update their individual prices.
-     */
+    @Override
     public void updatePrices() {
-        for (final APICallerInterface website : this.websiteList) {
+        for (final APICallerInterface website : this.endpointList) {
             new Thread(website::updatePriceAndNotify).start();
         }
 
         // this.updateViewPrices();
+    }
+
+    @Override
+    public void updatePrice(final String name, final double price, final boolean hasSucceeded) {
+        this.mainWindow.updatePrice(name, price, hasSucceeded);
     }
 
     /**
@@ -202,9 +195,6 @@ final public class MainController extends AbstractController implements MainCont
         this.mainWindow.updatePrices();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void errorDisplay(final Errors error, final String name) {
 
@@ -215,9 +205,6 @@ final public class MainController extends AbstractController implements MainCont
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void errorDisplay(final Errors error) {
 
@@ -228,35 +215,23 @@ final public class MainController extends AbstractController implements MainCont
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
         this.updateWebsiteFiat();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void updateCryptocurrency(final CryptoCurrencies cryptoCurrency) {
         this.currentCrypto = cryptoCurrency;
         this.updateWebsitesCrypto();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void notifyWindowOfUpdate() {
         this.updateViewPrices();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void aboutPagePopUp() {
         new AboutJFrameWindow();

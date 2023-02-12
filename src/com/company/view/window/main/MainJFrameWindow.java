@@ -154,29 +154,44 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
         this.setVisible(MainJFrameWindow.DEFAULT_VISIBILITY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void updateDropdowns() {
-        this.fiatDropdown.setSelectedItem(this.mainController.getCurrentFiat().getAbbreviatedName());
-        this.cryptoDropdown.setSelectedItem(this.mainController.getCurrentCrypto().getAbbreviatedName());
+    public void updateDropdowns(final CryptoCurrencies currentCrypto, final FiatCurrencies currentFiat) {
+        this.cryptoDropdown.setSelectedItem(currentCrypto.getAbbreviatedName());
+        this.fiatDropdown.setSelectedItem(currentFiat.getAbbreviatedName());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
+    public void updatePrice(final String name, final double price, final boolean hasSucceeded) {
+        for (final Vector<String> website : this.data) {
+            if (website.firstElement().equals(name)) {
+                website.set(1, String.valueOf(price));
+            }
+        }
+        this.table.setData(this.data);
+    }
+
     @Override
     public void updatePrices() {
-        final ArrayList<APICallerInterface> websites = this.mainController.getWebsiteList();
+        final ArrayList<APICallerInterface> websites = this.mainController.getEndpointList();
         this.data.clear();
 
         // TODO: Clean this up a bit?
-        for (APICallerInterface website : websites) {
+        for (final APICallerInterface website : websites) {
             final Vector<String> websiteVec = new Vector<>();
             websiteVec.add(website.getName());
             websiteVec.add("" + website.getPrice());
             this.data.add(websiteVec);
+        }
+        this.table.setData(this.data);
+    }
+
+    @Override
+    public void setEndpoints(final Iterable<String> endpointNames) {
+        for (final String name : endpointNames) {
+            final Vector<String> endpointVec = new Vector<>();
+            endpointVec.add(name);
+            endpointVec.add("");
+            this.data.add(endpointVec);
         }
         this.table.setData(this.data);
     }

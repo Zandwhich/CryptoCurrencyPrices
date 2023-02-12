@@ -69,7 +69,7 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @param fiatCurrency The given fiat currency
      * @return If the given fiat currency can be used with CoinBase
      */
-    public static boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency)
+    public static boolean endpointCanUseFiatCurrency(final FiatCurrencies fiatCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, fiatCurrency);
     }
@@ -79,7 +79,7 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @param cryptoCurrency The given cryptocurrency
      * @return If the given cryptocurrency can be used with CoinBase
      */
-    public static boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
+    public static boolean endpointCanUseCryptoCurrency(final CryptoCurrencies cryptoCurrency)
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
@@ -97,6 +97,14 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
         if (data == null || !data.containsKey("amount")) return -1;
 
         return Double.parseDouble((String) data.get("amount"));
+    }
+
+    /**
+     * Updates the url to hit for the endpoint, provided that the extension is passed in
+     * @param urlExtension The extension for the CoinBase endpoint
+     */
+    protected void updateUrlWithNewExtension(final String urlExtension) {
+        super.updateUrl(AbstractCoinBase.BASE_URL + urlExtension);
     }
 
 }

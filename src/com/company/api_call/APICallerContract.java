@@ -13,6 +13,14 @@ public interface APICallerContract {
     void notifyWindowOfUpdate();
 
     /**
+     * The function to call when a single endpoint has received an update on its price, but successful or not
+     * @param name The name of the endpoint (this is what will be used to check against in the table)
+     * @param price The new price to display for this endpoint
+     * @param hasSucceeded If this last call was successful or not
+     */
+    void updatePrice(final String name, final double price, final boolean hasSucceeded);
+
+    /**
      * Returns true if connected to the internet, otherwise false
      * @return True if connected to the internet, otherwise false
      */
