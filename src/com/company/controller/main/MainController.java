@@ -76,7 +76,7 @@ final public class MainController extends AbstractController implements MainCont
         }
 
         /* CoinMarketCap */
-        // websiteList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
+        // endpointList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
 
         /* CoinCap */
         if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
@@ -143,23 +143,14 @@ final public class MainController extends AbstractController implements MainCont
         new Thread(this::updateChangedCurrency).start();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<APICallerInterface> getEndpointList() { return this.endpointList; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FiatCurrencies getCurrentFiat() {
         return this.currentFiat;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public CryptoCurrencies getCurrentCrypto() {
         return this.currentCrypto;
@@ -176,9 +167,6 @@ final public class MainController extends AbstractController implements MainCont
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void refresh() {
         super.checkConnection();
@@ -186,10 +174,7 @@ final public class MainController extends AbstractController implements MainCont
         else this.updatePrices();
     }
 
-    /**
-     * Updates the prices displayed on the controller.
-     * Calls on each of the websites to update their individual prices.
-     */
+    @Override
     public void updatePrices() {
         for (final APICallerInterface website : this.endpointList) {
             new Thread(website::updatePriceAndNotify).start();
@@ -198,6 +183,7 @@ final public class MainController extends AbstractController implements MainCont
         // this.updateViewPrices();
     }
 
+    @Override
     public void updatePrice(final String name, final double price, final boolean hasSucceeded) {
         this.mainWindow.updatePrice(name, price, hasSucceeded);
     }
@@ -219,9 +205,6 @@ final public class MainController extends AbstractController implements MainCont
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void errorDisplay(final Errors error) {
 
@@ -232,35 +215,23 @@ final public class MainController extends AbstractController implements MainCont
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void updateFiatCurrency(final FiatCurrencies fiatCurrency) {
         this.currentFiat = fiatCurrency;
         this.updateWebsiteFiat();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void updateCryptocurrency(final CryptoCurrencies cryptoCurrency) {
         this.currentCrypto = cryptoCurrency;
         this.updateWebsitesCrypto();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void notifyWindowOfUpdate() {
         this.updateViewPrices();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void aboutPagePopUp() {
         new AboutJFrameWindow();
