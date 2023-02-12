@@ -4,6 +4,9 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
 
 /**
@@ -47,7 +50,8 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @param controller The controller that implements the required methods
      */
     public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                            final String name, final String urlExt, final APICallerContract controller) {
+                            final String name, final String urlExt, final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
                 AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
                 AbstractCoinBase.BASE_URL + urlExt, controller);

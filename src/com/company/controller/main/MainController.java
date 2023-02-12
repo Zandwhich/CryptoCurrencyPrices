@@ -11,6 +11,7 @@ import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.Errors;
 import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.view.window.about.AboutJFrameWindow;
 import com.company.view.window.error.network_error.NetworkErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
@@ -114,14 +115,13 @@ final public class MainController extends AbstractController implements MainCont
      */
     private void updateChangedCurrency() {
         for (final APICallerInterface website : this.endpointList) {
-            if (website.canUseCryptoCurrency(this.currentCrypto) && website.canUseFiatCurrency(this.currentFiat)) {
+            try {
                 website.setCryptoCurrency(this.currentCrypto);
                 website.setFiatCurrency(this.currentFiat);
                 website.setActive(true);
-            } else {
-                // TODO: Should I set the currencies to null in this instance?
-                website.setCryptoCurrency(null);
-                website.setFiatCurrency(null);
+            } catch (final AbstractCurrencyNotSupported e) {
+                website.setCryptoCurrencyToNull();
+                website.setFiatCurrencyToNull();
                 website.setActive(false);
             }
         }

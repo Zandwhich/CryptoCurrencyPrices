@@ -52,7 +52,8 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param controller The controller that implements the required methods
      */
     public CryptoCompare(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                   final APICallerContract controller) {
+                   final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, CryptoCompare.ACCEPTED_CRYPTOCURRENCIES,
                 CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
                 cryptoCurrency == null || fiatCurrency == null ?

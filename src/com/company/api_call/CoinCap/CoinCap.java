@@ -5,6 +5,7 @@ import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
 
 /**
@@ -49,7 +50,8 @@ final public class CoinCap extends AbstractAPICaller {
      * @param controller The controller that implements the required methods
      */
     public CoinCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                   final APICallerContract controller) {
+                   final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
                 CoinCap.BASE_NAME,
                 cryptoCurrency == null || fiatCurrency == null ?

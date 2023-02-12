@@ -49,7 +49,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The name of the API endpoint
      */
-    private final String name;
+    private String name;
 
     /**
      * The url to hit
@@ -64,17 +64,17 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The controller that calls this API caller
      */
-    private final APICallerContract controller;
+    private APICallerContract controller;
 
     /**
      * The cryptocurrencies that this website can use
      */
-    private final CryptoCurrencies[] acceptedCryptoCurrencies;
+    private CryptoCurrencies[] acceptedCryptoCurrencies;
 
     /**
      * The fiat currencies that this website can use
      */
-    private final FiatCurrencies[] acceptedFiatCurrencies;
+    private FiatCurrencies[] acceptedFiatCurrencies;
 
     /**
      * The flag to check when going through to see if this API endpoint should be updated.
@@ -101,8 +101,37 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                              final CryptoCurrencies[] acceptedCryptoCurrencies,
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                             final APICallerContract controller) throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+                             final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+        this.setup(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
+                controller);
+    }
 
+    // TODO: This is where you left off. Next, you need to implement a constructor that doesn't take in a cryptocurrency
+    //       or a fiat currency, sets those to null, does the rest of the setup stuff, and won't throw an error.
+
+
+    /* ************ *
+     *    Methods   *
+     * ************ */
+
+    /**
+     * The setup function with its logic extracted to avoid duplication
+     * @param cryptoCurrency The cryptocurrency that this endpoint will use
+     * @param fiatCurrency The fiat currency that this endpoint will use
+     * @param acceptedCryptoCurrencies The list of accepted cryptocurrencies for this endpoint
+     * @param acceptedFiatCurrencies The list of accepted fiat currencies for this endpoint
+     * @param name The name of this endpoint
+     * @param url The url for this endpoint
+     * @param controller Whoever created and will be implementing the methods in the contract for this endpoint
+     *                   (most likely a controller)
+     * @throws CryptoCurrencyNotSupported If an unaccepted cryptocurrency is tried to be set
+     * @throws FiatCurrencyNotSupported If an unaccepted fiat currency is tried to be set
+     */
+    private void setup(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
+                       final CryptoCurrencies[] acceptedCryptoCurrencies, final FiatCurrencies[] acceptedFiatCurrencies,
+                       final String name, final String url, final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         // The order here is important
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
@@ -137,51 +166,26 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.fiatCurrency = fiatCurrency;
     }
 
-
-    /* ************ *
-     *    Methods   *
-     * ************ */
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public double getPrice() { return this.price; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public CryptoCurrencies getCurrentCryptoCurrency() { return this.cryptoCurrency; }
 
-    /**
-     * {@inheritDoc}
-     */
     public FiatCurrencies getCurrentFiatCurrency() { return this.fiatCurrency; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() { return this.name; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public URL getUrl() { return this.url; }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isActive() {
         return isActive;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void setActive(final boolean active) {
         isActive = active;
     }
@@ -255,6 +259,16 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             throw new FiatCurrencyNotSupported(fiatCurrency);
     }
 
+    @Override
+    public void setCryptoCurrencyToNull() {
+        this.cryptoCurrency = null;
+    }
+
+    @Override
+    public void setFiatCurrencyToNull() {
+        this.fiatCurrency = null;
+    }
+
     /**
      * Updates the url with a new url
      * @param newUrl The new url in String form
@@ -291,6 +305,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     @Override
     public boolean canUseCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+        if (cryptoCurrency == null) return true;
+
         for (final CryptoCurrencies crypto : this.acceptedCryptoCurrencies) {
             if (crypto.equals(cryptoCurrency)) return true;
         }
@@ -300,6 +316,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     @Override
     public boolean canUseFiatCurrency(FiatCurrencies fiatCurrency) {
+        if (fiatCurrency == null) return true;
+
         for (final FiatCurrencies fiat : this.acceptedFiatCurrencies) {
             if (fiat.equals(fiatCurrency)) return true;
         }

@@ -3,6 +3,7 @@ package com.company.api_call.CoinBase;
 import com.company.api_call.APICallerContract;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 
@@ -32,7 +33,8 @@ final public class CoinBaseSpot extends AbstractCoinBase {
      * @param controller The controller that implements the required methods
      */
     public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                        final APICallerContract controller) {
+                        final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency,
                 "Spot",
                 cryptoCurrency == null || fiatCurrency == null ?

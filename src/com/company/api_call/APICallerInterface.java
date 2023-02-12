@@ -45,6 +45,16 @@ public interface APICallerInterface {
     void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported;
 
     /**
+     * Sets the cryptocurrency to null (to avoid try/catch blocks)
+     */
+    void setCryptoCurrencyToNull();
+
+    /**
+     * Sets the fiat currency to null (to avoid try/catch blocks)
+     */
+    void setFiatCurrencyToNull();
+
+    /**
      * Returns the cryptocurrency
      * @return The cryptocurrency
      */

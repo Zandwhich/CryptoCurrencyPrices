@@ -32,7 +32,8 @@ final public class CoinBaseBuy extends AbstractCoinBase {
      * @param controller The controller that implements the required methods
      */
     public CoinBaseBuy(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                       final APICallerContract controller) {
+                       final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency,
                 "Buy",
                 cryptoCurrency == null || fiatCurrency == null ?
