@@ -1,8 +1,8 @@
 package com.company.api_call.CoinBase;
 
 import com.company.api_call.APICallerContract;
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
 
 /**
  * The implementation of the CoinBase API that hits the 'buy' endpoint

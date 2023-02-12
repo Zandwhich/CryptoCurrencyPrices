@@ -1,7 +1,7 @@
 package com.company.view.window.main;
 
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.main.MainControllerInterface;
 import com.company.api_call.APICallerInterface;
 import com.company.view.combo_box.crypto_dropdown.CryptoDropdownJComboBox;

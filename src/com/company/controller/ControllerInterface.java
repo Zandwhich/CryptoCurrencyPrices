@@ -1,7 +1,7 @@
 package com.company.controller;
 
 import com.company.api_call.APICallerContract;
-import com.company.tools.enums.Errors;
+import com.company.tool.enums.Errors;
 import com.company.view.button.refresh.RefreshButtonContractInterface;
 
 /**

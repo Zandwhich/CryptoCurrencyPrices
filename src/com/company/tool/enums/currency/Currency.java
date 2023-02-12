@@ -1,4 +1,4 @@
-package com.company.tools.enums.currency;
+package com.company.tool.enums.currency;
 
 /**
  * A parent enum to both FiatCurrencies and CryptoCurrencies

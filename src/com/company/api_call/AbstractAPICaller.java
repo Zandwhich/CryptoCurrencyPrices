@@ -1,9 +1,9 @@
 package com.company.api_call;
 
-import com.company.tools.enums.Errors;
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.Currency;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.Errors;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.Currency;
+import com.company.tool.enums.currency.FiatCurrencies;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;

@@ -1,7 +1,7 @@
 package com.company.api_call;
 
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
 
 import java.net.URL;
 
