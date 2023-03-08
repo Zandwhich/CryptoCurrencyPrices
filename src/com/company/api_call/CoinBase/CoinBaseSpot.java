@@ -35,13 +35,34 @@ final public class CoinBaseSpot extends AbstractCoinBase {
     public CoinBaseSpot(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                         final APICallerContract controller)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        super(cryptoCurrency, fiatCurrency,
-                "Spot",
-                cryptoCurrency == null || fiatCurrency == null ?
-                        null :
-                        cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                                CoinBaseSpot.SPOT_EXT,
+        super(cryptoCurrency, fiatCurrency, "Spot", CoinBaseSpot.urlBuilder(cryptoCurrency, fiatCurrency),
                 controller);
+    }
+
+    /**
+     * The constructor for CoinBaseSpot when a cryptocurrency and a fiat currency aren't specified (most likely when
+     * the currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public CoinBaseSpot(final APICallerContract controller) {
+        super("Spot", CoinBaseSpot.urlBuilder(null, null), controller);
+    }
+
+
+    /* ************ *
+     *   Methods    *
+     * ************ */
+
+    /**
+     * A function through which to create the URL for the given currency outside the constructor
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @return The url to be used for the endpoint
+     */
+    public static String urlBuilder(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency) {
+        return cryptoCurrency == null || fiatCurrency == null ?
+                null :
+                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseSpot.SPOT_EXT;
     }
 
     /**

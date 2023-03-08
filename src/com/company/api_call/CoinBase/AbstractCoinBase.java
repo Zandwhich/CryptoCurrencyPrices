@@ -57,14 +57,21 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
                 AbstractCoinBase.BASE_URL + urlExt, controller);
     }
 
+    /**
+     * The constructor for AbstractCoinBase when a cryptocurrency and a fiat currency aren't specified (most likely when
+     * the currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public AbstractCoinBase(final String name, final String urlExt, final APICallerContract controller) {
+        super(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "Coinbase "
+                + name, AbstractCoinBase.BASE_URL + urlExt, controller);
+    }
+
 
     /* ************ *
      *   Methods    *
      * ************ */
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }
 

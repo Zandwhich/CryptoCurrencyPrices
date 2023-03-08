@@ -62,37 +62,29 @@ final public class MainController extends AbstractController implements MainCont
         // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns(this.currentCrypto, this.currentFiat);
 
-        // TODO: Work to be done in the refactor_api_calls branch: update this so that if the endpoint doesn't accept
-        //       the starting currencies, it gets its currencies set to null
         /* CoinBase */
-        if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             endpointList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             endpointList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CoinBaseBuy(null, null, this));
-            endpointList.add(new CoinBaseSell(null, null, this));
-            endpointList.add(new CoinBaseSell(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CoinBaseBuy(this));
+            endpointList.add(new CoinBaseSell(this));
+            endpointList.add(new CoinBaseSell(this));
         }
 
-        /* CoinMarketCap */
-        // endpointList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-
         /* CoinCap */
-        if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CoinCap(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CoinCap(this));
         }
 
         /* CryptoCompare */
-        if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CryptoCompare(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CryptoCompare(this));
         }
 
         this.mainWindow.setEndpoints(
@@ -112,6 +104,8 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * Because the logic for changing either cryptocurrency or fiat currency is the same, have one method
      * that both methods call
+     * </p>
+     * TODO: Should we split this up into two functions: one for the cryptocurrency and one for the fiat currency?
      */
     private void updateChangedCurrency() {
         for (final APICallerInterface website : this.endpointList) {

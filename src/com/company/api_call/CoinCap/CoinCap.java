@@ -53,11 +53,17 @@ final public class CoinCap extends AbstractAPICaller {
                    final APICallerContract controller)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinCap.BASE_NAME,
-                cryptoCurrency == null || fiatCurrency == null ?
-                        null :
-                        CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase(),
-                controller);
+                CoinCap.BASE_NAME, CoinCap.urlBuilder(cryptoCurrency, fiatCurrency), controller);
+    }
+
+    /**
+     * The constructor for CoinCap when a cryptocurrency and a fiat currency aren't specified (most likely when the
+     * currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public CoinCap(final APICallerContract controller) {
+        super(CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES, CoinCap.BASE_NAME,
+                CoinCap.urlBuilder(null, null), controller);
     }
 
 
@@ -66,9 +72,17 @@ final public class CoinCap extends AbstractAPICaller {
      * ************ */
 
     /**
-     * Returns the base url
-     * @return The base url
+     * A function through which to create the URL for the given currency outside the constructor
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @return The url to be used for the endpoint
      */
+    private static String urlBuilder(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency) {
+        return cryptoCurrency == null || fiatCurrency == null ?
+                null :
+                CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase();
+    }
+
     @Override
     public String getBaseUrl() { return CoinCap.BASE_URL; }
 
@@ -92,9 +106,6 @@ final public class CoinCap extends AbstractAPICaller {
         return AbstractAPICaller.canUseCurrency(CoinCap.ACCEPTED_CRYPTOCURRENCIES, cryptoCurrency);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
         final JSONObject data = (JSONObject) jsonObject.get("data");

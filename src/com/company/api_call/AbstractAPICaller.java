@@ -4,6 +4,7 @@ import com.company.tool.enums.Errors;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.Currency;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
@@ -91,7 +92,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The constructor for AbstractAPICaller
      * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
-     * @param fiatCurrency The fiat currency to compare against (USD, CAD, PLN, etc.)
+     * @param fiatCurrency The fiat currency to compare against (i.e. USD, CAD, PLN, etc.)
      * @param acceptedCryptoCurrencies The accepted cryptocurrencies for this website
      * @param acceptedFiatCurrencies The accepted fiat currencies for this website
      * @param name The name of the API endpoint
@@ -105,6 +106,26 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         this.setup(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
                 controller);
+    }
+
+    /**
+     * The constructor for AbstractAPICaller when a cryptocurrency and a fiat currency aren't specified (most likely
+     * when the currency is not supported for the given endpoint)
+     * @param acceptedCryptoCurrencies The list of accepted cryptocurrencies for this endpoint
+     * @param acceptedFiatCurrencies The list of accepted fiat currencies for this endpoint
+     * @param name The name of this endpoint
+     * @param url The url to hit
+     * @param controller The instantiation of whatever calls this endpoint, most likely a controller
+     */
+    public AbstractAPICaller(final CryptoCurrencies[] acceptedCryptoCurrencies,
+                             final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
+                             final APICallerContract controller) {
+        try {
+            this.setup(null, null, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
+                    controller);
+        } catch (final AbstractCurrencyNotSupported ignored) {
+            // This won't happen, as the two currencies are set to null
+        }
     }
 
     // TODO: This is where you left off. Next, you need to implement a constructor that doesn't take in a cryptocurrency
@@ -135,8 +156,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         // The order here is important
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
-        if (!canUseCryptoCurrency(cryptoCurrency)) throw new CryptoCurrencyNotSupported(cryptoCurrency);
-        if (!canUseFiatCurrency(fiatCurrency)) throw new FiatCurrencyNotSupported(fiatCurrency);
+        if (!this.canUseCryptoCurrency(cryptoCurrency)) throw new CryptoCurrencyNotSupported(cryptoCurrency);
+        if (!this.canUseFiatCurrency(fiatCurrency)) throw new FiatCurrencyNotSupported(fiatCurrency);
 
         this.controller = controller;
         this.hasPrice = false;
@@ -245,7 +266,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     @Override
     public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
-        if (canUseCryptoCurrency(cryptoCurrency))
+        if (this.canUseCryptoCurrency(cryptoCurrency))
             this.cryptoCurrency = cryptoCurrency;
         else
             throw new CryptoCurrencyNotSupported(cryptoCurrency);
@@ -253,7 +274,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     @Override
     public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
-        if (canUseFiatCurrency(fiatCurrency))
+        if (this.canUseFiatCurrency(fiatCurrency))
             this.fiatCurrency = fiatCurrency;
         else
             throw new FiatCurrencyNotSupported(fiatCurrency);

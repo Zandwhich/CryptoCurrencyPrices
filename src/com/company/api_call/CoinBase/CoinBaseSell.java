@@ -34,13 +34,34 @@ final public class CoinBaseSell extends AbstractCoinBase {
     public CoinBaseSell(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
                        final APICallerContract controller)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        super(cryptoCurrency, fiatCurrency,
-                "Sell",
-                cryptoCurrency == null || fiatCurrency == null ?
-                        null :
-                        cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() +
-                                CoinBaseSell.SELL_EXT,
+        super(cryptoCurrency, fiatCurrency, "Sell", CoinBaseSell.urlBuilder(cryptoCurrency, fiatCurrency),
                 controller);
+    }
+
+    /**
+     * The constructor for CoinBaseSell when a cryptocurrency and a fiat currency aren't specified (most likely when
+     * the currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public CoinBaseSell(final APICallerContract controller) {
+        super("Sell", CoinBaseSell.urlBuilder(null, null), controller);
+    }
+
+
+    /* ************ *
+     *   Methods    *
+     * ************ */
+
+    /**
+     * A function through which to create the URL for the given currency outside the constructor
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @return The url to be used for the endpoint
+     */
+    public static String urlBuilder(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency) {
+        return cryptoCurrency == null || fiatCurrency == null ?
+                null :
+                cryptoCurrency.getAbbreviatedName() + "-" + fiatCurrency.getAbbreviatedName() + CoinBaseSell.SELL_EXT;
     }
 
     /**

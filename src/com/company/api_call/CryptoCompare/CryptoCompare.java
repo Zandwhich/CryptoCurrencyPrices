@@ -56,11 +56,17 @@ final public class CryptoCompare extends AbstractAPICaller {
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, CryptoCompare.ACCEPTED_CRYPTOCURRENCIES,
                 CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
-                cryptoCurrency == null || fiatCurrency == null ?
-                        null :
-                        CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
-                                fiatCurrency.getAbbreviatedName(),
-                controller);
+                urlBuilder(cryptoCurrency, fiatCurrency), controller);
+    }
+
+    /**
+     * The constructor for CryptoCompare when a cryptocurrency and a fiat currency aren't specified (most likely when
+     * the currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public CryptoCompare(final APICallerContract controller) {
+        super(CryptoCompare.ACCEPTED_CRYPTOCURRENCIES, CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
+                urlBuilder(null, null), controller);
     }
 
 
@@ -69,9 +75,18 @@ final public class CryptoCompare extends AbstractAPICaller {
      * ************ */
 
     /**
-     * Returns the base url
-     * @return The base url
+     * A function through which to create the URL for the given currency outside the constructor
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @return The url to be used for the endpoint
      */
+    private static String urlBuilder(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency) {
+        return cryptoCurrency == null || fiatCurrency == null ?
+                null :
+                CryptoCompare.BASE_URL + "?fsym=" + cryptoCurrency.getAbbreviatedName() + "&tsyms=" +
+                        fiatCurrency.getAbbreviatedName();
+    }
+
     @Override
     public String getBaseUrl() { return CryptoCompare.BASE_URL; }
 
