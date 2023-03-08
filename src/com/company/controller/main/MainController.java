@@ -7,10 +7,11 @@ import com.company.api_call.CoinBase.CoinBaseSell;
 import com.company.api_call.CoinBase.CoinBaseSpot;
 import com.company.api_call.CoinCap.CoinCap;
 import com.company.api_call.CryptoCompare.CryptoCompare;
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.Errors;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.Errors;
+import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.view.window.about.AboutJFrameWindow;
 import com.company.view.window.error.network_error.NetworkErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
@@ -61,37 +62,29 @@ final public class MainController extends AbstractController implements MainCont
         // Get the dropdown to display the default currencies
         this.mainWindow.updateDropdowns(this.currentCrypto, this.currentFiat);
 
-        // TODO: Work to be done in the refactor_api_calls branch: update this so that if the endpoint doesn't accept
-        //       the starting currencies, it gets its currencies set to null
         /* CoinBase */
-        if (AbstractCoinBase.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                AbstractCoinBase.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CoinBaseBuy(this.currentCrypto, this.currentFiat, this));
             endpointList.add(new CoinBaseSell(this.currentCrypto, this.currentFiat, this));
             endpointList.add(new CoinBaseSpot(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CoinBaseBuy(null, null, this));
-            endpointList.add(new CoinBaseSell(null, null, this));
-            endpointList.add(new CoinBaseSell(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CoinBaseBuy(this));
+            endpointList.add(new CoinBaseSell(this));
+            endpointList.add(new CoinBaseSell(this));
         }
 
-        /* CoinMarketCap */
-        // endpointList.add(new CoinMarketCap(this.currentCrypto, this.currentFiat, this));
-
         /* CoinCap */
-        if (CoinCap.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                CoinCap.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CoinCap(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CoinCap(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CoinCap(this));
         }
 
         /* CryptoCompare */
-        if (CryptoCompare.endpointCanUseCryptoCurrency(this.currentCrypto) &&
-                CryptoCompare.endpointCanUseFiatCurrency(this.currentFiat)) {
+        try {
             endpointList.add(new CryptoCompare(this.currentCrypto, this.currentFiat, this));
-        } else {
-            endpointList.add(new CryptoCompare(null, null, this));
+        } catch (final AbstractCurrencyNotSupported exception) {
+            endpointList.add(new CryptoCompare(this));
         }
 
         this.mainWindow.setEndpoints(
@@ -111,17 +104,18 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * Because the logic for changing either cryptocurrency or fiat currency is the same, have one method
      * that both methods call
+     * </p>
+     * TODO: Should we split this up into two functions: one for the cryptocurrency and one for the fiat currency?
      */
     private void updateChangedCurrency() {
         for (final APICallerInterface website : this.endpointList) {
-            if (website.canUseCryptoCurrency(this.currentCrypto) && website.canUseFiatCurrency(this.currentFiat)) {
+            try {
                 website.setCryptoCurrency(this.currentCrypto);
                 website.setFiatCurrency(this.currentFiat);
                 website.setActive(true);
-            } else {
-                // TODO: Should I set the currencies to null in this instance?
-                website.setCryptoCurrency(null);
-                website.setFiatCurrency(null);
+            } catch (final AbstractCurrencyNotSupported e) {
+                website.setCryptoCurrencyToNull();
+                website.setFiatCurrencyToNull();
                 website.setActive(false);
             }
         }

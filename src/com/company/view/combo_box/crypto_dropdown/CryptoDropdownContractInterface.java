@@ -1,6 +1,6 @@
 package com.company.view.combo_box.crypto_dropdown;
 
-import com.company.tools.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.view.combo_box.ComboBoxContractInterface;
 
 /**

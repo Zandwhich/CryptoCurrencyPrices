@@ -1,7 +1,9 @@
 package com.company.api_call;
 
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 
 import java.net.URL;
 
@@ -34,13 +36,23 @@ public interface APICallerInterface {
      * Sets the current cryptocurrency that will be used for this endpoint
      * @param cryptoCurrency The cryptocurrency to be used for this endpoint
      */
-    void setCryptoCurrency(final CryptoCurrencies cryptoCurrency);
+    void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported;
 
     /**
      * Sets the current fiat currency that will be used for this endpoint
      * @param fiatCurrency The fiat currency to be used for this endpoint
      */
-    void setFiatCurrency(final FiatCurrencies fiatCurrency);
+    void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported;
+
+    /**
+     * Sets the cryptocurrency to null (to avoid try/catch blocks)
+     */
+    void setCryptoCurrencyToNull();
+
+    /**
+     * Sets the fiat currency to null (to avoid try/catch blocks)
+     */
+    void setFiatCurrencyToNull();
 
     /**
      * Returns the cryptocurrency

@@ -1,4 +1,4 @@
-package com.company.tools.enums.currency;
+package com.company.tool.enums.currency;
 
 /**
  * An enum that holds all possible cryptocurrencies (received from <a href="http://coincap.io/map">http://coincap.io/map</a>)

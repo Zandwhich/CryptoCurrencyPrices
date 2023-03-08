@@ -1,6 +1,6 @@
 package com.company.api_call;
 
-import com.company.tools.enums.Errors;
+import com.company.tool.enums.Errors;
 
 /**
  * Whoever wants to use an instantiation of APICallerInterface needs to provide these methods

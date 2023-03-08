@@ -2,8 +2,11 @@ package com.company.api_call.CoinMarketCap;
 
 import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
-import com.company.tools.enums.currency.CryptoCurrencies;
-import com.company.tools.enums.currency.FiatCurrencies;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
+import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
 
 /**
@@ -51,15 +54,21 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * @param controller The controller that implements the required method
      */
     public CoinMarketCap(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                         final APICallerContract controller) {
+                         final APICallerContract controller)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         super(cryptoCurrency, fiatCurrency, CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES,
                 CoinMarketCap.ACCEPTED_FIAT_CURRENCIES,
-                CoinMarketCap.BASE_NAME,
-                cryptoCurrency == null || fiatCurrency == null ?
-                        null :
-                        CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() + "&convert=" +
-                                fiatCurrency.getAbbreviatedName(),
-                controller);
+                CoinMarketCap.BASE_NAME, CoinMarketCap.urlBuilder(cryptoCurrency, fiatCurrency), controller);
+    }
+
+    /**
+     * The constructor for CoinMarketCap when a cryptocurrency and a fiat currency aren't specified (most likely when
+     * the currency is not supported for the given endpoint)
+     * @param controller The controller that implements the required methods
+     */
+    public CoinMarketCap(final APICallerContract controller) {
+        super(CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES, CoinMarketCap.ACCEPTED_FIAT_CURRENCIES, CoinMarketCap.BASE_NAME,
+                CoinMarketCap.urlBuilder(null, null), controller);
     }
 
 
@@ -68,8 +77,18 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * ************ */
 
     /**
-     * {@inheritDoc}
+     * A function through which to create the URL for the given currency outside the constructor
+     * @param cryptoCurrency The cryptocurrency
+     * @param fiatCurrency The fiat currency
+     * @return The url to be used for the endpoint
      */
+    private static String urlBuilder(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency) {
+        return cryptoCurrency == null || fiatCurrency == null ?
+                null :
+                CoinMarketCap.BASE_URL + "?symbol=" + cryptoCurrency.getAbbreviatedName() + "&convert=" +
+                        fiatCurrency.getAbbreviatedName();
+    }
+
     @Override
     public String getBaseUrl() { return CoinMarketCap.BASE_URL; }
 
@@ -93,9 +112,6 @@ final public class CoinMarketCap extends AbstractAPICaller {
         return AbstractAPICaller.canUseCurrency(CoinMarketCap.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected double extractPrice(final JSONObject jsonObject) {
         final JSONObject data = (JSONObject) jsonObject.get("data");
@@ -118,7 +134,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * @param cryptoCurrency The cryptocurrency to be used for this endpoint
      */
     @Override
-    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) {
+    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
         super.setCryptoCurrency(cryptoCurrency);
         super.updateUrl(cryptoCurrency == null ?
                 null :
@@ -133,7 +149,7 @@ final public class CoinMarketCap extends AbstractAPICaller {
      * @param fiatCurrency The fiat currency to be used for this endpoint
      */
     @Override
-    public void setFiatCurrency(final FiatCurrencies fiatCurrency) {
+    public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
         super.setFiatCurrency(fiatCurrency);
         super.updateUrl(fiatCurrency == null ?
                 null :
