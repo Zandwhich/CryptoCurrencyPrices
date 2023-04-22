@@ -38,12 +38,13 @@ final public class EndpointMemory implements EndpointMemoryInterface {
 
     private EndpointDataInterface getDataFromMap(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        // TODO: Potentially flip this around, where I only check for if it's in the lists IF the map.get method fails,
-        //  in order to save on the amount of time I actually check the map
-        if (!Arrays.asList(this.acceptedCryptos).contains(crypto)) throw  new CryptoCurrencyNotSupported(crypto);
-        if (!Arrays.asList(this.acceptedFiats).contains(fiat)) throw new FiatCurrencyNotSupported(fiat);
-
-        return this.endpointDataMap.get(new Pair<>(crypto, fiat));
+        try {
+            return this.endpointDataMap.get(new Pair<>(crypto, fiat));
+        } catch (final NullPointerException e) {
+            if (!Arrays.asList(this.acceptedCryptos).contains(crypto)) throw  new CryptoCurrencyNotSupported(crypto);
+            if (!Arrays.asList(this.acceptedFiats).contains(fiat)) throw new FiatCurrencyNotSupported(fiat);
+        }
+        return null;
     }
 
     @Override
