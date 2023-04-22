@@ -25,7 +25,7 @@ final public class CryptoCompare extends AbstractAPICaller {
     /**
      * The base name for the endpoint
      */
-    private final static String BASE_NAME = "CryptoCompare";
+    private final static String NAME = "CryptoCompare";
 
     /**
      * The accepted cryptocurrencies for CryptoCompare
@@ -51,7 +51,7 @@ final public class CryptoCompare extends AbstractAPICaller {
      * @param controller The controller that implements the required methods
      */
     public CryptoCompare(final APICallerContract controller) {
-        super(CryptoCompare.ACCEPTED_CRYPTOCURRENCIES, CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.BASE_NAME,
+        super(CryptoCompare.ACCEPTED_CRYPTOCURRENCIES, CryptoCompare.ACCEPTED_FIAT_CURRENCIES, CryptoCompare.NAME,
                 controller);
     }
 

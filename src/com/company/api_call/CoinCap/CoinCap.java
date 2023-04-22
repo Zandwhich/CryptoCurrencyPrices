@@ -25,7 +25,7 @@ final public class CoinCap extends AbstractAPICaller {
     /**
      * The base name for the endpoint
      */
-    private final static String BASE_NAME = "CoinCap ";
+    private final static String NAME = "CoinCap ";
 
     /**
      * The accepted cryptocurrencies for CoinCap
@@ -49,7 +49,7 @@ final public class CoinCap extends AbstractAPICaller {
      * @param controller The controller that implements the required methods
      */
     public CoinCap(final APICallerContract controller) {
-        super(CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES, CoinCap.BASE_NAME, controller);
+        super(CoinCap.ACCEPTED_CRYPTOCURRENCIES, CoinCap.ACCEPTED_FIAT_CURRENCIES, CoinCap.NAME, controller);
     }
 
 
