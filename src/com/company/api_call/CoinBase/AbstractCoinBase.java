@@ -36,35 +36,23 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      */
     private static final String BASE_URL = "https://api.coinbase.com/v2/prices/";
 
+    private final String urlExt;
+
 
     /* ************ *
      * Constructors *
      * ************ */
 
     /**
-     * The constructor for the AbstractCoinBase class
-     * @param cryptoCurrency The cryptocurrency
-     * @param fiatCurrency The fiat currency
-     * @param name The name of the specific request
-     * @param urlExt The extension to the base url
-     * @param controller The controller that implements the required methods
-     */
-    public AbstractCoinBase(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                            final String name, final String urlExt, final APICallerContract controller)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        super(cryptoCurrency, fiatCurrency, AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES,
-                AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "CoinBase " + name,
-                AbstractCoinBase.BASE_URL + urlExt, controller);
-    }
-
-    /**
      * The constructor for AbstractCoinBase when a cryptocurrency and a fiat currency aren't specified (most likely when
      * the currency is not supported for the given endpoint)
+     * @param name       The name of the specific implementation of the AbstractCoinBase endpoint
      * @param controller The controller that implements the required methods
      */
     public AbstractCoinBase(final String name, final String urlExt, final APICallerContract controller) {
         super(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, AbstractCoinBase.ACCEPTED_FIAT_CURRENCIES, "Coinbase "
-                + name, AbstractCoinBase.BASE_URL + urlExt, controller);
+                + name, controller);
+        this.urlExt = urlExt;
     }
 
 
@@ -73,7 +61,25 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * ************ */
 
     @Override
-    public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }
+    protected double extractPrice(final JSONObject jsonObject, final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+        super.throwIfNotAcceptedCurrency(crypto, fiat);
+
+        final JSONObject data = (JSONObject) jsonObject.get("data");
+
+        // TODO: Should throw an error here?
+        if (data == null || !data.containsKey("amount")) return -1;
+
+        return Double.parseDouble((String) data.get("amount"));
+    }
+
+    @Override
+    protected String createURLStringForCall(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+        this.throwIfNotAcceptedCurrency(crypto, fiat);
+
+        return AbstractCoinBase.BASE_URL + crypto.getAbbreviatedName() + "-" + fiat.getAbbreviatedName() + this.urlExt;
+    }
 
     /**
      * Returns if the given fiat currency can be used with CoinBase
@@ -94,28 +100,4 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
     {
         return AbstractAPICaller.canUseCurrency(AbstractCoinBase.ACCEPTED_CRYPTO_CURRENCIES, cryptoCurrency);
     }
-
-    /**
-     * Gets the price from the JSON Object
-     * @param jsonObject The JSON object received from a request
-     * @return The price from the JSON object
-     */
-    @Override
-    protected double extractPrice(final JSONObject jsonObject) {
-        final JSONObject data = (JSONObject) jsonObject.get("data");
-
-        // TODO: Should throw an error here?
-        if (data == null || !data.containsKey("amount")) return -1;
-
-        return Double.parseDouble((String) data.get("amount"));
-    }
-
-    /**
-     * Updates the url to hit for the endpoint, provided that the extension is passed in
-     * @param urlExtension The extension for the CoinBase endpoint
-     */
-    protected void updateUrlWithNewExtension(final String urlExtension) {
-        super.updateUrl(AbstractCoinBase.BASE_URL + urlExtension);
-    }
-
 }

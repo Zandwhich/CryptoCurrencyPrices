@@ -19,12 +19,6 @@ public interface APICallerContract {
                         final boolean isUpdating);
 
     /**
-     * Returns true if connected to the internet, otherwise false
-     * @return True if connected to the internet, otherwise false
-     */
-    boolean isConnected();
-
-    /**
      * Pops up a window that displays an error message
      * @param error The type of error
      * @param name The name of whoever called this error

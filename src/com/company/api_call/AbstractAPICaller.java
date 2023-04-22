@@ -33,29 +33,24 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * The name of the API endpoint
      */
-    private String name;
-
-    /**
-     * The url to hit
-     */
-    private URL url;
+    private final String name;
 
     /**
      * The controller that calls this API caller
      */
-    private APICallerContract controller;
+    private final APICallerContract controller;
 
     /**
      * The cryptocurrencies that this website can use
      */
-    private CryptoCurrencies[] acceptedCryptos;
+    private final CryptoCurrencies[] acceptedCryptos;
 
     /**
      * The fiat currencies that this website can use
      */
-    private FiatCurrencies[] acceptedFiats;
+    private final FiatCurrencies[] acceptedFiats;
 
-    private EndpointMemoryInterface memory;
+    private final EndpointMemoryInterface memory;
 
 
     /* ************ *
@@ -67,14 +62,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * @param acceptedCryptos The accepted cryptocurrencies for this website
      * @param acceptedFiats The accepted fiat currencies for this website
      * @param name The name of the API endpoint
-     * @param url The url to hit
      * @param controller The controller that calls this API caller
      */
-    public AbstractAPICaller(final CryptoCurrencies[] acceptedCryptos,
-                             final FiatCurrencies[] acceptedFiats, final String name, final String url,
-                             final APICallerContract controller) {
-        this.setup(acceptedCryptos, acceptedFiats, name, url,
-                controller);
+    public AbstractAPICaller(final CryptoCurrencies[] acceptedCryptos, final FiatCurrencies[] acceptedFiats,
+                             final String name, final APICallerContract controller) {
+        // The order here is important
+        this.acceptedCryptos = acceptedCryptos;
+        this.acceptedFiats = acceptedFiats;
+
+        this.controller = controller;
+        this.name = name;
+
+        this.memory = new EndpointMemory(this.acceptedCryptos, this.acceptedFiats);
     }
 
 
@@ -82,47 +81,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      *    Methods   *
      * ************ */
 
-    /**
-     * The setup function with its logic extracted to avoid duplication
-     *
-     * @param acceptedCryptoCurrencies The list of accepted cryptocurrencies for this endpoint
-     * @param acceptedFiatCurrencies   The list of accepted fiat currencies for this endpoint
-     * @param name                     The name of this endpoint
-     * @param url                      The url for this endpoint
-     * @param controller               Whoever created and will be implementing the methods in the contract for this
-     *                                 endpoint (most likely a controller)
-     */
-    private void setup(final CryptoCurrencies[] acceptedCryptoCurrencies, final FiatCurrencies[] acceptedFiatCurrencies,
-                       final String name, final String url, final APICallerContract controller) {
-        // The order here is important
-        this.acceptedCryptos = acceptedCryptoCurrencies;
-        this.acceptedFiats = acceptedFiatCurrencies;
-
-        this.controller = controller;
-        this.name = name;
-
-        try {
-            this.url = new URL(url);
-        }
-        catch (final MalformedURLException e) {
-            // The url is set to null if either of the cryptocurrency or fiat currency are null
-            if (!(e.getCause() instanceof NullPointerException)) {
-                // Bad URL input
-                e.printStackTrace();
-
-                // TODO: Figure out what to do when a bad URL is inputted (this shouldn't happen as the URLs are to be hard-coded in)
-                //       Throw an error?
-            }
-
-        }
-
-        this.memory = new EndpointMemory(this.acceptedCryptos, this.acceptedFiats);
+    protected void throwIfNotAcceptedCurrency(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+        if (!this.canUseCryptoCurrency(crypto)) throw new CryptoCurrencyNotSupported(crypto);
+        if (!this.canUseFiatCurrency(fiat)) throw new FiatCurrencyNotSupported(fiat);
     }
 
     @Override
     public String getName() { return this.name; }
-
-    protected URL getUrl() { return this.url; }
 
     @Override
     public double getPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat)
@@ -186,19 +152,23 @@ public abstract class AbstractAPICaller implements APICallerInterface {
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
     }
 
-    private double getNewPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+    private double getNewPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         final JSONObject response = this.getRequestCall(crypto, fiat);
-        return this.extractPrice(response);
+        return this.extractPrice(response, crypto, fiat);
     }
 
-    protected abstract URL createURLForCall(final CryptoCurrencies crypto, final FiatCurrencies fiat);
+    protected abstract String createURLStringForCall(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
     /**
      * Gets the price from the JSON object which was returned from a call
      * @param jsonObject The returned, parsed JSON object from the call
      * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
      */
-    protected abstract double extractPrice(final JSONObject jsonObject);
+    protected abstract double extractPrice(final JSONObject jsonObject, final CryptoCurrencies crypto,
+                                           final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
     /**
      * A method to avoid duplication in implementation of the "canUseCryptoCurrency" and "canUseFiatCurrency" methods
@@ -220,14 +190,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Hits the url and retrieves the JSON. If there is an error, it returns null
      * @return The parsed JSON object returned as a result of the call. If there is an error, then it returns null
      */
-    private JSONObject getRequestCall(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
-
-        // If it's not connected, don't try to get the request
-        // TODO: Throw error here?
-        // TODO: Should I even check this, as it should "short" out in the controller above,
-        //  or get caught later in the method as an ENDPOINT_UPDATE_ERROR?
-        if (!this.controller.isConnected()) return null;
-
+    private JSONObject getRequestCall(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         /*
         Refer to:
             https://docs.oracle.com/javase/tutorial/networking/urls/connecting.html
@@ -239,13 +203,22 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         JSONObject jsonObject;
         // Set up the connection and get the input stream
         try {
-            final URLConnection connection = this.createURLForCall(crypto, fiat).openConnection();
+            final URLConnection connection = new URL(this.createURLStringForCall(crypto, fiat)).openConnection();
             connection.connect();
             final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             final JSONParser parser = new JSONParser();
 
             jsonObject = (JSONObject) parser.parse(in);
+        } catch (final MalformedURLException e) {
+            // TODO: This really shouldn't happen
+            // TODO: Should I make a distinct error for this?
+            this.controller.errorDisplay(Errors.ENDPOINT_UPDATE_ERROR, this.getName(), crypto, fiat);
+            e.printStackTrace();
+
+            // TODO: Throw an error here?
+
+            jsonObject = null;
         } catch (final IOException e) {
             // openConnection(), connection.connect(), or parser.parse(in) failed
             this.controller.errorDisplay(Errors.ENDPOINT_UPDATE_ERROR, this.getName(), crypto, fiat);
