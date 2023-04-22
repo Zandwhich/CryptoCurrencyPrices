@@ -1,24 +1,22 @@
 package com.company.api_call;
 
 import com.company.tool.enums.Errors;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
+
+import java.time.LocalDateTime;
 
 /**
  * Whoever wants to use an instantiation of APICallerInterface needs to provide these methods
  */
 public interface APICallerContract {
 
-    /**
-     * The function to call when there is an update in the data of an endpoint and the window needs to be re-drawn
-     */
-    void notifyWindowOfUpdate();
+    void notifyPriceSet(final AbstractAPICaller endpoint, final CryptoCurrencies crypto, final FiatCurrencies fiat,
+                        final double price, final boolean isUpdating, final boolean isSuccessful,
+                        final LocalDateTime lastUpdated);
 
-    /**
-     * The function to call when a single endpoint has received an update on its price, but successful or not
-     * @param name The name of the endpoint (this is what will be used to check against in the table)
-     * @param price The new price to display for this endpoint
-     * @param hasSucceeded If this last call was successful or not
-     */
-    void updatePrice(final String name, final double price, final boolean hasSucceeded);
+    void notifyUpdating(final AbstractAPICaller endpoint, final CryptoCurrencies crypto, final FiatCurrencies fiat,
+                        final boolean isUpdating);
 
     /**
      * Returns true if connected to the internet, otherwise false
@@ -31,5 +29,5 @@ public interface APICallerContract {
      * @param error The type of error
      * @param name The name of whoever called this error
      */
-    void errorDisplay(final Errors error, final String name);
+    void errorDisplay(final Errors error, final String name, final CryptoCurrencies crypto, final FiatCurrencies fiat);
 }

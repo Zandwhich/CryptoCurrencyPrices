@@ -5,6 +5,8 @@ package com.company.tool.enums;
  */
 public enum Errors {
 
-    NETWORK_CONNECTION
+    ENDPOINT_UPDATE_ERROR,
+    NETWORK_ERROR,
+    PARSE_ERROR
 
 }

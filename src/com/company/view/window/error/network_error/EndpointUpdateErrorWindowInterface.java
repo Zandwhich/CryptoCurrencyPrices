@@ -5,4 +5,4 @@ import com.company.view.window.error.ErrorWindowInterface;
 /**
  * The interface for the window of a network error
  */
-public interface NetworkErrorWindowInterface extends ErrorWindowInterface { }
+public interface EndpointUpdateErrorWindowInterface extends ErrorWindowInterface { }

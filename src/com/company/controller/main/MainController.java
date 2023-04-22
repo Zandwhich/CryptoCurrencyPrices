@@ -12,7 +12,7 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.view.window.about.AboutJFrameWindow;
-import com.company.view.window.error.network_error.NetworkErrorWindow;
+import com.company.view.window.error.network_error.EndpointUpdateErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
 
@@ -163,7 +163,7 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public void refresh() {
         super.checkConnection();
-        if (!super.isConnected()) this.errorDisplay(Errors.NETWORK_CONNECTION);
+        if (!super.isConnected()) this.errorDisplay(Errors.ENDPOINT_UPDATE_ERROR);
         else this.updatePrices();
     }
 
@@ -189,11 +189,20 @@ final public class MainController extends AbstractController implements MainCont
     }
 
     @Override
-    public void errorDisplay(final Errors error, final String name) {
+    public void errorDisplay(final Errors error, final String name, final CryptoCurrencies crypto,
+                             final FiatCurrencies fiat) {
 
         switch (error) {
-            case NETWORK_CONNECTION:
-                new NetworkErrorWindow(this, name);
+            case ENDPOINT_UPDATE_ERROR:
+                new EndpointUpdateErrorWindow(this, name, crypto, fiat);
+                return;
+            case NETWORK_ERROR:
+                // TODO: Implement this
+                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
+                return;
+            case PARSE_ERROR:
+                // TODO: Implement this
+                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
                 return;
         }
     }
@@ -202,8 +211,16 @@ final public class MainController extends AbstractController implements MainCont
     public void errorDisplay(final Errors error) {
 
         switch (error) {
-            case NETWORK_CONNECTION:
-                new NetworkErrorWindow(this);
+            case ENDPOINT_UPDATE_ERROR:
+                new EndpointUpdateErrorWindow(this);
+                return;
+            case NETWORK_ERROR:
+                // TODO: Implement this
+                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
+                return;
+            case PARSE_ERROR:
+                // TODO: Implement this
+                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
                 return;
         }
     }

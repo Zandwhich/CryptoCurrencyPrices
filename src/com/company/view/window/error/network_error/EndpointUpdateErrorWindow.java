@@ -1,12 +1,14 @@
 package com.company.view.window.error.network_error;
 
 import com.company.controller.ControllerInterface;
+import com.company.tool.enums.currency.CryptoCurrencies;
+import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.view.window.error.AbstractJFrameErrorWindow;
 
 /**
  * The error to throw if there is a network error
  */
-final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
+final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow implements EndpointUpdateErrorWindowInterface {
 
     /* ************ *
      *    Fields    *
@@ -42,9 +44,9 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      * The constructor for the window that displays a network error
      * @param controller The controller in charge of the window
      */
-    public NetworkErrorWindow(final ControllerInterface controller) {
-        super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
-                NetworkErrorWindow.MESSAGE);
+    public EndpointUpdateErrorWindow(final ControllerInterface controller) {
+        super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH, EndpointUpdateErrorWindow.HEIGHT,
+                EndpointUpdateErrorWindow.MESSAGE);
         this.setup();
     }
 
@@ -53,9 +55,10 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      * @param controller The controller in charge of the window
      * @param name The name of the cryptocurrency that caused the error
      */
-    public NetworkErrorWindow(final ControllerInterface controller, final String name) {
-        super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
-                messageWithName(name));
+    public EndpointUpdateErrorWindow(final ControllerInterface controller, final String name, final CryptoCurrencies crypto,
+                                     final FiatCurrencies fiat) {
+        super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH, EndpointUpdateErrorWindow.HEIGHT,
+                messageWithName(name, crypto, fiat));
         this.setup();
     }
 
@@ -74,9 +77,10 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
      * @param name The name of the cryptocurrency that tried to call a network connection
      * @return The message formatted to hold the cryptocurrency's name that tried to call a network connection
      */
-    private static String messageWithName(final String name) {
-        return "There appears to be a network connection error. This error occurred while trying to connect to " +
-                name + ".\nPlease check your connection and try again.";
+    private static String messageWithName(final String name, final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+        return "There was an error while getting the price for an endpoint. This error occurred while trying to connect " +
+                "to " + name + " with crypto currency " + crypto.getAbbreviatedName() + " and fiat currency " +
+                fiat.getAbbreviatedName() + ".\nPlease check your connection and try again.";
     }
 
 }
