@@ -1,7 +1,6 @@
 package com.company.controller.main;
 
 import com.company.api_call.APICallerInterface;
-import com.company.api_call.CoinBase.AbstractCoinBase;
 import com.company.api_call.CoinBase.CoinBaseBuy;
 import com.company.api_call.CoinBase.CoinBaseSell;
 import com.company.api_call.CoinBase.CoinBaseSpot;
@@ -171,7 +170,7 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public void updatePrices() {
         for (final APICallerInterface website : this.endpointList) {
-            new Thread(website::updatePriceAndNotify).start();
+            website.updatePriceAndNotify();
         }
 
         // this.updateViewPrices();

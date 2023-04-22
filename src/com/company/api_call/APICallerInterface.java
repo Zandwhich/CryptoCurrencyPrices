@@ -2,10 +2,9 @@ package com.company.api_call;
 
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
-import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
-import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 
 /**
  * The abstract API caller interface for all classes which will call APIs
@@ -16,7 +15,11 @@ public interface APICallerInterface {
      * Returns the current price
      * @return The current price
      */
-    double getPrice();
+    double getPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat);
+
+    LocalDateTime getLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat);
+
+    boolean isUpdating(final CryptoCurrencies crypto, final FiatCurrencies fiat);
 
     /**
      * Returns if the API endpoint can use the given cryptocurrency
@@ -31,40 +34,6 @@ public interface APICallerInterface {
      * @return If the given fiat currency can be used with this endpoint
      */
     boolean canUseFiatCurrency(final FiatCurrencies fiatCurrency);
-
-    /**
-     * Sets the current cryptocurrency that will be used for this endpoint
-     * @param cryptoCurrency The cryptocurrency to be used for this endpoint
-     */
-    void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported;
-
-    /**
-     * Sets the current fiat currency that will be used for this endpoint
-     * @param fiatCurrency The fiat currency to be used for this endpoint
-     */
-    void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported;
-
-    /**
-     * Sets the cryptocurrency to null (to avoid try/catch blocks)
-     */
-    void setCryptoCurrencyToNull();
-
-    /**
-     * Sets the fiat currency to null (to avoid try/catch blocks)
-     */
-    void setFiatCurrencyToNull();
-
-    /**
-     * Returns the cryptocurrency
-     * @return The cryptocurrency
-     */
-    CryptoCurrencies getCurrentCryptoCurrency();
-
-    /**
-     * Returns the fiat currency
-     * @return The fiat currency
-     */
-    FiatCurrencies getCurrentFiatCurrency();
 
     /**
      * Updates the price and notifies the controller

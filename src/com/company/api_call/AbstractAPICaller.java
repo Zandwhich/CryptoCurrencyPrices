@@ -4,9 +4,9 @@ import com.company.tool.enums.Errors;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.Currency;
 import com.company.tool.enums.currency.FiatCurrencies;
-import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
+import com.company.tool.util.Pair;
 import json_simple.JSONObject;
 import json_simple.parser.JSONParser;
 import json_simple.parser.ParseException;
@@ -17,35 +17,142 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The abstract class for API calls, which all API calls are based off of
  */
 public abstract class AbstractAPICaller implements APICallerInterface {
 
+    /**
+     * A wrapper class around the hashmap to hold the data returned from endpoints
+     * </p>
+     * NOTE: This may seem a bit over-kill, but I liked the separation, personally, so I decided to implement it.
+     * If in the future I want to get rid of it, I will
+     */
+    private static final class EndpointMemory {
+
+
+        /**
+         * The class that encapsulates all the data that we want to know about data returned from the APIs
+         */
+        private static final class EndpointData {
+
+            /**
+             * The last price of the endpoint
+             */
+            private double price = -1;
+
+            /**
+             * The last time this endpoint was updated for this currency combination
+             */
+            private LocalDateTime lastSuccessfulUpdate = null;
+
+            /**
+             * If the endpoint is currently updating for this currently combination
+             */
+            private boolean isUpdating = false;
+
+            private boolean hasFailedLastUpdate = false;
+
+            public double getPrice() {
+                return price;
+            }
+
+            public void setPrice(final double price) {
+                this.price = price;
+            }
+
+            public LocalDateTime getLastSuccessfulUpdate() {
+                return lastSuccessfulUpdate;
+            }
+
+            public void setLastSuccessfulUpdate(final LocalDateTime lastSuccessfulUpdate) {
+                this.lastSuccessfulUpdate = lastSuccessfulUpdate;
+            }
+
+            public boolean isUpdating() {
+                return isUpdating;
+            }
+
+            public void setUpdating(final boolean updating) {
+                isUpdating = updating;
+            }
+
+            public boolean hasFailedLastUpdate() {
+                return hasFailedLastUpdate;
+            }
+
+            public void setHasFailedLastUpdate(final boolean hasFailedLastUpdate) {
+                this.hasFailedLastUpdate = hasFailedLastUpdate;
+            }
+        }
+
+        /**
+         * The map that actually holds the data
+         */
+        private final Map<Pair<CryptoCurrencies, FiatCurrencies>, EndpointData> endpointDataMap;
+
+        private final CryptoCurrencies[] acceptedCryptos;
+
+        private final FiatCurrencies[] acceptedFiats;
+
+        public EndpointMemory(final CryptoCurrencies[] acceptedCryptos,
+                              final FiatCurrencies[] acceptedFiats) {
+            this.endpointDataMap = new HashMap<>();
+            this.acceptedCryptos = acceptedCryptos;
+            this.acceptedFiats = acceptedFiats;
+
+            for (final CryptoCurrencies crypto : this.acceptedCryptos) {
+                for (final FiatCurrencies fiat : this.acceptedFiats) {
+                    this.endpointDataMap.put(new Pair<>(crypto, fiat), new EndpointData());
+                }
+            }
+        }
+
+        // TODO: You left off here, where you were adding the errors to all of the getters and setters. Take a look at
+        //  your Notion for notes on what else to do
+
+        public double getPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+            return this.endpointDataMap.get(new Pair<>(crypto, fiat)).getPrice();
+        }
+
+        public void setPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat, final double price)
+                throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+            try {
+                this.endpointDataMap.get(new Pair<>(crypto, fiat)).setPrice(price);
+            } catch (final NullPointerException e) {
+                if (!Arrays.asList(this.acceptedCryptos).contains(crypto))
+                    throw new CryptoCurrencyNotSupported(crypto);
+                throw new FiatCurrencyNotSupported(fiat);
+            }
+
+        }
+
+        public boolean isUpdating(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+            return this.endpointDataMap.get(new Pair<>(crypto, fiat)).isUpdating();
+        }
+
+        public void setUpdating(final CryptoCurrencies crypto, final FiatCurrencies fiat, final boolean isUpdating) {
+            this.endpointDataMap.get(new Pair<>(crypto, fiat)).setUpdating(isUpdating);
+        }
+
+        public LocalDateTime getLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+            return this.endpointDataMap.get(new Pair<>(crypto, fiat)).getLastSuccessfulUpdate();
+        }
+
+        public void setLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat,
+                                   final LocalDateTime lastUpdated) {
+            this.endpointDataMap.get(new Pair<>(crypto, fiat)).setLastSuccessfulUpdate(lastUpdated);
+        }
+    }
+
     /* ************ *
      *    Fields    *
      * ************ */
-
-    /**
-     * The last received price
-     */
-    private double price;
-
-    /**
-     * The crypto currency (i.e. BTC, ETH, LTC, etc.)
-     */
-    private CryptoCurrencies cryptoCurrency;
-
-    /**
-     * The fiat currency (i.e. USD, CAD, PLN, etc.)
-     */
-    private FiatCurrencies fiatCurrency;
-
-    /**
-     * If the API has a price to display
-     */
-    private boolean hasPrice;
 
     /**
      * The name of the API endpoint
@@ -56,11 +163,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * The url to hit
      */
     private URL url;
-
-    /**
-     * If the last attempt to update the prices ended in failure
-     */
-    private boolean hasFailedLastUpdate;
 
     /**
      * The controller that calls this API caller
@@ -79,10 +181,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     /**
      * The flag to check when going through to see if this API endpoint should be updated.
+     * NOTE: Not to be used for cryptocurrency/fiat currency combinations, but more so for "url isn't working" reasons
      * </p>
      * The flag's setter can be overwritten as well if we for some reason we don't want to use a certain endpoint.
      */
     private boolean isActive = false;
+
+    private EndpointMemory memory;
 
 
     /* ************ *
@@ -91,45 +196,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     /**
      * The constructor for AbstractAPICaller
-     * @param cryptoCurrency The currency (i.e. BTC, ETH, LTC, etc.)
-     * @param fiatCurrency The fiat currency to compare against (i.e. USD, CAD, PLN, etc.)
      * @param acceptedCryptoCurrencies The accepted cryptocurrencies for this website
      * @param acceptedFiatCurrencies The accepted fiat currencies for this website
      * @param name The name of the API endpoint
      * @param url The url to hit
      * @param controller The controller that calls this API caller
      */
-    public AbstractAPICaller(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                             final CryptoCurrencies[] acceptedCryptoCurrencies,
-                             final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
-                             final APICallerContract controller)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        this.setup(cryptoCurrency, fiatCurrency, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
-                controller);
-    }
-
-    /**
-     * The constructor for AbstractAPICaller when a cryptocurrency and a fiat currency aren't specified (most likely
-     * when the currency is not supported for the given endpoint)
-     * @param acceptedCryptoCurrencies The list of accepted cryptocurrencies for this endpoint
-     * @param acceptedFiatCurrencies The list of accepted fiat currencies for this endpoint
-     * @param name The name of this endpoint
-     * @param url The url to hit
-     * @param controller The instantiation of whatever calls this endpoint, most likely a controller
-     */
     public AbstractAPICaller(final CryptoCurrencies[] acceptedCryptoCurrencies,
                              final FiatCurrencies[] acceptedFiatCurrencies, final String name, final String url,
                              final APICallerContract controller) {
-        try {
-            this.setup(null, null, acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
-                    controller);
-        } catch (final AbstractCurrencyNotSupported ignored) {
-            // This won't happen, as the two currencies are set to null
-        }
+        this.setup(acceptedCryptoCurrencies, acceptedFiatCurrencies, name, url,
+                controller);
     }
-
-    // TODO: This is where you left off. Next, you need to implement a constructor that doesn't take in a cryptocurrency
-    //       or a fiat currency, sets those to null, does the rest of the setup stuff, and won't throw an error.
 
 
     /* ************ *
@@ -138,32 +216,21 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     /**
      * The setup function with its logic extracted to avoid duplication
-     * @param cryptoCurrency The cryptocurrency that this endpoint will use
-     * @param fiatCurrency The fiat currency that this endpoint will use
+     *
      * @param acceptedCryptoCurrencies The list of accepted cryptocurrencies for this endpoint
-     * @param acceptedFiatCurrencies The list of accepted fiat currencies for this endpoint
-     * @param name The name of this endpoint
-     * @param url The url for this endpoint
-     * @param controller Whoever created and will be implementing the methods in the contract for this endpoint
-     *                   (most likely a controller)
-     * @throws CryptoCurrencyNotSupported If an unaccepted cryptocurrency is tried to be set
-     * @throws FiatCurrencyNotSupported If an unaccepted fiat currency is tried to be set
+     * @param acceptedFiatCurrencies   The list of accepted fiat currencies for this endpoint
+     * @param name                     The name of this endpoint
+     * @param url                      The url for this endpoint
+     * @param controller               Whoever created and will be implementing the methods in the contract for this
+     *                                 endpoint (most likely a controller)
      */
-    private void setup(final CryptoCurrencies cryptoCurrency, final FiatCurrencies fiatCurrency,
-                       final CryptoCurrencies[] acceptedCryptoCurrencies, final FiatCurrencies[] acceptedFiatCurrencies,
-                       final String name, final String url, final APICallerContract controller)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+    private void setup(final CryptoCurrencies[] acceptedCryptoCurrencies, final FiatCurrencies[] acceptedFiatCurrencies,
+                       final String name, final String url, final APICallerContract controller) {
         // The order here is important
         this.acceptedCryptoCurrencies = acceptedCryptoCurrencies;
         this.acceptedFiatCurrencies = acceptedFiatCurrencies;
-        if (!this.canUseCryptoCurrency(cryptoCurrency)) throw new CryptoCurrencyNotSupported(cryptoCurrency);
-        if (!this.canUseFiatCurrency(fiatCurrency)) throw new FiatCurrencyNotSupported(fiatCurrency);
 
         this.controller = controller;
-        this.hasPrice = false;
-        // There has not been a failure to update, as there hasn't been a request made yet
-        this.hasFailedLastUpdate = false;
-        this.price = 0.0;
         this.name = name;
 
         this.isActive = true;
@@ -183,17 +250,23 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             this.isActive = false;
         }
 
-        this.cryptoCurrency = cryptoCurrency;
-        this.fiatCurrency = fiatCurrency;
+        this.memory = new EndpointMemory(this.acceptedCryptoCurrencies, this.acceptedFiatCurrencies);
     }
 
     @Override
-    public double getPrice() { return this.price; }
+    public double getPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+        return this.memory.getPrice(crypto, fiat);
+    }
 
     @Override
-    public CryptoCurrencies getCurrentCryptoCurrency() { return this.cryptoCurrency; }
+    public LocalDateTime getLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+        return this.memory.getLastUpdated(crypto, fiat);
+    }
 
-    public FiatCurrencies getCurrentFiatCurrency() { return this.fiatCurrency; }
+    @Override
+    public boolean isUpdating(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+        return this.memory.isUpdating(crypto, fiat);
+    }
 
     @Override
     public String getName() { return this.name; }
@@ -203,25 +276,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     @Override
     public boolean isActive() {
-        return isActive;
+        return this.isActive;
     }
 
     @Override
     public void setActive(final boolean active) {
-        isActive = active;
+        this.isActive = active;
     }
-
-    /**
-     * Gets the Base URL of the API call
-     * @return The Base URL of the API call
-     */
-    public abstract String getBaseUrl();
-
-    /**
-     * Gets if the last attempt at updating the price ended in failure
-     * @return If the last attempt at updating the price ended in failure
-     */
-    public boolean getHasFailedLastUpdate() { return this.hasFailedLastUpdate; }
 
     /**
      * Gets the controller
@@ -232,8 +293,10 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * Updates the price
      */
-    private void updatePrice() {
+    private void updatePrice(final CryptoCurrencies crypto, final FiatCurrencies fiat) {
         if (this.isActive) {
+            this.memory.setUpdating(crypto, fiat, true);
+
             final double newPrice = this.getNewPrice();
             // TODO: Once we start throwing errors this will be changed
             if (newPrice != -1) {
@@ -245,7 +308,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
                 this.setHasFailedLastUpdate(true);
             }
         } else {
-            // TODO: Should this be -1...? Can this be cleaner somehow?
+            // TODO: Should this be -1...? Can this be cleaner somehow? Should I throw an error here?
             this.setPrice(-1);
         }
     }
@@ -258,36 +321,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.controller.updatePrice(this.name, this.price, !this.hasFailedLastUpdate);
     }
 
-    /**
-     * Sets the price
-     * @param price The new price
-     */
-    protected void setPrice(final double price) { this.price = price; }
-
-    @Override
-    public void setCryptoCurrency(final CryptoCurrencies cryptoCurrency) throws CryptoCurrencyNotSupported {
-        if (this.canUseCryptoCurrency(cryptoCurrency))
-            this.cryptoCurrency = cryptoCurrency;
-        else
-            throw new CryptoCurrencyNotSupported(cryptoCurrency);
-    }
-
-    @Override
-    public void setFiatCurrency(final FiatCurrencies fiatCurrency) throws FiatCurrencyNotSupported {
-        if (this.canUseFiatCurrency(fiatCurrency))
-            this.fiatCurrency = fiatCurrency;
-        else
-            throw new FiatCurrencyNotSupported(fiatCurrency);
-    }
-
-    @Override
-    public void setCryptoCurrencyToNull() {
-        this.cryptoCurrency = null;
-    }
-
-    @Override
-    public void setFiatCurrencyToNull() {
-        this.fiatCurrency = null;
+    protected void setPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat, final double price) {
+        this.memory.setPrice(crypto, fiat, price);
     }
 
     /**
