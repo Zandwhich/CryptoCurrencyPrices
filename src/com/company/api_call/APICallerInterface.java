@@ -5,7 +5,6 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 
-import java.net.URL;
 import java.time.LocalDateTime;
 
 /**
@@ -20,13 +19,13 @@ public interface APICallerInterface {
     double getPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
-    LocalDateTime getLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+    LocalDateTime getLastSuccessfulUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
     boolean isUpdating(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
-    boolean wasLastUpdatedSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+    boolean wasLastUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
     /**

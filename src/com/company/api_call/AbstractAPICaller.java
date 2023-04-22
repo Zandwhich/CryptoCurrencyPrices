@@ -81,6 +81,40 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      *    Methods   *
      * ************ */
 
+    protected abstract String createURLStringForCall(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
+
+    /**
+     * Gets the price from the JSON object which was returned from a call
+     * @param jsonObject The returned, parsed JSON object from the call
+     * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
+     */
+    protected abstract double extractPrice(final JSONObject jsonObject, final CryptoCurrencies crypto,
+                                           final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
+
+    @Override
+    public boolean canUseCryptoCurrency(final CryptoCurrencies crypto) {
+        return Arrays.asList(this.acceptedCryptos).contains(crypto);
+    }
+
+    @Override
+    public boolean canUseFiatCurrency(final FiatCurrencies fiat) {
+        return Arrays.asList(this.acceptedFiats).contains(fiat);
+    }
+
+    /**
+     * A method to avoid duplication in implementation of the "canUseCryptoCurrency" and "canUseFiatCurrency" methods
+     * that are in each of the children classes. This method is to only be called by the children classes
+     * @param acceptedCurrencies The array of accepted currencies for this endpoint
+     * @param attemptedCurrency The currency in question to see if it is in the list of accepted currencies for this
+     *                          endpoint
+     * @return If the attemptedCurrency is in the list of acceptedCurrencies
+     */
+    protected static boolean canUseCurrency(final Currency[] acceptedCurrencies, final Currency attemptedCurrency) {
+        return Arrays.asList(acceptedCurrencies).contains(attemptedCurrency);
+    }
+
     protected void throwIfNotAcceptedCurrency(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         if (!this.canUseCryptoCurrency(crypto)) throw new CryptoCurrencyNotSupported(crypto);
@@ -97,7 +131,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     }
 
     @Override
-    public LocalDateTime getLastUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+    public LocalDateTime getLastSuccessfulUpdated(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         return this.memory.getLastSuccessfulUpdated(crypto, fiat);
     }
@@ -109,26 +143,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     }
 
     @Override
-    public boolean wasLastUpdatedSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+    public boolean wasLastUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         return this.memory.wasLastUpdateSuccessful(crypto, fiat);
-    }
-
-    @Override
-    public boolean canUseCryptoCurrency(final CryptoCurrencies crypto) {
-        return Arrays.asList(this.acceptedCryptos).contains(crypto);
-    }
-
-    @Override
-    public boolean canUseFiatCurrency(final FiatCurrencies fiat) {
-        return Arrays.asList(this.acceptedFiats).contains(fiat);
     }
 
     /**
      * Updates the price and notifies the controller
      */
+    @Override
     public void updatePriceAndNotify(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+
         this.setIsUpdatingAndNotify(crypto, fiat, true);
         final double newPrice = this.getNewPrice(crypto, fiat);
         this.setNewPriceAndNotify(crypto, fiat, newPrice);
@@ -137,53 +163,28 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private void setIsUpdatingAndNotify(final CryptoCurrencies crypto, final FiatCurrencies fiat,
                                         final boolean isUpdating)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+
         this.memory.setUpdating(crypto, fiat, isUpdating);
         this.controller.notifyUpdating(this, crypto, fiat, isUpdating);
+    }
+
+    private double getNewPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat)
+            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+
+        final JSONObject response = this.getRequestCall(crypto, fiat);
+        return this.extractPrice(response, crypto, fiat);
     }
 
     // TODO: Update this when price errors get updated
     private void setNewPriceAndNotify(final CryptoCurrencies crypto, final FiatCurrencies fiat, final double price)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
+
         this.memory.setUpdating(crypto, fiat, false);
         if (price != -1) this.memory.setPrice(crypto, fiat, price);
         if (price != -1) this.memory.setLastSuccessfulUpdated(crypto, fiat, LocalDateTime.now());
         this.memory.setWasLasUpdateSuccessful(crypto, fiat, price == -1);
         this.controller.notifyPriceSet(this, crypto, fiat, price, false, price == -1,
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
-    }
-
-    private double getNewPrice(final CryptoCurrencies crypto, final FiatCurrencies fiat)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
-        final JSONObject response = this.getRequestCall(crypto, fiat);
-        return this.extractPrice(response, crypto, fiat);
-    }
-
-    protected abstract String createURLStringForCall(final CryptoCurrencies crypto, final FiatCurrencies fiat)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
-
-    /**
-     * Gets the price from the JSON object which was returned from a call
-     * @param jsonObject The returned, parsed JSON object from the call
-     * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
-     */
-    protected abstract double extractPrice(final JSONObject jsonObject, final CryptoCurrencies crypto,
-                                           final FiatCurrencies fiat)
-            throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
-
-    /**
-     * A method to avoid duplication in implementation of the "canUseCryptoCurrency" and "canUseFiatCurrency" methods
-     * that are in each of the children classes. This method is to only be called by the children classes
-     * @param acceptedCurrencies The array of accepted currencies for this endpoint
-     * @param attemptedCurrency The currency in question to see if it is in the list of accepted currencies for this
-     *                          endpoint
-     * @return If the attemptedCurrency is in the list of acceptedCurrencies
-     */
-    protected static boolean canUseCurrency(final Currency[] acceptedCurrencies, final Currency attemptedCurrency) {
-        for (final Currency acceptedCurrency : acceptedCurrencies) {
-            if (acceptedCurrency.equals(attemptedCurrency)) return true;
-        }
-
-        return false;
     }
 
     /**
@@ -239,5 +240,4 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
         return jsonObject;
     }
-
 }
