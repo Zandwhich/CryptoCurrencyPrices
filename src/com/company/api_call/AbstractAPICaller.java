@@ -15,6 +15,7 @@ import json_simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -202,12 +203,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
          */
 
         JSONObject jsonObject;
-        // Set up the connection and get the input stream
+        URLConnection connection = null;
+        BufferedReader in = null;
         try {
-            final URLConnection connection = new URL(this.createURLStringForCall(crypto, fiat)).openConnection();
+            // Set up the connection and get the input stream
+            // TODO: Setup setConnectTimeout and steReadTimeout?
+            connection = this.getUrl().openConnection();
             connection.connect();
-            final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             final JSONParser parser = new JSONParser();
 
             jsonObject = (JSONObject) parser.parse(in);
@@ -236,6 +239,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             // TODO: Throw an error?
 
             jsonObject = null;
+        }
+        finally {
+            try {
+                if (in != null) in.close();
+            } catch (final IOException ignored) {}
+            // TODO: Disconnect the connection here. (Do I need to cast as  HttpURLConnection/HttpsURLConnection) above
+            //  when I do .openConnection();
         }
 
         return jsonObject;
