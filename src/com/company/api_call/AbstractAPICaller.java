@@ -408,6 +408,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         BufferedReader in = null;
         try {
             // Set up the connection and get the input stream
+            // TODO: Setup setConnectTimeout and steReadTimeout?
             connection = this.getUrl().openConnection();
             connection.connect();
             in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
