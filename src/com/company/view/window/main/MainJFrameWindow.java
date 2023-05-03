@@ -172,7 +172,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
     public void setRefreshing(final String name) {
         for (final Vector<String> website : this.data) {
             if (website.firstElement().equals(name)) {
-                website.set(2, "🔄");
+                website.set(2, "Refreshing");
                 this.table.setData(this.data);
                 return;
             }
@@ -196,9 +196,9 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
     private void setVectorizedWebsite(final Vector<String> website, final double price, final boolean hasSucceeded,
                                       final LocalDateTime lastUpdated) {
         if (hasSucceeded) {
-            website.set(2, "✅");
+            website.set(2, "Successful");
         } else {
-            website.set(2, "❌");
+            website.set(2, "Failed");
         }
 
         website.set(1, String.valueOf(price));
@@ -213,7 +213,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
             final Vector<String> endpointVec = new Vector<>();
             endpointVec.add(name);
             endpointVec.add("");
-            endpointVec.add("⚪️");
+            endpointVec.add("Nothing");
             endpointVec.add("");
             this.data.add(endpointVec);
         }
