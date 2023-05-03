@@ -176,14 +176,18 @@ final public class MainController extends AbstractController implements MainCont
     @Override
     public void notifyUpdating(final AbstractAPICaller endpoint, final CryptoCurrencies crypto,
                                final FiatCurrencies fiat, final boolean isUpdating) {
-        // TODO: Implement the view stuff first, then come back and implement this
+        // First, check if this is still for the current crypto/fiat combination
+        if (crypto == this.currentCrypto && fiat == this.currentFiat)
+            this.mainWindow.setRefreshing(endpoint.getName());
     }
 
     @Override
     public void notifyPriceSet(final AbstractAPICaller endpoint, final CryptoCurrencies crypto,
-                               final FiatCurrencies fiat, final double price, final boolean isUpdating,
-                               final boolean isSuccessful, final LocalDateTime lastUpdated) {
-        // TODO: Implement the view stuff first, then come back and implement this
+                               final FiatCurrencies fiat, final double price, final boolean isSuccessful,
+                               final LocalDateTime lastUpdated) {
+        // First, check if this is still for the current crypto/fiat combination
+        if (crypto == this.currentCrypto && fiat == this.currentFiat)
+            this.mainWindow.updatePrice(endpoint.getName(), price, isSuccessful, lastUpdated);
     }
 
     @Override

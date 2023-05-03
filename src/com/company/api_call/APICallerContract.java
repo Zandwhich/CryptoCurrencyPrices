@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public interface APICallerContract {
 
     void notifyPriceSet(final AbstractAPICaller endpoint, final CryptoCurrencies crypto, final FiatCurrencies fiat,
-                        final double price, final boolean isUpdating, final boolean isSuccessful,
+                        final double price, final boolean isSuccessful,
                         final LocalDateTime lastUpdated);
 
     void notifyUpdating(final AbstractAPICaller endpoint, final CryptoCurrencies crypto, final FiatCurrencies fiat,

@@ -184,7 +184,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         if (price != -1) this.memory.setPrice(crypto, fiat, price);
         if (price != -1) this.memory.setLastSuccessfulUpdated(crypto, fiat, LocalDateTime.now());
         this.memory.setWasLasUpdateSuccessful(crypto, fiat, price == -1);
-        this.controller.notifyPriceSet(this, crypto, fiat, price, false, price == -1,
+        this.controller.notifyPriceSet(this, crypto, fiat, price, price == -1,
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
     }
 
@@ -208,7 +208,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         try {
             // Set up the connection and get the input stream
             // TODO: Setup setConnectTimeout and steReadTimeout?
-            connection = this.getUrl().openConnection();
+            connection = new URL(this.createURLStringForCall(crypto, fiat)).openConnection();
             connection.connect();
             in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             final JSONParser parser = new JSONParser();

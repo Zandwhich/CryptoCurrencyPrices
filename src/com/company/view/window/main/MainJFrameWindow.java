@@ -14,6 +14,7 @@ import com.company.view.button.refresh.RefreshButtonInterface;
 import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -150,7 +151,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
         this.panel.add((JScrollPane) this.table);
         this.add(this.panel);
 
-        this.updatePrices();
+
         this.setVisible(MainJFrameWindow.DEFAULT_VISIBILITY);
     }
 
@@ -161,35 +162,58 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
     }
 
     @Override
-    public void updatePrice(final String name, final double price, final boolean hasSucceeded) {
-        for (final Vector<String> website : this.data) {
-            if (website.firstElement().equals(name)) {
-                website.set(1, String.valueOf(price));
-            }
-        }
+    public void clear() {
+        this.data.clear();
         this.table.setData(this.data);
     }
 
+    // TODO: This should be done in the main table
     @Override
-    public void updatePrices() {
-        final ArrayList<APICallerInterface> websites = this.mainController.getEndpointList();
-        this.data.clear();
-
-        // TODO: Clean this up a bit?
-        for (final APICallerInterface website : websites) {
-            final Vector<String> websiteVec = new Vector<>();
-            websiteVec.add(website.getName());
-            websiteVec.add("" + website.getPrice());
-            this.data.add(websiteVec);
+    public void setRefreshing(final String name) {
+        for (final Vector<String> website : this.data) {
+            if (website.firstElement().equals(name)) {
+                website.set(2, "🔄");
+                this.table.setData(this.data);
+                return;
+            }
         }
-        this.table.setData(this.data);
+    }
+
+    // TODO: There should probably be a better way to update this
+    // TODO: This should be done in the main table
+    @Override
+    public void updatePrice(final String name, final double price, final boolean hasSucceeded,
+                            final LocalDateTime lastUpdated) {
+        for (final Vector<String> website : this.data) {
+            if (website.firstElement().equals(name)) {
+                this.setVectorizedWebsite(website, price, hasSucceeded, lastUpdated);
+                this.table.setData(this.data);
+                return;
+            }
+        }
+    }
+
+    private void setVectorizedWebsite(final Vector<String> website, final double price, final boolean hasSucceeded,
+                                      final LocalDateTime lastUpdated) {
+        if (hasSucceeded) {
+            website.set(2, "✅");
+        } else {
+            website.set(2, "❌");
+        }
+
+        website.set(1, String.valueOf(price));
+        website.set(3, lastUpdated.toString());
     }
 
     @Override
     public void setEndpoints(final Iterable<String> endpointNames) {
+        this.clear();
+
         for (final String name : endpointNames) {
             final Vector<String> endpointVec = new Vector<>();
             endpointVec.add(name);
+            endpointVec.add("");
+            endpointVec.add("⚪️");
             endpointVec.add("");
             this.data.add(endpointVec);
         }
