@@ -157,6 +157,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
 
     @Override
     public void updateDropdowns(final CryptoCurrencies currentCrypto, final FiatCurrencies currentFiat) {
+        // TODO: This should be done in dropdowns
         this.cryptoDropdown.setSelectedItem(currentCrypto.getAbbreviatedName());
         this.fiatDropdown.setSelectedItem(currentFiat.getAbbreviatedName());
     }
@@ -164,12 +165,15 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
     @Override
     public void clear() {
         this.data.clear();
+        // TODO: This should be done in the main table
         this.table.setData(this.data);
     }
 
     // TODO: This should be done in the main table
     @Override
     public void setRefreshing(final String name) {
+        System.out.println("Setting refreshing for endpoint " + name);
+
         for (final Vector<String> website : this.data) {
             if (website.firstElement().equals(name)) {
                 website.set(2, "Refreshing");
@@ -186,15 +190,21 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
                             final LocalDateTime lastUpdated) {
         for (final Vector<String> website : this.data) {
             if (website.firstElement().equals(name)) {
+                System.out.println("Starting the updatePrice logic for endpoint " + name);
                 this.setVectorizedWebsite(website, price, hasSucceeded, lastUpdated);
                 this.table.setData(this.data);
+                System.out.println("Have set " + name + " to " + price + " with success of " + hasSucceeded + " at " +
+                        "time " + lastUpdated.toString());
                 return;
             }
         }
+        System.out.println("Failed to updatePrice for " + name + " with price " + price + " and status " + hasSucceeded
+         + " at time " + lastUpdated.toString());
     }
 
     private void setVectorizedWebsite(final Vector<String> website, final double price, final boolean hasSucceeded,
                                       final LocalDateTime lastUpdated) {
+        // TODO: This should be moved into the table
         if (hasSucceeded) {
             website.set(2, "Successful");
         } else {
@@ -207,6 +217,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
 
     @Override
     public void setEndpoints(final Iterable<String> endpointNames) {
+        // TODO: This should be moved into the table
         this.clear();
 
         for (final String name : endpointNames) {
