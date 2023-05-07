@@ -30,6 +30,6 @@ public interface EndpointMemoryInterface {
     boolean wasLastUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 
-    void setWasLasUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat, final boolean successful)
+    void setWasLastUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat, final boolean successful)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported;
 }

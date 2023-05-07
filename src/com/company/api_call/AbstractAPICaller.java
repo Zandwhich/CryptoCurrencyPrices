@@ -15,7 +15,6 @@ import json_simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -183,7 +182,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         this.memory.setUpdating(crypto, fiat, false);
         if (price != -1) this.memory.setPrice(crypto, fiat, price);
         if (price != -1) this.memory.setLastSuccessfulUpdated(crypto, fiat, LocalDateTime.now());
-        this.memory.setWasLasUpdateSuccessful(crypto, fiat, price != -1);
+        this.memory.setWasLastUpdateSuccessful(crypto, fiat, price != -1);
         this.controller.notifyPriceSet(this, crypto, fiat, price, price != -1,
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
     }

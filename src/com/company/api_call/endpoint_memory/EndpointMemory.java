@@ -91,8 +91,8 @@ final public class EndpointMemory implements EndpointMemoryInterface {
     }
 
     @Override
-    public void setWasLasUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat,
-                                          final boolean successful)
+    public void setWasLastUpdateSuccessful(final CryptoCurrencies crypto, final FiatCurrencies fiat,
+                                           final boolean successful)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
         this.getDataFromMap(crypto, fiat).setWasLastUpdateSuccessful(successful);
     }
