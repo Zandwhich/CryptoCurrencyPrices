@@ -116,6 +116,7 @@ final public class MainController extends AbstractController implements MainCont
         for (final APICallerInterface endpoint : this.endpointList) {
             new Thread(() -> {
                 try {
+                    System.out.println("About to update " + endpoint.getName());
                     endpoint.updatePriceAndNotify(this.currentCrypto, this.currentFiat);
                 } catch (final AbstractCurrencyNotSupported e) {
                     // TODO: Remove this endpoint from the display

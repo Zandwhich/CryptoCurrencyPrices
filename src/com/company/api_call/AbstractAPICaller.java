@@ -179,10 +179,13 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private void setNewPriceAndNotify(final CryptoCurrencies crypto, final FiatCurrencies fiat, final double price)
             throws CryptoCurrencyNotSupported, FiatCurrencyNotSupported {
 
+        System.out.println("For " + this.name + " updating memory stuff for the following values: " +
+                "crypto: " + crypto.getAbbreviatedName() + " fiat: " + fiat.getAbbreviatedName() + " price: " + price);
         this.memory.setUpdating(crypto, fiat, false);
         if (price != -1) this.memory.setPrice(crypto, fiat, price);
         if (price != -1) this.memory.setLastSuccessfulUpdated(crypto, fiat, LocalDateTime.now());
         this.memory.setWasLastUpdateSuccessful(crypto, fiat, price != -1);
+        System.out.println("About to call the controller back");
         this.controller.notifyPriceSet(this, crypto, fiat, price, price != -1,
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
     }

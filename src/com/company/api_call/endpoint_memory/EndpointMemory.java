@@ -19,7 +19,6 @@ final public class EndpointMemory implements EndpointMemoryInterface {
 
     private final CryptoCurrencies[] acceptedCryptos;
 
-    // TODO: Figure out if I actually need this
     private final FiatCurrencies[] acceptedFiats;
 
 
@@ -41,7 +40,7 @@ final public class EndpointMemory implements EndpointMemoryInterface {
         try {
             return this.endpointDataMap.get(new Pair<>(crypto, fiat));
         } catch (final NullPointerException e) {
-            if (!Arrays.asList(this.acceptedCryptos).contains(crypto)) throw  new CryptoCurrencyNotSupported(crypto);
+            if (!Arrays.asList(this.acceptedCryptos).contains(crypto)) throw new CryptoCurrencyNotSupported(crypto);
             if (!Arrays.asList(this.acceptedFiats).contains(fiat)) throw new FiatCurrencyNotSupported(fiat);
             throw e; // TODO: This isn't good, but I don't know what else to do here...
         }
