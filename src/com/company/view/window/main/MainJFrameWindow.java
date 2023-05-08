@@ -15,6 +15,7 @@ import com.company.view.window.AbstractJFrameWindow;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -212,7 +213,7 @@ final public class MainJFrameWindow extends AbstractJFrameWindow implements Main
         }
 
         website.set(1, String.valueOf(price));
-        website.set(3, lastUpdated.toString());
+        website.set(3, lastUpdated.toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString());
     }
 
     @Override
