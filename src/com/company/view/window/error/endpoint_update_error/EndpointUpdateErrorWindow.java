@@ -6,7 +6,7 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.view.window.error.AbstractJFrameErrorWindow;
 
 /**
- * The error to throw if there is an error updating an endpoint
+ * The error to display if there is an error updating an endpoint
  */
 final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow implements EndpointUpdateErrorWindowInterface {
 
@@ -47,11 +47,10 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
     public EndpointUpdateErrorWindow(final ControllerInterface controller) {
         super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH, EndpointUpdateErrorWindow.HEIGHT,
                 EndpointUpdateErrorWindow.MESSAGE);
-        this.setup();
     }
 
     /**
-     * The constructor for the window that displays an endpoitn update error along with the name of the connection that caused the error
+     * The constructor for the window that displays an endpoint update error along with the name of the connection that caused the error
      * @param controller The controller in charge of the window
      * @param name The name of the cryptocurrency that caused the error
      */
@@ -59,7 +58,6 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
                                      final CryptoCurrencies crypto, final FiatCurrencies fiat) {
         super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH,
                 EndpointUpdateErrorWindow.HEIGHT, messageWithName(name, crypto, fiat));
-        this.setup();
     }
 
 
@@ -68,13 +66,10 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
      * ************ */
 
     /**
-     * The method used to do duplicate setup work throughout multiple controllers
-     */
-    private void setup() { }
-
-    /**
      * Returns the message formatted to hold the cryptocurrency's name that tried to call a network connection
-     * @param name The name of the cryptocurrency that tried to call a network connection
+     * @param name The name of the endpoint that tried to call a network connection
+     * @param crypto The name of the cryptocurrency that was being used
+     * @param fiat The name of the fiat currency that was being used
      * @return The message formatted to hold the cryptocurrency's name that tried to call a network connection
      */
     private static String messageWithName(final String name, final CryptoCurrencies crypto, final FiatCurrencies fiat) {

@@ -15,6 +15,7 @@ import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupp
 import com.company.view.window.about.AboutJFrameWindow;
 import com.company.view.window.error.endpoint_update_error.EndpointUpdateErrorWindow;
 import com.company.view.window.error.network_error.NetworkErrorWindow;
+import com.company.view.window.error.parse_error.ParseErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
 
@@ -140,9 +141,7 @@ final public class MainController extends AbstractController implements MainCont
                 new NetworkErrorWindow(this);
                 return;
             case PARSE_ERROR:
-                // TODO: Implement this
-                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
-                return;
+                new ParseErrorWindow(this, name, crypto, fiat);
         }
     }
 
@@ -157,9 +156,7 @@ final public class MainController extends AbstractController implements MainCont
                 new NetworkErrorWindow(this);
                 return;
             case PARSE_ERROR:
-                // TODO: Implement this
-                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
-                return;
+                new ParseErrorWindow(this);
         }
     }
 
