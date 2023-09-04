@@ -1,4 +1,4 @@
-package com.company.view.window.error.network_error;
+package com.company.view.window.error.endpoint_update_error;
 
 import com.company.view.window.error.ErrorWindowInterface;
 

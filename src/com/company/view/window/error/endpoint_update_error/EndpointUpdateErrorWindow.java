@@ -1,4 +1,4 @@
-package com.company.view.window.error.network_error;
+package com.company.view.window.error.endpoint_update_error;
 
 import com.company.controller.ControllerInterface;
 import com.company.tool.enums.currency.CryptoCurrencies;
@@ -6,7 +6,7 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.view.window.error.AbstractJFrameErrorWindow;
 
 /**
- * The error to throw if there is a network error
+ * The error to throw if there is an error updating an endpoint
  */
 final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow implements EndpointUpdateErrorWindowInterface {
 
@@ -17,13 +17,13 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
     /**
      * The message of the error's window
      */
-    public static final String MESSAGE = "There appears to be a network connection error.\n" +
+    public static final String MESSAGE = "There was an error updating an endpoint.\n" +
             "Please check your connection and try again.";
 
     /**
      * The title of the error's window
      */
-    public static final String TITLE = "ERROR: Network Connection";
+    public static final String TITLE = "ERROR: Endpoint Update Failure";
 
     /**
      * The width of the error window
@@ -41,7 +41,7 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
      * ************ */
 
     /**
-     * The constructor for the window that displays a network error
+     * The constructor for the window that displays an endpoint update error
      * @param controller The controller in charge of the window
      */
     public EndpointUpdateErrorWindow(final ControllerInterface controller) {
@@ -51,14 +51,14 @@ final public class EndpointUpdateErrorWindow extends AbstractJFrameErrorWindow i
     }
 
     /**
-     * The constructor for the window that displays a network error along with the name of the connection that caused the error
+     * The constructor for the window that displays an endpoitn update error along with the name of the connection that caused the error
      * @param controller The controller in charge of the window
      * @param name The name of the cryptocurrency that caused the error
      */
-    public EndpointUpdateErrorWindow(final ControllerInterface controller, final String name, final CryptoCurrencies crypto,
-                                     final FiatCurrencies fiat) {
-        super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH, EndpointUpdateErrorWindow.HEIGHT,
-                messageWithName(name, crypto, fiat));
+    public EndpointUpdateErrorWindow(final ControllerInterface controller, final String name,
+                                     final CryptoCurrencies crypto, final FiatCurrencies fiat) {
+        super(controller, EndpointUpdateErrorWindow.TITLE, EndpointUpdateErrorWindow.WIDTH,
+                EndpointUpdateErrorWindow.HEIGHT, messageWithName(name, crypto, fiat));
         this.setup();
     }
 

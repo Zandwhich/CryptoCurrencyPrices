@@ -13,7 +13,8 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.view.window.about.AboutJFrameWindow;
-import com.company.view.window.error.network_error.EndpointUpdateErrorWindow;
+import com.company.view.window.error.endpoint_update_error.EndpointUpdateErrorWindow;
+import com.company.view.window.error.network_error.NetworkErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
 
@@ -136,8 +137,7 @@ final public class MainController extends AbstractController implements MainCont
                 new EndpointUpdateErrorWindow(this, name, crypto, fiat);
                 return;
             case NETWORK_ERROR:
-                // TODO: Implement this
-                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
+                new NetworkErrorWindow(this);
                 return;
             case PARSE_ERROR:
                 // TODO: Implement this
@@ -154,8 +154,7 @@ final public class MainController extends AbstractController implements MainCont
                 new EndpointUpdateErrorWindow(this);
                 return;
             case NETWORK_ERROR:
-                // TODO: Implement this
-                System.out.println("THIS NEEDS TO BE IMPLEMENTED!!");
+                new NetworkErrorWindow(this);
                 return;
             case PARSE_ERROR:
                 // TODO: Implement this
