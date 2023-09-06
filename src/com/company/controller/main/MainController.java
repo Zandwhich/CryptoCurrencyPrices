@@ -98,9 +98,7 @@ final public class MainController extends AbstractController implements MainCont
      */
     public void run() {
       
-        while (true) {
-            // System.out.println("Current window location: (" + this.mainWindow.getLocationX() + ", " + this.mainWindow.getLocationY() + ")");
-        }
+        while (true) { }
 
     }
 
