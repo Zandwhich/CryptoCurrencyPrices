@@ -40,12 +40,12 @@ final public class MainController extends AbstractController implements MainCont
     /**
      * The currently selected fiat currency
      */
-    private FiatCurrencies currentFiat = FiatCurrencies.EUR;
+    private FiatCurrencies currentFiat = FiatCurrencies.USD;
 
     /**
      * The currently selected cryptocurrency
      */
-    private CryptoCurrencies currentCrypto = CryptoCurrencies.LTC;
+    private CryptoCurrencies currentCrypto = CryptoCurrencies.BTC;
 
     /**
      * The main window of the application

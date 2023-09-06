@@ -185,7 +185,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
         if (price != -1) this.memory.setPrice(crypto, fiat, price);
         if (price != -1) this.memory.setLastSuccessfulUpdated(crypto, fiat, LocalDateTime.now());
         this.memory.setWasLastUpdateSuccessful(crypto, fiat, price != -1);
-        System.out.println("About to call the controller back");
+        System.out.println("About to call the controller back for " + this.name);
         this.controller.notifyPriceSet(this, crypto, fiat, price, price != -1,
                 this.memory.getLastSuccessfulUpdated(crypto, fiat));
     }

@@ -25,7 +25,7 @@ final public class CoinCap extends AbstractAPICaller {
     /**
      * The base name for the endpoint
      */
-    private final static String NAME = "CoinCap ";
+    private final static String NAME = "CoinCap";
 
     /**
      * The accepted cryptocurrencies for CoinCap
