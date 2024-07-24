@@ -4,6 +4,7 @@ import com.company.tool.enums.Errors;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.Currency;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.BadData;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
@@ -14,7 +15,6 @@ import json_simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -233,20 +233,18 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * Updates the price
      */
-    private void updatePrice() {
+    private void updatePrice() throws BadData {
         if (this.isActive) {
-            final double newPrice = this.getNewPrice();
-            // TODO: Once we start throwing errors this will be changed
-            if (newPrice != -1) {
-                this.setPrice(newPrice);
+            try {
+                this.setPrice(this.getNewPrice());
                 this.setHasFailedLastUpdate(false);
                 this.setHasPrice(true);
-            }
-            else {
+            } catch (final BadData e) {
                 this.setHasFailedLastUpdate(true);
+                throw e;
             }
         } else {
-            // TODO: Should this be -1...? Can this be cleaner somehow?
+            // TODO: Should this throw a different error? I believe it should...
             this.setPrice(-1);
         }
     }
@@ -255,7 +253,12 @@ public abstract class AbstractAPICaller implements APICallerInterface {
      * Updates the price and notifies the controller
      */
     public void updatePriceAndNotify() {
-        this.updatePrice();
+        try {
+            this.updatePrice();
+        } catch (final BadData ignored) {
+            // TODO: Is this correct to do nothing here, or should I throw this error up to the controller?
+        }
+
         this.controller.updatePrice(this.name, this.price, !this.hasFailedLastUpdate);
     }
 
@@ -349,15 +352,10 @@ public abstract class AbstractAPICaller implements APICallerInterface {
 
     /**
      * Gets an updated price by calling the API
-     * @return The update price received from calling the API. If it is -1, there was a failure in retrieving the price
+     * @return The update price received from calling the API.
      */
-    protected double getNewPrice() {
-        final JSONObject response = this.getRequestCall();
-        if (response == null) return -1;
-
-        final double extractedPrice = this.extractPrice(response);
-
-        if (extractedPrice == -1) return -1; // TODO: Once we throw errors, we can get rid of this
+    protected double getNewPrice() throws BadData {
+        final double extractedPrice = this.extractPrice(this.getRequestCall());
 
         this.setHasPrice(true);
         return extractedPrice;
@@ -366,9 +364,9 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     /**
      * Gets the price from the JSON object which was returned from a call
      * @param jsonObject The returned, parsed JSON object from the call
-     * @return The price extracted from the JSON object. If it is -1, there was a failure in retrieving the price
+     * @return The price extracted from the JSON object.
      */
-    protected abstract double extractPrice(final JSONObject jsonObject);
+    protected abstract double extractPrice(final JSONObject jsonObject) throws BadData;
 
     /**
      * A method to avoid duplication in implementation of the "canUseCryptoCurrency" and "canUseFiatCurrency" methods
@@ -419,14 +417,14 @@ public abstract class AbstractAPICaller implements APICallerInterface {
             try {
                 jsonObject = (JSONObject) parser.parse(in);
             }
-            catch (ParseException e) {
+            catch (final ParseException e) {
                 System.out.println("In ParseException");
                 // TODO: Figure out what to do with a ParseException
                 // TODO: Throw error?
                 jsonObject = null;
             }
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             // openConnection() failed
             this.getController().errorDisplay(Errors.NETWORK_CONNECTION, this.getName());
             e.printStackTrace();

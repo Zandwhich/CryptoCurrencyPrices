@@ -4,6 +4,7 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.BadData;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
@@ -114,17 +115,17 @@ final public class CryptoCompare extends AbstractAPICaller {
      * {@inheritDoc}
      */
     @Override
-    protected double extractPrice(final JSONObject jsonObject) {
-        double price;
+    protected double extractPrice(final JSONObject jsonObject) throws BadData {
         try {
             // Ok, so I don't know why, but casting it to a regular 'double' wasn't working.
             //  This works, so I'm leaving it
-            price = ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
+            return ((Double) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName()));
         } catch (final ClassCastException e) {
             // Sometimes when the price has too many digits, it gets returned as a long
-            price = ((Long) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName())).doubleValue();
+            return ((Long) jsonObject.get(super.getCurrentFiatCurrency().getAbbreviatedName())).doubleValue();
+        } catch (final Exception e) {
+            throw new BadData(e, this);
         }
-        return price;
     }
 
     /**

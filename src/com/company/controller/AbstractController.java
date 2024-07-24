@@ -76,7 +76,7 @@ public abstract class AbstractController implements  ControllerInterface {
             final URLConnection connection = url.openConnection();
             connection.connect();
         }
-        catch (IOException exception) {
+        catch (final IOException exception) {
             // Failed to connect to yahoo
             internet = false;
         }

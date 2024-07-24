@@ -4,6 +4,7 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.BadData;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
 import json_simple.JSONObject;
@@ -107,13 +108,14 @@ final public class CoinCap extends AbstractAPICaller {
     }
 
     @Override
-    protected double extractPrice(final JSONObject jsonObject) {
-        final JSONObject data = (JSONObject) jsonObject.get("data");
+    protected double extractPrice(final JSONObject jsonObject) throws BadData {
+        try {
+            final JSONObject data = (JSONObject) jsonObject.get("data");
 
-        // TODO: Should throw an error here?
-        if (data == null) return -1;
-
-        return Double.parseDouble((String) data.get("rateUsd"));
+            return Double.parseDouble((String) data.get("rateUsd"));
+        } catch (final Exception e) {
+            throw new BadData(e, this);
+        }
     }
 
     /**

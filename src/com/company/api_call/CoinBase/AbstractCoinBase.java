@@ -4,6 +4,7 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.BadData;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
@@ -101,13 +102,12 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      * @return The price from the JSON object
      */
     @Override
-    protected double extractPrice(final JSONObject jsonObject) {
-        final JSONObject data = (JSONObject) jsonObject.get("data");
-
-        // TODO: Should throw an error here?
-        if (data == null || !data.containsKey("amount")) return -1;
-
-        return Double.parseDouble((String) data.get("amount"));
+    protected double extractPrice(final JSONObject jsonObject) throws BadData {
+        try {
+            return Double.parseDouble(((String) ((JSONObject) jsonObject.get("data")).get("amount")));
+        } catch (final Exception e) {
+            throw new BadData(e, this);
+        }
     }
 
     /**

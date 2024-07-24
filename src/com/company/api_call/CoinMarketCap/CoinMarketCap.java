@@ -4,6 +4,7 @@ import com.company.api_call.APICallerContract;
 import com.company.api_call.AbstractAPICaller;
 import com.company.tool.enums.currency.CryptoCurrencies;
 import com.company.tool.enums.currency.FiatCurrencies;
+import com.company.tool.exception.BadData;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.CryptoCurrencyNotSupported;
 import com.company.tool.exception.currency_not_supported.FiatCurrencyNotSupported;
@@ -113,18 +114,19 @@ final public class CoinMarketCap extends AbstractAPICaller {
     }
 
     @Override
-    protected double extractPrice(final JSONObject jsonObject) {
-        final JSONObject data = (JSONObject) jsonObject.get("data");
-
-        if (data == null) return -1; // TODO: Throw an error
-
-        final JSONObject quotes = (JSONObject) data.get("quotes");
-
-        if (quotes == null) return -1; // TODO: Throw an error
-
-        final JSONObject fiat = (JSONObject) quotes.get(this.getCurrentFiatCurrency().getAbbreviatedName());
-
-        return fiat == null ? -1 /* TODO: Throw an error */ : (double) fiat.get("price");
+    protected double extractPrice(final JSONObject jsonObject) throws BadData {
+        try {
+            return (double)
+                    ((JSONObject)
+                    ((JSONObject)
+                    ((JSONObject) jsonObject
+                    .get("data"))
+                    .get("quotes"))
+                    .get(this.getCurrentFiatCurrency().getAbbreviatedName()))
+                    .get("price");
+        } catch (final Exception e) {
+            throw new BadData(e, this);
+        }
     }
 
     /**
