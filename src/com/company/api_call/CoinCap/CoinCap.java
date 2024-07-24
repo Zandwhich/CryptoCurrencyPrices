@@ -84,9 +84,6 @@ final public class CoinCap extends AbstractAPICaller {
                 CoinCap.BASE_URL + cryptoCurrency.getFullName().toLowerCase();
     }
 
-    @Override
-    public String getBaseUrl() { return CoinCap.BASE_URL; }
-
     /**
      * Returns if the given fiat currency can be used with CoinCap
      * @param fiatCurrency The given fiat currency

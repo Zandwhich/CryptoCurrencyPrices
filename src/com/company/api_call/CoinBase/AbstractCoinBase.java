@@ -73,9 +73,6 @@ public abstract class AbstractCoinBase extends AbstractAPICaller {
      *   Methods    *
      * ************ */
 
-    @Override
-    public String getBaseUrl() { return AbstractCoinBase.BASE_URL; }
-
     /**
      * Returns if the given fiat currency can be used with CoinBase
      * @param fiatCurrency The given fiat currency

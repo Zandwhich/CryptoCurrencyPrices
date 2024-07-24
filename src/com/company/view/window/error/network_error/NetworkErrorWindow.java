@@ -4,7 +4,7 @@ import com.company.controller.ControllerInterface;
 import com.company.view.window.error.AbstractJFrameErrorWindow;
 
 /**
- * The error to throw if there is a network error
+ * The error window to show if there is a NetworkError
  */
 final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implements NetworkErrorWindowInterface {
 
@@ -45,7 +45,6 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
     public NetworkErrorWindow(final ControllerInterface controller) {
         super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
                 NetworkErrorWindow.MESSAGE);
-        this.setup();
     }
 
     /**
@@ -56,18 +55,12 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
     public NetworkErrorWindow(final ControllerInterface controller, final String name) {
         super(controller, NetworkErrorWindow.TITLE, NetworkErrorWindow.WIDTH, NetworkErrorWindow.HEIGHT,
                 messageWithName(name));
-        this.setup();
     }
 
 
     /* ************ *
      *    Methods   *
      * ************ */
-
-    /**
-     * The method used to do duplicate setup work throughout multiple controllers
-     */
-    private void setup() { }
 
     /**
      * Returns the message formatted to hold the cryptocurrency's name that tried to call a network connection
@@ -78,5 +71,4 @@ final public class NetworkErrorWindow extends AbstractJFrameErrorWindow implemen
         return "There appears to be a network connection error. This error occurred while trying to connect to " +
                 name + ".\nPlease check your connection and try again.";
     }
-
 }

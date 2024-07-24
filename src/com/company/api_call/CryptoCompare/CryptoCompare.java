@@ -88,9 +88,6 @@ final public class CryptoCompare extends AbstractAPICaller {
                         fiatCurrency.getAbbreviatedName();
     }
 
-    @Override
-    public String getBaseUrl() { return CryptoCompare.BASE_URL; }
-
     /**
      * Returns if the given fiat currency can be used with CryptoCompare
      * @param fiatCurrency The given fiat currency

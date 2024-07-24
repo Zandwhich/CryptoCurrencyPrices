@@ -90,9 +90,6 @@ final public class CoinMarketCap extends AbstractAPICaller {
                         fiatCurrency.getAbbreviatedName();
     }
 
-    @Override
-    public String getBaseUrl() { return CoinMarketCap.BASE_URL; }
-
     /**
      * Returns if the given fiat currency can be used with CoinMarketCap
      * @param fiatCurrency The given fiat currency

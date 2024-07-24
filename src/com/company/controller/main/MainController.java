@@ -13,6 +13,8 @@ import com.company.tool.enums.currency.FiatCurrencies;
 import com.company.controller.AbstractController;
 import com.company.tool.exception.currency_not_supported.AbstractCurrencyNotSupported;
 import com.company.view.window.about.AboutJFrameWindow;
+import com.company.view.window.error.bad_data_error.BadDataErrorWindow;
+import com.company.view.window.error.default_error.DefaultErrorWindow;
 import com.company.view.window.error.network_error.NetworkErrorWindow;
 import com.company.view.window.main.MainJFrameWindow;
 import com.company.view.window.main.MainWindowInterface;
@@ -196,6 +198,11 @@ final public class MainController extends AbstractController implements MainCont
             case NETWORK_CONNECTION:
                 new NetworkErrorWindow(this, name);
                 return;
+            case BAD_DATA:
+                new BadDataErrorWindow(this, name);
+                return;
+            default:
+                new DefaultErrorWindow(this);
         }
     }
 
@@ -206,6 +213,11 @@ final public class MainController extends AbstractController implements MainCont
             case NETWORK_CONNECTION:
                 new NetworkErrorWindow(this);
                 return;
+            case BAD_DATA:
+                new BadDataErrorWindow(this, "");
+                return;
+            default:
+                new DefaultErrorWindow(this);
         }
     }
 

@@ -34,7 +34,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     private double price;
 
     /**
-     * The crypto currency (i.e. BTC, ETH, LTC, etc.)
+     * The cryptocurrency (i.e. BTC, ETH, LTC, etc.)
      */
     private CryptoCurrencies cryptoCurrency;
 
@@ -213,12 +213,6 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     }
 
     /**
-     * Gets the Base URL of the API call
-     * @return The Base URL of the API call
-     */
-    public abstract String getBaseUrl();
-
-    /**
      * Gets if the last attempt at updating the price ended in failure
      * @return If the last attempt at updating the price ended in failure
      */
@@ -255,8 +249,8 @@ public abstract class AbstractAPICaller implements APICallerInterface {
     public void updatePriceAndNotify() {
         try {
             this.updatePrice();
-        } catch (final BadData ignored) {
-            // TODO: Is this correct to do nothing here, or should I throw this error up to the controller?
+        } catch (final BadData exception) {
+            this.controller.errorDisplay(Errors.BAD_DATA, exception.getCaller().name);
         }
 
         this.controller.updatePrice(this.name, this.price, !this.hasFailedLastUpdate);
@@ -402,7 +396,7 @@ public abstract class AbstractAPICaller implements APICallerInterface {
          */
 
         JSONObject jsonObject;
-        URLConnection connection = null;
+        URLConnection connection;
         BufferedReader in = null;
         try {
             // Set up the connection and get the input stream
