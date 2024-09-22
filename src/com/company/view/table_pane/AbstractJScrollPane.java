@@ -56,7 +56,7 @@ abstract public class AbstractJScrollPane extends JScrollPane implements TablePa
      * @param columns The columns of the table
      * @param data The data of the table
      */
-    private  void setup(final Vector<String> columns, final Vector<Vector<String>> data) {
+    private void setup(final Vector<String> columns, final Vector<Vector<String>> data) {
         this.columns = columns;
         this.data = data;
         this.table = new JTable(this.data, this.columns);
